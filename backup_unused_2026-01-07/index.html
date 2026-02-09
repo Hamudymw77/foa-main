@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier League Centrum | KICKGOAL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* --- ZÁKLADNÍ STYLY (Livesport Dark Mode) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0f172a; /* Slate 900 */
+            color: white;
+            scroll-behavior: smooth; 
+        }
+        .section-card {
+            background-color: #1e293b; /* Slate 800 */
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2rem;
+            padding: 0; /* Padding handled inside to allow full-width headers */
+            overflow: hidden; 
+        }
+        /* Třída pro karty, které potřebují vnitřní odsazení (např. statistiky) */
+        .section-card.padded {
+            padding: 1.5rem;
+        }
+        
+        /* --- STYLY PRO STATISTIKY A TABULKU --- */
+        .stats-button {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            transition: all 0.3s ease;
+        }
+        .stats-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4);
+        }
+        .premier-league-table table {
+            min-width: 100%;
+            width: 100%;
+        }
+        
+        /* --- STYLY PRO SEZNAM ZÁPASŮ (NOVÉ) --- */
+        .card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #334155;
+            background-color: #1e293b;
+        }
+        .match-row {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #334155;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        .match-row:hover {
+            background-color: #334155;
+            cursor: pointer;
+        }
+        .match-row:last-child {
+            border-bottom: none;
+        }
+        .team-logo {
+            height: 20px;
+            width: 20px;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .match-time {
+            width: 80px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        .match-teams {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .team-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 1rem;
+        }
+        .team-score {
+            font-weight: bold;
+            width: 20px;
+            text-align: center;
+        }
+        .winner {
+            font-weight: bold;
+            color: white;
+        }
+        .loser {
+            color: #94a3b8;
+        }
+
+        /* --- STYLY PRO DETAIL ZÁPASU (FULHAM) --- */
+        .match-tabs .tab {
+            cursor: pointer;
+            padding-bottom: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .match-tabs .active {
+            border-bottom: 3px solid #f97316;
+            color: #f97316;
+            font-weight: 700;
+        }
+        .formation-pitch {
+            background: linear-gradient(180deg, #1a5f2e 0%, #2d8f4a 100%);
+            border: 2px solid #fff;
+            border-radius: 8px;
+            position: relative;
+            padding: 20px;
+            min-height: 400px;
+        }
+        .formation-line {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 15px 0;
+        }
+        .player-position {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 11px;
+            text-align: center;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .timeline-event {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: -15px;
+            width: 2px;
+            background: #475569;
+        }
+        .timeline-event:last-child::before { display: none; }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body class="p-5">
+
+<header class="text-center mb-10">
+    <h1 class="text-6xl font-extrabold text-orange-500 tracking-tight">KICKGOAL PREMIER LEAGUE</h1>
+    <p class="text-xl text-slate-300 mt-2">Výsledky, Tabulka a Rozpis zápasů</p>
+</header>
+
+<main class="container mx-auto max-w-7xl">
+    <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+        
+        <div class="lg:col-span-3">
+            
+            <div class="section-card padded">
+                <div class="flex justify-center gap-4 flex-wrap">
+                    <button onclick="toggleStatistics()" class="stats-button px-8 py-4 rounded-lg text-white font-bold text-lg shadow-lg">
+                        <i class="fas fa-chart-bar mr-2"></i> Zobrazit statistiky ligy
+                    </button>
+                </div>
+                
+                <div id="statistics-content" class="hidden mt-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-slate-700/50 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold mb-4 text-yellow-400 flex items-center">
+                                <i class="fas fa-futbol mr-2"></i> Nejlepší střelci
+                            </h3>
+                            <div id="top-scorers-list" class="space-y-3 text-sm">
+                                <div class="flex justify-between border-b border-slate-600 pb-2">
+                                    <span>1. Erling Haaland (Man City)</span>
+                                    <span class="font-bold text-orange-400">28</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-600 pb-2">
+                                    <span>2. Mohamed Salah (Liverpool)</span>
+                                    <span class="font-bold text-orange-400">22</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>3. Bukayo Saka (Arsenal)</span>
+                                    <span class="font-bold text-orange-400">18</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-slate-700/50 p-6 rounded-lg">
+                            <h3 class="text-2xl font-bold mb-4 text-blue-400 flex items-center">
+                                <i class="fas fa-shield-alt mr-2"></i> Čistá konta
+                            </h3>
+                            <div id="best-defense-list" class="space-y-3 text-sm">
+                                <div class="flex justify-between border-b border-slate-600 pb-2">
+                                    <span>1. David Raya (Arsenal)</span>
+                                    <span class="font-bold text-blue-400">14</span>
+                                </div>
+                                <div class="flex justify-between border-b border-slate-600 pb-2">
+                                    <span>2. Ederson (Man City)</span>
+                                    <span class="font-bold text-blue-400">11</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card padded premier-league-table">
+                <h2 class="text-3xl font-bold mb-4 border-b pb-2 border-slate-600 text-yellow-400">🏆 Tabulka Premier League</h2>
+                <div class="overflow-x-auto">
+                    <table class="text-sm">
+                        <thead class="bg-slate-700">
+                            <tr>
+                                <th class="px-3 py-3">Poz</th>
+                                <th class="px-3 py-3 text-left">Tým</th>
+                                <th class="px-3 py-3">Z</th>
+                                <th class="px-3 py-3">V</th>
+                                <th class="px-3 py-3">R</th>
+                                <th class="px-3 py-3">P</th>
+                                <th class="px-3 py-3">Skóre</th>
+                                <th class="px-3 py-3 font-extrabold">Body</th>
+                                <th class="px-3 py-3">Forma</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700">
+                            <tr>
+                                <td class="px-3 py-3 text-center border-l-4 border-green-500">1.</td>
+                                <td class="px-3 py-3 font-bold">Arsenal</td>
+                                <td class="px-3 py-3 text-center">33</td>
+                                <td class="px-3 py-3 text-center">25</td>
+                                <td class="px-3 py-3 text-center">5</td>
+                                <td class="px-3 py-3 text-center">3</td>
+                                <td class="px-3 py-3 text-center">78:26</td>
+                                <td class="px-3 py-3 text-center font-extrabold text-orange-400">80</td>
+                                <td class="px-3 py-3 text-center text-green-400">V V V V R</td>
+                            </tr>
+                            <tr>
+                                <td class="px-3 py-3 text-center border-l-4 border-green-500">2.</td>
+                                <td class="px-3 py-3 font-bold">Man City</td>
+                                <td class="px-3 py-3 text-center">33</td>
+                                <td class="px-3 py-3 text-center">24</td>
+                                <td class="px-3 py-3 text-center">4</td>
+                                <td class="px-3 py-3 text-center">5</td>
+                                <td class="px-3 py-3 text-center">82:30</td>
+                                <td class="px-3 py-3 text-center font-extrabold text-orange-400">76</td>
+                                <td class="px-3 py-3 text-center text-green-400">V V V P V</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="card-header flex justify-between items-center bg-slate-700">
+                    <h2 class="text-xl font-bold text-green-400">✅ 16. KOLO - VÝSLEDKY</h2>
+                    <span class="text-xs text-slate-300 bg-slate-600 px-2 py-1 rounded">Dokončeno</span>
+                </div>
+                
+                <div class="match-row">
+                    <div class="match-time">15.12. 21:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/66.png" class="team-logo">Manchester Utd</span><span class="team-score text-green-400">4</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/1044.png" class="team-logo">Bournemouth</span><span class="team-score text-green-400">4</span></div>
+                    </div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time">14.12. 17:30</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/402.png" class="team-logo">Brentford</span><span class="team-score">1</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/341.png" class="team-logo">Leeds</span><span class="team-score">1</span></div>
+                    </div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time">14.12. 15:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/354.png" class="team-logo">Crystal Palace</span><span class="team-score">0</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/65.png" class="team-logo font-bold">Manchester City</span><span class="team-score font-bold">3</span></div>
+                    </div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time">14.12. 15:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/351.png" class="team-logo font-bold">Nottingham</span><span class="team-score font-bold">3</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/73.png" class="team-logo">Tottenham</span><span class="team-score">0</span></div>
+                    </div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time">14.12. 15:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://resources.premierleague.com/premierleague/badges/t56.svg" class="team-logo font-bold">Sunderland</span><span class="team-score font-bold">1</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/67.png" class="team-logo">Newcastle</span><span class="team-score">0</span></div>
+                    </div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time">14.12. 15:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/563.png" class="team-logo">West Ham</span><span class="team-score">2</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/58.png" class="team-logo font-bold">Aston Villa</span><span class="team-score font-bold">3</span></div>
+                    </div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time">13.12. 21:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/57.png" class="team-logo font-bold">Arsenal</span><span class="team-score font-bold">2</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/76.png" class="team-logo">Wolves</span><span class="team-score">1</span></div>
+                    </div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time">13.12. 18:30</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://resources.premierleague.com/premierleague/badges/t90.svg" class="team-logo">Burnley</span><span class="team-score">2</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/63.png" class="team-logo font-bold">Fulham</span><span class="team-score font-bold">3</span></div>
+                    </div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time">13.12. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/61.png" class="team-logo font-bold">Chelsea</span><span class="team-score font-bold">2</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/62.png" class="team-logo">Everton</span><span class="team-score">0</span></div>
+                    </div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time">13.12. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/64.png" class="team-logo font-bold">Liverpool</span><span class="team-score font-bold">2</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/397.png" class="team-logo">Brighton</span><span class="team-score">0</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="card-header flex justify-between items-center bg-slate-700">
+                    <h2 class="text-xl font-bold text-orange-400">📅 34. KOLO - PROGRAM</h2>
+                    <span class="text-xs text-slate-300 bg-slate-600 px-2 py-1 rounded">Nadcházející</span>
+                </div>
+
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/57.png" class="team-logo">Arsenal</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/67.png" class="team-logo">Newcastle</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/1044.png" class="team-logo">Bournemouth</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/341.png" class="team-logo">Leeds</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/397.png" class="team-logo">Brighton</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/61.png" class="team-logo">Chelsea</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://resources.premierleague.com/premierleague/badges/t90.svg" class="team-logo">Burnley</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/65.png" class="team-logo">Manchester City</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/63.png" class="team-logo">Fulham</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/58.png" class="team-logo">Aston Villa</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/64.png" class="team-logo">Liverpool</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/354.png" class="team-logo">Crystal Palace</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/66.png" class="team-logo">Manchester Utd</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/402.png" class="team-logo">Brentford</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://resources.premierleague.com/premierleague/badges/t56.svg" class="team-logo">Sunderland</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/351.png" class="team-logo">Nottingham</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/563.png" class="team-logo">West Ham</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/62.png" class="team-logo">Everton</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-orange-400">25.04. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/76.png" class="team-logo">Wolves</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/73.png" class="team-logo">Tottenham</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="card-header flex justify-between items-center bg-slate-700">
+                    <h2 class="text-xl font-bold text-sky-400">📅 35. KOLO - PROGRAM</h2>
+                    <span class="text-xs text-slate-300 bg-slate-600 px-2 py-1 rounded">Nadcházející</span>
+                </div>
+
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/57.png" class="team-logo">Arsenal</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/63.png" class="team-logo">Fulham</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/58.png" class="team-logo">Aston Villa</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/73.png" class="team-logo">Tottenham</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/1044.png" class="team-logo">Bournemouth</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/354.png" class="team-logo">Crystal Palace</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/402.png" class="team-logo">Brentford</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/563.png" class="team-logo">West Ham</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/62.png" class="team-logo">Everton</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/65.png" class="team-logo">Manchester City</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/61.png" class="team-logo">Chelsea</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/351.png" class="team-logo">Nottingham</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/341.png" class="team-logo">Leeds</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://resources.premierleague.com/premierleague/badges/t90.svg" class="team-logo">Burnley</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/66.png" class="team-logo">Manchester Utd</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/64.png" class="team-logo">Liverpool</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/67.png" class="team-logo">Newcastle</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://crests.football-data.org/397.png" class="team-logo">Brighton</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+                <div class="match-row">
+                    <div class="match-time text-sky-400">02.05. 16:00</div>
+                    <div class="match-teams">
+                        <div class="team-row"><span><img src="https://crests.football-data.org/76.png" class="team-logo">Wolves</span><span class="team-score">-</span></div>
+                        <div class="team-row"><span><img src="https://resources.premierleague.com/premierleague/badges/t56.svg" class="team-logo">Sunderland</span><span class="team-score">-</span></div>
+                    </div>
+                    <div class="text-slate-500"><i class="fas fa-tv"></i></div>
+                </div>
+            </div>
+
+            <div class="section-card padded soccer-match-details" id="match-fulham-manchestercity">
+                <h2 class="text-3xl font-bold mb-4 border-b pb-2 border-slate-600 text-green-500 text-center">⚽ Kolo 32: Fulham vs. Manchester City - FINISHED</h2>
+                <div class="flex justify-around items-center my-6">
+                    <div class="text-center">
+                        <img alt="Fulham logo" class="mb-2 mx-auto" height="50" src="https://crests.football-data.org/63.png" width="50"/>
+                        <span class="font-bold text-xl">Fulham</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-5xl font-extrabold text-green-400">4 : 5</span>
+                        <span class="block text-md text-slate-400 mt-2">02.12. / 20:30 CET</span>
+                    </div>
+                    <div class="text-center">
+                        <img alt="Manchester City logo" class="mb-2 mx-auto" height="50" src="https://crests.football-data.org/65.png" width="50"/>
+                        <span class="font-bold text-xl">Manchester City</span>
+                    </div>
+                </div>
+                <div class="text-center text-slate-400 italic py-4">Detail zápasu (statistiky, timeline) zobrazen výše nebo po kliknutí.</div>
+            </div>
+
+        </div>
+        
+        <aside class="lg:col-span-1 space-y-6 mt-6 lg:mt-0">
+            <div class="section-card padded">
+                <h3 class="text-2xl font-bold mb-4 border-b pb-2 border-slate-600 text-green-400">📅 Rychlý přehled (16.k)</h3>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between border-b border-slate-700 pb-1">
+                        <span>Man Utd - Bournemouth</span>
+                        <span class="font-bold text-green-400">4:4</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-700 pb-1">
+                        <span>Palace - Man City</span>
+                        <span class="font-bold">0:3</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-700 pb-1">
+                        <span>Nottm - Spurs</span>
+                        <span class="font-bold text-green-400">3:0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-card padded">
+                <h3 class="text-2xl font-bold mb-4 border-b pb-2 border-slate-600 text-orange-400">⏰ Další program</h3>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between border-b border-slate-700 pb-1">
+                        <span>Arsenal - Newcastle</span>
+                        <span class="text-orange-400">25.04.</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-700 pb-1">
+                        <span>Burnley - Man City</span>
+                        <span class="text-orange-400">25.04.</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-700 pb-1">
+                        <span>Man Utd - Liverpool</span>
+                        <span class="text-sky-400">02.05.</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+</main>
+
+<script>
+    function toggleStatistics() {
+        const statsContent = document.getElementById('statistics-content');
+        if (statsContent.classList.contains('hidden')) {
+            statsContent.classList.remove('hidden');
+        } else {
+            statsContent.classList.add('hidden');
+        }
+    }
+</script>
+<script src="script.js"></script>
+</body>
+</html>

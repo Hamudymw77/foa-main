@@ -1,0 +1,23 @@
+/*
+ * a.css - Doplňkový CSS pro Premier League přehled
+ * Většina stylů je řízena pomocí Tailwind CSS tříd v f.html.
+ */
+
+/* Zajištění správné čitelnosti tabulky */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  border-bottom: 1px solid #4a5568; /* Tmavší linka */
+  text-align: center; /* Všechny sloupce zarovnáme na střed */
+}
+
+td:nth-child(2) {
+  text-align: left; /* Kromě názvu týmu */
+}
+
+/* Konec */
