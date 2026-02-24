@@ -44,48 +44,48 @@ export function TransferStats({ transfers }: TransferStatsProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-green-500/10 rounded-lg">
-            <DollarSign className="w-5 h-5 text-green-500" />
+      <div className="glass-card p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-3 bg-green-500/10 rounded-xl">
+            <DollarSign className="w-6 h-6 text-green-500" />
           </div>
-          <span className="text-slate-400 text-sm">Total Market Volume</span>
+          <span className="text-secondary font-medium">Total Market Volume</span>
         </div>
-        <div className="text-2xl font-bold text-white">{formatCurrency(stats.totalSpent)}</div>
-        <div className="text-xs text-slate-500 mt-1">€{(stats.totalEUR / 1000000).toFixed(1)}M (EUR)</div>
+        <div className="text-3xl font-bold text-foreground mb-1">{formatCurrency(stats.totalSpent)}</div>
+        <div className="text-sm text-secondary">€{(stats.totalEUR / 1000000).toFixed(1)}M (EUR)</div>
       </div>
 
-      <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-blue-500/10 rounded-lg">
-            <TrendingUp className="w-5 h-5 text-blue-500" />
+      <div className="glass-card p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-3 bg-blue-500/10 rounded-xl">
+            <TrendingUp className="w-6 h-6 text-blue-500" />
           </div>
-          <span className="text-slate-400 text-sm">Highest Transfer</span>
+          <span className="text-secondary font-medium">Highest Transfer</span>
         </div>
-        <div className="text-xl font-bold text-white truncate">{stats.highestFee?.player || 'N/A'}</div>
-        <div className="text-xs text-blue-400 mt-1">{formatCurrency(stats.highestFee?.fee || 0)}</div>
+        <div className="text-2xl font-bold text-foreground truncate mb-1" title={stats.highestFee?.player}>{stats.highestFee?.player || 'N/A'}</div>
+        <div className="text-sm font-semibold text-blue-400">{formatCurrency(stats.highestFee?.fee || 0)}</div>
       </div>
 
-      <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-purple-500/10 rounded-lg">
-            <Award className="w-5 h-5 text-purple-500" />
+      <div className="glass-card p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-3 bg-purple-500/10 rounded-xl">
+            <Award className="w-6 h-6 text-purple-500" />
           </div>
-          <span className="text-slate-400 text-sm">Top Spender</span>
+          <span className="text-secondary font-medium">Top Spender</span>
         </div>
-        <div className="text-xl font-bold text-white truncate">{stats.topSpender[0]}</div>
-        <div className="text-xs text-purple-400 mt-1">{formatCurrency(stats.topSpender[1])}</div>
+        <div className="text-2xl font-bold text-foreground truncate mb-1" title={stats.topSpender[0]}>{stats.topSpender[0]}</div>
+        <div className="text-sm font-semibold text-purple-400">{formatCurrency(stats.topSpender[1])}</div>
       </div>
 
-      <div className="bg-slate-800 p-4 rounded-xl border border-slate-700">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-orange-500/10 rounded-lg">
-            <Users className="w-5 h-5 text-orange-500" />
+      <div className="glass-card p-6 rounded-xl transition-all duration-300 hover:scale-[1.02]">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-3 bg-orange-500/10 rounded-xl">
+            <Users className="w-6 h-6 text-orange-500" />
           </div>
-          <span className="text-slate-400 text-sm">Average Fee</span>
+          <span className="text-secondary font-medium">Average Fee</span>
         </div>
-        <div className="text-2xl font-bold text-white">{formatCurrency(stats.avgFee)}</div>
-        <div className="text-xs text-slate-500 mt-1">Per paid transfer</div>
+        <div className="text-3xl font-bold text-foreground mb-1">{formatCurrency(stats.avgFee)}</div>
+        <div className="text-sm text-secondary">Per paid transfer</div>
       </div>
     </div>
   );

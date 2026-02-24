@@ -233,7 +233,14 @@ export async function GET(request: Request) {
         return NextResponse.json(mappedStandings);
       }
 
-      // 3. Prefer local standings file if present
+      // 3. Compute standings from FixtureDownload results (Real Data Priority)
+      const fdMatches = await fetchRealMatchesFromFD();
+      if (fdMatches && fdMatches.length > 0) {
+        const standings = computeStandings(fdMatches);
+        return NextResponse.json(standings);
+      }
+
+      // 4. Prefer local standings file if present
       const standingsPath = path.join(process.cwd(), 'app', 'standings.json');
       if (fs.existsSync(standingsPath)) {
         try {
@@ -244,7 +251,7 @@ export async function GET(request: Request) {
         } catch {}
       }
 
-      // 4. Compute standings from local matches if available
+      // 5. Compute standings from local matches if available
       const completedPath = path.join(process.cwd(), 'app', 'completed.json');
       const upcomingPath = path.join(process.cwd(), 'app', 'upcoming.json');
       let completed: Match[] = [];
@@ -258,13 +265,6 @@ export async function GET(request: Request) {
       const localMatches = [...completed, ...upcoming];
       if (localMatches.length > 0) {
         const standings = computeStandings(localMatches);
-        return NextResponse.json(standings);
-      }
-
-      // 5. Compute standings from FixtureDownload results
-      const fdMatches = await fetchRealMatchesFromFD();
-      if (fdMatches && fdMatches.length > 0) {
-        const standings = computeStandings(fdMatches);
         return NextResponse.json(standings);
       }
       

@@ -2,6 +2,7 @@
 import { Match } from "@/types"
 import { useState } from "react"
 import { ChevronDown, Calendar, Filter } from "lucide-react"
+import { TeamLogo } from "./TeamLogo"
 
 interface MatchListProps {
   matches: Match[]
@@ -58,11 +59,11 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
   }
 
   return (
-    <div className="bg-slate-800 rounded-xl shadow-xl mb-8 p-6 border border-slate-700">
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4 border-b border-slate-700 pb-4">
-        <h2 className="text-3xl font-bold text-white tracking-tight flex items-center gap-2">
+    <div className="glass rounded-xl shadow-lg mb-8 p-6">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4 border-b border-white/10 pb-4">
+        <h2 className="font-bold text-foreground tracking-tight flex items-center gap-2 text-[clamp(1.4rem,3vw,1.9rem)]">
             Zápasy
-            <span className="text-sm font-normal text-slate-400 ml-2 bg-slate-700 px-2 py-0.5 rounded-full">
+            <span className="text-sm font-normal text-secondary ml-2 bg-white/10 px-2 py-0.5 rounded-full">
                 {activeMatches.length}
             </span>
         </h2>
@@ -71,59 +72,59 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
             {/* Custom Select: Team */}
             <div className="relative group flex-1 md:flex-none">
                 <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                    <Filter className="w-4 h-4 text-slate-400 group-hover:text-orange-500 transition-colors" />
+                    <Filter className="w-4 h-4 text-secondary group-hover:text-accent transition-colors" />
                 </div>
                 <select
                     value={filterTeam}
                     onChange={(e) => setFilterTeam(e.target.value)}
-                    className="w-full md:w-40 bg-slate-900/50 border border-slate-600 text-slate-200 text-sm rounded-lg pl-9 pr-8 py-2.5 appearance-none hover:border-orange-500/50 hover:bg-slate-900 transition-all focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                    className="w-full md:w-40 bg-white/5 border border-white/10 text-foreground text-sm rounded-lg pl-9 pr-8 py-3 appearance-none hover:border-accent/50 hover:bg-white/10 transition-all focus:outline-none focus:ring-2 focus:ring-accent/20 min-h-[44px]"
                 >
-                    <option value="">Všechny týmy</option>
+                    <option value="" className="bg-slate-900">Všechny týmy</option>
                     {teams.map(t => (
-                    <option key={t} value={t}>{t}</option>
+                    <option key={t} value={t} className="bg-slate-900">{t}</option>
                     ))}
                 </select>
                 <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                    <ChevronDown className="w-4 h-4 text-slate-500" />
+                    <ChevronDown className="w-4 h-4 text-secondary" />
                 </div>
             </div>
 
             {/* Custom Select: Round */}
             <div className="relative group flex-1 md:flex-none">
                 <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                    <Calendar className="w-4 h-4 text-slate-400 group-hover:text-orange-500 transition-colors" />
+                    <Calendar className="w-4 h-4 text-secondary group-hover:text-accent transition-colors" />
                 </div>
                 <select
                     value={filterRound ?? ''}
                     onChange={(e) => setFilterRound(e.target.value ? Number(e.target.value) : undefined)}
-                    className="w-full md:w-40 bg-slate-900/50 border border-slate-600 text-slate-200 text-sm rounded-lg pl-9 pr-8 py-2.5 appearance-none hover:border-orange-500/50 hover:bg-slate-900 transition-all focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                    className="w-full md:w-40 bg-white/5 border border-white/10 text-foreground text-sm rounded-lg pl-9 pr-8 py-3 appearance-none hover:border-accent/50 hover:bg-white/10 transition-all focus:outline-none focus:ring-2 focus:ring-accent/20 min-h-[44px]"
                 >
-                    <option value="">Všechna kola</option>
+                    <option value="" className="bg-slate-900">Všechna kola</option>
                     {rounds.map(r => (
-                    <option key={r} value={r}>{`Kolo ${r}`}</option>
+                    <option key={r} value={r} className="bg-slate-900">{`Kolo ${r}`}</option>
                     ))}
                 </select>
                 <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                    <ChevronDown className="w-4 h-4 text-slate-500" />
+                    <ChevronDown className="w-4 h-4 text-secondary" />
                 </div>
             </div>
 
           <div className="relative">
             <button
               onClick={() => setMatchesMenuOpen(!matchesMenuOpen)}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 px-6 rounded-lg transition-all shadow-lg shadow-orange-500/20 flex items-center gap-2 text-sm"
+              className="bg-white hover:bg-gray-100 text-slate-900 font-bold py-2.5 px-6 rounded-lg transition-all shadow-lg shadow-black/10 flex items-center gap-2 text-sm min-h-[44px] min-w-[44px]"
             >
               {centerListType === 'played' ? 'Odehrané' : 'Nadcházející'}
               <ChevronDown className={`w-4 h-4 transition-transform ${matchesMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             {matchesMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-600 rounded-lg shadow-xl z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+              <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-white/10 rounded-lg shadow-xl z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                 <button
                   onClick={() => {
                     setCenterListType('played')
                     setMatchesMenuOpen(false)
                   }}
-                  className={`w-full text-left px-4 py-3 text-sm transition-colors ${centerListType === 'played' ? 'bg-orange-500/10 text-orange-500 font-medium' : 'text-slate-300 hover:bg-slate-700'}`}
+                  className={`w-full text-left px-4 py-3 text-sm transition-colors ${centerListType === 'played' ? 'bg-accent/10 text-accent font-medium' : 'text-slate-300 hover:bg-white/5'}`}
                 >
                   Odehrané zápasy
                 </button>
@@ -132,7 +133,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
                     setCenterListType('upcoming')
                     setMatchesMenuOpen(false)
                   }}
-                  className={`w-full text-left px-4 py-3 text-sm transition-colors ${centerListType === 'upcoming' ? 'bg-orange-500/10 text-orange-500 font-medium' : 'text-slate-300 hover:bg-slate-700'}`}
+                  className={`w-full text-left px-4 py-3 text-sm transition-colors ${centerListType === 'upcoming' ? 'bg-accent/10 text-accent font-medium' : 'text-slate-300 hover:bg-white/5'}`}
                 >
                   Nadcházející zápasy
                 </button>
@@ -150,10 +151,10 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
             <button
               key={m.id}
               onClick={() => onSelectMatch(m.id, m.status === 'upcoming')}
-              className={`group relative bg-slate-900/50 hover:bg-slate-800 rounded-xl p-5 transition-all duration-300 text-left border ${selectedMatchId === m.id ? 'border-orange-500 ring-1 ring-orange-500/50' : 'border-slate-700/50 hover:border-slate-600'} hover:shadow-lg hover:shadow-black/20`}
+              className={`glass-card rounded-xl p-5 transition-all duration-300 text-left border ${selectedMatchId === m.id ? 'border-accent ring-1 ring-accent/50' : 'border-white/5 hover:border-white/10'} hover:scale-[1.02]`}
             >
               <div className="flex items-center justify-between mb-4">
-                <div className="text-xs font-medium text-slate-400 group-hover:text-slate-300 transition-colors">{m.date}</div>
+                <div className="text-xs font-medium text-secondary group-hover:text-foreground transition-colors">{m.date}</div>
                 <div className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide ${m.status === 'upcoming' ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' : 'bg-green-500/10 text-green-400 border border-green-500/20'}`}>
                   {m.status === 'upcoming' ? 'Upcoming' : 'Finished'}
                 </div>
@@ -162,36 +163,44 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
               <div className="flex items-center justify-between gap-4">
                 {/* Home Team */}
                 <div className="flex flex-col items-center gap-2 flex-1 min-w-0">
-                  <img src={m.homeLogo || "/placeholder.svg"} alt={m.homeTeam} className="w-12 h-12 object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+                  <TeamLogo 
+                    teamName={m.homeTeam} 
+                    url={m.homeLogo} 
+                    className="w-12 h-12 drop-shadow-md group-hover:scale-110 transition-transform duration-300" 
+                  />
                   <div className="text-center w-full">
-                    <span className="block text-sm font-bold text-slate-200 truncate group-hover:text-white transition-colors leading-tight mb-1">{m.homeTeam}</span>
+                    <span className="block text-sm font-bold text-slate-200 group-hover:text-white transition-colors leading-tight mb-1 break-words">{m.homeTeam}</span>
                     <div className="flex justify-center">{renderFormDots(m.homeTeam)}</div>
                   </div>
                 </div>
 
                 {/* Score */}
-                <div className="flex flex-col items-center justify-center min-w-[60px] relative z-10">
+                <div className="flex flex-col items-center justify-center min-w-[80px] relative z-10 bg-slate-900/50 rounded-lg py-2 px-1">
                   <div className={`text-3xl font-black tracking-tighter ${m.status === 'upcoming' ? 'text-slate-600' : 'text-white'}`}>
                     {m.status === 'upcoming' ? (
-                        <span className="text-2xl text-slate-500">VS</span>
+                        <span className="text-2xl text-slate-500 font-bold">VS</span>
                     ) : (
-                        <div className="flex items-center gap-1">
-                            <span>{m.homeScore}</span>
-                            <span className="text-slate-600 text-xl mx-0.5">:</span>
-                            <span>{m.awayScore}</span>
+                        <div className="flex items-center justify-center gap-1">
+                            <span className="text-4xl">{m.homeScore}</span>
+                            <span className="text-secondary text-2xl mx-0.5">:</span>
+                            <span className="text-4xl">{m.awayScore}</span>
                         </div>
                     )}
                   </div>
                   {m.status !== 'upcoming' && (
-                    <div className="text-[10px] font-medium text-slate-500 mt-1 uppercase">Full Time</div>
+                    <div className="text-[10px] font-bold text-secondary mt-1 uppercase tracking-wider">Full Time</div>
                   )}
                 </div>
 
                 {/* Away Team */}
                 <div className="flex flex-col items-center gap-2 flex-1 min-w-0">
-                  <img src={m.awayLogo || "/placeholder.svg"} alt={m.awayTeam} className="w-12 h-12 object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+                  <TeamLogo 
+                    teamName={m.awayTeam} 
+                    url={m.awayLogo} 
+                    className="w-12 h-12 drop-shadow-md group-hover:scale-110 transition-transform duration-300" 
+                  />
                   <div className="text-center w-full">
-                    <span className="block text-sm font-bold text-slate-200 truncate group-hover:text-white transition-colors leading-tight mb-1">{m.awayTeam}</span>
+                    <span className="block text-sm font-bold text-slate-200 group-hover:text-white transition-colors leading-tight mb-1 break-words">{m.awayTeam}</span>
                     <div className="flex justify-center">{renderFormDots(m.awayTeam)}</div>
                   </div>
                 </div>

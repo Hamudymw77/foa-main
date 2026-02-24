@@ -7,6 +7,7 @@ export function useFootballData() {
   const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<Date | undefined>(undefined);
 
   useEffect(() => {
     async function fetchData() {
@@ -31,6 +32,7 @@ export function useFootballData() {
                 upcoming.sort((a: Match, b: Match) => (a.timestamp ?? Number.POSITIVE_INFINITY) - (b.timestamp ?? Number.POSITIVE_INFINITY));
                 setMatches(completed);
                 setUpcomingMatches(upcoming);
+                setLastUpdated(new Date());
             }
         }
       } catch (error) {
@@ -49,5 +51,5 @@ export function useFootballData() {
     return () => clearInterval(intervalId);
   }, []);
 
-  return { standings, matches, upcomingMatches, isLoading, error };
+  return { standings, matches, upcomingMatches, isLoading, error, lastUpdated };
 }

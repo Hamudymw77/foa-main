@@ -40,16 +40,15 @@ async function getDB() {
 
 // Official Data for 2025/26 Season (January 2026)
 const generateTopScorers = (): Scorer[] => [
-  { id: '1', name: 'Erling Haaland', team: 'Manchester City', goals: 23, assists: 4, countryCode: 'no', matchesPlayed: 21, minutesPlayed: 1850, goalsPerMatch: 1.10 },
-  { id: '2', name: 'Mohamed Salah', team: 'Liverpool', goals: 19, assists: 8, countryCode: 'eg', matchesPlayed: 22, minutesPlayed: 1920, goalsPerMatch: 0.86 },
-  { id: '3', name: 'Cole Palmer', team: 'Chelsea', goals: 16, assists: 11, countryCode: 'gb-eng', matchesPlayed: 20, minutesPlayed: 1780, goalsPerMatch: 0.80 },
-  { id: '4', name: 'Alexander Isak', team: 'Newcastle', goals: 15, assists: 3, countryCode: 'se', matchesPlayed: 19, minutesPlayed: 1650, goalsPerMatch: 0.79 },
-  { id: '5', name: 'Bukayo Saka', team: 'Arsenal', goals: 14, assists: 12, countryCode: 'gb-eng', matchesPlayed: 21, minutesPlayed: 1890, goalsPerMatch: 0.67 },
-  { id: '6', name: 'Hugo Ekitike', team: 'Liverpool', goals: 12, assists: 5, countryCode: 'fr', matchesPlayed: 18, minutesPlayed: 1450, goalsPerMatch: 0.67 },
-  { id: '7', name: 'Antoine Semenyo', team: 'Manchester City', goals: 11, assists: 6, countryCode: 'gh', matchesPlayed: 17, minutesPlayed: 1320, goalsPerMatch: 0.65 },
-  { id: '8', name: 'Ollie Watkins', team: 'Aston Villa', goals: 11, assists: 7, countryCode: 'gb-eng', matchesPlayed: 21, minutesPlayed: 1800, goalsPerMatch: 0.52 },
-  { id: '9', name: 'Son Heung-min', team: 'Tottenham', goals: 10, assists: 6, countryCode: 'kr', matchesPlayed: 20, minutesPlayed: 1750, goalsPerMatch: 0.50 },
-  { id: '10', name: 'Jarrod Bowen', team: 'West Ham', goals: 10, assists: 4, countryCode: 'gb-eng', matchesPlayed: 22, minutesPlayed: 1950, goalsPerMatch: 0.45 },
+  { id: '1', name: 'E. Haaland', team: 'Manchester City', goals: 22, assists: 7, countryCode: 'no', matchesPlayed: 27, minutesPlayed: 2350, goalsPerMatch: 0.81 },
+  { id: '2', name: 'Igor Thiago', team: 'Brentford', goals: 17, assists: 1, countryCode: 'br', matchesPlayed: 27, minutesPlayed: 2100, goalsPerMatch: 0.63 },
+  { id: '3', name: 'A. Semenyo', team: 'Manchester City', goals: 13, assists: 4, countryCode: 'gh', matchesPlayed: 26, minutesPlayed: 1980, goalsPerMatch: 0.50 },
+  { id: '4', name: 'João Pedro', team: 'Chelsea', goals: 11, assists: 4, countryCode: 'br', matchesPlayed: 27, minutesPlayed: 2200, goalsPerMatch: 0.41 },
+  { id: '5', name: 'H. Ekitiké', team: 'Liverpool', goals: 10, assists: 2, countryCode: 'fr', matchesPlayed: 24, minutesPlayed: 1850, goalsPerMatch: 0.42 },
+  { id: '6', name: 'D. Calvert-Lewin', team: 'Leeds', goals: 10, assists: 1, countryCode: 'gb-eng', matchesPlayed: 24, minutesPlayed: 1920, goalsPerMatch: 0.42 },
+  { id: '7', name: 'V. Gyökeres', team: 'Arsenal', goals: 10, assists: 0, countryCode: 'se', matchesPlayed: 26, minutesPlayed: 2150, goalsPerMatch: 0.38 },
+  { id: '8', name: 'Bruno Guimarães', team: 'Newcastle', goals: 9, assists: 4, countryCode: 'br', matchesPlayed: 23, minutesPlayed: 2000, goalsPerMatch: 0.39 },
+  { id: '9', name: 'B. Mbeumo', team: 'Man Utd', goals: 9, assists: 3, countryCode: 'cm', matchesPlayed: 22, minutesPlayed: 1800, goalsPerMatch: 0.41 },
 ];
 
 

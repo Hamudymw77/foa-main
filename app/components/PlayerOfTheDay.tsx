@@ -60,17 +60,17 @@ export function PlayerOfTheDay() {
 
   const totalVotes = candidates.reduce((sum, c) => sum + c.votes, 0)
 
-  if (isLoading) return <div className="h-64 bg-slate-800 rounded-xl animate-pulse"></div>
+  if (isLoading) return <div className="h-64 bg-slate-800/50 rounded-xl animate-pulse"></div>
 
   return (
-    <div className="bg-slate-800 rounded-xl shadow-xl p-6 border border-slate-700">
+    <div className="glass rounded-xl shadow-lg p-6">
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-2 bg-yellow-500/10 rounded-lg">
-          <Medal className="w-6 h-6 text-yellow-500" />
+        <div className="p-2 bg-accent/10 rounded-lg">
+          <Medal className="w-6 h-6 text-accent" />
         </div>
         <div>
-          <h3 className="text-xl font-bold text-white">Player of the Day</h3>
-          <p className="text-sm text-slate-400">Vote for the best performance</p>
+          <h3 className="text-xl font-bold text-foreground">Player of the Day</h3>
+          <p className="text-sm text-secondary">Vote for the best performance</p>
         </div>
       </div>
 
@@ -85,15 +85,15 @@ export function PlayerOfTheDay() {
               className={`relative overflow-hidden rounded-lg border transition-all duration-300 ${
                 hasVoted 
                   ? isSelected 
-                    ? "border-yellow-500/50 bg-yellow-500/10" 
-                    : "border-slate-700 bg-slate-700/30 opacity-75"
-                  : "border-slate-700 bg-slate-700/50 hover:border-slate-600 hover:bg-slate-700"
+                    ? "border-accent/50 bg-accent/10" 
+                    : "border-white/5 bg-white/5 opacity-75"
+                  : "border-white/5 bg-white/5 hover:border-white/10 hover:bg-white/10"
               }`}
             >
               {/* Progress Bar Background */}
               {hasVoted && (
                 <div 
-                  className="absolute inset-0 bg-yellow-500/10 transition-all duration-1000 ease-out"
+                  className="absolute inset-0 bg-accent/10 transition-all duration-1000 ease-out"
                   style={{ width: `${percentage}%` }}
                 />
               )}
@@ -101,25 +101,25 @@ export function PlayerOfTheDay() {
               <div className="relative p-4 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                    isSelected ? "bg-yellow-500 text-slate-900" : "bg-slate-600 text-slate-300"
+                    isSelected ? "bg-accent text-slate-900" : "bg-slate-700 text-slate-300"
                   }`}>
                     <User className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="font-bold text-white">{candidate.name}</div>
-                    <div className="text-xs text-slate-400">{candidate.team}</div>
+                    <div className="font-extrabold text-white text-lg tracking-tight group-hover:text-accent transition-colors">{candidate.name}</div>
+                    <div className="text-xs text-secondary font-medium opacity-80">{candidate.team}</div>
                   </div>
                 </div>
 
                 {hasVoted ? (
                   <div className="text-right">
-                    <div className="text-xl font-bold text-yellow-400">{percentage}%</div>
-                    <div className="text-xs text-slate-400">{candidate.votes} votes</div>
+                    <div className="text-xl font-bold text-accent">{percentage}%</div>
+                    <div className="text-xs text-secondary">{candidate.votes} votes</div>
                   </div>
                 ) : (
                   <button
                     onClick={() => handleVote(candidate.id)}
-                    className="flex items-center gap-2 px-4 py-2 bg-slate-600 hover:bg-orange-500 text-white text-sm font-semibold rounded-lg transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-accent text-foreground hover:text-white text-sm font-semibold rounded-lg transition-colors min-h-[44px] min-w-[44px]"
                   >
                     <ThumbsUp className="w-4 h-4" />
                     Vote
@@ -132,7 +132,7 @@ export function PlayerOfTheDay() {
       </div>
       
       {hasVoted && (
-        <div className="mt-4 text-center text-sm text-slate-400 animate-in fade-in">
+        <div className="mt-4 text-center text-sm text-secondary animate-in fade-in">
           Thanks for voting! Come back tomorrow for new candidates.
         </div>
       )}

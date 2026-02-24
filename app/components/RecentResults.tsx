@@ -20,8 +20,8 @@ export function RecentResults({ matches, selectedMatchId, onSelectMatch }: Recen
     .sort((a, b) => b - a)
 
   return (
-    <div className="bg-slate-800 rounded-xl shadow-xl p-6">
-      <h3 className="text-2xl font-bold text-yellow-400 mb-4">Recent Results</h3>
+    <div className="glass rounded-xl shadow-lg p-6">
+      <h3 className="text-2xl font-bold text-accent mb-4">Recent Results</h3>
       <div className="space-y-5">
         {sortedRounds.map((round) => {
           const roundMatches = matches
@@ -29,28 +29,30 @@ export function RecentResults({ matches, selectedMatchId, onSelectMatch }: Recen
             .sort((a, b) => (b.timestamp ?? 0) - (a.timestamp ?? 0));
           return (
             <div key={`round-${round}`} className="space-y-3">
-              <div className="text-sm font-bold text-slate-300">
+              <div className="text-sm font-bold text-secondary">
                 Hrací den {round}/38
               </div>
               {roundMatches.map((match) => (
                 <button
                   key={match.id}
                   onClick={() => onSelectMatch(match.id)}
-                  className={`w-full text-left p-3 rounded-lg transition-colors ${
-                    selectedMatchId === match.id ? "bg-orange-500" : "bg-slate-700 hover:bg-slate-600"
+                  className={`w-full text-left p-3 rounded-lg transition-colors border ${
+                    selectedMatchId === match.id 
+                      ? "bg-accent text-white border-accent" 
+                      : "bg-white/5 hover:bg-white/10 border-white/5 hover:border-white/10 text-foreground"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2 mb-1">
-                    <div className="flex items-center gap-2 flex-1">
-                      <img src={match.homeLogo || "/placeholder.svg"} alt={match.homeTeam} className="w-6 h-6" />
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
+                      <img src={match.homeLogo || "/placeholder.svg"} alt={match.homeTeam} className="w-6 h-6 shrink-0" />
                       <span className="text-sm font-semibold truncate">{match.homeTeam}</span>
                     </div>
-                    <span className="font-bold text-lg">
+                    <span className="font-bold text-lg whitespace-nowrap px-2">
                       {match.homeScore} - {match.awayScore}
                     </span>
-                    <div className="flex items-center gap-2 flex-1 justify-end">
+                    <div className="flex items-center gap-2 flex-1 justify-end min-w-0">
                       <span className="text-sm font-semibold truncate">{match.awayTeam}</span>
-                      <img src={match.awayLogo || "/placeholder.svg"} alt={match.awayTeam} className="w-6 h-6" />
+                      <img src={match.awayLogo || "/placeholder.svg"} alt={match.awayTeam} className="w-6 h-6 shrink-0" />
                     </div>
                   </div>
                 </button>

@@ -44,7 +44,7 @@ export function TransfersPanel({ transfers, isLoading }: TransfersPanelProps) {
       case 'permanent': return 'text-green-400 bg-green-400/10 border-green-400/20';
       case 'loan': return 'text-blue-400 bg-blue-400/10 border-blue-400/20';
       case 'free': return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20';
-      default: return 'text-slate-400 bg-slate-700/30 border-slate-600';
+      default: return 'text-secondary bg-white/5 border-white/10';
     }
   };
 
@@ -96,12 +96,12 @@ export function TransfersPanel({ transfers, isLoading }: TransfersPanelProps) {
 
   if (isLoading) {
     return (
-        <div className="bg-slate-800 rounded-xl shadow-xl p-6 mb-8 animate-pulse">
+        <div className="glass-card p-6 mb-8 animate-pulse">
             <span className="sr-only">Loading transfers...</span>
-            <div className="h-8 bg-slate-700 w-1/3 mb-6 rounded"></div>
+            <div className="h-8 bg-white/10 w-1/3 mb-6 rounded"></div>
             <div className="space-y-4">
                 {[...Array(5)].map((_, i) => (
-                    <div key={i} className="h-16 bg-slate-700 rounded"></div>
+                    <div key={i} className="h-16 bg-white/5 rounded"></div>
                 ))}
             </div>
         </div>
@@ -109,33 +109,33 @@ export function TransfersPanel({ transfers, isLoading }: TransfersPanelProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-500">
       <TransferStats transfers={transfers} />
       
-      <div className="bg-slate-800 rounded-xl shadow-xl mb-8 border border-slate-700 overflow-hidden">
-        <div className="p-6 border-b border-slate-700 bg-slate-800/95 backdrop-blur">
+      <div className="glass-card mb-8 overflow-hidden">
+        <div className="p-6 border-b border-white/10 bg-white/5 backdrop-blur">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
               <div className="flex items-center gap-3">
                   <div className="p-2 bg-purple-500/10 rounded-lg">
                       <ArrowRightLeft className="w-6 h-6 text-purple-500" />
                   </div>
                   <div>
-                      <h2 className="text-2xl font-bold text-white">Transfers 25/26</h2>
-                      <p className="text-slate-400 text-sm">Premier League Winter Window</p>
+                      <h2 className="text-2xl font-bold text-foreground">Transfers 25/26</h2>
+                      <p className="text-secondary text-sm">Premier League Winter Window</p>
                   </div>
               </div>
               
               <div className="flex gap-2">
                 <button 
                   onClick={handleExportCSV}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors text-sm font-medium"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 text-foreground rounded-lg transition-colors text-sm font-medium min-h-[44px] min-w-[44px]"
                 >
                   <Download className="w-4 h-4" />
                   CSV
                 </button>
                 <button 
                   onClick={handleExportJSON}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors text-sm font-medium"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 text-foreground rounded-lg transition-colors text-sm font-medium min-h-[44px] min-w-[44px]"
                 >
                   <FileJson className="w-4 h-4" />
                   JSON
@@ -146,26 +146,26 @@ export function TransfersPanel({ transfers, isLoading }: TransfersPanelProps) {
         {/* Filters */}
         <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary" />
                 <input 
                     type="text" 
                     placeholder="Search player, club..." 
-                    className="w-full bg-slate-900 border border-slate-700 text-white rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-slate-500"
+                    className="w-full bg-white/5 border border-white/10 text-foreground rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent placeholder-secondary"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
             </div>
             <div className="relative min-w-[200px]">
-                <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-secondary" />
                 <select 
-                    className="w-full bg-slate-900 border border-slate-700 text-white rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 appearance-none cursor-pointer"
+                    className="w-full bg-white/5 border border-white/10 text-foreground rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent appearance-none cursor-pointer"
                     value={typeFilter}
                     onChange={(e) => setTypeFilter(e.target.value)}
                 >
-                    <option value="all">All Types</option>
-                    <option value="permanent">Permanent</option>
-                    <option value="loan">Loan</option>
-                    <option value="free">Free Transfer</option>
+                    <option value="all" className="bg-background text-foreground">All Types</option>
+                    <option value="permanent" className="bg-background text-foreground">Permanent</option>
+                    <option value="loan" className="bg-background text-foreground">Loan</option>
+                    <option value="free" className="bg-background text-foreground">Free Transfer</option>
                 </select>
             </div>
         </div>
@@ -174,7 +174,7 @@ export function TransfersPanel({ transfers, isLoading }: TransfersPanelProps) {
       {/* List */}
       <div className="overflow-x-auto">
         <table className="w-full text-left">
-            <thead className="bg-slate-900/50 text-slate-400 text-sm uppercase font-semibold">
+            <thead className="bg-white/5 text-secondary text-sm uppercase font-semibold">
                 <tr>
                     <th className="px-6 py-4">Player</th>
                     <th className="px-6 py-4">From / To</th>
@@ -183,38 +183,38 @@ export function TransfersPanel({ transfers, isLoading }: TransfersPanelProps) {
                     <th className="px-6 py-4">Type</th>
                 </tr>
             </thead>
-            <tbody className="divide-y divide-slate-700">
+            <tbody className="divide-y divide-white/5">
                 {paginatedTransfers.length > 0 ? (
                     paginatedTransfers.map((transfer) => (
-                        <tr key={transfer.id} className="hover:bg-slate-700/30 transition-colors">
+                        <tr key={transfer.id} className="hover:bg-white/5 transition-colors">
                             <td className="px-6 py-4">
-                                <div className="font-bold text-white text-lg">{transfer.player}</div>
-                                <div className="text-sm text-slate-400">{transfer.position} • {transfer.age} yrs</div>
+                                <div className="font-bold text-foreground text-lg">{transfer.player}</div>
+                                <div className="text-sm text-secondary">{transfer.position} • {transfer.age} yrs</div>
                             </td>
                             <td className="px-6 py-4">
                                 <div className="flex items-center gap-2 text-sm text-slate-300">
-                                    <span className="text-slate-500 w-12">From:</span>
+                                    <span className="text-secondary w-12">From:</span>
                                     <span className="font-medium">{transfer.oldClub}</span>
                                 </div>
-                                <div className="flex items-center gap-2 text-sm text-white mt-1">
-                                    <span className="text-slate-500 w-12">To:</span>
-                                    <span className="font-bold text-purple-400">{transfer.newClub}</span>
+                                <div className="flex items-center gap-2 text-sm text-foreground mt-1">
+                                    <span className="text-secondary w-12">To:</span>
+                                    <span className="font-bold text-accent">{transfer.newClub}</span>
                                 </div>
                             </td>
                             <td className="px-6 py-4">
                                 <div className="flex items-center gap-1.5 font-bold text-green-400 text-lg">
                                     {formatFee(transfer.fee, transfer.feeDisplay)}
                                 </div>
-                                <div className="text-xs text-slate-500 mt-0.5">
+                                <div className="text-xs text-secondary mt-0.5">
                                     {transfer.feeEUR ? `€${(transfer.feeEUR/1000000).toFixed(1)}M` : ''}
                                 </div>
-                                <div className="text-xs text-slate-500 mt-0.5">
+                                <div className="text-xs text-secondary mt-0.5">
                                     {transfer.contractLength}
                                 </div>
                             </td>
-                            <td className="px-6 py-4 text-slate-300 text-sm">
+                            <td className="px-6 py-4 text-secondary text-sm">
                                 <div className="flex items-center gap-2">
-                                    <Calendar className="w-4 h-4 text-slate-500" />
+                                    <Calendar className="w-4 h-4 text-secondary" />
                                     {transfer.date}
                                 </div>
                             </td>
@@ -227,7 +227,7 @@ export function TransfersPanel({ transfers, isLoading }: TransfersPanelProps) {
                     ))
                 ) : (
                     <tr>
-                        <td colSpan={5} className="px-6 py-12 text-center text-slate-500">
+                        <td colSpan={5} className="px-6 py-12 text-center text-secondary">
                             No transfers found matching your criteria.
                         </td>
                     </tr>
@@ -238,21 +238,21 @@ export function TransfersPanel({ transfers, isLoading }: TransfersPanelProps) {
 
       {/* Pagination */}
       {totalPages > 1 && (
-          <div className="p-4 border-t border-slate-700 flex justify-between items-center bg-slate-800/50">
+          <div className="p-4 border-t border-white/10 flex justify-between items-center bg-white/5">
             <button 
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="p-2 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-slate-400 hover:text-white"
+                className="p-2 rounded-lg hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-secondary hover:text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
                 <ChevronLeft className="w-5 h-5" />
             </button>
-            <span className="text-sm text-slate-400 font-medium">
-                Page <span className="text-white">{currentPage}</span> of {totalPages}
+            <span className="text-sm text-secondary font-medium">
+                Page <span className="text-foreground">{currentPage}</span> of {totalPages}
             </span>
             <button 
                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
-                className="p-2 rounded-lg hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-slate-400 hover:text-white"
+                className="p-2 rounded-lg hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-secondary hover:text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
             >
                 <ChevronRight className="w-5 h-5" />
             </button>

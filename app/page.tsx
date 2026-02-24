@@ -14,10 +14,12 @@ import { useDashboardState } from "./hooks/useDashboardState"
 import { useStatisticsData } from "./hooks/useStatisticsData"
 import { useTransferData } from "./hooks/useTransferData"
 import { SkeletonLoader } from "./components/SkeletonLoader"
-import { Trophy } from "lucide-react"
+import { Header } from "./components/Header"
+import { Footer } from "./components/Footer"
+import { BackToTop } from "./components/BackToTop"
 
 export default function PremierLeagueDashboard() {
-  const { standings, matches, upcomingMatches, isLoading } = useFootballData();
+  const { standings, matches, upcomingMatches, isLoading, lastUpdated } = useFootballData();
   const { topScorers, bestDefense } = useStatisticsData();
   const { transfers, isLoading: transfersLoading } = useTransferData();
   const { 
@@ -43,22 +45,11 @@ export default function PremierLeagueDashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white p-4 md:p-8 font-sans">
-        <header className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="absolute inset-0 bg-orange-500 blur-lg opacity-50 rounded-full"></div>
-              <div className="relative bg-gradient-to-br from-orange-400 to-red-600 p-3 rounded-2xl shadow-lg transform rotate-3 hover:rotate-6 transition-transform">
-                <Trophy className="w-8 h-8 text-white" />
-              </div>
-            </div>
-            <h1 className="text-4xl font-extrabold tracking-tight">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">KICK</span>
-              <span className="text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.8)]">GOAL</span>
-            </h1>
-          </div>
-        </header>
-        <SkeletonLoader />
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <div className="p-4 md:p-8 flex-1">
+          <SkeletonLoader />
+        </div>
       </div>
     );
   }
@@ -74,32 +65,26 @@ export default function PremierLeagueDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-5">
-      <header className="text-center mb-10">
-        <div className="flex items-center justify-center gap-4 mb-2">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-orange-500 tracking-tight">KICKGOAL</h1>
-        </div>
-        <h2 className="text-4xl font-bold text-white mt-2">PREMIER LEAGUE</h2>
-        <p className="text-xl text-slate-300 mt-2">Match Statistics, Table & Schedule</p>
-      </header>
-
-      <main className="container mx-auto max-w-7xl">
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      
+      <main id="main" className="container mx-auto max-w-7xl px-4 md:px-8 flex-1">
         <div className="lg:grid lg:grid-cols-4 lg:gap-8">
           <div className="lg:col-span-3">
             {/* Premier League Table */}
-            <div className="bg-slate-800 rounded-xl shadow-xl mb-8 p-6">
-              <div className="flex justify-between items-center mb-4 pb-2 border-b border-slate-600">
-                <h2 className="text-3xl font-bold text-yellow-400">Premier League Table</h2>
+            <div id="standings" className="glass rounded-xl shadow-lg mb-8 p-6 scroll-mt-24">
+              <div className="flex justify-between items-center mb-4 pb-2 border-b border-white/10">
+                <h2 className="font-bold text-accent text-[clamp(1.5rem,3vw,2rem)]">Premier League Table</h2>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setShowTransfers(!showTransfers)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-colors"
+                    className="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-6 rounded-lg transition-colors min-h-[44px] min-w-[44px]"
                   >
                     {showTransfers ? "Hide Transfers" : "Transfers"}
                   </button>
                   <button
                     onClick={() => setShowStatistics(!showStatistics)}
-                    className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition-colors"
+                    className="bg-accent hover:bg-accent/90 text-white font-bold py-2 px-6 rounded-lg transition-colors min-h-[44px] min-w-[44px]"
                   >
                     {showStatistics ? "Hide Statistics" : "Show Statistics"}
                   </button>
@@ -114,10 +99,16 @@ export default function PremierLeagueDashboard() {
                 <TransfersPanel transfers={transfers} isLoading={transfersLoading} />
               )}
 
-              <LeagueTable standings={standings} />
+              {!showStatistics && !showTransfers && (
+                <LeagueTable standings={standings} lastUpdated={lastUpdated} />
+              )}
             </div>
 
-            {/* Match List */}
+              {/* Anchor for Stats navigation */}
+              <div id="stats" aria-hidden="true"></div>
+
+              {/* Match List */}
+              <div id="matches" aria-hidden="false"></div>
             <MatchList 
               matches={matches} 
               upcomingMatches={upcomingMatches} 
@@ -156,6 +147,24 @@ export default function PremierLeagueDashboard() {
           </div>
         </div>
       </main>
+      
+      {/* Mobile CTA: prominent accessible button */}
+      <div className="md:hidden fixed bottom-6 right-6 z-50">
+        <button
+          type="button"
+          onClick={() => {
+            const el = document.getElementById('matches');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="bg-accent text-slate-900 font-extrabold px-5 py-3 rounded-full shadow-lg shadow-amber-300/30 hover:shadow-amber-300/50 transition-all min-h-[48px] min-w-[48px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-300/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          aria-label="Přejít na zápasy (živé skóre)"
+        >
+          Živé skóre
+        </button>
+      </div>
+      
+      <Footer />
+      <BackToTop />
     </div>
   )
 }
