@@ -1,6 +1,6 @@
 "use client"
 import { Scorer, Defense } from "@/types"
-import { Trophy, Shield, Medal, BarChart3 } from "lucide-react"
+import { Trophy, Shield, Medal, BarChart3, Activity } from "lucide-react"
 
 interface StatisticsPanelProps {
   topScorers: Scorer[]

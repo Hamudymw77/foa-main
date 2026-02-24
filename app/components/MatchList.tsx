@@ -1,6 +1,7 @@
 "use client"
 import { Match } from "@/types"
 import { useState } from "react"
+import { ChevronDown, Calendar, Filter } from "lucide-react"
 
 interface MatchListProps {
   matches: Match[]
@@ -17,51 +18,112 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
 
   const activeMatches = centerListType === 'played' ? matches : upcomingMatches
   const allMatches = [...matches, ...upcomingMatches]
+  const playedMatches = [...matches, ...upcomingMatches].filter(m => m.status === 'finished' || (m.homeScore !== undefined && m.awayScore !== undefined));
   
   const teams = Array.from(new Set(allMatches.flatMap(m => [m.homeTeam, m.awayTeam]))).sort()
   const rounds = Array.from(new Set(allMatches.map(m => m.round).filter((r): r is number => typeof r === 'number'))).sort((a, b) => a - b)
 
+  const getTeamForm = (teamName: string) => {
+    return playedMatches
+      .filter(m => m.homeTeam === teamName || m.awayTeam === teamName)
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 5)
+      .map(m => {
+        const isHome = m.homeTeam === teamName
+        const homeScore = m.homeScore ?? 0
+        const awayScore = m.awayScore ?? 0
+        
+        if (homeScore === awayScore) return 'D'
+        if (isHome) return homeScore > awayScore ? 'W' : 'L'
+        return awayScore > homeScore ? 'W' : 'L'
+      })
+      .reverse() // Show oldest to newest (left to right) or newest to oldest? Usually newest on right.
+  }
+
+  const renderFormDots = (teamName: string) => {
+    const form = getTeamForm(teamName);
+    return (
+      <div className="flex gap-1 mt-1">
+        {form.map((result, i) => (
+          <div 
+            key={i} 
+            className={`w-1.5 h-1.5 rounded-full ${
+              result === 'W' ? 'bg-green-500' : 
+              result === 'L' ? 'bg-red-500' : 'bg-slate-400'
+            }`}
+          />
+        ))}
+      </div>
+    )
+  }
+
   return (
-    <div className="bg-slate-800 rounded-xl shadow-xl mb-8 p-6">
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-600">
-        <h2 className="text-3xl font-bold text-yellow-400">Zápasy</h2>
-        <div className="flex items-center gap-3">
-          <select
-            value={filterTeam}
-            onChange={(e) => setFilterTeam(e.target.value)}
-            className="bg-slate-700 text-white px-3 py-2 rounded-lg"
-          >
-            <option value="">Všechny týmy</option>
-            {teams.map(t => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
-          <select
-            value={filterRound ?? ''}
-            onChange={(e) => setFilterRound(e.target.value ? Number(e.target.value) : undefined)}
-            className="bg-slate-700 text-white px-3 py-2 rounded-lg"
-          >
-            <option value="">Všechna kola</option>
-            {rounds.map(r => (
-              <option key={r} value={r}>{`Kolo ${r}`}</option>
-            ))}
-          </select>
+    <div className="bg-slate-800 rounded-xl shadow-xl mb-8 p-6 border border-slate-700">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4 border-b border-slate-700 pb-4">
+        <h2 className="text-3xl font-bold text-white tracking-tight flex items-center gap-2">
+            Zápasy
+            <span className="text-sm font-normal text-slate-400 ml-2 bg-slate-700 px-2 py-0.5 rounded-full">
+                {activeMatches.length}
+            </span>
+        </h2>
+        
+        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+            {/* Custom Select: Team */}
+            <div className="relative group flex-1 md:flex-none">
+                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                    <Filter className="w-4 h-4 text-slate-400 group-hover:text-orange-500 transition-colors" />
+                </div>
+                <select
+                    value={filterTeam}
+                    onChange={(e) => setFilterTeam(e.target.value)}
+                    className="w-full md:w-40 bg-slate-900/50 border border-slate-600 text-slate-200 text-sm rounded-lg pl-9 pr-8 py-2.5 appearance-none hover:border-orange-500/50 hover:bg-slate-900 transition-all focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                >
+                    <option value="">Všechny týmy</option>
+                    {teams.map(t => (
+                    <option key={t} value={t}>{t}</option>
+                    ))}
+                </select>
+                <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                    <ChevronDown className="w-4 h-4 text-slate-500" />
+                </div>
+            </div>
+
+            {/* Custom Select: Round */}
+            <div className="relative group flex-1 md:flex-none">
+                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                    <Calendar className="w-4 h-4 text-slate-400 group-hover:text-orange-500 transition-colors" />
+                </div>
+                <select
+                    value={filterRound ?? ''}
+                    onChange={(e) => setFilterRound(e.target.value ? Number(e.target.value) : undefined)}
+                    className="w-full md:w-40 bg-slate-900/50 border border-slate-600 text-slate-200 text-sm rounded-lg pl-9 pr-8 py-2.5 appearance-none hover:border-orange-500/50 hover:bg-slate-900 transition-all focus:outline-none focus:ring-2 focus:ring-orange-500/20"
+                >
+                    <option value="">Všechna kola</option>
+                    {rounds.map(r => (
+                    <option key={r} value={r}>{`Kolo ${r}`}</option>
+                    ))}
+                </select>
+                <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                    <ChevronDown className="w-4 h-4 text-slate-500" />
+                </div>
+            </div>
+
           <div className="relative">
             <button
               onClick={() => setMatchesMenuOpen(!matchesMenuOpen)}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-6 rounded-lg transition-colors flex items-center gap-2"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 px-6 rounded-lg transition-all shadow-lg shadow-orange-500/20 flex items-center gap-2 text-sm"
             >
-              Zápasy
-              <span className="text-xl">▾</span>
+              {centerListType === 'played' ? 'Odehrané' : 'Nadcházející'}
+              <ChevronDown className={`w-4 h-4 transition-transform ${matchesMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             {matchesMenuOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-slate-900 border border-slate-700 rounded-lg shadow-xl z-10">
+              <div className="absolute right-0 mt-2 w-48 bg-slate-800 border border-slate-600 rounded-lg shadow-xl z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                 <button
                   onClick={() => {
                     setCenterListType('played')
                     setMatchesMenuOpen(false)
                   }}
-                  className={`w-full text-left px-4 py-3 rounded-t-lg ${centerListType === 'played' ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-800'}`}
+                  className={`w-full text-left px-4 py-3 text-sm transition-colors ${centerListType === 'played' ? 'bg-orange-500/10 text-orange-500 font-medium' : 'text-slate-300 hover:bg-slate-700'}`}
                 >
                   Odehrané zápasy
                 </button>
@@ -70,7 +132,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
                     setCenterListType('upcoming')
                     setMatchesMenuOpen(false)
                   }}
-                  className={`w-full text-left px-4 py-3 rounded-b-lg ${centerListType === 'upcoming' ? 'bg-slate-700 text-white' : 'text-slate-300 hover:bg-slate-800'}`}
+                  className={`w-full text-left px-4 py-3 text-sm transition-colors ${centerListType === 'upcoming' ? 'bg-orange-500/10 text-orange-500 font-medium' : 'text-slate-300 hover:bg-slate-700'}`}
                 >
                   Nadcházející zápasy
                 </button>
@@ -79,6 +141,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
           </div>
         </div>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {activeMatches
           .filter(m => !filterTeam || m.homeTeam === filterTeam || m.awayTeam === filterTeam)
@@ -87,30 +150,61 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
             <button
               key={m.id}
               onClick={() => onSelectMatch(m.id, m.status === 'upcoming')}
-              className={`bg-slate-700 hover:bg-slate-600 rounded-lg p-4 transition-colors text-left ${selectedMatchId === m.id ? 'ring-2 ring-orange-500' : ''}`}
+              className={`group relative bg-slate-900/50 hover:bg-slate-800 rounded-xl p-5 transition-all duration-300 text-left border ${selectedMatchId === m.id ? 'border-orange-500 ring-1 ring-orange-500/50' : 'border-slate-700/50 hover:border-slate-600'} hover:shadow-lg hover:shadow-black/20`}
             >
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-xs text-slate-300">{m.date}</div>
-                <div className={`text-[11px] px-2 py-0.5 rounded ${m.status === 'upcoming' ? 'bg-blue-600/30 text-blue-300' : 'bg-green-600/30 text-green-300'}`}>
-                  {m.status === 'upcoming' ? 'UPCOMING' : 'KONEC'}
+              <div className="flex items-center justify-between mb-4">
+                <div className="text-xs font-medium text-slate-400 group-hover:text-slate-300 transition-colors">{m.date}</div>
+                <div className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide ${m.status === 'upcoming' ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' : 'bg-green-500/10 text-green-400 border border-green-500/20'}`}>
+                  {m.status === 'upcoming' ? 'Upcoming' : 'Finished'}
                 </div>
               </div>
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2 flex-1">
-                  <img src={m.homeLogo || "/placeholder.svg"} alt={m.homeTeam} className="w-7 h-7" />
-                  <span className="text-sm font-semibold truncate">{m.homeTeam}</span>
+
+              <div className="flex items-center justify-between gap-4">
+                {/* Home Team */}
+                <div className="flex flex-col items-center gap-2 flex-1 min-w-0">
+                  <img src={m.homeLogo || "/placeholder.svg"} alt={m.homeTeam} className="w-12 h-12 object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+                  <div className="text-center w-full">
+                    <span className="block text-sm font-bold text-slate-200 truncate group-hover:text-white transition-colors leading-tight mb-1">{m.homeTeam}</span>
+                    <div className="flex justify-center">{renderFormDots(m.homeTeam)}</div>
+                  </div>
                 </div>
-                <div className="text-center font-bold">
-                  {m.status === 'upcoming' ? '-' : `${m.homeScore} - ${m.awayScore}`}
+
+                {/* Score */}
+                <div className="flex flex-col items-center justify-center min-w-[60px] relative z-10">
+                  <div className={`text-3xl font-black tracking-tighter ${m.status === 'upcoming' ? 'text-slate-600' : 'text-white'}`}>
+                    {m.status === 'upcoming' ? (
+                        <span className="text-2xl text-slate-500">VS</span>
+                    ) : (
+                        <div className="flex items-center gap-1">
+                            <span>{m.homeScore}</span>
+                            <span className="text-slate-600 text-xl mx-0.5">:</span>
+                            <span>{m.awayScore}</span>
+                        </div>
+                    )}
+                  </div>
+                  {m.status !== 'upcoming' && (
+                    <div className="text-[10px] font-medium text-slate-500 mt-1 uppercase">Full Time</div>
+                  )}
                 </div>
-                <div className="flex items-center gap-2 flex-1 justify-end">
-                  <span className="text-sm font-semibold truncate">{m.awayTeam}</span>
-                  <img src={m.awayLogo || "/placeholder.svg"} alt={m.awayTeam} className="w-7 h-7" />
+
+                {/* Away Team */}
+                <div className="flex flex-col items-center gap-2 flex-1 min-w-0">
+                  <img src={m.awayLogo || "/placeholder.svg"} alt={m.awayTeam} className="w-12 h-12 object-contain drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+                  <div className="text-center w-full">
+                    <span className="block text-sm font-bold text-slate-200 truncate group-hover:text-white transition-colors leading-tight mb-1">{m.awayTeam}</span>
+                    <div className="flex justify-center">{renderFormDots(m.awayTeam)}</div>
+                  </div>
                 </div>
               </div>
-              <div className="mt-2 text-[11px] text-slate-400 flex items-center gap-2">
-                <span>{m.stadium}</span>
-                {typeof m.round === 'number' && <span>• Kolo {m.round}/38</span>}
+
+              <div className="mt-4 pt-3 border-t border-slate-700/50 flex items-center justify-between text-[11px] text-slate-500 group-hover:text-slate-400 transition-colors">
+                <span className="flex items-center gap-1.5">
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    {m.stadium}
+                </span>
+                {typeof m.round === 'number' && (
+                    <span className="font-medium bg-slate-800 px-2 py-0.5 rounded text-slate-400">R{m.round}</span>
+                )}
               </div>
             </button>
           ))}

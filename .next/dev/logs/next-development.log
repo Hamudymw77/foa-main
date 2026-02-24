@@ -1,9 +1,4 @@
-[00:00:03.135] Server  LOG      ✓ Ready in 2.3s
-[00:00:06.201] Server  LOG      ○ Compiling / ...
-[00:00:10.126] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:26.457] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:01.872] Browser ERROR   uncaughtError: ReferenceError: Activity is not defined
-[00:01:13.825] Browser ERROR   uncaughtError: ReferenceError: Activity is not defined
-[00:01:39.561] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:02:15.801] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:02:32.458] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:02.748] Server  LOG      ✓ Ready in 1949ms
+[00:00:05.779] Server  LOG      ○ Compiling / ...
+[00:00:08.208] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:37.297] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

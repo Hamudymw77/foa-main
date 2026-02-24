@@ -13,6 +13,8 @@ import { useFootballData } from "./hooks/useFootballData"
 import { useDashboardState } from "./hooks/useDashboardState"
 import { useStatisticsData } from "./hooks/useStatisticsData"
 import { useTransferData } from "./hooks/useTransferData"
+import { SkeletonLoader } from "./components/SkeletonLoader"
+import { Trophy } from "lucide-react"
 
 export default function PremierLeagueDashboard() {
   const { standings, matches, upcomingMatches, isLoading } = useFootballData();
@@ -41,8 +43,22 @@ export default function PremierLeagueDashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center">
-        <div className="text-2xl font-bold animate-pulse">Loading data...</div>
+      <div className="min-h-screen bg-slate-900 text-white p-4 md:p-8 font-sans">
+        <header className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="absolute inset-0 bg-orange-500 blur-lg opacity-50 rounded-full"></div>
+              <div className="relative bg-gradient-to-br from-orange-400 to-red-600 p-3 rounded-2xl shadow-lg transform rotate-3 hover:rotate-6 transition-transform">
+                <Trophy className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            <h1 className="text-4xl font-extrabold tracking-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">KICK</span>
+              <span className="text-orange-500 drop-shadow-[0_0_10px_rgba(249,115,22,0.8)]">GOAL</span>
+            </h1>
+          </div>
+        </header>
+        <SkeletonLoader />
       </div>
     );
   }
