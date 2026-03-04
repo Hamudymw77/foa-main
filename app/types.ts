@@ -32,12 +32,14 @@ export interface MatchGoal {
 
 export interface MatchEvent {
   minute: number;
-  type: 'goal' | 'yellow' | 'red' | 'substitution';
+  displayMinute?: string;
+  type: 'goal' | 'yellow' | 'red' | 'substitution' | 'injury' | 'yellow_card' | 'red_card';
   team: 'home' | 'away';
   player?: string;
   assist?: string;
   playerOut?: string;
   playerIn?: string;
+  score?: string;
 }
 
 export interface TeamPlayers {
@@ -56,8 +58,9 @@ export interface Match {
   homeScore?: number;
   awayScore?: number;
   date: string;
-  timestamp?: number;
-  stadium: string;
+  kickoff_time?: string;
+  timestamp: number;
+  matchweek?: number;
   homeLogo: string;
   awayLogo: string;
   round?: number;
@@ -68,10 +71,8 @@ export interface Match {
   events?: MatchEvent[];
   homeFormation?: string;
   awayFormation?: string;
-  homePlayers?: TeamPlayers;
-  awayPlayers?: TeamPlayers;
-  predictedHomePlayers?: TeamPlayers;
-  predictedAwayPlayers?: TeamPlayers;
+  homePlayers?: any;
+  awayPlayers?: any;
 }
 
 export type FormResult = 'W' | 'V' | 'D' | 'R' | 'L' | 'P';
@@ -89,6 +90,25 @@ export interface TeamStanding {
   points: number;
   form: FormResult[];
   logo: string;
+}
+
+export interface PlayerStat {
+  id: number;
+  code: number;
+  name: string;
+  web_name: string;
+  team: string;
+  team_code: number;
+  position: number;
+  goals: number;
+  assists: number;
+  clean_sheets: number;
+  expected_goals: number;
+  expected_assists: number;
+  total_points: number;
+  minutes: number;
+  photo: string;
+  team_logo: string;
 }
 
 export interface Scorer {
@@ -116,15 +136,13 @@ export interface Defense {
 export interface Transfer {
   id: string;
   player: string;
-  position: string;
-  age: number;
+  photo: string;
   oldClub: string;
+  oldClubLogo: string;
   newClub: string;
-  fee: number;
-  feeEUR?: number;
-  feeDisplay: string;
+  newClubLogo: string;
   date: string;
-  contractLength: string;
   type: 'permanent' | 'loan' | 'free';
-  notes?: string;
+  fee?: string;
+  deleted?: boolean;
 }

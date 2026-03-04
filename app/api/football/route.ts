@@ -1,280 +1,279 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { 
-  mapExternalMatchToInternal, 
-  mapExternalStandingToInternal, 
-  ExternalMatch, 
-  ExternalStanding, 
-  mapStatoriumMatchToInternal, 
-  mapStatoriumStandingToInternal,
-  StatoriumMatchItem,
-  StatoriumStandingItem
-} from '../../lib/api-mapper';
-import { Match } from '@/types';
-import { TEAM_LOGOS } from '@/lib/constants';
-import { computeStandings } from '@/lib/standings';
 
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+// Cesta k overrides souboru
+const OVERRIDES_FILE = path.join(process.cwd(), 'app', 'admin_overrides.json');
 
-// Real-data source: fixturedownload.com (publicly viewable JSON embedded in HTML)
-async function fetchFixtureDownloadRaw(): Promise<string | null> {
+// Pomocná funkce pro čtení overrides (zde pouze pro čtení, zápis dělá admin API)
+function getOverrides() {
   try {
-    const res = await fetch('https://fixturedownload.com/view/json/epl-2025', {
-      headers: { 'accept': 'text/html' },
-      next: { revalidate: 60 }
-    });
-    if (!res.ok) return null;
-    return await res.text();
-  } catch {
-    return null;
+    if (fs.existsSync(OVERRIDES_FILE)) {
+      const data = fs.readFileSync(OVERRIDES_FILE, 'utf8');
+      return JSON.parse(data);
+    }
+  } catch (error) {
+    console.error("Chyba při čtení overrides:", error);
   }
-}
-
-function htmlDecodeEntities(input: string): string {
-  return input
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&apos;/g, "'")
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>');
-}
-
-function extractJsonFromHtmlTextarea(html: string): unknown[] | null {
-  const match = html.match(/<textarea[^>]*>([\s\S]*?)<\/textarea>/i);
-  if (!match) return null;
-  const decoded = htmlDecodeEntities(match[1].trim());
-  try {
-    return JSON.parse(decoded);
-  } catch {
-    return null;
-  }
-}
-
-type FDItem = {
-  MatchNumber: number;
-  RoundNumber: number;
-  DateUtc: string;
-  Location: string;
-  HomeTeam: string;
-  AwayTeam: string;
-  Group: string | null;
-  HomeTeamScore: number | null;
-  AwayTeamScore: number | null;
-};
-
-function mapFDItemToInternal(m: FDItem): Match {
-  const homeLogo = TEAM_LOGOS[m.HomeTeam] || '';
-  const awayLogo = TEAM_LOGOS[m.AwayTeam] || '';
-  const dateObj = new Date(m.DateUtc.replace(' ', 'T'));
-  const finished = typeof m.HomeTeamScore === 'number' && typeof m.AwayTeamScore === 'number';
-  
-  return {
-    id: `fd-${m.MatchNumber}`,
-    homeTeam: m.HomeTeam,
-    awayTeam: m.AwayTeam,
-    homeScore: finished && m.HomeTeamScore !== null ? m.HomeTeamScore : undefined,
-    awayScore: finished && m.AwayTeamScore !== null ? m.AwayTeamScore : undefined,
-    date: dateObj.toLocaleDateString('cs-CZ', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }),
-    timestamp: dateObj.getTime(),
-    round: m.RoundNumber,
-    stadium: m.Location,
-    homeLogo,
-    awayLogo,
-    status: finished ? 'finished' : 'upcoming'
-  };
-}
-
-async function fetchRealMatchesFromFD(): Promise<Match[] | null> {
-  const html = await fetchFixtureDownloadRaw();
-  if (!html) return null;
-  const arr = extractJsonFromHtmlTextarea(html);
-  if (!arr || !Array.isArray(arr)) return null;
-  
-  // Validate items look like FDItem before mapping (basic check or just cast)
-  const mapped = (arr as FDItem[]).map(mapFDItemToInternal);
-  mapped.sort((a, b) => {
-    return (a.timestamp ?? 0) - (b.timestamp ?? 0);
-  });
-  return mapped;
-}
-
-// This function would contain the logic to fetch from a real API like football-data.org or api-football.com
-// Since we don't have an API key, we return null to signal fallback to local data.
-async function fetchFromExternalAPI(endpoint: string) {
-  const apiKey = process.env.FOOTBALL_API_KEY;
-  if (!apiKey) return null;
-
-  try {
-    // Example: API-Football (RapidAPI)
-    const res = await fetch(`https://v3.football.api-sports.io/${endpoint}`, {
-      headers: {
-        'x-rapidapi-key': apiKey,
-        'x-rapidapi-host': 'v3.football.api-sports.io'
-      },
-      next: { revalidate: 60 }, // Cache for 60 seconds
-    });
-    
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (e) {
-    console.error("External API call failed", e);
-    return null;
-  }
-}
-
-async function fetchFromStatorium(endpoint: 'matches' | 'standings') {
-  const apiKey = process.env.STATORIUM_API_KEY;
-  const leagueId = process.env.STATORIUM_LEAGUE_ID;
-  const seasonId = process.env.STATORIUM_SEASON_ID;
-  if (!apiKey || !leagueId || !seasonId) return null;
-  const url = `https://api.statorium.com/api/v1/${endpoint}/?league_id=${leagueId}&season_id=${seasonId}&apikey=${apiKey}`;
-  try {
-    const res = await fetch(url, { next: { revalidate: 60 } });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch {
-    return null;
-  }
+  return {};
 }
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const type = searchParams.get('type');
-  const detail = searchParams.get('detail') === '1';
+  const type = searchParams.get('type') || 'matches';
 
   try {
-    if (type === 'matches') {
-      // 1. Try Statorium
-      const stMatches = await fetchFromStatorium('matches');
-      if (stMatches) {
-        const rawList = (Array.isArray(stMatches.matches) ? stMatches.matches : (Array.isArray(stMatches) ? stMatches : [])) as unknown[];
-        if (rawList.length > 0) {
-          const mapped = rawList.map((m) => mapStatoriumMatchToInternal(m as StatoriumMatchItem));
-          mapped.sort((a, b) => (a.timestamp ?? 0) - (b.timestamp ?? 0));
-          return NextResponse.json(mapped);
-        }
-      }
+    // 0. Načtení overrides
+    const overrides = getOverrides();
 
-      // 2. Try external API (if key present)
-      const externalData = await fetchFromExternalAPI('fixtures?league=39&season=2025');
-      if (externalData && externalData.response) {
-        let base = externalData.response as ExternalMatch[];
-        if (detail) {
-          const detailed = await Promise.all(base.map(async (m: any) => {
-            const id = m.fixture?.id;
-            if (!id) return m;
-            const [eventsRes, lineupsRes, statsRes] = await Promise.all([
-              fetchFromExternalAPI(`fixtures/events?fixture=${id}`),
-              fetchFromExternalAPI(`fixtures/lineups?fixture=${id}`),
-              fetchFromExternalAPI(`fixtures/statistics?fixture=${id}`)
-            ]);
-            const events = Array.isArray(eventsRes?.response) ? eventsRes.response : [];
-            const lineups = Array.isArray(lineupsRes?.response) ? lineupsRes.response : [];
-            const statistics = Array.isArray(statsRes?.response) ? statsRes.response : [];
-            return { ...m, events, lineups, statistics };
-          }));
-          base = detailed as ExternalMatch[];
-        }
-        const mappedMatches = base.map((m: ExternalMatch) => mapExternalMatchToInternal(m));
-        return NextResponse.json(mappedMatches);
-      }
+    // 1. Stáhnutí základních dat (týmy, hráči)
+    const bootstrapRes = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/', { 
+        next: { revalidate: 60 },
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        },
+        cache: 'no-store'
+    });
+    if (!bootstrapRes.ok) throw new Error('FPL Bootstrap selhal');
+    const bootstrapData = await bootstrapRes.json();
 
-      // 3. Try FixtureDownload real data source (no key required)
-      const fdMatches = await fetchRealMatchesFromFD();
-      if (fdMatches) {
-        return NextResponse.json(fdMatches);
-      }
+    const teamsMap = new Map(bootstrapData.teams.map((t: any) => [t.id, { name: t.name, code: t.code }]));
+    const playersMap = new Map(bootstrapData.elements.map((p: any) => [p.id, `${p.first_name} ${p.second_name}`]));
 
-      // 4. Fallback to local data (completed + upcoming) if present
-      const completedPath = path.join(process.cwd(), 'app', 'completed.json');
-      const upcomingPath = path.join(process.cwd(), 'app', 'upcoming.json');
-      
-      let completed: Match[] = [];
-      let upcoming: Match[] = [];
+    // 2. Stáhnutí zápasů
+    const fixturesRes = await fetch('https://fantasy.premierleague.com/api/fixtures/', { 
+        next: { revalidate: 60 },
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        },
+        cache: 'no-store'
+    });
+    if (!fixturesRes.ok) throw new Error('FPL Fixtures selhalo');
+    const fixturesData = await fixturesRes.json();
 
-      if (fs.existsSync(completedPath)) {
-        completed = JSON.parse(fs.readFileSync(completedPath, 'utf8'));
-      }
-      if (fs.existsSync(upcomingPath)) {
-        upcoming = JSON.parse(fs.readFileSync(upcomingPath, 'utf8'));
-      }
-
-      const localMatches = [...completed, ...upcoming];
-      if (Array.isArray(localMatches) && localMatches.length > 0) {
-        return NextResponse.json(localMatches);
-      }
-
-      // 5. Final empty fallback
-      return NextResponse.json([]);
-    } else if (type === 'standings') {
-      // 1. Try Statorium
-      const stStandings = await fetchFromStatorium('standings');
-      if (stStandings) {
-        const rawList = (Array.isArray(stStandings.standings)
-          ? stStandings.standings
-          : (Array.isArray(stStandings.table)
-            ? stStandings.table
-            : (Array.isArray(stStandings) ? stStandings : []))) as unknown[];
-        if (rawList.length > 0) {
-          const mappedStandings = rawList.map((s) => mapStatoriumStandingToInternal(s as StatoriumStandingItem));
-          mappedStandings.sort((a, b) => a.pos - b.pos);
-          return NextResponse.json(mappedStandings);
-        }
-      }
-
-      // 2. Try external API
-      const externalData = await fetchFromExternalAPI('standings?league=39&season=2025');
-      if (externalData && externalData.response && externalData.response[0] && externalData.response[0].league?.standings) {
-        const standingsRaw = externalData.response[0].league.standings[0];
-        const mappedStandings = standingsRaw.map((s: ExternalStanding) => mapExternalStandingToInternal(s));
-        return NextResponse.json(mappedStandings);
-      }
-
-      // 3. Compute standings from FixtureDownload results (Real Data Priority)
-      const fdMatches = await fetchRealMatchesFromFD();
-      if (fdMatches && fdMatches.length > 0) {
-        const standings = computeStandings(fdMatches);
-        return NextResponse.json(standings);
-      }
-
-      // 4. Prefer local standings file if present
-      const standingsPath = path.join(process.cwd(), 'app', 'standings.json');
-      if (fs.existsSync(standingsPath)) {
-        try {
-          const localStandings = JSON.parse(fs.readFileSync(standingsPath, 'utf8'));
-          if (Array.isArray(localStandings) && localStandings.length > 0) {
-            return NextResponse.json(localStandings);
-          }
-        } catch {}
-      }
-
-      // 5. Compute standings from local matches if available
-      const completedPath = path.join(process.cwd(), 'app', 'completed.json');
-      const upcomingPath = path.join(process.cwd(), 'app', 'upcoming.json');
-      let completed: Match[] = [];
-      let upcoming: Match[] = [];
-      if (fs.existsSync(completedPath)) {
-        completed = JSON.parse(fs.readFileSync(completedPath, 'utf8'));
-      }
-      if (fs.existsSync(upcomingPath)) {
-        upcoming = JSON.parse(fs.readFileSync(upcomingPath, 'utf8'));
-      }
-      const localMatches = [...completed, ...upcoming];
-      if (localMatches.length > 0) {
-        const standings = computeStandings(localMatches);
-        return NextResponse.json(standings);
-      }
-      
-      // 6. Final empty fallback
-      return NextResponse.json([]);
-    } else {
-        return NextResponse.json({ error: 'Invalid type parameter' }, { status: 400 });
+    // --- ZPRACOVÁNÍ HRÁČŮ ---
+    if (type === 'players') {
+       const playersByTeam: any[] = [];
+       // Iterujeme přes týmy
+       bootstrapData.teams.forEach((t: any) => {
+           // Najdeme hráče pro tento tým
+           const teamPlayers = bootstrapData.elements
+               .filter((p: any) => p.team === t.id)
+               .map((p: any) => ({
+                   id: p.id,
+                   name: `${p.first_name} ${p.second_name}`,
+                   position: p.element_type === 1 ? 'GKP' : p.element_type === 2 ? 'DEF' : p.element_type === 3 ? 'MID' : 'FWD',
+                   photo: `https://resources.premierleague.com/premierleague25/photos/players/110x140/${p.photo.replace('.jpg', '.png')}`
+               }));
+           
+           playersByTeam.push({
+               teamId: t.id,
+               teamName: t.name,
+               players: teamPlayers
+           });
+       });
+       return NextResponse.json(playersByTeam);
     }
+
+    // --- ZPRACOVÁNÍ ZÁPASŮ ---
+    if (type === 'matches') {
+      const matches = fixturesData.map((f: any) => {
+        const homeTeamData = teamsMap.get(f.team_h) || { name: 'Neznámý', code: 0 };
+        const awayTeamData = teamsMap.get(f.team_a) || { name: 'Neznámý', code: 0 };
+        const homeTeam = (homeTeamData as any).name;
+        const awayTeam = (awayTeamData as any).name;
+        
+        // Získání override dat pro tento zápas
+        const matchId = f.id.toString();
+        const matchOverride = overrides[matchId] || {};
+
+        if (matchOverride.hidden) return null;
+
+        // --- MIGRACE STARÝCH FOTEK NA NOVÝ FORMÁT ---
+        // Projdeme formace v overrides a opravíme URL fotek, pokud jsou staré
+        if (matchOverride) {
+            const fixPlayerPhoto = (p: any) => {
+                if (p && p.code && !p.customPhoto) {
+                    // Nový formát: premierleague25 bez 'p'
+                    p.photo = `https://resources.premierleague.com/premierleague25/photos/players/110x140/${p.code}.png`;
+                    // Pokud se používá i photoUrl, aktualizujeme ji taky
+                    if (p.photoUrl) p.photoUrl = p.photo;
+                }
+                return p;
+            };
+
+            if (matchOverride.homePlayers && Array.isArray(matchOverride.homePlayers)) {
+                matchOverride.homePlayers = matchOverride.homePlayers.map(fixPlayerPhoto);
+            }
+            if (matchOverride.awayPlayers && Array.isArray(matchOverride.awayPlayers)) {
+                matchOverride.awayPlayers = matchOverride.awayPlayers.map(fixPlayerPhoto);
+            }
+            // Poznámka: Změny v matchOverride se zde neukládají zpět do souboru (to dělá jen POST),
+            // ale projeví se v odpovědi na frontend, což stačí pro zobrazení.
+        }
+
+        let status = matchOverride.status || 'upcoming'; // Override status nebo default
+        if (!matchOverride.status) {
+           if (f.finished) status = 'finished';
+           else if (f.started) status = 'live';
+        }
+
+        // Zpracování událostí (jen góly a karty, ignorujeme 'bps', 'saves' atd.)
+        let events: any[] = [];
+        
+        // Pokud má admin vlastní události, použijeme POUZE ty (podle zadání)
+        if (matchOverride.events && Array.isArray(matchOverride.events) && matchOverride.events.length > 0) {
+           events = matchOverride.events;
+        } else if (matchOverride.events && Array.isArray(matchOverride.events) && matchOverride.events.length === 0) {
+            // Pokud je v override prázdné pole, znamená to, že admin smazal všechny události (a nechce FPL)
+            // Nebo chce prostě prázdné události.
+            // Pokud override existuje (i když prázdný), použijeme ho.
+            events = [];
+        } else {
+            // Jinak použijeme FPL
+            if (f.stats && f.stats.length > 0) {
+              f.stats.forEach((statObj: any) => {
+                const identifier = statObj.identifier;
+                if (['goals_scored', 'yellow_cards', 'red_cards', 'own_goals'].includes(identifier)) {
+                  let eventType = 'goal';
+                  if (identifier === 'yellow_cards') eventType = 'yellow';
+                  if (identifier === 'red_cards') eventType = 'red';
+                  if (identifier === 'own_goals') eventType = 'goal'; // Vlastňák
+                  
+                  const processStat = (teamStats: any[], teamSide: string) => {
+                     teamStats.forEach((s: any) => {
+                       // Pokud dal hráč 2 góly (value: 2), přidáme událost dvakrát
+                       for(let i=0; i<s.value; i++) {
+                          events.push({
+                            type: eventType,
+                            team: teamSide,
+                            player: playersMap.get(s.element) || 'Neznámý hráč',
+                            minute: null // FPL neposílá minuty, frontend si s null poradí
+                          });
+                       }
+                     });
+                  };
+                  
+                  processStat(statObj.h, 'home');
+                  processStat(statObj.a, 'away');
+                }
+              });
+            }
+        }
+
+        // Statistiky - merge s override
+        // Defaultní mock stats
+        let stats = { possession: [50, 50], shots: [0, 0], shotsOnTarget: [0, 0], corners: [0, 0], fouls: [0, 0] };
+        if (matchOverride.stats) {
+            stats = { ...stats, ...matchOverride.stats };
+        }
+
+        return {
+          id: matchId,
+          homeTeam,
+          awayTeam,
+          homeScore: f.team_h_score ?? 0,
+          awayScore: f.team_a_score ?? 0,
+          date: new Date(f.kickoff_time).toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+          kickoff_time: f.kickoff_time, // Raw ISO date for sync
+          timestamp: new Date(f.kickoff_time).getTime(),
+          matchweek: f.event || 0, // Přidáno kolo zápasu
+          stadium: 'Premier League',
+          homeLogo: `https://resources.premierleague.com/premierleague/badges/100/t${(homeTeamData as any).code}.png`,
+          awayLogo: `https://resources.premierleague.com/premierleague/badges/100/t${(awayTeamData as any).code}.png`,
+          status,
+          events,
+          stats,
+          // Další override fields
+          homeFormation: matchOverride.homeFormation,
+          awayFormation: matchOverride.awayFormation,
+          homePlayers: matchOverride.homePlayers,
+          awayPlayers: matchOverride.awayPlayers
+        };
+      }).filter(Boolean);
+      return NextResponse.json(matches);
+    }
+
+    // --- ZPRACOVÁNÍ STATISTIK (TOP SCORERS atd.) ---
+    if (type === 'stats') {
+       const players = bootstrapData.elements.map((p: any) => {
+         const team = teamsMap.get(p.team);
+         // Získání URL loga týmu a kódu země
+         // p.team_code (tým), p.code (hráč), p.element_type (pozice)
+         
+         // Převod stats
+         return {
+           id: p.id,
+           code: p.code,
+           name: `${p.first_name} ${p.second_name}`,
+           web_name: p.web_name,
+           team: team?.name || 'Unknown',
+           team_code: team?.code,
+           position: p.element_type, // 1=GKP, 2=DEF, 3=MID, 4=FWD
+           goals: p.goals_scored,
+           assists: p.assists,
+           clean_sheets: p.clean_sheets,
+           expected_goals: parseFloat(p.expected_goals),
+           expected_assists: parseFloat(p.expected_assists),
+           total_points: p.total_points,
+           minutes: p.minutes,
+           photo: `https://resources.premierleague.com/premierleague25/photos/players/110x140/${p.code}.png`,
+           team_logo: `https://resources.premierleague.com/premierleague/badges/100/t${team?.code}.png`
+         };
+       });
+
+       return NextResponse.json(players);
+    }
+
+    // --- ZPRACOVÁNÍ TABULKY (počítá se dynamicky ze zápasů) ---
+    if (type === 'standings') {
+       const table = new Map();
+       
+       bootstrapData.teams.forEach((t: any) => {
+         table.set(t.id, {
+           id: t.id, pos: 0, team: t.name, logo: `https://resources.premierleague.com/premierleague/badges/100/t${t.code}.png`,
+           played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0, form: []
+         });
+       });
+
+       fixturesData.filter((f: any) => f.finished).forEach((f: any) => {
+          const home = table.get(f.team_h);
+          const away = table.get(f.team_a);
+          
+          if (home && away) {
+              home.played++; away.played++;
+              home.gf += f.team_h_score; home.ga += f.team_a_score;
+              away.gf += f.team_a_score; away.ga += f.team_h_score;
+              
+              if (f.team_h_score > f.team_a_score) {
+                 home.won++; home.points += 3; home.form.push('W');
+                 away.lost++; away.form.push('L');
+              } else if (f.team_h_score < f.team_a_score) {
+                 away.won++; away.points += 3; away.form.push('W');
+                 home.lost++; home.form.push('L');
+              } else {
+                 home.drawn++; home.points += 1; home.form.push('D');
+                 away.drawn++; away.points += 1; away.form.push('D');
+              }
+          }
+       });
+
+       const standingsList = Array.from(table.values()).map(t => {
+         t.gd = t.gf - t.ga;
+         t.form = t.form.slice(-5).reverse(); // Posledních 5 zápasů
+         return t;
+       });
+
+       standingsList.sort((a, b) => b.points - a.points || b.gd - a.gd || b.gf - a.gf);
+       standingsList.forEach((t, i) => t.pos = i + 1);
+
+       return NextResponse.json(standingsList);
+    }
+
+    return NextResponse.json({ error: 'Neznámý dotaz' }, { status: 400 });
+
   } catch (error) {
-    console.error("API Error:", error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('FPL API Error:', error);
+    return NextResponse.json({ error: 'Chyba serveru při FPL' }, { status: 500 });
   }
 }

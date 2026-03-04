@@ -1,0 +1,323 @@
+Player,From,To,Fee,Window,Club
+Kepa Arrizabalaga,Chelsea,Arsenal,£5m,Summer 2025,Arsenal
+Martín Zubimendi,Real Sociedad,Arsenal,£51m,Summer 2025,Arsenal
+Christian Nørgaard,Brentford,Arsenal,£15m,Summer 2025,Arsenal
+Noni Madueke,Chelsea,Arsenal,£52m,Summer 2025,Arsenal
+Cristhian Mosquera,Valencia,Arsenal,£13m,Summer 2025,Arsenal
+Viktor Gyökeres,Sporting CP,Arsenal,£63.5m,Summer 2025,Arsenal
+Eberechi Eze,Crystal Palace,Arsenal,£67.5m,Summer 2025,Arsenal
+Piero Hincapié,Bayer Leverkusen,Arsenal,Loan (loan),Summer 2025,Arsenal
+Jorginho,Arsenal,Flamengo,Free,Summer 2025,Arsenal
+Kieran Tierney,Arsenal,Celtic,Free,Summer 2025,Arsenal
+Nuno Tavares,Arsenal,Lazio,£7.5m,Summer 2025,Arsenal
+Marquinhos,Arsenal,Cruzeiro,Undisclosed,Summer 2025,Arsenal
+Albert Sambi Lokonga,Arsenal,Hamburg,Undisclosed,Summer 2025,Arsenal
+Takehiro Tomiyasu,Arsenal,Released,Released,Summer 2025,Arsenal
+Thomas Partey,Arsenal,Released,Released,Summer 2025,Arsenal
+Ismaël Kabia,Arsenal,Shrewsbury,Loan,Summer 2025,Arsenal
+
+Yasin Özcan,Kasimpasa,Aston Villa,Undisclosed,Summer 2025,Aston Villa
+Zepiqueno Redmond,Feyenoord,Aston Villa,Free,Summer 2025,Aston Villa
+Marco Bizot,Brest,Aston Villa,Undisclosed,Summer 2025,Aston Villa
+Evann Guessand,Nice,Aston Villa,£28m,Summer 2025,Aston Villa
+Victor Lindelöf,Manchester United,Aston Villa,Free,Summer 2025,Aston Villa
+Jadon Sancho,Manchester United,Aston Villa,Loan,Summer 2025,Aston Villa
+Harvey Elliott,Liverpool,Aston Villa,Loan,Summer 2025,Aston Villa
+Alysson,Gremio,Aston Villa,£10m,January 2026,Aston Villa
+Brian Madjo,Metz,Aston Villa,Undisclosed,January 2026,Aston Villa
+Tammy Abraham,Besiktas,Aston Villa,£18.2m,January 2026,Aston Villa
+Robin Olsen,Aston Villa,Malmö,Free,Summer 2025,Aston Villa
+Kaine Kesler-Hayden,Aston Villa,Coventry City,£3.5m,Summer 2025,Aston Villa
+Enzo Barrenechea,Aston Villa,Benfica,Loan,Summer 2025,Aston Villa
+Modou Kéba Cissé,Aston Villa,LASK,Loan,Summer 2025,Aston Villa
+Rico Richards,Aston Villa,Port Vale,Undisclosed,Summer 2025,Aston Villa
+Josh Feeney,Aston Villa,Huddersfield,Loan,Summer 2025,Aston Villa
+Joshua Borland,Aston Villa,Swindon,Loan,January 2026,Aston Villa
+
+Bafodé Diakité,Lille,Bournemouth,£35m,Summer 2025,Bournemouth
+Đorđe Petrović,Chelsea,Bournemouth,£25m,Summer 2025,Bournemouth
+Adrien Truffert,Rennes,Bournemouth,£14.4m,Summer 2025,Bournemouth
+Ben Gannon-Doak,Liverpool,Bournemouth,£25m,Summer 2025,Bournemouth
+Amine Adli,Bayer Leverkusen,Bournemouth,£25.1m,Summer 2025,Bournemouth
+Veljko Milosavljević,Crvena zvezda,Bournemouth,£13m,Summer 2025,Bournemouth
+Alex Jiménez,AC Milan,Bournemouth,Loan,Summer 2025,Bournemouth
+Fraser Forster,Free agent,Bournemouth,Free,January 2026,Bournemouth
+Ade Solanke,Lorient,Bournemouth,Undisclosed,January 2026,Bournemouth
+Alex Tóth,Ferencváros,Bournemouth,£13m,January 2026,Bournemouth
+Rayan,Vasco da Gama,Bournemouth,£30.3m,January 2026,Bournemouth
+Illia Zabarnyi,Bournemouth,PSG,£54.5m,Summer 2025,Bournemouth
+Milos Kerkez,Bournemouth,Liverpool,£40m,Summer 2025,Bournemouth
+Dean Huijsen,Bournemouth,Real Madrid,£50m,Summer 2025,Bournemouth
+Jaidon Anthony,Bournemouth,Burnley,£8m,Summer 2025,Bournemouth
+Mark Travers,Bournemouth,Everton,£4m,Summer 2025,Bournemouth
+Max Aarons,Bournemouth,Rangers,Loan,Summer 2025,Bournemouth
+Dango Ouattara,Bournemouth,Brentford,£42m,Summer 2025,Bournemouth
+Julian Araujo,Bournemouth,Celtic,Loan,January 2026,Bournemouth
+Antoine Semenyo,Bournemouth,Man City,£64m,January 2026,Bournemouth
+Romain Faivre,Bournemouth,Auxerre,Undisclosed,January 2026,Bournemouth
+Will Dennis,Bournemouth,Leyton Orient,Loan,January 2026,Bournemouth
+
+Michael Kayode,Fiorentina,Brentford,£14m,Summer 2025,Brentford
+Romelle Donovan,Birmingham City,Brentford,Undisclosed,Summer 2025,Brentford
+Caoimhín Kelleher,Liverpool,Brentford,£18m,Summer 2025,Brentford
+Antoni Milambo,Feyenoord,Brentford,£18.8m,Summer 2025,Brentford
+Reiss Nelson,Arsenal,Brentford,Loan,Summer 2025,Brentford
+Kaye Furo,Club Brugge,Brentford,£8.7m,January 2026,Brentford
+Bryan Mbeumo,Brentford,Man United,£71m,Summer 2025,Brentford
+Christian Nørgaard,Brentford,Arsenal,£15m,Summer 2025,Brentford
+Mark Flekken,Brentford,Bayer Leverkusen,£11m,Summer 2025,Brentford
+Yoane Wissa,Brentford,Newcastle,£55m,Summer 2025,Brentford
+Iwan Morgan,Brentford,Shrewsbury,Loan,January 2026,Brentford
+Benjamin Arthur,Brentford,Celtic,Loan,January 2026,Brentford
+Frank Onyeka,Brentford,Coventry City,Loan,January 2026,Brentford
+Myles Peart-Harris,Brentford,Oxford,Undisclosed,January 2026,Brentford
+Yunus Emre Konak,Brentford,Oxford,Loan,January 2026,Brentford
+Matt Cox,Brentford,Shrewsbury,Loan,January 2026,Brentford
+Chanse Headman,Brentford,Harrogate,Undisclosed,January 2026,Brentford
+Gustavo Nunes,Brentford,Swansea,Loan,January 2026,Brentford
+Paris Maghoma,Brentford,Norwich,Undisclosed,January 2026,Brentford
+
+Maxim De Cuyper,Club Brugge,Brighton,£17.3m,Summer 2025,Brighton
+Olivier Boscagli,PSV Eindhoven,Brighton,Free,Summer 2025,Brighton
+Diego Coppola,Hellas Verona,Brighton,£9m,Summer 2025,Brighton
+Tom Watson,Sunderland,Brighton,£10m,Summer 2025,Brighton
+Yoon Do-young,Daejeon Hana Citizen,Brighton,Undisclosed,Summer 2025,Brighton
+Charalampos Kostoulas,Olympiacos,Brighton,£31.4m,Summer 2025,Brighton
+Pascal Groß,Borussia Dortmund,Brighton,£1.2m,January 2026,Brighton
+Joao Pedro,Brighton,Chelsea,£60m,Summer 2025,Brighton
+Simon Adingra,Brighton,Sunderland,£20.5m,Summer 2025,Brighton
+Pervis Estupiñán,Brighton,AC Milan,£17.4m,Summer 2025,Brighton
+Julio Enciso,Brighton,Strasbourg,£10m,Summer 2025,Brighton
+Caylan Vickers,Brighton,Wigan,Loan,January 2026,Brighton
+Matt O'Riley,Brighton,Marseille,Loan,January 2026,Brighton
+Evan Ferguson,Brighton,Roma,Loan,Summer 2025,Brighton
+Odel Offiah,Brighton,Preston,£1.5m,Summer 2025,Brighton
+Valentin Barco,Brighton,Strasbourg,Undisclosed,Summer 2025,Brighton
+Amario Cozier-Duberry,Brighton,Bolton,Loan,Summer 2025,Brighton
+Kjell Scherpen,Brighton,Union SG,Undisclosed,Summer 2025,Brighton
+Eiran Cashin,Brighton,Birmingham,Loan,Summer 2025,Brighton
+Kamari Doyle,Brighton,Reading,Loan,Summer 2025,Brighton
+Carl Rushworth,Brighton,Coventry,Loan,Summer 2025,Brighton
+Andrew Moran,Brighton,LA Galaxy,Loan,Summer 2025,Brighton
+Malick Yalcouyé,Brighton,Swansea,Loan,Summer 2025,Brighton
+Abdallah Sima,Brighton,Lens,£4m,Summer 2025,Brighton
+Tariq Lamptey,Brighton,Fiorentina,£6m,Summer 2025,Brighton
+Igor Julio,Brighton,West Ham,Loan,Summer 2025,Brighton
+Matt O'Riley,Brighton,Marseille,Loan,Summer 2025,Brighton
+Facundo Buonanotte,Brighton,Chelsea,Loan,Summer 2025,Brighton
+Jeremy Sarmiento,Brighton,Cremonese,Loan,Summer 2025,Brighton
+
+Kyle Walker,Man City,Burnley,£5m,Summer 2025,Burnley
+Loum Tchaouna,Lazio,Burnley,£12m,Summer 2025,Burnley
+Axel Tuanzebe,Ipswich Town,Burnley,Free,Summer 2025,Burnley
+Quilindschy Hartman,Feyenoord,Burnley,Undisclosed,Summer 2025,Burnley
+Bashir Humphreys,Chelsea,Burnley,£10m,Summer 2025,Burnley
+Jaidon Anthony,Bournemouth,Burnley,£8m,Summer 2025,Burnley
+Marcus Edwards,Sporting CP,Burnley,£8.5m,Summer 2025,Burnley
+Zian Flemming,Millwall,Burnley,£7m,Summer 2025,Burnley
+Max Weiss,Karlsruher,Burnley,£4.2m,Summer 2025,Burnley
+Jacob Bruun Larsen,Stuttgart,Burnley,Undisclosed,Summer 2025,Burnley
+Lesley Ugochukwu,Chelsea,Burnley,£23m,Summer 2025,Burnley
+Martin Dúbravka,Newcastle,Burnley,Undisclosed,Summer 2025,Burnley
+Armando Broja,Chelsea,Burnley,£20m,Summer 2025,Burnley
+James Trafford,Burnley,Man City,£31m,Summer 2025,Burnley
+Dara Costelloe,Burnley,Wigan,Undisclosed,Summer 2025,Burnley
+Josh Brownhill,Burnley,Released,Released,Summer 2025,Burnley
+Nathan Redmond,Burnley,Released,Released,Summer 2025,Burnley
+Jonjo Shelvey,Burnley,Released,Released,Summer 2025,Burnley
+CJ Egan-Riley,Burnley,Marseille,Free,Summer 2025,Burnley
+Andreas Hountondji,Burnley,St. Pauli,Loan,Summer 2025,Burnley
+Sam Walker,Burnley,Crewe,Loan,Summer 2025,Burnley
+Owen Dodgson,Burnley,Stockport,Loan,Summer 2025,Burnley
+Joe Bauress,Burnley,Accrington,Loan,Summer 2025,Burnley
+Han-Noah Massengo,Burnley,Augsburg,Undisclosed,Summer 2025,Burnley
+Joe Westley,Burnley,Dundee,Undisclosed,Summer 2025,Burnley
+
+João Pedro,Brighton,Chelsea,£60m,Summer 2025,Chelsea
+Estevão Willian,Palmeiras,Chelsea,£29m,Summer 2025,Chelsea
+Dário Essugo,Sporting CP,Chelsea,£18.5m,Summer 2025,Chelsea
+Kendry Páez,Independiente del Valle,Chelsea,£17.3m,Summer 2025,Chelsea
+Mamadou Sarr,Strasbourg,Chelsea,£12m,Summer 2025,Chelsea
+Jamie Gittens,Dortmund,Chelsea,£51.5m,Summer 2025,Chelsea
+Liam Delap,Ipswich Town,Chelsea,£30m,Summer 2025,Chelsea
+Jorrel Hato,Ajax,Chelsea,£38.5m,Summer 2025,Chelsea
+Alejandro Garnacho,Man United,Chelsea,£40m,Summer 2025,Chelsea
+Kevin De Bruyne,Released (Man City),Manchester United,£70m,Summer 2025,Manchester United
+Matheus Cunha,Wolves,Manchester United,£62.5m,Summer 2025,Manchester United
+Bryan Mbeumo,Brentford,Manchester United,£65m,Summer 2025,Manchester United
+Enzo Kana-Biyik,Le Havre,Manchester United,Free,Summer 2025,Manchester United
+Benjamin Šeško,RB Leipzig,Manchester United,£73.6m,Summer 2025,Manchester United
+Senne Lammens,Antwerp,Manchester United,Undisclosed,Summer 2025,Manchester United
+Alejandro Garnacho,Manchester United,Chelsea,£40m,Summer 2025,Manchester United
+Victor Lindelöf,Manchester United,Aston Villa,Free,Summer 2025,Manchester United
+
+Walter Benítez,PSV Eindhoven,Crystal Palace,Free,Summer 2025,Crystal Palace
+Borna Sosa,Ajax,Crystal Palace,£3m,Summer 2025,Crystal Palace
+Yeremy Pino,Villarreal,Crystal Palace,£26m,Summer 2025,Crystal Palace
+Jaydee Canabaught,Toulouse,Crystal Palace,£17.3m,Summer 2025,Crystal Palace
+Jørgen Strand Larsen,Wolves,Crystal Palace,£48m,January 2026,Crystal Palace
+Evann Guessand,Aston Villa,Crystal Palace,Loan,January 2026,Crystal Palace
+Brennan Johnson,Tottenham,Crystal Palace,£35m,January 2026,Crystal Palace
+Eberechi Eze,Crystal Palace,Arsenal,£67.5m,Summer 2025,Crystal Palace
+Jeffrey Schlupp,Crystal Palace,Norwich,Free,Summer 2025,Crystal Palace
+Sean Grehan,Crystal Palace,Doncaster,Undisclosed,Summer 2025,Crystal Palace
+Joel Ward,Crystal Palace,Released,Free,Summer 2025,Crystal Palace
+Louie Moulden,Crystal Palace,Norwich,Free,Summer 2025,Crystal Palace
+Owen Goodman,Crystal Palace,Huddersfield,Loan,Summer 2025,Crystal Palace
+Killian Phillips,Crystal Palace,St Mirren,Undisclosed,Summer 2025,Crystal Palace
+Joe Whitworth,Crystal Palace,Exeter,Loan,Summer 2025,Crystal Palace
+Danny Imray,Crystal Palace,Blackpool,Loan,Summer 2025,Crystal Palace
+Danny Imray,Crystal Palace,Blackpool,Loan,January 2026,Crystal Palace
+Odsonne Edouard,Crystal Palace,Lens,Undisclosed,Summer 2025,Crystal Palace
+Franco Umeh,Crystal Palace,Portsmouth,Undisclosed,Summer 2025,Crystal Palace
+Naouirou Ahamada,Crystal Palace,Auxerre,Undisclosed,Summer 2025,Crystal Palace
+
+Charly Alcaraz,Flamengo,Everton,£12.64m,Summer 2025,Everton
+Thierno Barry,Villarreal,Everton,£27m,Summer 2025,Everton
+Mark Travers,Bournemouth,Everton,£4m,Summer 2025,Everton
+Adam Aznou,Bayern Munich,Everton,£10m,Summer 2025,Everton
+Kiernan Dewsbury-Hall,Chelsea,Everton,£29m,Summer 2025,Everton
+Tyler Dibling,Southampton,Everton,£35m,Summer 2025,Everton
+Jack Grealish,Man City,Everton,Loan,January 2026,Everton
+
+Benjamin Lecomte,Montpellier,Fulham,Free,Summer 2025,Fulham
+Kevin,Shakhtar Donetsk,Fulham,£34.6m,Summer 2025,Fulham
+Oscar Bobb,Man City,Fulham,£27m,January 2026,Fulham
+Andreas Pereira,Fulham,Palmeiras,£8.7m,Summer 2025,Fulham
+Carlos Vinícius,Fulham,Released,Released,Summer 2025,Fulham
+Willian,Fulham,Released,Released,Summer 2025,Fulham
+Luca Ashby-Hammond,Fulham,Released,Released,Summer 2025,Fulham
+Callum Osmand,Fulham,Celtic,Released,Summer 2025,Fulham
+Steven Benda,Fulham,Millwall,Loan,Summer 2025,Fulham
+Harvey Araújo,Fulham,Colchester,Loan,Summer 2025,Fulham
+Martial Godo,Fulham,Strasbourg,Undisclosed,Summer 2025,Fulham
+Matt Dibley-Dias,Fulham,Chesterfield,Loan,Summer 2025,Fulham
+Devan Tanton,Fulham,Chesterfield,Loan,Summer 2025,Fulham
+Luke Harris,Fulham,Oxford United,Loan,Summer 2025,Fulham
+Lemar Gordon,Fulham,Leyton Orient,Undisclosed,Summer 2025,Fulham
+
+Anton Stach,Hoffenheim,Leeds,£17.4m,Summer 2025,Leeds
+Sébastien Bornauw,Wolfsburg,Leeds,£5.1m,Summer 2025,Leeds
+Lukas Nmecha,Wolfsburg,Leeds,Free,Summer 2025,Leeds
+Jaka Bijol,Udinese,Leeds,£15m,Summer 2025,Leeds
+Gabriel Gudmundsson,Lille,Leeds,£10m,Summer 2025,Leeds
+Sean Longstaff,Newcastle,Leeds,£12m,Summer 2025,Leeds
+Lucas Perri,Lyon,Leeds,£15.6m,Summer 2025,Leeds
+Dominic Calvert-Lewin,Everton,Leeds,Free,Summer 2025,Leeds
+Noah Okafor,AC Milan,Leeds,£18m,Summer 2025,Leeds
+James Justin,Leicester,Leeds,£10m,Summer 2025,Leeds
+Ilia Gruznovs,Liverpool,Leeds,£13m,January 2026,Leeds
+Luca Vazquez,Inter Milan,Leeds,Loan,January 2026,Leeds
+
+Miloš Kerkez,Bournemouth,Liverpool,£40m,Summer 2025,Liverpool
+Florian Wirtz,Bayer Leverkusen,Liverpool,£116m,Summer 2025,Liverpool
+Jeremie Frimpong,Bayer Leverkusen,Liverpool,£29.5m,Summer 2025,Liverpool
+Giorgi Mamardashvili,Valencia,Liverpool,£29m,Summer 2025,Liverpool
+Hugo Ekitike,Eintracht Frankfurt,Liverpool,£79m,Summer 2025,Liverpool
+Giovanni Leoni,Parma,Liverpool,£26m,Summer 2025,Liverpool
+Alexander Isak,Newcastle,Liverpool,£125m,Summer 2025,Liverpool
+Darwin Núñez,Liverpool,Al Hilal,£56.6m,Summer 2025,Liverpool
+Trent Alexander-Arnold,Liverpool,Real Madrid,£10m,Summer 2025,Liverpool
+Caoimhín Kelleher,Liverpool,Brentford,£18m,Summer 2025,Liverpool
+Darwin Núñez,Liverpool,Al-Hilal,£45.9m,Summer 2025,Liverpool
+Luis Díaz,Liverpool,Bayern Munich,£65.6m,Summer 2025,Liverpool
+Jarell Quansah,Liverpool,Bayer Leverkusen,£35m,Summer 2025,Liverpool
+Tyler Morton,Liverpool,Lyon,£15m,Summer 2025,Liverpool
+Nat Phillips,Liverpool,West Brom,£3m,Summer 2025,Liverpool
+Ben Gannon-Doak,Liverpool,Bournemouth,£25m,Summer 2025,Liverpool
+
+Rayan Aït-Nouri,Wolves,Man City,£36m,Summer 2025,Man City
+Rayan Cherki,Lyon,Man City,£34m,Summer 2025,Man City
+Marcus Bettinelli,Chelsea,Man City,Undisclosed,Summer 2025,Man City
+Tijjani Reijnders,AC Milan,Man City,£46.3m,Summer 2025,Man City
+Sverre Nypan,Rosenborg,Man City,£12.5m,Summer 2025,Man City
+James Trafford,Burnley,Man City,£31m,Summer 2025,Man City
+Gianluigi Donnarumma,PSG,Man City,£26m,Summer 2025,Man City
+Antoine Semenyo,Bournemouth,Man City,£64m,January 2026,Man City
+Marc Guehi,Crystal Palace,Man City,£20m,January 2026,Man City
+
+Toby Collyer,West Brom,Man Utd,Loan,Summer 2025,Man Utd
+Sonny Aljofree,Notts County,Man Utd,Loan,Summer 2025,Man Utd
+Ethan Wheatley,Northampton,Man Utd,Loan,Summer 2025,Man Utd
+Bryan Mbeumo,Brentford,Man Utd,£65m,Summer 2025,Man Utd
+Matheus Cunha,Wolves,Man Utd,£62.5m,Summer 2025,Man Utd
+Diego León,Cerro Porteño,Man Utd,£7m,Summer 2025,Man Utd
+Benjamin Šeško,RB Leipzig,Man Utd,£73.7m,Summer 2025,Man Utd
+Alejandro Garnacho,Man Utd,Chelsea,£40m,Summer 2025,Man Utd
+Victor Lindelöf,Man Utd,Aston Villa,Free,Summer 2025,Man Utd
+
+Seung-soo Park,Suwon Bluewings,Newcastle,Undisclosed,Summer 2025,Newcastle
+Aaron Ramsdale,Southampton,Newcastle,Loan,Summer 2025,Newcastle
+Malick Thiaw,AC Milan,Newcastle,£31.1m,Summer 2025,Newcastle
+Jacob Ramsey,Aston Villa,Newcastle,£43m,Summer 2025,Newcastle
+Nick Woltemade,Stuttgart,Newcastle,£73m,Summer 2025,Newcastle
+Anthony Elanga,Nottingham Forest,Newcastle,£55m,Summer 2025,Newcastle
+Jamaal Lascelles,Newcastle,Leicester,Free,January 2026,Newcastle
+Lloyd Kelly,Newcastle,Juventus,£14.5m,Summer 2025,Newcastle
+Sean Longstaff,Newcastle,Leeds,£12m,Summer 2025,Newcastle
+Callum Wilson,Newcastle,West Ham,Free,Summer 2025,Newcastle
+
+Igor Jesus,Botafogo,Nottingham Forest,£10m,Summer 2025,Nottingham Forest
+Jair Cunha,Botafogo,Nottingham Forest,£10m,Summer 2025,Nottingham Forest
+Dan Ndoye,Bologna,Nottingham Forest,£34.6m,Summer 2025,Nottingham Forest
+Angus Gunn,Norwich,Nottingham Forest,Free,Summer 2025,Nottingham Forest
+Omari Hutchinson,Ipswich,Nottingham Forest,£37.5m,Summer 2025,Nottingham Forest
+James McAtee,Man City,Nottingham Forest,£30m,Summer 2025,Nottingham Forest
+Arnaud Kalimuendo,Rennes,Nottingham Forest,£26m,Summer 2025,Nottingham Forest
+Nicolo Savona,Juventus,Nottingham Forest,£13m,Summer 2025,Nottingham Forest
+Cuiabano,Botafogo,Nottingham Forest,£5m,Summer 2025,Nottingham Forest
+Dilane Bakwa,Strasbourg,Nottingham Forest,£30.2m,Summer 2025,Nottingham Forest
+Oleksandr Zinchenko,Man City,Nottingham Forest,Loan,Summer 2025,Nottingham Forest
+Lorenzo Lucca,Napoli,Nottingham Forest,Loan,January 2026,Nottingham Forest
+Luca Netz,Borussia M'gladbach,Nottingham Forest,£1.1m,January 2026,Nottingham Forest
+Jack Thompson,Nottingham Forest,Barrow,Loan,January 2026,Nottingham Forest
+Danilo,Nottingham Forest,Botafogo,£21.7m,Summer 2025,Nottingham Forest
+
+Enzo Le Fée,Roma,Sunderland,£19.35m,Summer 2025,Sunderland
+Habib Diarra,Strasbourg,Sunderland,£27m,Summer 2025,Sunderland
+Noah Sadiki,Union SG,Sunderland,£15m,Summer 2025,Sunderland
+Reinildo,Atlético Madrid,Sunderland,Free,Summer 2025,Sunderland
+Chemsdine Talbi,Club Brugge,Sunderland,£17.2m,Summer 2025,Sunderland
+Simon Adingra,Brighton,Sunderland,£21m,Summer 2025,Sunderland
+Nilson Angulo,Anderlecht,Sunderland,£17.5m,January 2026,Sunderland
+Jocelin Tabi,Maccabi Netanya,Sunderland,Undisclosed,January 2026,Sunderland
+Melker Ellborg,Malmö,Sunderland,£3.4m,January 2026,Sunderland
+
+Kevin Dánso,Lens,Tottenham,£21m,Summer 2025,Tottenham
+Luka Vuskovic,Westerlo,Tottenham,£9.3m,Summer 2025,Tottenham
+Mathys Tel,Bayern Munich,Tottenham,£30m,Summer 2025,Tottenham
+Kota Takai,Kawasaki,Tottenham,£5m,Summer 2025,Tottenham
+Mohamed Kudus,West Ham,Tottenham,£55m,Summer 2025,Tottenham
+João Palhinha,Bayern Munich,Tottenham,Loan,Summer 2025,Tottenham
+Xavi Simons,Leipzig,Tottenham,£56.3m,Summer 2025,Tottenham
+Douglas Luiz,Tottenham,Juve,Loan,January 2026,Tottenham
+Conor Gallagher,Atlético Madrid,Tottenham,£34m,January 2026,Tottenham
+George Abbott,Wycombe,Tottenham,Loan Recall,January 2026,Tottenham
+Alfie Dorrington,Aberdeen,Tottenham,Loan Recall,January 2026,Tottenham
+James Wilson,Hearts,Tottenham,Loan,January 2026,Tottenham
+Souza,Santos,Tottenham,£13m,January 2026,Tottenham
+Brennan Johnson,Tottenham,Crystal Palace,£35m,January 2026,Tottenham
+
+Jean-Clair Todibo,Nice,West Ham,£25.4m,Summer 2025,West Ham
+El Hadji Malick Diouf,Slavia Praha,West Ham,£19m,Summer 2025,West Ham
+Kyle Walker-Peters,Southampton,West Ham,Free,Summer 2025,West Ham
+Callum Wilson,Newcastle,West Ham,Free,Summer 2025,West Ham
+Mads Hermansen,Leicester,West Ham,£18m,Summer 2025,West Ham
+Mateus Fernandes,Southampton,West Ham,£38.1m,Summer 2025,West Ham
+Soungoutou Magassa,Monaco,West Ham,£14.7m,Summer 2025,West Ham
+Igor Julio,Brighton,West Ham,Loan,Summer 2025,West Ham
+Lucas Paquetá,West Ham,Flamengo,£36.5m,January 2026,West Ham
+Guido Rodríguez,West Ham,Valencia,Undisclosed,January 2026,West Ham
+Adama Traoré,West Ham,Fulham,Undisclosed,January 2026,West Ham
+Pablo Felipe,Gil Vicente,West Ham,£20m,January 2026,West Ham
+Taty Castellanos,Lazio,West Ham,£25.2m,January 2026,West Ham
+Axel Disasi,Chelsea,West Ham,Loan,January 2026,West Ham
+
+Fer López,Celta Vigo,Wolves,£19.6m,Summer 2025,Wolves
+Jørgen Strand Larsen,Celta Vigo,Wolves,£23m,Summer 2025,Wolves
+Jhon Arias,Fluminense,Wolves,£14.7m,Summer 2025,Wolves
+David Møller Wolfe,Feyenoord,Wolves,£10m,Summer 2025,Wolves
+Jackson Tchatchoua,Hellas Verona,Wolves,£10m,Summer 2025,Wolves
+Adam Armstrong,Southampton,Wolves,Undisclosed,January 2026,Wolves
+Angel Gomes,Marseille,Wolves,Loan,January 2026,Wolves
+Pedro Lima,Porto,Wolves,Loan Recall,January 2026,Wolves

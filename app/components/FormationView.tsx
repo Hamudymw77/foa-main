@@ -1,172 +1,146 @@
-"use client"
+import { useState } from "react"
 import { Match } from "@/types"
+import { User, X } from "lucide-react"
 
 interface FormationViewProps {
   selectedMatch: Match
-  showPredicted: boolean
-  setShowPredicted: (show: boolean) => void
 }
 
-export function FormationView({ selectedMatch, showPredicted, setShowPredicted }: FormationViewProps) {
+export function FormationView({ selectedMatch }: FormationViewProps) {
+  const [previewPlayer, setPreviewPlayer] = useState<any>(null)
+
+  // Helper to parse formation string into rows (GK + lines)
+  const getFormationRows = (formation: string) => {
+      const parts = (formation || '4-4-2').split('-').map(Number)
+      return [1, ...parts] // Add GK
+  }
+
+  // Get players for a team (handles both flat array and legacy object formats if needed)
+  const getTeamPlayers = (isHome: boolean) => {
+      const players = isHome ? selectedMatch.homePlayers : selectedMatch.awayPlayers;
+      
+      if (Array.isArray(players)) return players;
+      
+      // Legacy format fallback (convert object to array)
+      if (players && typeof players === 'object') {
+          const p = players as any;
+          return [...(p.gk || []), ...(p.def || []), ...(p.mid || []), ...(p.fwd || [])];
+      }
+      
+      return [];
+  }
+
+  const renderPitch = (isHome: boolean) => {
+      const teamName = isHome ? selectedMatch.homeTeam : selectedMatch.awayTeam;
+      const formation = isHome ? (selectedMatch.homeFormation || '4-4-2') : (selectedMatch.awayFormation || '4-4-2');
+      const players = getTeamPlayers(isHome);
+      const rows = getFormationRows(formation);
+      
+      const pitchBg = isHome ? "bg-green-900/80" : "bg-slate-800/80";
+      const playerBorder = isHome ? "border-accent" : "border-blue-500";
+      const hoverColor = isHome ? "hover:bg-accent" : "hover:bg-blue-500";
+
+      return (
+          <div className="flex flex-col gap-4">
+              <h4 className="text-center font-bold text-lg text-foreground">
+                {teamName} - {formation} 
+              </h4>
+
+              <div className={`relative ${pitchBg} rounded-lg border border-white/10 overflow-hidden shadow-inner aspect-[2/3] md:aspect-[3/4]`}>
+                  {/* Pitch Markings */}
+                  <div className="absolute inset-4 border-2 border-white/20 rounded-sm pointer-events-none"></div>
+                  <div className="absolute top-4 left-1/2 -translate-x-1/2 w-32 h-16 border-2 border-t-0 border-white/20 pointer-events-none"></div>
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-16 border-2 border-b-0 border-white/20 pointer-events-none"></div>
+                  <div className="absolute top-1/2 left-4 right-4 h-0.5 bg-white/20 pointer-events-none"></div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-white/20 rounded-full pointer-events-none"></div>
+
+                  {/* Players Grid */}
+                  <div className="absolute inset-0 flex flex-col justify-between py-8 px-4">
+                      {rows.map((count, rowIdx) => (
+                          <div key={rowIdx} className="flex justify-around items-center h-full">
+                              {Array.from({ length: count }).map((_, colIdx) => {
+                                  const prevCount = rows.slice(0, rowIdx).reduce((a, b) => a + b, 0)
+                                  const globalIndex = prevCount + colIdx
+                                  const player = players[globalIndex]
+                                  
+                                  if (!player) return <div key={globalIndex} className="w-12 h-12" />; // Empty slot placeholder
+
+                                  return (
+                                      <div 
+                                          key={globalIndex}
+                                          onClick={() => setPreviewPlayer(player)}
+                                          className={`
+                                              relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center 
+                                              cursor-pointer transition-all duration-300 group z-10
+                                              bg-slate-900 border-2 ${playerBorder} shadow-lg hover:scale-110
+                                          `}
+                                      >
+                                          {player.photo ? (
+                                              <img 
+                                                  src={player.photo} 
+                                                  alt={player.name}
+                                                  className="w-full h-full object-cover rounded-full" 
+                                                  onError={(e) => {
+                                                      const target = e.currentTarget;
+                                                      target.src = 'https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_0-66.png';
+                                                  }}
+                                              />
+                                          ) : (
+                                              <span className="text-xs font-bold text-white">{player.number || '?'}</span>
+                                          )}
+                                          
+                                          <div className={`
+                                              absolute -bottom-6 left-1/2 -translate-x-1/2 
+                                              bg-black/80 backdrop-blur text-white text-[10px] font-bold 
+                                              px-2 py-0.5 rounded-full whitespace-nowrap shadow-md z-20 
+                                              ${hoverColor} hover:text-black transition-colors
+                                          `}>
+                                              {player.name ? player.name.split(' ').pop() : 'Player'}
+                                          </div>
+                                      </div>
+                                  )
+                              })}
+                          </div>
+                      ))}
+                  </div>
+              </div>
+          </div>
+      )
+  }
+
   return (
     <div className="space-y-6">
-      {/* Toggle for Predicted Lineups */}
-      <div className="flex justify-center mb-4">
-        <div className="bg-white/5 p-1 rounded-lg flex gap-1 border border-white/10">
-          <button
-            onClick={() => setShowPredicted(false)}
-            className={`px-4 py-2 rounded-md text-sm font-bold transition-all ${
-              !showPredicted ? "bg-accent text-slate-900 shadow-lg" : "text-secondary hover:text-white hover:bg-white/5"
-            }`}
-          >
-            Actual Lineup
-          </button>
-          <button
-            onClick={() => setShowPredicted(true)}
-            className={`px-4 py-2 rounded-md text-sm font-bold transition-all ${
-              showPredicted ? "bg-accent text-slate-900 shadow-lg" : "text-secondary hover:text-white hover:bg-white/5"
-            }`}
-          >
-            Predicted Lineup
-          </button>
-        </div>
+      <div className="grid md:grid-cols-2 gap-8">
+        {renderPitch(true)}
+        {renderPitch(false)}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {/* Home Team Formation */}
-        <div className="glass rounded-lg p-4 border border-white/10">
-          <h4 className="text-center font-bold mb-4 text-lg text-foreground">
-            {selectedMatch.homeTeam} - {selectedMatch.homeFormation} 
-            {showPredicted && <span className="text-accent text-sm ml-2">(Predicted)</span>}
-          </h4>
-          <div className="relative bg-green-900/40 rounded-lg border border-white/5" style={{ height: "400px" }}>
-            {/* Field markings */}
-            <div className="absolute inset-0 border-2 border-white/30 rounded-lg">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-16 border-2 border-white/30 border-t-0" />
-              <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-white/30" />
-            </div>
-
-            {/* Goalkeeper */}
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 text-center">
-              <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center font-bold text-xs mb-1 text-slate-900 shadow-lg shadow-accent/20">
-                GK
+      {/* Player Preview Modal */}
+      {previewPlayer && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in zoom-in-95 duration-200" onClick={() => setPreviewPlayer(null)}>
+              <div className="bg-slate-900 border border-white/10 rounded-3xl p-8 max-w-sm w-full flex flex-col items-center gap-6 relative shadow-[0_0_100px_rgba(0,0,0,0.5)]" onClick={e => e.stopPropagation()}>
+                  <button onClick={() => setPreviewPlayer(null)} className="absolute top-4 right-4 text-white/50 hover:text-white"><X className="w-6 h-6" /></button>
+                  
+                  <div className="w-40 h-40 rounded-full bg-gradient-to-br from-slate-800 to-black border-4 border-accent shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-hidden relative">
+                      {previewPlayer.photo ? (
+                          <img src={previewPlayer.photo} className="w-full h-full object-cover scale-110" />
+                      ) : (
+                          <User className="w-20 h-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/20" />
+                      )}
+                  </div>
+                  
+                  <div className="text-center">
+                      <h2 className="text-3xl font-black text-white mb-2 tracking-tight">{previewPlayer.name}</h2>
+                      <div className="text-accent font-mono text-2xl font-bold mb-6">#{previewPlayer.number || '?'}</div>
+                      
+                      <div className="flex flex-wrap gap-2 justify-center">
+                          <span className="bg-white/10 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-white/5">{previewPlayer.position || 'Unknown'}</span>
+                          <span className="bg-white/10 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-white/5">{previewPlayer.teamName || 'Team'}</span>
+                      </div>
+                  </div>
               </div>
-              <div className="text-[10px] font-bold bg-black/60 backdrop-blur-md text-white px-2 py-0.5 rounded border border-white/20 shadow-sm">
-                {(((showPredicted || !selectedMatch.homePlayers) ? selectedMatch.predictedHomePlayers : selectedMatch.homePlayers) ?? { gk: [], def: [], mid: [], fwd: [] }).gk[0]}
-              </div>
-            </div>
-
-            {/* Defenders */}
-            <div className="absolute top-24 left-0 right-0 flex justify-around px-4">
-              {(((showPredicted || !selectedMatch.homePlayers) ? selectedMatch.predictedHomePlayers : selectedMatch.homePlayers) ?? { gk: [], def: [], mid: [], fwd: [] }).def.map((player, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center font-bold text-xs mb-1 text-slate-900 shadow-md shadow-accent/20">
-                    D
-                  </div>
-                  <div className="text-[10px] font-bold bg-black/60 backdrop-blur-md text-white px-1.5 py-0.5 rounded max-w-[70px] truncate border border-white/20 shadow-sm">
-                    {player}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Midfielders */}
-            <div className="absolute top-52 left-0 right-0 flex justify-around px-4">
-              {(((showPredicted || !selectedMatch.homePlayers) ? selectedMatch.predictedHomePlayers : selectedMatch.homePlayers) ?? { gk: [], def: [], mid: [], fwd: [] }).mid.map((player, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center font-bold text-xs mb-1 text-slate-900 shadow-md shadow-accent/20">
-                    M
-                  </div>
-                  <div className="text-[10px] font-bold bg-black/60 backdrop-blur-md text-white px-1.5 py-0.5 rounded max-w-[70px] truncate border border-white/20 shadow-sm">
-                    {player}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Forwards */}
-            <div className="absolute bottom-4 left-0 right-0 flex justify-around px-4">
-              {(((showPredicted || !selectedMatch.homePlayers) ? selectedMatch.predictedHomePlayers : selectedMatch.homePlayers) ?? { gk: [], def: [], mid: [], fwd: [] }).fwd.map((player, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center font-bold text-xs mb-1 text-slate-900 shadow-md shadow-accent/20">
-                    F
-                  </div>
-                  <div className="text-[10px] font-bold bg-black/60 backdrop-blur-md text-white px-1.5 py-0.5 rounded max-w-[70px] truncate border border-white/20 shadow-sm">
-                    {player}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
-        </div>
-
-        {/* Away Team Formation */}
-        <div className="glass-card rounded-lg p-4 border border-white/10">
-          <h4 className="text-center font-bold mb-4 text-lg text-foreground">
-            {selectedMatch.awayTeam} - {selectedMatch.awayFormation}
-            {showPredicted && <span className="text-primary text-sm ml-2">(Predicted)</span>}
-          </h4>
-          <div className="relative bg-green-900/40 rounded-lg border border-white/5" style={{ height: "400px" }}>
-            {/* Field markings */}
-            <div className="absolute inset-0 border-2 border-white/30 rounded-lg">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-16 border-2 border-white/30 border-t-0" />
-              <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-white/30" />
-            </div>
-
-            {/* Goalkeeper */}
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 text-center">
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center font-bold text-xs mb-1 text-white shadow-lg shadow-primary/20">
-                GK
-              </div>
-              <div className="text-[10px] font-bold bg-black/60 backdrop-blur-md text-white px-2 py-0.5 rounded border border-white/20 shadow-sm">
-                {(((showPredicted || !selectedMatch.awayPlayers) ? selectedMatch.predictedAwayPlayers : selectedMatch.awayPlayers) ?? { gk: [], def: [], mid: [], fwd: [] }).gk[0]}
-              </div>
-            </div>
-
-            {/* Defenders */}
-            <div className="absolute top-24 left-0 right-0 flex justify-around px-4">
-              {(((showPredicted || !selectedMatch.awayPlayers) ? selectedMatch.predictedAwayPlayers : selectedMatch.awayPlayers) ?? { gk: [], def: [], mid: [], fwd: [] }).def.map((player, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-bold text-xs mb-1 text-white shadow-md shadow-primary/20">
-                    D
-                  </div>
-                  <div className="text-[10px] font-bold bg-black/60 backdrop-blur-md text-white px-1.5 py-0.5 rounded max-w-[70px] truncate border border-white/20 shadow-sm">
-                    {player}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Midfielders */}
-            <div className="absolute top-52 left-0 right-0 flex justify-around px-4">
-              {(((showPredicted || !selectedMatch.awayPlayers) ? selectedMatch.predictedAwayPlayers : selectedMatch.awayPlayers) ?? { gk: [], def: [], mid: [], fwd: [] }).mid.map((player, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-bold text-xs mb-1 text-white shadow-md shadow-primary/20">
-                    M
-                  </div>
-                  <div className="text-[10px] font-bold bg-black/60 backdrop-blur-md text-white px-1.5 py-0.5 rounded max-w-[70px] truncate border border-white/20 shadow-sm">
-                    {player}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Forwards */}
-            <div className="absolute bottom-4 left-0 right-0 flex justify-around px-4">
-              {(((showPredicted || !selectedMatch.awayPlayers) ? selectedMatch.predictedAwayPlayers : selectedMatch.awayPlayers) ?? { gk: [], def: [], mid: [], fwd: [] }).fwd.map((player, i) => (
-                <div key={i} className="text-center">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center font-bold text-xs mb-1 text-white shadow-md shadow-primary/20">
-                    F
-                  </div>
-                  <div className="text-[10px] font-bold bg-black/60 backdrop-blur-md text-white px-1.5 py-0.5 rounded max-w-[70px] truncate border border-white/20 shadow-sm">
-                    {player}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   )
 }

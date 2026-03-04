@@ -33,8 +33,8 @@ export function MatchEvents({ selectedMatch }: MatchEventsProps) {
             }`}></div>
             
             <div className="glass-card p-4 rounded-lg flex items-center gap-4 transition-all duration-300 hover:translate-x-2">
-              <span className="text-lg font-bold text-accent min-w-[3rem] text-center bg-white/5 rounded px-2 py-1">
-                {event.minute}&apos;
+              <span className={`text-lg font-bold text-accent min-w-[3rem] text-center bg-white/5 rounded px-2 py-1 ${event.minute === 0 ? 'opacity-0' : ''}`}>
+                {event.minute > 0 ? `${event.minute}'` : ''}
               </span>
               
               <div className="flex items-center gap-3">
@@ -60,14 +60,25 @@ export function MatchEvents({ selectedMatch }: MatchEventsProps) {
                     <span className="font-extrabold text-white text-lg tracking-tight">
                       {event.type === "substitution" ? (
                         <span className="flex items-center gap-2">
-                          <span className="text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.3)]">{event.playerIn}</span>
+                          <span className="text-green-500 font-semibold drop-shadow-[0_0_8px_rgba(74,222,128,0.3)]">
+                            <span className="mr-1">⬆️</span>{event.playerIn}
+                          </span>
                           <span className="text-secondary/60 text-[10px] font-bold uppercase tracking-widest">IN</span>
                           <span className="text-secondary/40">/</span>
-                          <span className="text-red-400 drop-shadow-[0_0_8px_rgba(248,113,113,0.3)]">{event.playerOut}</span>
+                          <span className="text-red-500 font-semibold drop-shadow-[0_0_8px_rgba(248,113,113,0.3)]">
+                            <span className="mr-1">⬇️</span>{event.playerOut}
+                          </span>
                           <span className="text-secondary/60 text-[10px] font-bold uppercase tracking-widest">OUT</span>
                         </span>
                       ) : (
-                        event.player
+                        <span className={`${
+                          event.type === 'yellow' ? 'text-yellow-500 font-semibold' : 
+                          event.type === 'red' ? 'text-red-500 font-bold' : 
+                          (event as any).isOwnGoal ? 'text-red-400/90' : 
+                          ''
+                        }`}>
+                          {event.type === 'substitution' ? event.playerIn : event.player} {(event as any).isOwnGoal && <span className="text-sm font-bold text-red-500 ml-1">(OG)</span>}
+                        </span>
                       )}
                     </span>
                   </div>

@@ -9,16 +9,12 @@ interface MatchDetailProps {
   selectedMatch: Match
   activeTab: string
   setActiveTab: (tab: string) => void
-  showPredicted: boolean
-  setShowPredicted: (show: boolean) => void
 }
 
 export function MatchDetail({ 
   selectedMatch, 
   activeTab, 
-  setActiveTab, 
-  showPredicted, 
-  setShowPredicted 
+  setActiveTab
 }: MatchDetailProps) {
   return (
     <div className="glass rounded-xl shadow-lg p-4 md:p-6">
@@ -56,23 +52,12 @@ export function MatchDetail({
 
       <div className="text-center text-secondary mb-6">
         <p className="text-sm font-medium">{selectedMatch.date}</p>
-        <p className="text-sm">{selectedMatch.stadium}</p>
       </div>
 
       {/* Tabs */}
       <div className="flex gap-2 mb-6 border-b border-white/10 overflow-x-auto pb-2 md:pb-0 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
         {selectedMatch.status !== 'upcoming' && (
           <>
-            <button
-              onClick={() => setActiveTab("overview")}
-              className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap ${
-                activeTab === "overview"
-                  ? "text-accent border-b-2 border-accent"
-                  : "text-secondary hover:text-foreground hover:bg-white/5 rounded-t-lg"
-              }`}
-            >
-              Overview
-            </button>
             <button
               onClick={() => setActiveTab("statistics")}
               className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap ${
@@ -110,42 +95,6 @@ export function MatchDetail({
       </div>
 
       {/* Tab Content */}
-      {activeTab === "overview" && (
-        <div className="space-y-6 animate-in fade-in duration-300">
-          <div>
-            <h4 className="text-xl font-bold text-accent mb-4 flex items-center gap-2">
-              <span className="w-1 h-6 bg-accent rounded-full"></span>
-              Goals
-            </h4>
-            {selectedMatch.goals && selectedMatch.goals.length > 0 ? (
-              <div className="space-y-3">
-                {selectedMatch.goals.map((goal, idx) => (
-                  <div key={idx} className="glass-card flex items-center gap-4 p-4 rounded-xl transition-all duration-300 hover:scale-[1.01]">
-                    <span className="text-2xl font-bold text-accent w-12 text-center">{goal.minute}&apos;</span>
-                    <img
-                      src={goal.team === "home" ? selectedMatch.homeLogo : selectedMatch.awayLogo}
-                      alt=""
-                      className="w-10 h-10 object-contain drop-shadow-sm"
-                    />
-                    <div className="flex-1">
-                      <div className="font-bold text-lg">{goal.scorer}</div>
-                      <div className="text-sm text-secondary font-medium uppercase tracking-wide">
-                        {goal.team === "home" ? selectedMatch.homeTeam : selectedMatch.awayTeam}
-                      </div>
-                    </div>
-                    <span className="text-3xl font-bold text-accent/20">{goal.score}</span>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center text-secondary py-12 bg-white/5 rounded-xl border border-white/10 border-dashed">
-                <p>Goal details are not available for this match.</p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
       {activeTab === "statistics" && (
         <MatchStatistics selectedMatch={selectedMatch} />
       )}
@@ -153,8 +102,6 @@ export function MatchDetail({
       {activeTab === "formation" && (
         <FormationView 
           selectedMatch={selectedMatch} 
-          showPredicted={showPredicted} 
-          setShowPredicted={setShowPredicted} 
         />
       )}
 

@@ -1,11 +1,11 @@
 import { openDB, DBSchema } from 'idb';
-import { Scorer, Defense, Transfer } from '../types';
+import { Scorer, Defense, Transfer, PlayerStat } from '../types';
 
 interface FootballDB extends DBSchema {
   scorers: {
     key: string;
     value: {
-      data: Scorer[];
+      data: any[];
       timestamp: number;
     };
   };
@@ -109,6 +109,27 @@ const generateBestDefense = (): Defense[] => [
 
 // Service Methods
 export const DataService = {
+  async getPlayersStats(): Promise<PlayerStat[]> {
+    try {
+      const db = await getDB();
+      const cached = await db.get('scorers', 'allPlayers');
+      
+      if (cached && (Date.now() - cached.timestamp < CACHE_DURATION)) {
+        return cached.data;
+      }
+
+      const res = await fetch('/api/football?type=stats');
+      if (!res.ok) throw new Error('Failed to fetch stats');
+      const data = await res.json();
+      
+      await db.put('scorers', { data, timestamp: Date.now() }, 'allPlayers');
+      return data;
+    } catch (error) {
+      console.error('Error fetching player stats:', error);
+      return []; 
+    }
+  },
+
   async getTopScorers(): Promise<Scorer[]> {
     try {
       const db = await getDB();

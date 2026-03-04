@@ -1,0 +1,909 @@
+Arsenal
+Player
+Transfer Type / Club
+Read More
+Oleksandr Zinchenko
+Transfer Out - Ajax
+Details
+Ethan Nwaneri
+Loan Out - Marseille
+Details
+Jaden Dixon
+Transfer In - Stoke City
+Details
+Osman Kamara
+Transfer Out - Blackburn
+Details
+Harrison Dudziak
+Loan Out - Braintree
+Details
+Louie Copley
+Loan Out - Crawley
+Details
+Maldini Kacurri
+Transfer Out - Grimsby
+Details
+Will Sweet
+Loan Out - Dagenham
+Details
+Evan Mooney
+Transfer In - St Mirren
+Details
+Charles Sagoe Jr
+Loan Out Kalmar
+Details
+Aston Villa club badge
+Aston Villa
+Player
+Transfer Type / Club
+Read More
+Douglas Luiz
+Loan In - Juventus
+Details
+Tammy Abraham
+Transfer In - Besiktas
+Details
+Alysson
+Transfer In - Gremio
+Details
+Leon Bailey
+Loan Recall - Roma
+Details
+Donyell Malen
+Transfer Out - Roma
+Details
+Evann Guessand
+Loan Out - Crystal Palace
+Details
+Brian Madjo
+Transfer In - Metz
+Details
+Aidan Borland
+Loan Out - Swindon
+Details
+Sam Lewis
+Loan Out - Oxford
+Details
+Finley Munroe
+Transfer Out - Middlesborough
+Details
+Kane Taylor
+Loan Out - Oldham
+Details
+Sil Swinkels
+Loan Out - Chesterfield
+Details
+Charlie Pavey
+Loan Out - Hereford
+Details
+Jamaldeen Jimoh-Aloba
+Loan Out - West Brom
+Details
+Ben Broggio
+Loan Out - Falkirk
+Details
+Samuel Iling Jr
+Loan Out - West Brom
+Details
+Kadan Young
+Loan Out - Reading
+Details
+Louie Barry
+Loan Out - Stockport
+Details
+Lino Sousa
+Loan Out - Rotherham
+Details
+Bournemouth club badge
+Bournemouth
+Player
+Transfer Type / Club
+Read More
+Rayan
+Transfer In - Vasco
+Details
+Antoine Semenyo
+Transfer Out - Man City
+Details
+Christos Mandas
+Loan In - Lazio
+Details
+Alex Toth
+Transfer In - Ferencvaros
+Details
+Ade Solanke
+Transfer In - Lorient
+Details
+Romain Faivre
+Transfer Out - Auxerre
+Details
+Fraser Forster
+Transfer In
+Details
+Julian Araujo
+Loan Out - Celtic
+Details
+Noa Boutin
+Loan Recall - Sutton
+Details
+Will Dennis
+Loan Out - Leyton Orient
+Details
+Brentford club badge
+Brentford
+Player
+Transfer Type / Club
+Read More
+Kaye Furo
+Transfer In - Club Brugge
+Details
+Gustavo Nunes
+Loan Out - Swansea
+Details
+Paris Maghoma
+Transfer Out - Norwich
+Details
+Iwan Morgan
+Loan Out - Shrewsbury
+Details
+Michael Olakigbe
+Loan Out - Swindon
+Details
+Myles Peart-Harris
+Transfer Out - Oxford
+Details
+Yunus Emre Konak
+Loan Out - Oxford
+Details
+Matt Cox
+Loan Out - Shrewsbury
+Details
+Chanse Headman
+Transfer Out - Harrogate
+Details
+Frank Onyeka
+Loan Out - Coventry
+Details
+Joseph Wheeler-Henry
+Loan In - Chelsea
+Details
+Benjamin Arthur
+Loan Out - Celtic
+Details
+Brighton and Hove Albion club badge
+Brighton and Hove Albion
+Player
+Transfer Type / Club
+Read More
+Pascal Gross
+Transfer In - Dortmund
+Details
+Matt O'Riley
+Loan Recall - Marseille
+Details
+Facundo Buonanotte
+Loan Out - Leeds
+Details
+Igor Julio
+Loan Recall - West Ham
+Details
+Brajan Gruda
+Loan Out - Leipzig
+Details
+Ibrahim Osman
+Loan Out -Birmingham City
+Details
+Jeremy Sarmiento
+Loan Out - Middlesbrough
+Details
+Tommy Watson
+Loan Out - Millwall
+Details
+Eiran Cashin
+Loan Out - Blackburn
+Details
+Yoon Do-young
+Loan Out - Dordrecht
+Details
+Caylan Vickers
+Loan Recall - Barnsley
+Details
+Jacob Slater
+Loan Out - Harrogate
+Details
+Diego Coppola
+Loan Out - Paris FC
+Details
+Joe Knight
+Transfer Out - Stevenage
+Details
+Andrew Moran
+Transfer Out - Preston
+Details
+Caylan Vickers
+Loan Out - Wigan
+Details
+Burnley club badge
+Burnley
+Player
+Transfer Type / Club
+Read More
+James Ward-Prowse
+Loan In - West Ham
+Details
+Luca Koleosho
+Loan Out - Paris FC
+Details
+Hannes Delcroix
+Transfer Out - Lugano
+Details
+Michael Obafemi
+Loan Out - Blackpool
+Details
+Lewis Forshaw
+Loan Out - Worksop
+Details
+Sam Waller
+Loan Recall - Crewe
+Details
+Charlie Casper
+Loan Recall - Grimsby
+Details
+Brad Grant
+Player Released -
+Details
+Joe Bevan
+Transfer Out -Dundee
+Details
+Felix Chester
+Loan Out -Burscough
+Details
+Cameron Scott
+Transfer In
+Details
+Tom Tweedy
+Loan Out - Darlington
+Details
+Oliver Sonne
+Loan Out - Sparta Prague
+Details
+Manuel Benson
+Transfer Out - Maccabi Haifa
+Details
+Joe Ashton
+Loan Out - Marine
+Details
+Joe Bauress
+Loan Recall - Accrington
+Details
+Logan Pye
+Loan Recall - Accrington
+Details
+Chelsea club badge
+Chelsea
+Player
+Transfer Type / Club
+Read More
+Mamadou Sarr
+Loan Recall - Strasbourg
+Details
+Raheem Sterling
+Player Released -
+Details
+Tyrique George
+Loan Out - Everton
+Details
+Axel Disasi
+Loan Out - West Ham
+Details
+Facundo Buonanotte
+End of Loan - Brighton
+Details
+Aaron Anselmino
+Loan Out - Strasbourg
+Details
+Kendry Paez
+Loan Out - River Plate
+Details
+Yisa Alao
+Transfer In - Sheff Wed
+Details
+Leo Castledine
+Transfer Out - Middlesbrough
+Details
+Caleb Wiley
+Loan Recall - Watford
+Details
+Kiano Dyer
+Loan Recall - Volendam
+Details
+David Fofana
+Loan Out - Strasbourg
+Details
+Ato Ampah
+Transfer Out - Stoke
+Details
+Crystal Palace club badge
+Crystal Palace
+Player
+Transfer Type / Club
+Read More
+Marc Guehi
+Transfer Out - Man City
+Details
+Jorgen Strand Larsen
+Transfer In - Wolves
+Details
+Brennan Johnson
+Transfer In - Spurs
+Details
+Evann Guessand
+Loan In - Aston Villa
+Details
+Hindolo Mustapha
+Loan Recall - Nurnberg
+Details
+Naouirou Ahamada
+Transfer Out - Auxerre
+Details
+Romain Esse
+Loan Out - Coventry
+Details
+Owen Goodman
+Loan Out - Barnsley
+Details
+Luke Browne
+Transfer Out - Notts County
+Details
+Danny Imray
+Loan Out - West Brom
+Details
+Jesurun Rak-Sakyi
+Loan Out - Stoke
+Details
+Hindolo Mustapha
+Loan Out - West Brom
+Details
+Tayo Adaramola
+Loan Out - Sheff Wed
+Details
+Everton club badge
+Everton
+Player
+Transfer Type / Club
+Read More
+Tyrique George
+Loan In - Chelsea
+Details
+Harrison Armstrong
+Loan Out - Preston
+Details
+Harry Tyrer
+Transfer Out - Cardiff
+Details
+Martin Sherif
+Loan Out - Port Vale
+Details
+George Finney
+Loan Out - Ayr United
+Details
+Will Tamen
+Loan Out - Tranmere
+Details
+Francis Okoronkwo
+Loan Out - Doncaster
+Details
+Martin Sherif
+Loan Recall - Rotherham
+Details
+Roman Dixon
+Loan Out - Stockport
+Details
+Eli Campbell
+Loan Out - Port Vale
+Details
+Jack Patterson
+Loan Out - Lodz
+Details
+Fulham club badge
+Fulham
+Player
+Transfer Type / Club
+Read More
+Oscar Bobb
+Transfer In - Man City
+Details
+Adama Traore
+Transfer Out - West Ham
+Details
+Chibby Nwoko
+Loan Out - Forest Green
+Details
+Steven Benda
+Loan Recall - Millwall
+Details
+Aaron Loupalo-Bi
+Loan Out - Walsall
+Details
+Terrell Works
+Loan Out - Yeovil
+Details
+Luke Harris
+Loan Recall - Oxford
+Details
+Matt Dibley-Dias
+Loan Recall - Chesterfield
+Details
+Devan Tanton
+Loan Recall - Chesterfield
+Details
+Marco Underwood
+Loan Out - Uxbridge
+Details
+Steven Benda
+Loan Out - Feyenoord
+Details
+Leeds United club badge
+Leeds United
+Player
+Transfer Type / Club
+Read More
+Jack Harrison
+Loan Out - Fiorentina
+Details
+Facundo Buonanotte
+Loan In - Brighton
+Details
+Harry Gray
+Loan Out - Rotherham
+Details
+Rory Mahady
+Loan Out - Scunthorpe
+Details
+Connor Douglas
+Loan Out - Buxton
+Details
+Reuben Lopata-White
+Loan Out - Greenock Morton
+Details
+Edward Ibrovic-Fletcher
+Transfer In - Man Utd
+Details
+Liverpool club badge
+Liverpool
+Player
+Transfer Type / Club
+Read More
+Jeremy Jacquet
+Transfer In - Rennes
+Details
+Lewis Koumas
+Loan Out - Hull
+Details
+Mor Talla Ndiaye
+Transfer In - Amitie
+Details
+Owen Beck
+Loan Recall - Derby County
+Details
+James Norris
+Transfer Out - Shelbourne
+Details
+James Balagizi
+Loan Out - Forest Green
+Details
+Luke Chambers
+Loan Out - Charlton
+Details
+Calum Scanlon
+Loan Out - Cardiff
+Details
+Jeremy Jacquet
+Loan Out - Rennes
+Details
+Harvey Davies
+Loan Recall - Crawley Town
+Details
+James McConnell
+Loan Recall - Ajax
+Details
+Manchester City club badge
+Manchester City
+Player
+Transfer Type / Club
+Read More
+Marc Guehi
+Transfer In - Crystal Palace
+Details
+Antoine Semenyo
+Transfer In - Bournemouth
+Details
+Oscar Bobb
+Transfer Out - Fulham
+Details
+Stefan Ortega
+Transfer Out - Forest
+Details
+Claudio Echeverri
+Loan Out - Girona
+Details
+Sverre Nypan
+Loan Recall - Middlesborough
+Details
+Max Alleyne
+Loan Recall - Watford
+Details
+Jahmai Simpson-Pusey
+Loan Out - Koln
+Details
+Jaden Heskey
+Loan Out - Sheff Wed
+Details
+Will Dickson
+Transfer Out - Chesterfield
+Details
+Jadel Katongo
+Transfer Out - Kayserispor
+Details
+Kalvin Phillips
+Loan Out - Sheffield Utd
+Details
+Mahamadou Susoho
+Transfer Out - Kocaelispor
+Details
+Stephen Mfuni
+Loan Out - Watford
+Details
+Divine Mukasa
+Loan Out - Leicester
+Details
+Manchester United club badge
+Manchester United
+Player
+Transfer Type / Club
+Read More
+Toby Collyer
+Loan Out - Hull
+Details
+Joe Hugill
+Transfer Out - Kilmarnock
+Details
+Ethan Wheatley
+Loan Out - Bradford City
+Details
+Rhys Bennett
+Transfer Out - Fleetwood
+Details
+Harry Amass
+Loan Out - Norwich
+Details
+Sam Mather
+Transfer Out - Kayserispor
+Details
+Elyh Harrison
+Loan Recall - Shrewsbury
+Details
+Sekou Kone
+Loan Out - Lausanne-Sport
+Details
+Habeeb Ogunneye
+Loan Recall - Newport
+Details
+Gabriele Biancheri
+Loan Out - Rotherham
+Details
+Ethan Wheatley
+Loan Recall - Northampton
+Details
+Louis Jackson
+Loan Recall - Solihull
+Details
+Sonny Aljofree
+Loan Recall - Notts County
+Details
+James Scanlon
+Loan Out - Swindon
+Details
+Jacob Devaney
+Loan Out - St Mirren
+Details
+Jack Moorhouse
+Loan Recall - Leyton Orient
+Details
+Newcastle United club badge
+Newcastle United
+Player
+Transfer Type / Club
+Read More
+Antonio Cordero
+Loan Out - Cadiz
+Details
+Joe White
+Loan Out - Bradford
+Details
+Ben Parkinson
+Transfer Out - Falkirk
+Details
+Harrison Ashby
+Loan Out - Bradford
+Details
+Cathal Heffernan
+Transfer Out - Harrogate
+Details
+Joe Brayson
+Loan Out - Morpeth
+Details
+Charlie McArthur
+Loan Out - Airdrieonians
+Details
+Max Thompson
+Loan Out - Ayr
+Details
+Nottingham Forest club badge
+Nottingham Forest
+Player
+Transfer Type / Club
+Read More
+Stefan Ortega
+Transfer In - Man City
+Details
+Lorenzo Lucca
+Loan In - Napoli
+Details
+Luca Netz
+Transfer In - B. M’gladbach
+Details
+Douglas Luiz
+Loan Recall - Juventus
+Details
+Arnaud Kalimuendo
+Loan Out - Frankfurt
+Details
+Donnell McNeilly
+End of Loan
+Details
+Jamie McDonnell
+Transfer Out - Oxford
+Details
+George Murray-Jones
+Loan Out - Chester
+Details
+Josh Powell
+Loan Out - Fleetwood
+Details
+Kyle McAdam
+Loan Recall - Mansfield
+Details
+Esapa Osong
+Loan Recall - Motherwell
+Details
+Esapa Osong
+Loan Out - Fleetwood
+Details
+Kyle McAdam
+Loan Out - Northampton
+Details
+Ben Hammond
+Loan Out - Northampton
+Details
+Sunderland club badge
+Sunderland
+Player
+Transfer Type / Club
+Read More
+Anthony Patterson
+Loan Out - Millwall
+Details
+Patrick Roberts
+Transfer Out - Birmingham City
+Details
+Melker Ellborg
+Transfer In - Malmo
+Details
+Nilson Angulo
+Transfer In - Anderlecht
+Details
+Dan Neil
+Loan Out - Ipswich Town
+Details
+Jocelin Ta Bi
+Transfer In - Maccabi Netanya
+Details
+Timothee Pembele
+Loan Out - Le Havre
+Details
+Leo Hjelde
+Loan Out - Sheff Utd
+Details
+Jay Matete
+Transfer Out - MK Dons
+Details
+Trey Ogunsuyi
+Loan Out - Shrewsbury
+Details
+Zak Johnson
+Loan Out - York
+Details
+Ben Middlemas
+Loan Out - Swindon
+Details
+Oliver Bainbridge
+Loan Out - South Shields
+Details
+Jake Waters
+Loan Out - Spennymoor
+Details
+Joe Anderson
+Transfer Out - Barrow
+Details
+Timur Tutierov
+Loan Out - Exeter
+Details
+Blondy Nna Noukeu
+Transfer Out - Boulogne
+Details
+Tom Lavery
+Loan Recall - Cliftonville
+Details
+Aji Alese
+Loan Out - Portsmouth
+Details
+Adil Aouchiche
+Transfer Out - Schalke
+Details
+Simon Adingra
+Loan Out - Monaco
+Details
+Tottenham Hotspur club badge
+Tottenham Hotspur
+Player
+Transfer Type / Club
+Read More
+Conor Gallagher
+Transfer In - A. Madrid
+Details
+Souza
+Transfer In - Santos
+Details
+Brennan Johnson
+Transfer Out - Crystal Palace
+Details
+Dane Scarlett
+Loan Out - Hibernian
+Details
+Manor Solomon
+Loan Out - Fiorentina
+Details
+Kota Takai
+Loan Out - B. M’gladbach
+Details
+Jamie Donley
+Loan Out - Oxford
+Details
+Alfie Dorrington
+Loan Out - Salford
+Details
+Yang Min-Hyeok
+Loan Out - Coventry
+Details
+Oliver Irow
+Loan Out - Mansfield
+Details
+Damola Ajayi
+Loan Out - Doncaster
+Details
+Yusuf Akhamrich
+Loan Out - Bristol Rovers
+Details
+George Abbott
+Loan Out - Mansfield
+Details
+James Wilson
+Loan In - Hearts
+Details
+West Ham United club badge
+West Ham United
+Player
+Transfer Type / Club
+Read More
+Axel Disasi
+Loan In - Chelsea
+Details
+Taty Castellanos
+Transfer In - Lazio
+Details
+Lucas Paqueta
+Transfer Out - Flamengo
+Details
+James Ward-Prowse
+Loan Out - Burnley
+Details
+Adama Traore
+Transfer In - Fulham
+Details
+Pablo Felipe
+Transfer In - Gil Vicente
+Details
+Niclas Fullkrug
+Loan Out - AC Milan
+Details
+Guido Rodriguez
+Transfer Out - Valencia
+Details
+Igor Julio
+End of Loan - Brighton
+Details
+Luis Guilherme
+Transfer Out - Sporting
+Details
+Andy Irving
+Transfer Out - Prague
+Details
+Keiber Lamadrid
+Loan In - La Guaira
+Details
+Callum Marshall
+Loan Out - Bochum
+Details
+George Earthy
+Loan Out - Bristol City
+Details
+Junior Robinson
+Loan Out - Boreham Wood
+Details
+Kaelen Casey
+Loan Out - Leyton Orient
+Details
+Emeka Adiele
+Transfer Out - Utrecht
+Details
+Wolverhampton Wanderers club badge
+Wolverhampton Wanderers
+Player
+Transfer Type / Club
+Read More
+Jorgen Strand Larsen
+Transfer Out - Crystal Palace
+Details
+Angel Gomes
+Loan In - Marseille
+Details
+Adam Armstrong
+Transfer In - Southampton
+Details
+Jhon Arias
+Transfer Out Palmeiras
+Details
+Emmanuel Agbadou
+Transfer Out - Besiktas
+Details
+Marshall Munetsi
+Loan Out - Paris FC
+Details
+Fer Lopez
+Loan Out - Celta Vigo
+Details
+Ki-Jana Hoever
+Loan Out - Sheff Utd
+Details
+Pedro Lima
+Loan Recall - Porto
+Details
+Alfie Pond
+Loan Out - Crewe
+Details
+Fletcher Holman
+Transfer Out - Swindon
+Details
+Caden Voice
+Transfer Out - Cardiff
+Details
+Temple Ojinnaka
+Loan Out - Shrewsbury
+Details
+Dapo Anunlopo
+Transfer In - Bromley
+Details
+Tawanda Chirewa
+Loan Out - Barnsley
+Details

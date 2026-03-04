@@ -22,10 +22,10 @@ const mockMatch: Match = {
   homeScore: 2,
   awayScore: 1,
   date: '2023-01-01',
-  stadium: 'Test Stadium',
   homeLogo: '/home.png',
   awayLogo: '/away.png',
   status: 'finished',
+  timestamp: 1672531200, // Added dummy timestamp
   goals: [
     { minute: 10, team: 'home', scorer: 'Player 1', score: '1-0' }
   ]
