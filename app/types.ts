@@ -73,6 +73,7 @@ export interface Match {
   awayFormation?: string;
   homePlayers?: any;
   awayPlayers?: any;
+  stadium?: string;
 }
 
 export type FormResult = 'W' | 'V' | 'D' | 'R' | 'L' | 'P';
