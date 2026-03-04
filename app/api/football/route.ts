@@ -207,8 +207,8 @@ export async function GET(request: Request) {
            code: p.code,
            name: `${p.first_name} ${p.second_name}`,
            web_name: p.web_name,
-           team: team?.name || 'Unknown',
-           team_code: team?.code,
+           team: (team as any)?.name || 'Unknown',
+           team_code: (team as any)?.code,
            position: p.element_type, // 1=GKP, 2=DEF, 3=MID, 4=FWD
            goals: p.goals_scored,
            assists: p.assists,
@@ -218,7 +218,7 @@ export async function GET(request: Request) {
            total_points: p.total_points,
            minutes: p.minutes,
            photo: `https://resources.premierleague.com/premierleague25/photos/players/110x140/${p.code}.png`,
-           team_logo: `https://resources.premierleague.com/premierleague/badges/100/t${team?.code}.png`
+           team_logo: `https://resources.premierleague.com/premierleague/badges/100/t${(team as any)?.code}.png`
          };
        });
 
