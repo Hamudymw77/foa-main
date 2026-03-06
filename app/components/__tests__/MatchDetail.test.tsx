@@ -38,8 +38,6 @@ describe('MatchDetail', () => {
         selectedMatch={mockMatch} 
         activeTab="overview" 
         setActiveTab={() => {}} 
-        showPredicted={false} 
-        setShowPredicted={() => {}} 
       />
     );
 
@@ -54,8 +52,6 @@ describe('MatchDetail', () => {
         selectedMatch={mockMatch} 
         activeTab="overview" 
         setActiveTab={() => {}} 
-        showPredicted={false} 
-        setShowPredicted={() => {}} 
       />
     );
 
@@ -70,12 +66,11 @@ describe('MatchDetail', () => {
         selectedMatch={mockMatch} 
         activeTab="overview" 
         setActiveTab={setActiveTab} 
-        showPredicted={false} 
-        setShowPredicted={() => {}} 
       />
     );
 
-    fireEvent.click(screen.getByText('Statistics'));
+    const statsButton = screen.getByText('Statistics');
+    fireEvent.click(statsButton);
     expect(setActiveTab).toHaveBeenCalledWith('statistics');
   });
 });
