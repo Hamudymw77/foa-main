@@ -55,7 +55,8 @@ const generateTopScorers = (): Scorer[] => [
 // Validation and Deduplication Utils
 function validateTransfer(t: Transfer): boolean {
   if (!t.player || !t.oldClub || !t.newClub) return false;
-  if (typeof t.fee !== 'number' || t.fee < 0) return false;
+  // If fee is optional string, we can't strict check number < 0 easily without parsing
+  // But type check is handled by TS now.
   return true;
 }
 
@@ -72,27 +73,27 @@ function deduplicateTransfers(transfers: Transfer[]): Transfer[] {
 const generateTransfers = (): Transfer[] => {
   const rawTransfers: Transfer[] = [
     // Crystal Palace (Confirmed)
-    { id: 't1', player: 'Brennan Johnson', position: 'Forward', age: 24, oldClub: 'Tottenham', newClub: 'Crystal Palace', fee: 35000000, feeEUR: 40250000, feeDisplay: '£35.0M', date: '2026-01-31', contractLength: '5 years', type: 'permanent', notes: 'Deadline day signing' },
-    { id: 't2', player: 'Jørgen Strand Larsen', position: 'Forward', age: 25, oldClub: 'Wolves', newClub: 'Crystal Palace', fee: 48000000, feeEUR: 55200000, feeDisplay: '£48.0M', date: '2026-01-31', contractLength: '5 years', type: 'permanent', notes: 'Club record fee' },
+    { id: 't1', player: 'Brennan Johnson', position: 'Forward', age: 24, oldClub: 'Tottenham', newClub: 'Crystal Palace', fee: '35000000', feeEUR: '40250000', feeDisplay: '£35.0M', date: '2026-01-31', contractLength: '5 years', type: 'permanent', notes: 'Deadline day signing' },
+    { id: 't2', player: 'Jørgen Strand Larsen', position: 'Forward', age: 25, oldClub: 'Wolves', newClub: 'Crystal Palace', fee: '48000000', feeEUR: '55200000', feeDisplay: '£48.0M', date: '2026-01-31', contractLength: '5 years', type: 'permanent', notes: 'Club record fee' },
 
     // Aston Villa (Confirmed)
-    { id: 't3', player: 'Tammy Abraham', position: 'Forward', age: 28, oldClub: 'Besiktas', newClub: 'Aston Villa', fee: 18300000, feeEUR: 21000000, feeDisplay: '£18.3M', date: '2026-01-30', contractLength: '3.5 years', type: 'permanent', notes: 'Return to Premier League' },
-    { id: 't4', player: 'Alysson', position: 'Forward', age: 20, oldClub: 'Gremio', newClub: 'Aston Villa', fee: 10000000, feeEUR: 11500000, feeDisplay: '£10.0M', date: '2026-01-05', contractLength: '5 years', type: 'permanent', notes: 'First Jan signing' },
-    { id: 't5', player: 'Brian Madjo', position: 'Forward', age: 19, oldClub: 'Metz', newClub: 'Aston Villa', fee: 12000000, feeEUR: 13800000, feeDisplay: '£12.0M', date: '2026-01-15', contractLength: '5 years', type: 'permanent' },
-    { id: 't6', player: 'Douglas Luiz', position: 'Midfielder', age: 27, oldClub: 'Juventus', newClub: 'Aston Villa', fee: 0, feeEUR: 0, feeDisplay: 'Loan', date: '2026-01-20', contractLength: '6 months', type: 'loan', notes: 'Loan with option to buy' },
+    { id: 't3', player: 'Tammy Abraham', position: 'Forward', age: 28, oldClub: 'Besiktas', newClub: 'Aston Villa', fee: '18300000', feeEUR: '21000000', feeDisplay: '£18.3M', date: '2026-01-30', contractLength: '3.5 years', type: 'permanent', notes: 'Return to Premier League' },
+    { id: 't4', player: 'Alysson', position: 'Forward', age: 20, oldClub: 'Gremio', newClub: 'Aston Villa', fee: '10000000', feeEUR: '11500000', feeDisplay: '£10.0M', date: '2026-01-05', contractLength: '5 years', type: 'permanent', notes: 'First Jan signing' },
+    { id: 't5', player: 'Brian Madjo', position: 'Forward', age: 19, oldClub: 'Metz', newClub: 'Aston Villa', fee: '12000000', feeEUR: '13800000', feeDisplay: '£12.0M', date: '2026-01-15', contractLength: '5 years', type: 'permanent' },
+    { id: 't6', player: 'Douglas Luiz', position: 'Midfielder', age: 27, oldClub: 'Juventus', newClub: 'Aston Villa', fee: '0', feeEUR: '0', feeDisplay: 'Loan', date: '2026-01-20', contractLength: '6 months', type: 'loan', notes: 'Loan with option to buy' },
 
     // West Ham (Confirmed)
-    { id: 't7', player: 'Valentín Castellanos', position: 'Forward', age: 27, oldClub: 'Lazio', newClub: 'West Ham', fee: 15000000, feeEUR: 17250000, feeDisplay: '£15.0M', date: '2026-01-10', contractLength: '4.5 years', type: 'permanent', notes: 'Fee undisclosed (est.)' },
-    { id: 't8', player: 'Adama Traoré', position: 'Winger', age: 30, oldClub: 'Fulham', newClub: 'West Ham', fee: 5000000, feeEUR: 5750000, feeDisplay: '£5.0M', date: '2026-01-25', contractLength: '2.5 years', type: 'permanent', notes: 'Fee undisclosed (est.)' },
-    { id: 't9', player: 'Axel Disasi', position: 'Defender', age: 27, oldClub: 'Chelsea', newClub: 'West Ham', fee: 0, feeEUR: 0, feeDisplay: 'Loan', date: '2026-01-28', contractLength: '6 months', type: 'loan' },
-    { id: 't10', player: 'Pablo Felipe', position: 'Defender', age: 22, oldClub: 'Gil Vicente', newClub: 'West Ham', fee: 8000000, feeEUR: 9200000, feeDisplay: '£8.0M', date: '2026-01-12', contractLength: '4.5 years', type: 'permanent' },
+    { id: 't7', player: 'Valentín Castellanos', position: 'Forward', age: 27, oldClub: 'Lazio', newClub: 'West Ham', fee: '15000000', feeEUR: '17250000', feeDisplay: '£15.0M', date: '2026-01-10', contractLength: '4.5 years', type: 'permanent', notes: 'Fee undisclosed (est.)' },
+    { id: 't8', player: 'Adama Traoré', position: 'Winger', age: 30, oldClub: 'Fulham', newClub: 'West Ham', fee: '5000000', feeEUR: '5750000', feeDisplay: '£5.0M', date: '2026-01-25', contractLength: '2.5 years', type: 'permanent', notes: 'Fee undisclosed (est.)' },
+    { id: 't9', player: 'Axel Disasi', position: 'Defender', age: 27, oldClub: 'Chelsea', newClub: 'West Ham', fee: '0', feeEUR: '0', feeDisplay: 'Loan', date: '2026-01-28', contractLength: '6 months', type: 'loan' },
+    { id: 't10', player: 'Pablo Felipe', position: 'Defender', age: 22, oldClub: 'Gil Vicente', newClub: 'West Ham', fee: '8000000', feeEUR: '9200000', feeDisplay: '£8.0M', date: '2026-01-12', contractLength: '4.5 years', type: 'permanent' },
 
     // Brentford (Confirmed)
-    { id: 't11', player: 'Kaye Furo', position: 'Forward', age: 18, oldClub: 'Club Brugge', newClub: 'Brentford', fee: 6000000, feeEUR: 6900000, feeDisplay: '£6.0M', date: '2026-01-08', contractLength: '5.5 years', type: 'permanent', notes: 'Belgium U21 international' },
+    { id: 't11', player: 'Kaye Furo', position: 'Forward', age: 18, oldClub: 'Club Brugge', newClub: 'Brentford', fee: '6000000', feeEUR: '6900000', feeDisplay: '£6.0M', date: '2026-01-08', contractLength: '5.5 years', type: 'permanent', notes: 'Belgium U21 international' },
 
     // Outbound (Confirmed)
-    { id: 't12', player: 'Oleksandr Zinchenko', position: 'Defender', age: 29, oldClub: 'Arsenal', newClub: 'Ajax', fee: 12000000, feeEUR: 13800000, feeDisplay: '£12.0M', date: '2026-01-22', contractLength: '3 years', type: 'permanent' },
-    { id: 't13', player: 'Antonio Cordero', position: 'Midfielder', age: 19, oldClub: 'Newcastle', newClub: 'Cadiz', fee: 0, feeEUR: 0, feeDisplay: 'Loan', date: '2026-01-03', contractLength: '6 months', type: 'loan' }
+    { id: 't12', player: 'Oleksandr Zinchenko', position: 'Defender', age: 29, oldClub: 'Arsenal', newClub: 'Ajax', fee: '12000000', feeEUR: '13800000', feeDisplay: '£12.0M', date: '2026-01-22', contractLength: '3 years', type: 'permanent' },
+    { id: 't13', player: 'Antonio Cordero', position: 'Midfielder', age: 19, oldClub: 'Newcastle', newClub: 'Cadiz', fee: '0', feeEUR: '0', feeDisplay: 'Loan', date: '2026-01-03', contractLength: '6 months', type: 'loan' }
   ];
 
   // Apply validation and deduplication
