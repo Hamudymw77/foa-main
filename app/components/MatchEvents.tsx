@@ -77,7 +77,7 @@ export function MatchEvents({ selectedMatch }: MatchEventsProps) {
                           (event as any).isOwnGoal ? 'text-red-400/90' : 
                           ''
                         }`}>
-                          {event.type === 'substitution' ? event.playerIn : event.player} {(event as any).isOwnGoal && <span className="text-sm font-bold text-red-500 ml-1">(OG)</span>}
+                          {event.type === ('substitution' as string) ? event.playerIn : event.player} {(event as any).isOwnGoal && <span className="text-sm font-bold text-red-500 ml-1">(OG)</span>}
                         </span>
                       )}
                     </span>
