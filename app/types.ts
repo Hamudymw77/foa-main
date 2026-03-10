@@ -137,13 +137,19 @@ export interface Defense {
 export interface Transfer {
   id: string;
   player: string;
-  photo: string;
+  photo?: string;
+  position?: string;
+  age?: number;
   oldClub: string;
-  oldClubLogo: string;
+  oldClubLogo?: string;
   newClub: string;
-  newClubLogo: string;
+  newClubLogo?: string;
   date: string;
   type: 'permanent' | 'loan' | 'free';
   fee?: string;
+  feeEUR?: string;
+  feeDisplay?: string;
+  contractLength?: string;
+  notes?: string;
   deleted?: boolean;
 }
