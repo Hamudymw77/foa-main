@@ -316,9 +316,7 @@ export function mapExternalMatchToInternal(ext: ExternalMatch): Match {
   }
 
   // If status is upcoming, these might be predicted players
-  const predictedHomePlayers = status === 'upcoming' ? homePlayers : undefined;
-  const predictedAwayPlayers = status === 'upcoming' ? awayPlayers : undefined;
-
+  
   return {
     id: `api-${ext.fixture.id}`,
     homeTeam,
@@ -337,10 +335,8 @@ export function mapExternalMatchToInternal(ext: ExternalMatch): Match {
     events,
     homeFormation,
     awayFormation,
-    homePlayers: status !== 'upcoming' ? homePlayers : undefined,
-    awayPlayers: status !== 'upcoming' ? awayPlayers : undefined,
-    predictedHomePlayers,
-    predictedAwayPlayers
+    homePlayers,
+    awayPlayers
   };
 }
 

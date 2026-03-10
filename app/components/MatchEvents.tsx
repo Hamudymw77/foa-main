@@ -16,6 +16,17 @@ export function MatchEvents({ selectedMatch }: MatchEventsProps) {
     );
   }
 
+  const formatMinute = (event: any) => {
+    if (event.displayMinute) return event.displayMinute;
+    
+    const min = event.minute;
+    if (min > 90) return `90+${min - 90}'`;
+    // Note: We cannot safely determine 45+X without period info, 
+    // as 46-49 are valid 2nd half minutes. 
+    // We rely on displayMinute for 1st half stoppage if available.
+    return min > 0 ? `${min}'` : '';
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
       <h4 className="text-xl font-bold text-accent mb-6 flex items-center gap-2">
@@ -34,7 +45,7 @@ export function MatchEvents({ selectedMatch }: MatchEventsProps) {
             
             <div className="glass-card p-4 rounded-lg flex items-center gap-4 transition-all duration-300 hover:translate-x-2">
               <span className={`text-lg font-bold text-accent min-w-[3rem] text-center bg-white/5 rounded px-2 py-1 ${event.minute === 0 ? 'opacity-0' : ''}`}>
-                {event.minute > 0 ? `${event.minute}'` : ''}
+                {formatMinute(event)}
               </span>
               
               <div className="flex items-center gap-3">

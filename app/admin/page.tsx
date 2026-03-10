@@ -483,7 +483,7 @@ export default function AdminPage() {
   const handleEditEventItem = (event: any) => {
       setEditingEventId(event.id)
       setEventType(event.type)
-      setMinute(event.minute)
+      setMinute(event.displayMinute ? event.displayMinute.replace("'", "") : event.minute.toString())
       setTeam(event.team)
       
       if (event.type === 'goal') {
@@ -502,14 +502,39 @@ export default function AdminPage() {
       toast.info('Upravujete událost...')
   }
 
+  const parseMinute = (input: string) => {
+       const match = input.trim().match(/^(\d+)(?:\+(\d+))?'?$/);
+       if (!match) return null;
+       
+       const base = parseInt(match[1]);
+       const extra = match[2] ? parseInt(match[2]) : 0;
+       
+       return {
+           val: base + extra,
+           display: match[2] ? `${base}+${extra}'` : undefined
+       };
+   }
+
   const handleAddEvent = (e: React.FormEvent) => {
     e.preventDefault()
     
+    const parsedTime = parseMinute(minute);
+    if (!parsedTime) {
+        toast.error('Neplatný formát času! Použijte např. 45, 90, 90+2');
+        return;
+    }
+
     if (editingEventId) {
         // Editace existující
         const updatedEvents = currentEvents.map(ev => {
             if (ev.id === editingEventId) {
-                const updated = { ...ev, type: eventType, minute: parseInt(minute) || 0, team }
+                const updated = { 
+                    ...ev, 
+                    type: eventType, 
+                    minute: parsedTime.val,
+                    displayMinute: parsedTime.display,
+                    team 
+                }
                 if (eventType === 'goal') {
                     updated.player = player; updated.assist = assist; updated.score = score; updated.isPenalty = isPenalty; updated.isOwnGoal = isOwnGoal;
                 } else if (eventType === 'substitution') {
@@ -529,7 +554,8 @@ export default function AdminPage() {
         const newEvent: any = {
           id: Date.now().toString(),
           type: eventType,
-          minute: parseInt(minute) || 0,
+          minute: parsedTime.val,
+          displayMinute: parsedTime.display,
           team,
         }
     
@@ -870,7 +896,14 @@ export default function AdminPage() {
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="text-[10px] uppercase font-bold text-secondary mb-1 block">Minuta</label>
-                                            <input type="number" value={minute} onChange={e => setMinute(e.target.value)} className="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none" placeholder="Min" required />
+                                            <input 
+                                                type="text" 
+                                                value={minute} 
+                                                onChange={e => setMinute(e.target.value)} 
+                                                className="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none focus:border-accent font-mono" 
+                                                placeholder="90+2" 
+                                                required 
+                                            />
                                         </div>
                                         {eventType === 'goal' && (
                                             <div>
