@@ -175,7 +175,7 @@ export default function MatchesPage() {
           </div>
           
           {isLoading ? (
-            <SkeletonLoader count={3} />
+            <SkeletonLoader />
           ) : error ? (
             <div className="text-red-500 bg-red-500/10 p-4 rounded-lg">{(error as Error).message}</div>
           ) : (
