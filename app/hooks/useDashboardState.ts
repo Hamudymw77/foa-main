@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
 
-export function useDashboardState(matchId: string) {
-  const [selectedMatchId, setSelectedMatchId] = useState(matchId);
-  const [activeTab, setActiveTab] = useState("statistics"); // Default to statistics for finished matches
+export function useDashboardState(initialMatchId: string = "match-1") {
+  const [selectedMatchId, setSelectedMatchId] = useState(initialMatchId);
+  const [showStatistics, setShowStatistics] = useState(false);
 
-  // If we wanted to set default based on match status we would need the match object here,
-  // but for now we'll default to 'statistics' which is safe.
-  // The component can override this if the match is upcoming.
-  
+  const handleSelectMatch = (id: string, isUpcoming: boolean = false) => {
+      setSelectedMatchId(id);
+      // Optional: scroll to match detail if needed
+  };
+
   return {
     selectedMatchId,
     setSelectedMatchId,
-    activeTab,
-    setActiveTab
+    showStatistics,
+    setShowStatistics,
+    handleSelectMatch
   };
 }
