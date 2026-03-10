@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 export function useDashboardState(initialMatchId: string = "match-1") {
   const [selectedMatchId, setSelectedMatchId] = useState(initialMatchId);
   const [showStatistics, setShowStatistics] = useState(false);
+  const [activeTab, setActiveTab] = useState("statistics"); // Default to statistics for finished matches
 
   const handleSelectMatch = (id: string, isUpcoming: boolean = false) => {
       setSelectedMatchId(id);
@@ -14,6 +15,8 @@ export function useDashboardState(initialMatchId: string = "match-1") {
     setSelectedMatchId,
     showStatistics,
     setShowStatistics,
-    handleSelectMatch
+    handleSelectMatch,
+    activeTab,
+    setActiveTab
   };
 }
