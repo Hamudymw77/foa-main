@@ -130,7 +130,7 @@ export default function StatsPage() {
                                                         <img 
                                                             src={player.photo} 
                                                             alt={player.web_name}
-                                                            className="w-full h-full object-cover scale-110 translate-y-1"
+                                                            className="w-full h-full object-cover object-top scale-110 translate-y-1"
                                                             loading="lazy"
                                                             onError={(e) => {
                                                                 (e.target as HTMLImageElement).src = 'https://resources.premierleague.com/premierleague/photos/players/110x140/p0.png'

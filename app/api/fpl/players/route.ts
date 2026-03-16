@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const res = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/', {
-      next: { revalidate: 3600 },
+      cache: 'no-store',
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       }
@@ -17,6 +17,7 @@ export async function GET() {
       code: p.code,
       name: p.web_name,
       fullName: `${p.first_name} ${p.second_name}`,
+      photo: p.photo, // Add raw photo filename
       team: data.teams.find((t: any) => t.id === p.team)?.name
     }));
 

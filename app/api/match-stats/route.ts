@@ -11,8 +11,8 @@ const teamMap: Record<string, string> = {
   "Crystal Palace": "Crystal Palace", 
   "Everton": "Everton", 
   "Fulham": "Fulham", 
-  "Ipswich": "Ipswich", 
-  "Leicester": "Leicester", 
+  "Ipswich": "Ipswich Town", // Corrected
+  "Leicester": "Leicester City", // Corrected
   "Liverpool": "Liverpool", 
   "Man City": "Manchester City", 
   "Man Utd": "Manchester United", 
@@ -20,7 +20,7 @@ const teamMap: Record<string, string> = {
   "Nott'm Forest": "Nottingham Forest", 
   "Southampton": "Southampton", 
   "Spurs": "Tottenham", 
-  "West Ham": "West Ham", 
+  "West Ham": "West Ham United", // Corrected
   "Wolves": "Wolverhampton Wanderers" 
 };
 
@@ -105,14 +105,10 @@ export async function GET(request: Request) {
 
     console.log(`[Match Stats] Searching for: ${mappedHome} vs ${mappedAway}`);
 
-    const realMatch = allFixtures.find((m: any) => {
-        const apiHome = m.teams.home.name;
-        const apiAway = m.teams.away.name;
-        
-        // Loose matching with includes just in case, but map should handle it
-        return (apiHome.includes(mappedHome) || mappedHome?.includes(apiHome)) && 
-               (apiAway.includes(mappedAway) || mappedAway?.includes(apiAway));
-    });
+    const realMatch = allFixtures.find((m: any) => 
+        m.teams.home.name === mappedHome && 
+        m.teams.away.name === mappedAway 
+    );
 
     if (!realMatch) {
         console.warn(`[Match Stats] Match NOT found in API-Football list. Season: ${seasonYear}, Teams: ${mappedHome} vs ${mappedAway}`);

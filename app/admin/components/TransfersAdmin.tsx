@@ -319,7 +319,7 @@ export function TransfersAdmin() {
                                     <div key={t.id} className="flex items-center justify-between bg-white/5 p-3 rounded-lg border border-white/5 hover:border-white/10">
                                         <div className="flex items-center gap-3">
                                             <div className="w-8 h-8 rounded-full bg-black overflow-hidden">
-                                                {t.photo && <img src={t.photo} className="w-full h-full object-cover" />}
+                                                {t.photo && <img src={t.photo} className="w-full h-full object-cover object-top" />}
                                             </div>
                                             <div>
                                                 <div className="text-sm font-bold text-white">{t.player}</div>
@@ -346,7 +346,7 @@ export function TransfersAdmin() {
                                     <div key={t.id} className="flex items-center justify-between bg-white/5 p-3 rounded-lg border border-white/5 hover:border-white/10">
                                         <div className="flex items-center gap-3">
                                             <div className="w-8 h-8 rounded-full bg-black overflow-hidden">
-                                                {t.photo && <img src={t.photo} className="w-full h-full object-cover" />}
+                                                {t.photo && <img src={t.photo} className="w-full h-full object-cover object-top" />}
                                             </div>
                                             <div>
                                                 <div className="text-sm font-bold text-white">{t.player}</div>
@@ -374,7 +374,7 @@ export function TransfersAdmin() {
                                 <div key={t.id} className="flex items-center justify-between bg-red-500/5 p-3 rounded-lg border border-red-500/10 hover:border-red-500/20">
                                     <div className="flex items-center gap-3 opacity-50">
                                         <div className="w-8 h-8 rounded-full bg-black overflow-hidden">
-                                            {t.photo && <img src={t.photo} className="w-full h-full object-cover" />}
+                                            {t.photo && <img src={t.photo} className="w-full h-full object-cover object-top" />}
                                         </div>
                                         <div>
                                             <div className="text-sm font-bold text-white">{t.player}</div>

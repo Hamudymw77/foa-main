@@ -5,6 +5,8 @@ import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
 import { BackToTop } from "../components/BackToTop"
 import { ArrowRight, RefreshCw, User, Calendar, Shield, Activity, Target, ChevronDown, ChevronUp, Filter } from "lucide-react"
+import { PlayerAvatar } from "../components/PlayerAvatar"
+import { TeamBadge } from "../components/TeamBadge"
 
 // Stat Box Component
 const StatBox = ({ label, value, icon: Icon, color }: any) => (
@@ -34,18 +36,11 @@ const TransferCard = ({ t }: { t: any }) => {
                 {/* Player Photo */}
                 <div className="relative flex justify-center mb-6 mt-2">
                     <div className="w-28 h-28 rounded-full bg-slate-900 border-4 border-white/10 group-hover:border-accent transition-colors overflow-hidden shadow-2xl relative z-10 flex items-center justify-center">
-                        {t.photo && !imgError ? (
-                            <img 
-                                src={t.photo} 
-                                alt={t.player} 
-                                className="w-full h-full object-cover" 
-                                onError={() => setImgError(true)}
-                            />
-                        ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-slate-800">
-                                <User className="w-12 h-12 text-white/20" />
-                            </div>
-                        )}
+                        <PlayerAvatar 
+                            name={t.player} 
+                            photoUrl={t.photo} 
+                            className="w-full h-full" 
+                        />
                     </div>
                     <div className={`absolute -bottom-3 px-3 py-1 bg-slate-900 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-wider transition-colors z-20 flex items-center gap-1 ${t.type === 'loan' ? 'text-blue-400 border-blue-400/30' : 'text-accent border-accent/30'}`}>
                         {t.type === 'loan' ? 'On Loan' : 'Transfer'}
@@ -62,11 +57,7 @@ const TransferCard = ({ t }: { t: any }) => {
                 <div className="flex items-center justify-between relative z-10 bg-black/20 rounded-xl p-3 border border-white/5 mb-4">
                     <div className="flex flex-col items-center gap-2 w-[35%]">
                         <div className="w-10 h-10 flex items-center justify-center">
-                            {t.fromLogo ? (
-                                <img src={t.fromLogo} className="max-w-full max-h-full drop-shadow-md opacity-80 grayscale group-hover:grayscale-0 transition-all" title={t.from} />
-                            ) : (
-                                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[8px] font-bold text-white/50">{t.from?.substring(0,2)}</div>
-                            )}
+                            <TeamBadge name={t.from} className="w-full h-full" />
                         </div>
                         <span className="text-[9px] font-bold text-white/50 truncate w-full text-center leading-tight">{t.from}</span>
                     </div>
@@ -78,11 +69,7 @@ const TransferCard = ({ t }: { t: any }) => {
 
                     <div className="flex flex-col items-center gap-2 w-[35%]">
                         <div className="w-12 h-12 flex items-center justify-center">
-                            {t.toLogo ? (
-                                <img src={t.toLogo} className="max-w-full max-h-full drop-shadow-xl scale-110" title={t.to} />
-                            ) : (
-                                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[8px] font-bold text-white/50">{t.to?.substring(0,2)}</div>
-                            )}
+                            <TeamBadge name={t.to} className="w-full h-full scale-110" />
                         </div>
                         <span className="text-[9px] font-bold text-white truncate w-full text-center leading-tight">{t.to}</span>
                     </div>
@@ -125,23 +112,16 @@ const TransferCard = ({ t }: { t: any }) => {
 };
 
 const LatestTransferItem = ({ t }: { t: any }) => {
-    const [imgError, setImgError] = useState(false);
-    
     if (!t) return null;
 
     return (
         <div className="bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 p-3 rounded-xl flex items-center gap-3 transition-all cursor-default">
             <div className="w-8 h-8 rounded-full bg-slate-800 overflow-hidden shrink-0 border border-white/10 flex items-center justify-center">
-                {t.photo && !imgError ? (
-                    <img 
-                        src={t.photo} 
-                        className="w-full h-full object-cover scale-110 translate-y-1" 
-                        onError={() => setImgError(true)}
-                        alt={t.player}
-                    />
-                ) : (
-                    <User className="w-5 h-5 text-white/20" />
-                )}
+                <PlayerAvatar 
+                    name={t.player} 
+                    photoUrl={t.photo} 
+                    className="w-full h-full scale-110 translate-y-1" 
+                />
             </div>
             <div className="overflow-hidden">
                 <p className="text-xs font-bold text-white truncate">{t.player}</p>
@@ -184,9 +164,15 @@ export default function TransfersPage() {
   // Filter logic
   const filteredData = useMemo(() => {
       const currentList = activeTab === 'summer' ? data.summer : data.winter;
-      if (!selectedTeam) return currentList;
       
-      return currentList.filter(t => 
+      // Remove Kevin De Bruyne completely
+      const listWithoutKDB = currentList.filter(t => 
+        !(t.player === 'Kevin De Bruyne' || (t.player.includes('De Bruyne') && t.player.includes('Kevin')))
+      );
+      
+      if (!selectedTeam) return listWithoutKDB;
+      
+      return listWithoutKDB.filter(t => 
           (t.club && t.club === selectedTeam) || 
           (t.to === selectedTeam) || 
           (t.from === selectedTeam)

@@ -4,9 +4,6 @@ import { useEffect } from "react"
 import { LeagueTable } from "./components/LeagueTable"
 import { StatisticsPanel } from "./components/StatisticsPanel"
 import { MatchList } from "./components/MatchList"
-import { RecentResults } from "./components/RecentResults"
-import { UpcomingMatches } from "./components/UpcomingMatches"
-import { PlayerOfTheDay } from "./components/PlayerOfTheDay"
 import { useFootballData } from "./hooks/useFootballData"
 import { useDashboardState } from "./hooks/useDashboardState"
 import { useStatisticsData } from "./hooks/useStatisticsData"
@@ -101,22 +98,6 @@ export default function PremierLeagueDashboard() {
           <div className="lg:col-span-1 space-y-6 mt-8 lg:mt-0">
              {/* Match Detail removed as requested */}
 
-             {/* Player of the Day */}
-             <PlayerOfTheDay />
-
-            {/* Recent Results */}
-            <RecentResults 
-              matches={matches} 
-              selectedMatchId={selectedMatchId} 
-              onSelectMatch={(id) => handleSelectMatch(id, false)} 
-            />
-
-            {/* Upcoming Matches */}
-            <UpcomingMatches 
-              upcomingMatches={upcomingMatches} 
-              selectedMatchId={selectedMatchId} 
-              onSelectMatch={(id) => handleSelectMatch(id, true)} 
-            />
           </div>
         </div>
       </main>

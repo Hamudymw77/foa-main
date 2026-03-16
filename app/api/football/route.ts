@@ -5,6 +5,40 @@ import path from 'path';
 // Cesta k overrides souboru
 const OVERRIDES_FILE = path.join(process.cwd(), 'app', 'admin_overrides.json');
 
+const stadiums: Record<string, string> = { 
+  "Arsenal": "Emirates Stadium, London", 
+  "Aston Villa": "Villa Park, Birmingham", 
+  "Bournemouth": "Vitality Stadium, Bournemouth", 
+  "Brentford": "Gtech Community Stadium, London", 
+  "Brighton": "Amex Stadium, Falmer", 
+  "Burnley": "Turf Moor, Burnley", 
+  "Chelsea": "Stamford Bridge, London", 
+  "Crystal Palace": "Selhurst Park, London", 
+  "Everton": "Goodison Park, Liverpool", 
+  "Fulham": "Craven Cottage, London", 
+  "Ipswich": "Portman Road, Ipswich", 
+  "Leeds Utd": "Elland Road, Leeds", 
+  "Leeds United": "Elland Road, Leeds", 
+  "Leicester": "King Power Stadium, Leicester", 
+  "Liverpool": "Anfield, Liverpool", 
+  "Man City": "Etihad Stadium, Manchester", 
+  "Manchester City": "Etihad Stadium, Manchester", 
+  "Man Utd": "Old Trafford, Manchester", 
+  "Manchester United": "Old Trafford, Manchester", 
+  "Newcastle": "St. James' Park, Newcastle", 
+  "Newcastle United": "St. James' Park, Newcastle", 
+  "Nott'm Forest": "City Ground, Nottingham", 
+  "Nottingham Forest": "City Ground, Nottingham", 
+  "Southampton": "St Mary's Stadium, Southampton", 
+  "Sunderland": "Stadium of Light, Sunderland", 
+  "Spurs": "Tottenham Hotspur Stadium, London", 
+  "Tottenham": "Tottenham Hotspur Stadium, London", 
+  "West Ham": "London Stadium, London", 
+  "West Ham United": "London Stadium, London", 
+  "Wolves": "Molineux Stadium, Wolverhampton", 
+  "Wolverhampton Wanderers": "Molineux Stadium, Wolverhampton" 
+};
+
 // Pomocná funkce pro čtení overrides (zde pouze pro čtení, zápis dělá admin API)
 function getOverrides() {
   try {
@@ -28,11 +62,10 @@ export async function GET(request: Request) {
 
     // 1. Stáhnutí základních dat (týmy, hráči)
     const bootstrapRes = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/', { 
-        next: { revalidate: 60 },
+        cache: 'no-store',
         headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-        },
-        cache: 'no-store'
+        }
     });
     if (!bootstrapRes.ok) throw new Error('FPL Bootstrap selhal');
     const bootstrapData = await bootstrapRes.json();
@@ -177,8 +210,9 @@ export async function GET(request: Request) {
           date: new Date(f.kickoff_time).toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
           kickoff_time: f.kickoff_time, // Raw ISO date for sync
           timestamp: new Date(f.kickoff_time).getTime(),
-          matchweek: f.event || 0, // Přidáno kolo zápasu
-          stadium: 'Premier League',
+          matchweek: f.event || 0, // Map event (gameweek) to matchweek
+          round: f.event || 0,
+          stadium: f.venue ? `${f.venue.city}, ${f.venue.name}` : (stadiums[homeTeam] || 'Premier League'), // Use real venue or fallback to dictionary
           homeLogo: `https://resources.premierleague.com/premierleague/badges/100/t${(homeTeamData as any).code}.png`,
           awayLogo: `https://resources.premierleague.com/premierleague/badges/100/t${(awayTeamData as any).code}.png`,
           status,

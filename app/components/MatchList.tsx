@@ -18,8 +18,8 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
   const [filterTeam, setFilterTeam] = useState<string>('')
   const [filterRound, setFilterRound] = useState<number | undefined>(undefined)
 
-  const activeMatches = centerListType === 'played' ? matches : upcomingMatches
   const allMatches = [...matches, ...upcomingMatches]
+  const activeMatches = filterRound !== undefined ? allMatches : (centerListType === 'played' ? matches : upcomingMatches)
   const playedMatches = [...matches, ...upcomingMatches].filter(m => m.status === 'finished' || (m.homeScore !== undefined && m.awayScore !== undefined));
   
   const teams = Array.from(new Set(allMatches.flatMap(m => [m.homeTeam, m.awayTeam]))).sort()
@@ -53,41 +53,37 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
         </h2>
         
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-            <div className="relative group flex-1 md:flex-none">
-                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                    <Filter className="w-4 h-4 text-secondary group-hover:text-accent transition-colors" />
+            <div className="flex items-center gap-3">
+                {/* Team Filter - Admin Style */}
+                <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10 hover:border-white/20 transition-colors">
+                    <Filter className="w-4 h-4 text-secondary" />
+                    <select
+                        value={filterTeam}
+                        onChange={(e) => setFilterTeam(e.target.value)}
+                        className="bg-transparent text-sm outline-none font-bold cursor-pointer text-foreground appearance-none min-w-[100px]"
+                    >
+                        <option value="" className="bg-slate-900">Všechny týmy</option>
+                        {teams.map(t => (
+                        <option key={t} value={t} className="bg-slate-900">{t}</option>
+                        ))}
+                    </select>
+                    <ChevronDown className="w-4 h-4 text-secondary ml-1" />
                 </div>
-                <select
-                    value={filterTeam}
-                    onChange={(e) => setFilterTeam(e.target.value)}
-                    className="w-full md:w-40 bg-white/5 border border-white/10 text-foreground text-sm rounded-lg pl-9 pr-8 py-3 appearance-none hover:border-accent/50 hover:bg-white/10 transition-all focus:outline-none focus:ring-2 focus:ring-accent/20 min-h-[44px]"
-                >
-                    <option value="" className="bg-slate-900">Všechny týmy</option>
-                    {teams.map(t => (
-                    <option key={t} value={t} className="bg-slate-900">{t}</option>
-                    ))}
-                </select>
-                <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                    <ChevronDown className="w-4 h-4 text-secondary" />
-                </div>
-            </div>
 
-            <div className="relative group flex-1 md:flex-none">
-                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                    <Calendar className="w-4 h-4 text-secondary group-hover:text-accent transition-colors" />
-                </div>
-                <select
-                    value={filterRound ?? ''}
-                    onChange={(e) => setFilterRound(e.target.value ? Number(e.target.value) : undefined)}
-                    className="w-full md:w-40 bg-white/5 border border-white/10 text-foreground text-sm rounded-lg pl-9 pr-8 py-3 appearance-none hover:border-accent/50 hover:bg-white/10 transition-all focus:outline-none focus:ring-2 focus:ring-accent/20 min-h-[44px]"
-                >
-                    <option value="" className="bg-slate-900">Všechna kola</option>
-                    {rounds.map(r => (
-                    <option key={r} value={r} className="bg-slate-900">{`Kolo ${r}`}</option>
-                    ))}
-                </select>
-                <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                    <ChevronDown className="w-4 h-4 text-secondary" />
+                {/* Round Filter - Admin Style */}
+                <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10 hover:border-white/20 transition-colors">
+                    <Calendar className="w-4 h-4 text-secondary" />
+                    <select
+                        value={filterRound ?? ''}
+                        onChange={(e) => setFilterRound(e.target.value ? Number(e.target.value) : undefined)}
+                        className="bg-transparent text-sm outline-none font-bold cursor-pointer text-foreground appearance-none min-w-[100px]"
+                    >
+                        <option value="" className="bg-slate-900">Všechna kola</option>
+                        {Array.from({ length: 38 }, (_, i) => i + 1).map(r => (
+                            <option key={r} value={r} className="bg-slate-900">{`Kolo ${r}`}</option>
+                        ))}
+                    </select>
+                    <ChevronDown className="w-4 h-4 text-secondary ml-1" />
                 </div>
             </div>
 
@@ -128,7 +124,14 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {activeMatches
           .filter(m => !filterTeam || m.homeTeam === filterTeam || m.awayTeam === filterTeam)
-          .filter(m => filterRound === undefined || m.round === filterRound)
+          .filter(m => {
+            if (filterRound === undefined) return true
+            const raw = m.round ?? m.matchweek
+            if (raw === undefined || raw === null) return false
+            const matchRound = typeof raw === 'number' ? raw : Number.parseInt(String(raw), 10)
+            if (!Number.isFinite(matchRound)) return false
+            return matchRound === filterRound
+          })
           .map((m) => (
             <MatchCard
                 key={m.id}

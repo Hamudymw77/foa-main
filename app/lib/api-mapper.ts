@@ -328,6 +328,7 @@ export function mapExternalMatchToInternal(ext: ExternalMatch): Match {
     stadium: ext.fixture.venue.name,
     homeLogo: ext.teams.home.logo,
     awayLogo: ext.teams.away.logo,
+    round: typeof ext.league.round === 'string' ? parseInt(ext.league.round.replace(/\D/g, '')) : 0, // Ensure round is a number
     status,
     stats: status === 'finished' || status === 'live' ? stats : undefined,
     detailedStats,

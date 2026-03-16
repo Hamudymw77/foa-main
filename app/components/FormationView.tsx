@@ -79,7 +79,7 @@ export function FormationView({ selectedMatch }: FormationViewProps) {
                                               <img 
                                                   src={player.photo} 
                                                   alt={player.name}
-                                                  className="w-full h-full object-cover rounded-full" 
+                                                  className="w-full h-full object-cover object-top rounded-full" 
                                                   onError={(e) => {
                                                       const target = e.currentTarget;
                                                       target.src = 'https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_0-66.png';
@@ -123,7 +123,7 @@ export function FormationView({ selectedMatch }: FormationViewProps) {
                   
                   <div className="w-40 h-40 rounded-full bg-gradient-to-br from-slate-800 to-black border-4 border-accent shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-hidden relative">
                       {previewPlayer.photo ? (
-                          <img src={previewPlayer.photo} className="w-full h-full object-cover scale-110" />
+                          <img src={previewPlayer.photo} className="w-full h-full object-cover object-top scale-110" />
                       ) : (
                           <User className="w-20 h-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/20" />
                       )}
