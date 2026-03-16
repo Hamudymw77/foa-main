@@ -1,6 +1,6 @@
 "use client";
 
-import { Trophy, Menu, X } from "lucide-react";
+import { Trophy, Menu, X, Home, BarChart2, ArrowRightLeft } from "lucide-react";
 import { useState } from "react";
 import Link from 'next/link';
 
@@ -39,20 +39,23 @@ export function Header({
         <nav className="hidden md:flex items-center gap-1 bg-white/5 p-1.5 rounded-full border border-white/5 backdrop-blur-sm" aria-label="Primary">
           <Link 
             href="/"
-            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2"
           >
+            <Home className="w-4 h-4" />
             Home
           </Link>
           <Link 
             href="/stats"
-            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2"
           >
+            <BarChart2 className="w-4 h-4" />
             Stats
           </Link>
           <Link 
             href="/transfers"
-            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2"
           >
+            <ArrowRightLeft className="w-4 h-4" />
             Transfers
           </Link>
         </nav>
@@ -75,22 +78,25 @@ export function Header({
             <Link 
               href="/"
               onClick={() => setIsMenuOpen(false)}
-              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all"
+              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all flex items-center gap-3"
             >
+              <Home className="w-5 h-5" />
               Home
             </Link>
             <Link 
               href="/stats"
               onClick={() => setIsMenuOpen(false)}
-              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all"
+              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all flex items-center gap-3"
             >
+              <BarChart2 className="w-5 h-5" />
               Stats
             </Link>
             <Link 
               href="/transfers"
               onClick={() => setIsMenuOpen(false)}
-              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all"
+              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all flex items-center gap-3"
             >
+              <ArrowRightLeft className="w-5 h-5" />
               Transfers
             </Link>
           </div>

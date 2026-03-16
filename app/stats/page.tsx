@@ -105,17 +105,17 @@ export default function StatsPage() {
                             <table className="w-full text-left">
                                 <thead className="bg-white/5 text-xs font-bold text-secondary uppercase tracking-wider">
                                     <tr>
-                                        <th className="px-6 py-4 text-center w-16">Rank</th>
-                                        <th className="px-6 py-4">Player</th>
-                                        <th className="px-6 py-4 text-center">Team</th>
-                                        <th className="px-6 py-4 text-center w-32">{activeData.label}</th>
+                                        <th className="px-3 py-3 md:px-6 md:py-4 text-center w-12 md:w-16">Rank</th>
+                                        <th className="px-3 py-3 md:px-6 md:py-4">Player</th>
+                                        <th className="px-3 py-3 md:px-6 md:py-4 text-center">Team</th>
+                                        <th className="px-3 py-3 md:px-6 md:py-4 text-center w-24 md:w-32">{activeData.label}</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-white/5">
                                     {activeData.data.map((player, index) => (
                                         <tr key={player.id} className="group hover:bg-white/5 transition-colors">
-                                            <td className="px-6 py-4 text-center">
-                                                <div className={`w-8 h-8 flex items-center justify-center rounded-full font-bold text-sm mx-auto ${
+                                            <td className="px-3 py-3 md:px-6 md:py-4 text-center">
+                                                <div className={`w-6 h-6 md:w-8 md:h-8 flex items-center justify-center rounded-full font-bold text-xs md:text-sm mx-auto ${
                                                     index === 0 ? 'bg-yellow-500 text-slate-900' :
                                                     index === 1 ? 'bg-slate-300 text-slate-900' :
                                                     index === 2 ? 'bg-amber-700 text-white' :
@@ -124,9 +124,9 @@ export default function StatsPage() {
                                                     {index + 1}
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4">
-                                                <div className="flex items-center gap-4">
-                                                    <div className="w-12 h-12 rounded-full bg-white/10 overflow-hidden border border-white/10 relative">
+                                            <td className="px-3 py-3 md:px-6 md:py-4">
+                                                <div className="flex items-center gap-2 md:gap-4">
+                                                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/10 overflow-hidden border border-white/10 relative shrink-0">
                                                         <img 
                                                             src={player.photo} 
                                                             alt={player.web_name}
@@ -137,11 +137,11 @@ export default function StatsPage() {
                                                             }}
                                                         />
                                                     </div>
-                                                    <div>
-                                                        <div className="font-bold text-white text-lg group-hover:text-accent transition-colors">
+                                                    <div className="min-w-0">
+                                                        <div className="font-bold text-white text-sm md:text-lg group-hover:text-accent transition-colors truncate">
                                                             {player.web_name}
                                                         </div>
-                                                        <div className="text-xs text-secondary font-mono">
+                                                        <div className="text-[10px] md:text-xs text-secondary font-mono">
                                                             {player.position === 1 ? 'GKP' : 
                                                              player.position === 2 ? 'DEF' : 
                                                              player.position === 3 ? 'MID' : 'FWD'}
@@ -149,16 +149,16 @@ export default function StatsPage() {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-center">
+                                            <td className="px-3 py-3 md:px-6 md:py-4 text-center">
                                                 <div className="flex flex-col items-center gap-1">
-                                                    <TeamLogo teamName={player.team} url={player.team_logo} className="w-8 h-8" />
-                                                    <span className="text-[10px] font-bold text-secondary uppercase tracking-wider">
+                                                    <TeamLogo teamName={player.team} url={player.team_logo} className="w-6 h-6 md:w-8 md:h-8" />
+                                                    <span className="text-[9px] md:text-[10px] font-bold text-secondary uppercase tracking-wider hidden md:block">
                                                         {player.team_code}
                                                     </span>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-center">
-                                                <span className={`text-3xl font-black ${activeData.color}`}>
+                                            <td className="px-3 py-3 md:px-6 md:py-4 text-center">
+                                                <span className={`text-xl md:text-3xl font-black ${activeData.color}`}>
                                                     {player[activeData.valueKey]}
                                                 </span>
                                             </td>

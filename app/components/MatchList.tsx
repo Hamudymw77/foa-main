@@ -90,7 +90,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
           <div className="relative">
             <button
               onClick={() => setMatchesMenuOpen(!matchesMenuOpen)}
-              className="bg-white hover:bg-gray-100 text-slate-900 font-bold py-2.5 px-6 rounded-lg transition-all shadow-lg shadow-black/10 flex items-center gap-2 text-sm min-h-[44px] min-w-[44px]"
+              className="bg-slate-800 border border-white/10 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-lg transition-all shadow-lg shadow-black/10 flex items-center gap-2 text-sm min-h-[44px] min-w-[44px]"
             >
               {centerListType === 'played' ? 'Odehrané' : 'Nadcházející'}
               <ChevronDown className={`w-4 h-4 transition-transform ${matchesMenuOpen ? 'rotate-180' : ''}`} />

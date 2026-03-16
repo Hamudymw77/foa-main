@@ -203,16 +203,16 @@ export default function TransfersPage() {
             </div>
 
             {/* Tab Switcher */}
-            <div className="flex bg-slate-900/50 p-1 rounded-xl border border-white/10 backdrop-blur-md">
+            <div className="flex flex-col sm:flex-row bg-slate-900/50 p-1 rounded-xl border border-white/10 backdrop-blur-md w-full md:w-auto">
                 <button 
                     onClick={() => { setActiveTab('summer'); setSelectedTeam(null); }}
-                    className={`px-8 py-3 rounded-lg text-sm font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'summer' ? 'bg-accent text-slate-900 shadow-[0_0_20px_rgba(251,191,36,0.3)] scale-105' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
+                    className={`px-4 md:px-8 py-3 rounded-lg text-xs md:text-sm font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'summer' ? 'bg-accent text-slate-900 shadow-[0_0_20px_rgba(251,191,36,0.3)] scale-105' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
                 >
                     Summer 2025
                 </button>
                 <button 
                     onClick={() => { setActiveTab('winter'); setSelectedTeam(null); }}
-                    className={`px-8 py-3 rounded-lg text-sm font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'winter' ? 'bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)] scale-105' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
+                    className={`px-4 md:px-8 py-3 rounded-lg text-xs md:text-sm font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'winter' ? 'bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)] scale-105' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
                 >
                     January 2026
                 </button>
