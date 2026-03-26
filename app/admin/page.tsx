@@ -137,8 +137,8 @@ export default function AdminPage() {
         }
 
       } catch (error) {
-        console.error(error)
-        toast.error('Chyba při načítání dat')
+        console.warn("Failed to fetch admin data:", error)
+        toast.error('Chyba při načítání dat. Server může být dočasně nedostupný.')
       } finally {
         setIsLoading(false)
       }

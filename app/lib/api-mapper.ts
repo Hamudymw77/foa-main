@@ -409,3 +409,36 @@ export function mapStatoriumMatchToInternal(m: StatoriumMatchItem): Match {
     status
   };
 }
+
+export const normalizeTeamName = (fplName: string): string => { 
+  const nameMap: Record<string, string> = { 
+    // Teams with different naming conventions 
+    "Spurs": "Tottenham", 
+    "Tottenham Hotspur": "Tottenham", 
+    "Man Utd": "Manchester United", 
+    "Man City": "Manchester City", 
+    "Nott'm Forest": "Nottingham Forest", 
+    "Nottingham": "Nottingham Forest", 
+    "Newcastle": "Newcastle United", 
+    "Wolves": "Wolverhampton Wanderers", 
+    "Wolverhampton": "Wolverhampton Wanderers", 
+    "Bournemouth": "AFC Bournemouth", 
+    "Brighton": "Brighton & Hove Albion", 
+    "West Ham": "West Ham United", 
+    "Leeds": "Leeds United", // Promoted 
+    
+    // Teams with mostly identical names (hardcoded for absolute safety) 
+    "Arsenal": "Arsenal", 
+    "Aston Villa": "Aston Villa", 
+    "Brentford": "Brentford", 
+    "Burnley": "Burnley", // Promoted 
+    "Chelsea": "Chelsea", 
+    "Crystal Palace": "Crystal Palace", 
+    "Everton": "Everton", 
+    "Fulham": "Fulham", 
+    "Liverpool": "Liverpool", 
+    "Sunderland": "Sunderland" // Promoted 
+  }; 
+  
+  return nameMap[fplName] || fplName; 
+};

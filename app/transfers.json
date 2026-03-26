@@ -104,45 +104,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_jorginho",
-    "player": "Jorginho",
-    "from": "Arsenal",
-    "to": "Flamengo",
-    "fee": "Free",
-    "window": "summer_25",
-    "type": "free",
-    "club": "Arsenal",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_kieran tierney",
-    "player": "Kieran Tierney",
-    "from": "Arsenal",
-    "to": "Celtic",
-    "fee": "Free",
-    "window": "summer_25",
-    "type": "free",
-    "club": "Arsenal",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_nuno tavares",
-    "player": "Nuno Tavares",
-    "from": "Arsenal",
-    "to": "Lazio",
-    "fee": "£7.5m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Arsenal",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_marquinhos",
     "player": "Marquinhos",
     "from": "Arsenal",
@@ -165,71 +126,6 @@
     "type": "permanent",
     "club": "Arsenal",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/437742.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_takehiro tomiyasu",
-    "player": "Takehiro Tomiyasu",
-    "from": "Arsenal",
-    "to": "Released",
-    "fee": "Released",
-    "window": "summer_25",
-    "type": "released",
-    "club": "Arsenal",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_thomas partey",
-    "player": "Thomas Partey",
-    "from": "Arsenal",
-    "to": "Released",
-    "fee": "Released",
-    "window": "summer_25",
-    "type": "released",
-    "club": "Arsenal",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_ismael kabia",
-    "player": "Ismaël Kabia",
-    "from": "Arsenal",
-    "to": "Shrewsbury",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Arsenal",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/588796.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_yasin ozcan",
-    "player": "Yasin Özcan",
-    "from": "Kasimpasa",
-    "to": "Aston Villa",
-    "fee": "Undisclosed",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Aston Villa",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/587178.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_zepiqueno redmond",
-    "player": "Zepiqueno Redmond",
-    "from": "Feyenoord",
-    "to": "Aston Villa",
-    "fee": "Free",
-    "window": "summer_25",
-    "type": "free",
-    "club": "Aston Villa",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/576756.png",
     "fromLogo": null,
     "toLogo": null
   },
@@ -338,32 +234,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_robin olsen",
-    "player": "Robin Olsen",
-    "from": "Aston Villa",
-    "to": "Malmö",
-    "fee": "Free",
-    "window": "summer_25",
-    "type": "free",
-    "club": "Aston Villa",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_kaine kesler-hayden",
-    "player": "Kaine Kesler-Hayden",
-    "from": "Aston Villa",
-    "to": "Coventry City",
-    "fee": "£3.5m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Aston Villa",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/153127.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_enzo barrenechea",
     "player": "Enzo Barrenechea",
     "from": "Aston Villa",
@@ -373,45 +243,6 @@
     "type": "loan",
     "club": "Aston Villa",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/491287.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_modou keba cisse",
-    "player": "Modou Kéba Cissé",
-    "from": "Aston Villa",
-    "to": "LASK",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Aston Villa",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_rico richards",
-    "player": "Rico Richards",
-    "from": "Aston Villa",
-    "to": "Port Vale",
-    "fee": "Undisclosed",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Aston Villa",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/427623.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_josh feeney",
-    "player": "Josh Feeney",
-    "from": "Aston Villa",
-    "to": "Huddersfield",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Aston Villa",
-    "photo": null,
     "fromLogo": null,
     "toLogo": null
   },
@@ -598,19 +429,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_dean huijsen",
-    "player": "Dean Huijsen",
-    "from": "Bournemouth",
-    "to": "Real Madrid",
-    "fee": "£50m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Bournemouth",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_jaidon anthony",
     "player": "Jaidon Anthony",
     "from": "Bournemouth",
@@ -633,19 +451,6 @@
     "type": "permanent",
     "club": "Bournemouth",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/229600.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_max aarons",
-    "player": "Max Aarons",
-    "from": "Bournemouth",
-    "to": "Rangers",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Bournemouth",
-    "photo": null,
     "fromLogo": null,
     "toLogo": null
   },
@@ -1131,45 +936,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_odel offiah",
-    "player": "Odel Offiah",
-    "from": "Brighton",
-    "to": "Preston",
-    "fee": "£1.5m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Brighton",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_valentin barco",
-    "player": "Valentin Barco",
-    "from": "Brighton",
-    "to": "Strasbourg",
-    "fee": "Undisclosed",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Brighton",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_amario cozier-duberry",
-    "player": "Amario Cozier-Duberry",
-    "from": "Brighton",
-    "to": "Bolton",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Brighton",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_kjell scherpen",
     "player": "Kjell Scherpen",
     "from": "Brighton",
@@ -1179,32 +945,6 @@
     "type": "permanent",
     "club": "Brighton",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/240514.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_eiran cashin",
-    "player": "Eiran Cashin",
-    "from": "Brighton",
-    "to": "Birmingham",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Brighton",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/439135.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_kamari doyle",
-    "player": "Kamari Doyle",
-    "from": "Brighton",
-    "to": "Reading",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Brighton",
-    "photo": null,
     "fromLogo": null,
     "toLogo": null
   },
@@ -1521,19 +1261,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_jonjo shelvey",
-    "player": "Jonjo Shelvey",
-    "from": "Burnley",
-    "to": "Released",
-    "fee": "Released",
-    "window": "summer_25",
-    "type": "released",
-    "club": "Burnley",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_cj egan-riley",
     "player": "CJ Egan-Riley",
     "from": "Burnley",
@@ -1543,19 +1270,6 @@
     "type": "free",
     "club": "Burnley",
     "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_andreas hountondji",
-    "player": "Andreas Hountondji",
-    "from": "Burnley",
-    "to": "St. Pauli",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Burnley",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/156689.png",
     "fromLogo": null,
     "toLogo": null
   },
@@ -1586,45 +1300,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_joe bauress",
-    "player": "Joe Bauress",
-    "from": "Burnley",
-    "to": "Accrington",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Burnley",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_han-noah massengo",
-    "player": "Han-Noah Massengo",
-    "from": "Burnley",
-    "to": "Augsburg",
-    "fee": "Undisclosed",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Burnley",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_joe westley",
-    "player": "Joe Westley",
-    "from": "Burnley",
-    "to": "Dundee",
-    "fee": "Undisclosed",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Burnley",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_estevao willian",
     "player": "Estevão Willian",
     "from": "Palmeiras",
@@ -1638,19 +1313,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_dario essugo",
-    "player": "Dário Essugo",
-    "from": "Sporting CP",
-    "to": "Chelsea",
-    "fee": "£18.5m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Chelsea",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_kendry paez",
     "player": "Kendry Páez",
     "from": "Independiente del Valle",
@@ -1660,19 +1322,6 @@
     "type": "permanent",
     "club": "Chelsea",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/611134.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_mamadou sarr",
-    "player": "Mamadou Sarr",
-    "from": "Strasbourg",
-    "to": "Chelsea",
-    "fee": "£12m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Chelsea",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/574458.png",
     "fromLogo": null,
     "toLogo": null
   },
@@ -1751,19 +1400,6 @@
     "type": "permanent",
     "club": "Manchester United",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/430871.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_enzo kana-biyik",
-    "player": "Enzo Kana-Biyik",
-    "from": "Le Havre",
-    "to": "Manchester United",
-    "fee": "Free",
-    "window": "summer_25",
-    "type": "free",
-    "club": "Manchester United",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/448047.png",
     "fromLogo": null,
     "toLogo": null
   },
@@ -2145,32 +1781,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_carlos vinicius",
-    "player": "Carlos Vinícius",
-    "from": "Fulham",
-    "to": "Released",
-    "fee": "Released",
-    "window": "summer_25",
-    "type": "released",
-    "club": "Fulham",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_willian",
-    "player": "Willian",
-    "from": "Fulham",
-    "to": "Released",
-    "fee": "Released",
-    "window": "summer_25",
-    "type": "released",
-    "club": "Fulham",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_luca ashby-hammond",
     "player": "Luca Ashby-Hammond",
     "from": "Fulham",
@@ -2210,19 +1820,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_harvey araujo",
-    "player": "Harvey Araújo",
-    "from": "Fulham",
-    "to": "Colchester",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Fulham",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_martial godo",
     "player": "Martial Godo",
     "from": "Fulham",
@@ -2236,32 +1833,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_matt dibley-dias",
-    "player": "Matt Dibley-Dias",
-    "from": "Fulham",
-    "to": "Chesterfield",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Fulham",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_devan tanton",
-    "player": "Devan Tanton",
-    "from": "Fulham",
-    "to": "Chesterfield",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Fulham",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_luke harris",
     "player": "Luke Harris",
     "from": "Fulham",
@@ -2271,19 +1842,6 @@
     "type": "loan",
     "club": "Fulham",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/515024.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_lemar gordon",
-    "player": "Lemar Gordon",
-    "from": "Fulham",
-    "to": "Leyton Orient",
-    "fee": "Undisclosed",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Fulham",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/232826.png",
     "fromLogo": null,
     "toLogo": null
   },
@@ -2535,45 +2093,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_trent alexander-arnold",
-    "player": "Trent Alexander-Arnold",
-    "from": "Liverpool",
-    "to": "Real Madrid",
-    "fee": "£10m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Liverpool",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_luis diaz",
-    "player": "Luis Díaz",
-    "from": "Liverpool",
-    "to": "Bayern Munich",
-    "fee": "£65.6m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Liverpool",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/244731.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_jarell quansah",
-    "player": "Jarell Quansah",
-    "from": "Liverpool",
-    "to": "Bayer Leverkusen",
-    "fee": "£35m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Liverpool",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_tyler morton",
     "player": "Tyler Morton",
     "from": "Liverpool",
@@ -2652,19 +2171,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_sverre nypan",
-    "player": "Sverre Nypan",
-    "from": "Rosenborg",
-    "to": "Man City",
-    "fee": "£12.5m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Man City",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/566164.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_gianluigi donnarumma",
     "player": "Gianluigi Donnarumma",
     "from": "PSG",
@@ -2700,19 +2206,6 @@
     "type": "loan",
     "club": "Man Utd",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/490881.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_sonny aljofree",
-    "player": "Sonny Aljofree",
-    "from": "Notts County",
-    "to": "Man Utd",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Man Utd",
-    "photo": null,
     "fromLogo": null,
     "toLogo": null
   },
@@ -2834,19 +2327,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_lloyd kelly",
-    "player": "Lloyd Kelly",
-    "from": "Newcastle",
-    "to": "Juventus",
-    "fee": "£14.5m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Newcastle",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_callum wilson",
     "player": "Callum Wilson",
     "from": "Newcastle",
@@ -2964,19 +2444,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_cuiabano",
-    "player": "Cuiabano",
-    "from": "Botafogo",
-    "to": "Nottingham Forest",
-    "fee": "£5m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "Nottingham Forest",
-    "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/560441.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_dilane bakwa",
     "player": "Dilane Bakwa",
     "from": "Strasbourg",
@@ -3036,19 +2503,6 @@
     "fee": "Loan",
     "window": "winter_26",
     "type": "loan",
-    "club": "Nottingham Forest",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_danilo",
-    "player": "Danilo",
-    "from": "Nottingham Forest",
-    "to": "Botafogo",
-    "fee": "£21.7m",
-    "window": "summer_25",
-    "type": "permanent",
     "club": "Nottingham Forest",
     "photo": null,
     "fromLogo": null,
@@ -3224,19 +2678,6 @@
     "toLogo": null
   },
   {
-    "id": "summer_25_joao palhinha",
-    "player": "João Palhinha",
-    "from": "Bayern Munich",
-    "to": "Tottenham",
-    "fee": "Loan",
-    "window": "summer_25",
-    "type": "loan",
-    "club": "Tottenham",
-    "photo": null,
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
     "id": "summer_25_xavi simons",
     "player": "Xavi Simons",
     "from": "Leipzig",
@@ -3376,19 +2817,6 @@
     "type": "permanent",
     "club": "West Ham",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/467189.png",
-    "fromLogo": null,
-    "toLogo": null
-  },
-  {
-    "id": "summer_25_mateus fernandes",
-    "player": "Mateus Fernandes",
-    "from": "Southampton",
-    "to": "West Ham",
-    "fee": "£38.1m",
-    "window": "summer_25",
-    "type": "permanent",
-    "club": "West Ham",
-    "photo": null,
     "fromLogo": null,
     "toLogo": null
   },

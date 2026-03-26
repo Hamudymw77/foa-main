@@ -45,7 +45,7 @@ export function TransfersAdmin() {
                 }
             }
         } catch (error) {
-            console.error(error)
+            console.warn(error)
         } finally {
             setIsLoading(false)
         }
@@ -59,7 +59,7 @@ export function TransfersAdmin() {
                 setPlayers(data)
             }
         } catch (error) {
-            console.error(error)
+            console.warn(error)
         }
     }
 

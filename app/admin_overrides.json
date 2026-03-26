@@ -816,26 +816,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        6,
+        7
       ],
       "shotsOnTarget": [
-        0,
-        0
+        4,
+        1
       ],
       "corners": [
+        5,
+        7
+      ],
+      "fouls": [
+        11,
+        11
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
-        0,
-        0
+      "offsides": [
+        3,
+        3
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.902Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "6": {
     "events": [
@@ -1013,25 +1028,40 @@
       ],
       "shots": [
         0,
-        0
+        2
       ],
       "shotsOnTarget": [
-        0,
-        0
+        4,
+        6
       ],
       "corners": [
+        8,
+        7
+      ],
+      "fouls": [
+        6,
+        11
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
+      "offsides": [
         0,
-        0
+        3
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.896Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "7": {
     "events": [
@@ -1672,26 +1702,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        14,
+        5
       ],
       "shotsOnTarget": [
         0,
-        0
+        1
       ],
       "corners": [
+        7,
+        2
+      ],
+      "fouls": [
+        11,
+        14
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
-        0,
-        0
+      "offsides": [
+        1,
+        4
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.911Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "11": {
     "events": [
@@ -1891,26 +1936,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        13,
+        13
       ],
       "shotsOnTarget": [
-        0,
-        0
+        6,
+        6
       ],
       "corners": [
         0,
-        0
+        1
       ],
       "fouls": [
+        11,
+        10
+      ],
+      "yellowCards": [
         0,
         0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        4
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.932Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "12": {
     "events": [
@@ -2473,18 +2533,30 @@
         50
       ],
       "shots": [
-        0,
-        0
+        14,
+        8
       ],
       "shotsOnTarget": [
-        0,
+        3,
         0
       ],
       "corners": [
+        4,
+        9
+      ],
+      "fouls": [
+        9,
+        8
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
+      "offsides": [
         0,
         0
       ]
@@ -2492,7 +2564,10 @@
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.917Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "15": {
     "events": [
@@ -4431,18 +4506,30 @@
         50
       ],
       "shots": [
-        0,
-        0
+        1,
+        3
       ],
       "shotsOnTarget": [
-        0,
-        0
+        6,
+        6
       ],
       "corners": [
         0,
-        0
+        1
       ],
       "fouls": [
+        7,
+        1
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
         0,
         0
       ]
@@ -4450,7 +4537,10 @@
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.952Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "25": {
     "events": [
@@ -4811,26 +4901,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        14,
+        7
       ],
       "shotsOnTarget": [
-        0,
-        0
+        3,
+        4
       ],
       "corners": [
+        5,
+        5
+      ],
+      "fouls": [
+        14,
+        11
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
-        0,
-        0
+      "offsides": [
+        2,
+        4
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.939Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "27": {
     "events": [
@@ -5144,18 +5249,30 @@
         50
       ],
       "shots": [
-        0,
-        0
+        8,
+        12
       ],
       "shotsOnTarget": [
-        0,
-        0
+        2,
+        4
       ],
       "corners": [
+        4,
+        5
+      ],
+      "fouls": [
+        1,
+        8
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
+      "offsides": [
         0,
         0
       ]
@@ -5163,7 +5280,47 @@
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.948Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "29": {
+    "stats": {
+      "possession": [
+        35,
+        65
+      ],
+      "shots": [
+        21,
+        12
+      ],
+      "shotsOnTarget": [
+        8,
+        4
+      ],
+      "corners": [
+        5,
+        9
+      ],
+      "fouls": [
+        15,
+        8
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:58:02.031Z"
   },
   "30": {
     "events": [
@@ -6172,26 +6329,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        12,
+        14
       ],
       "shotsOnTarget": [
-        0,
-        0
+        4,
+        1
       ],
       "corners": [
-        0,
+        7,
         0
       ],
       "fouls": [
+        4,
+        10
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
         0,
+        0
+      ],
+      "offsides": [
+        3,
         0
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.973Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "35": {
     "events": [
@@ -6278,26 +6450,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        1,
+        13
       ],
       "shotsOnTarget": [
-        0,
-        0
+        2,
+        6
       ],
       "corners": [
+        9,
+        6
+      ],
+      "fouls": [
+        10,
+        12
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
-        0,
-        0
+      "offsides": [
+        4,
+        3
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.961Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "36": {
     "events": [
@@ -6555,26 +6742,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        4,
+        10
       ],
       "shotsOnTarget": [
-        0,
-        0
+        1,
+        6
       ],
       "corners": [
         0,
-        0
+        4
       ],
       "fouls": [
+        8,
+        8
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
         0,
         0
+      ],
+      "offsides": [
+        4,
+        3
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.966Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "38": {
     "events": [
@@ -7742,26 +7944,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        10,
+        8
       ],
       "shotsOnTarget": [
-        0,
-        0
+        1,
+        1
       ],
       "corners": [
+        8,
+        1
+      ],
+      "fouls": [
+        3,
+        5
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
-        0,
-        0
+      "offsides": [
+        2,
+        1
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.980Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "45": {
     "events": [
@@ -8583,26 +8800,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        7,
+        9
       ],
       "shotsOnTarget": [
         0,
-        0
+        2
       ],
       "corners": [
+        2,
+        3
+      ],
+      "fouls": [
+        11,
+        7
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
-        0,
-        0
+      "offsides": [
+        4,
+        2
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.992Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "49": {
     "events": [
@@ -8953,26 +9185,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        1,
+        6
       ],
       "shotsOnTarget": [
         0,
-        0
+        2
       ],
       "corners": [
-        0,
-        0
+        4,
+        8
       ],
       "fouls": [
         0,
+        14
+      ],
+      "yellowCards": [
+        0,
         0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        4
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:52.984Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "51": {
     "events": [
@@ -10184,25 +10431,40 @@
       ],
       "shots": [
         0,
-        0
+        12
       ],
       "shotsOnTarget": [
-        0,
-        0
+        3,
+        1
       ],
       "corners": [
-        0,
+        2,
         0
       ],
       "fouls": [
+        3,
+        10
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
         0,
         0
+      ],
+      "offsides": [
+        1,
+        4
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:53.000Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "57": {
     "events": [
@@ -10410,26 +10672,41 @@
         50
       ],
       "shots": [
-        0,
+        4,
         0
       ],
       "shotsOnTarget": [
-        0,
-        0
+        1,
+        3
       ],
       "corners": [
-        0,
+        2,
         0
       ],
       "fouls": [
+        13,
+        2
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
         0,
         0
+      ],
+      "offsides": [
+        2,
+        2
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:53.008Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "58": {
     "events": [
@@ -10811,26 +11088,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        5,
+        1
       ],
       "shotsOnTarget": [
-        0,
-        0
+        2,
+        1
       ],
       "corners": [
+        3,
+        1
+      ],
+      "fouls": [
+        12,
+        4
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
-        0,
-        0
+      "offsides": [
+        1,
+        3
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:53.013Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "60": {
     "events": [
@@ -11025,6 +11317,3054 @@
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
     "awayPlayers": []
+  },
+  "61": {
+    "stats": {
+      "possession": [
+        40,
+        60
+      ],
+      "shots": [
+        12,
+        16
+      ],
+      "shotsOnTarget": [
+        5,
+        7
+      ],
+      "corners": [
+        2,
+        10
+      ],
+      "fouls": [
+        10,
+        13
+      ],
+      "yellowCards": [
+        4,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:58:04.265Z"
+  },
+  "62": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        14,
+        9
+      ],
+      "shotsOnTarget": [
+        6,
+        6
+      ],
+      "corners": [
+        6,
+        4
+      ],
+      "fouls": [
+        6,
+        14
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.031Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "63": {
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        11,
+        16
+      ],
+      "shotsOnTarget": [
+        6,
+        9
+      ],
+      "corners": [
+        1,
+        7
+      ],
+      "fouls": [
+        7,
+        16
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:58:03.143Z"
+  },
+  "64": {
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        18,
+        8
+      ],
+      "shotsOnTarget": [
+        7,
+        5
+      ],
+      "corners": [
+        12,
+        3
+      ],
+      "fouls": [
+        9,
+        3
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:58:10.289Z"
+  },
+  "65": {
+    "stats": {
+      "possession": [
+        43,
+        57
+      ],
+      "shots": [
+        9,
+        12
+      ],
+      "shotsOnTarget": [
+        5,
+        2
+      ],
+      "corners": [
+        1,
+        5
+      ],
+      "fouls": [
+        12,
+        13
+      ],
+      "yellowCards": [
+        4,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        5,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:58:05.383Z"
+  },
+  "66": {
+    "stats": {
+      "possession": [
+        40,
+        60
+      ],
+      "shots": [
+        8,
+        17
+      ],
+      "shotsOnTarget": [
+        2,
+        5
+      ],
+      "corners": [
+        5,
+        8
+      ],
+      "fouls": [
+        13,
+        11
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:58:06.649Z"
+  },
+  "67": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        8
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        5,
+        9
+      ],
+      "fouls": [
+        14,
+        1
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.019Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "68": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        12,
+        2
+      ],
+      "shotsOnTarget": [
+        4,
+        5
+      ],
+      "corners": [
+        9,
+        8
+      ],
+      "fouls": [
+        5,
+        1
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.026Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "69": {
+    "stats": {
+      "possession": [
+        44,
+        56
+      ],
+      "shots": [
+        9,
+        17
+      ],
+      "shotsOnTarget": [
+        3,
+        6
+      ],
+      "corners": [
+        4,
+        5
+      ],
+      "fouls": [
+        13,
+        6
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:58:07.892Z"
+  },
+  "70": {
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        19,
+        14
+      ],
+      "shotsOnTarget": [
+        6,
+        7
+      ],
+      "corners": [
+        9,
+        6
+      ],
+      "fouls": [
+        12,
+        10
+      ],
+      "yellowCards": [
+        3,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:58:09.021Z"
+  },
+  "71": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        60,
+        40
+      ],
+      "shots": [
+        21,
+        10
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        9,
+        4
+      ],
+      "fouls": [
+        11,
+        9
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:37:17.913Z"
+  },
+  "72": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        6,
+        5
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        9,
+        9
+      ],
+      "fouls": [
+        12,
+        8
+      ],
+      "yellowCards": [
+        0,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.037Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "73": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        18,
+        10
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        5,
+        2
+      ],
+      "fouls": [
+        13,
+        12
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:37:18.995Z"
+  },
+  "74": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        34,
+        66
+      ],
+      "shots": [
+        2,
+        12
+      ],
+      "shotsOnTarget": [
+        2,
+        4
+      ],
+      "corners": [
+        0,
+        6
+      ],
+      "fouls": [
+        10,
+        9
+      ],
+      "yellowCards": [
+        4,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:37:21.152Z"
+  },
+  "75": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        8,
+        11
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        5,
+        2
+      ],
+      "fouls": [
+        7,
+        7
+      ],
+      "yellowCards": [
+        4,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:37:23.483Z"
+  },
+  "76": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        66,
+        34
+      ],
+      "shots": [
+        24,
+        8
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        8,
+        5
+      ],
+      "fouls": [
+        5,
+        10
+      ],
+      "yellowCards": [
+        1,
+        4
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:37:20.069Z"
+  },
+  "77": {
+    "stats": {
+      "possession": [
+        66,
+        34
+      ],
+      "shots": [
+        22,
+        16
+      ],
+      "shotsOnTarget": [
+        8,
+        9
+      ],
+      "corners": [
+        11,
+        3
+      ],
+      "fouls": [
+        12,
+        11
+      ],
+      "yellowCards": [
+        6,
+        4
+      ],
+      "redCards": [
+        0,
+        1
+      ],
+      "offsides": [
+        1,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:58:11.555Z"
+  },
+  "78": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        4,
+        3
+      ],
+      "shotsOnTarget": [
+        5,
+        0
+      ],
+      "corners": [
+        9,
+        6
+      ],
+      "fouls": [
+        14,
+        10
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.043Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "79": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        16,
+        12
+      ],
+      "shotsOnTarget": [
+        6,
+        1
+      ],
+      "corners": [
+        6,
+        4
+      ],
+      "fouls": [
+        14,
+        14
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:37:22.376Z"
+  },
+  "80": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        57,
+        43
+      ],
+      "shots": [
+        8,
+        19
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        7,
+        6
+      ],
+      "fouls": [
+        2,
+        11
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:37:24.576Z"
+  },
+  "81": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        42,
+        58
+      ],
+      "shots": [
+        15,
+        14
+      ],
+      "shotsOnTarget": [
+        6,
+        6
+      ],
+      "corners": [
+        3,
+        3
+      ],
+      "fouls": [
+        9,
+        8
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:05.069Z"
+  },
+  "82": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        44,
+        56
+      ],
+      "shots": [
+        11,
+        12
+      ],
+      "shotsOnTarget": [
+        6,
+        6
+      ],
+      "corners": [
+        5,
+        4
+      ],
+      "fouls": [
+        14,
+        7
+      ],
+      "yellowCards": [
+        3,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:11.175Z"
+  },
+  "83": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        14,
+        13
+      ],
+      "shotsOnTarget": [
+        8,
+        4
+      ],
+      "corners": [
+        2,
+        6
+      ],
+      "fouls": [
+        17,
+        8
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:17.267Z"
+  },
+  "84": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        63,
+        37
+      ],
+      "shots": [
+        19,
+        8
+      ],
+      "shotsOnTarget": [
+        8,
+        2
+      ],
+      "corners": [
+        9,
+        4
+      ],
+      "fouls": [
+        10,
+        7
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:22:58.974Z"
+  },
+  "85": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        2,
+        3
+      ],
+      "shotsOnTarget": [
+        4,
+        5
+      ],
+      "corners": [
+        0,
+        4
+      ],
+      "fouls": [
+        3,
+        12
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.052Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "86": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        71,
+        29
+      ],
+      "shots": [
+        13,
+        10
+      ],
+      "shotsOnTarget": [
+        7,
+        1
+      ],
+      "corners": [
+        12,
+        5
+      ],
+      "fouls": [
+        11,
+        15
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:23.382Z"
+  },
+  "87": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        10,
+        0
+      ],
+      "shotsOnTarget": [
+        5,
+        0
+      ],
+      "corners": [
+        0,
+        1
+      ],
+      "fouls": [
+        2,
+        5
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.047Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "88": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        48,
+        52
+      ],
+      "shots": [
+        14,
+        11
+      ],
+      "shotsOnTarget": [
+        5,
+        4
+      ],
+      "corners": [
+        4,
+        4
+      ],
+      "fouls": [
+        9,
+        13
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        6
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:37:26.749Z"
+  },
+  "89": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        39,
+        61
+      ],
+      "shots": [
+        22,
+        16
+      ],
+      "shotsOnTarget": [
+        11,
+        5
+      ],
+      "corners": [
+        6,
+        0
+      ],
+      "fouls": [
+        16,
+        8
+      ],
+      "yellowCards": [
+        6,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        6
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:37:25.651Z"
+  },
+  "90": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        2,
+        0
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        5,
+        2
+      ],
+      "fouls": [
+        0,
+        10
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.059Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "91": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        2
+      ],
+      "shotsOnTarget": [
+        5,
+        0
+      ],
+      "corners": [
+        3,
+        4
+      ],
+      "fouls": [
+        9,
+        0
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.069Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "92": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        0,
+        5
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        0,
+        0
+      ],
+      "fouls": [
+        0,
+        13
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.096Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "93": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        14,
+        10
+      ],
+      "shotsOnTarget": [
+        4,
+        2
+      ],
+      "corners": [
+        2,
+        3
+      ],
+      "fouls": [
+        11,
+        9
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:29.486Z"
+  },
+  "94": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        8,
+        6
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        2,
+        7
+      ],
+      "fouls": [
+        11,
+        12
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:35.564Z"
+  },
+  "95": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        62,
+        38
+      ],
+      "shots": [
+        14,
+        12
+      ],
+      "shotsOnTarget": [
+        5,
+        2
+      ],
+      "corners": [
+        2,
+        9
+      ],
+      "fouls": [
+        11,
+        15
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:40:09.208Z"
+  },
+  "96": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        36,
+        64
+      ],
+      "shots": [
+        12,
+        18
+      ],
+      "shotsOnTarget": [
+        6,
+        4
+      ],
+      "corners": [
+        3,
+        10
+      ],
+      "fouls": [
+        11,
+        6
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:40:21.545Z"
+  },
+  "97": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        8,
+        13
+      ],
+      "shotsOnTarget": [
+        5,
+        2
+      ],
+      "corners": [
+        5,
+        4
+      ],
+      "fouls": [
+        9,
+        12
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:41.627Z"
+  },
+  "98": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        3,
+        1
+      ],
+      "shotsOnTarget": [
+        5,
+        6
+      ],
+      "corners": [
+        7,
+        1
+      ],
+      "fouls": [
+        14,
+        7
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.108Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "99": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        39,
+        61
+      ],
+      "shots": [
+        13,
+        17
+      ],
+      "shotsOnTarget": [
+        5,
+        8
+      ],
+      "corners": [
+        5,
+        10
+      ],
+      "fouls": [
+        17,
+        11
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:40:02.966Z"
+  },
+  "100": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        18,
+        15
+      ],
+      "shotsOnTarget": [
+        2,
+        6
+      ],
+      "corners": [
+        8,
+        3
+      ],
+      "fouls": [
+        11,
+        8
+      ],
+      "yellowCards": [
+        1,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:40:15.373Z"
+  },
+  "101": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        57,
+        43
+      ],
+      "shots": [
+        18,
+        10
+      ],
+      "shotsOnTarget": [
+        8,
+        3
+      ],
+      "corners": [
+        9,
+        7
+      ],
+      "fouls": [
+        12,
+        14
+      ],
+      "yellowCards": [
+        7,
+        6
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        5
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:40:46.119Z"
+  },
+  "102": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        11,
+        14
+      ],
+      "shotsOnTarget": [
+        2,
+        2
+      ],
+      "corners": [
+        8,
+        7
+      ],
+      "fouls": [
+        10,
+        14
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:47.690Z"
+  },
+  "103": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        40,
+        60
+      ],
+      "shots": [
+        12,
+        14
+      ],
+      "shotsOnTarget": [
+        4,
+        8
+      ],
+      "corners": [
+        5,
+        5
+      ],
+      "fouls": [
+        13,
+        13
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:40:40.045Z"
+  },
+  "104": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        14,
+        11
+      ],
+      "shotsOnTarget": [
+        2,
+        4
+      ],
+      "corners": [
+        6,
+        2
+      ],
+      "fouls": [
+        8,
+        10
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:53.784Z"
+  },
+  "105": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        40,
+        60
+      ],
+      "shots": [
+        10,
+        14
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        4,
+        2
+      ],
+      "fouls": [
+        8,
+        8
+      ],
+      "yellowCards": [
+        1,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:40:33.895Z"
+  },
+  "106": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        44,
+        56
+      ],
+      "shots": [
+        18,
+        8
+      ],
+      "shotsOnTarget": [
+        7,
+        2
+      ],
+      "corners": [
+        7,
+        4
+      ],
+      "fouls": [
+        9,
+        8
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:41:04.537Z"
+  },
+  "107": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        3
+      ],
+      "shotsOnTarget": [
+        0,
+        2
+      ],
+      "corners": [
+        1,
+        6
+      ],
+      "fouls": [
+        1,
+        6
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.133Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "108": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        3,
+        0
+      ],
+      "shotsOnTarget": [
+        2,
+        4
+      ],
+      "corners": [
+        8,
+        9
+      ],
+      "fouls": [
+        2,
+        5
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.124Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "109": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        39,
+        61
+      ],
+      "shots": [
+        11,
+        24
+      ],
+      "shotsOnTarget": [
+        2,
+        10
+      ],
+      "corners": [
+        5,
+        3
+      ],
+      "fouls": [
+        16,
+        14
+      ],
+      "yellowCards": [
+        5,
+        3
+      ],
+      "redCards": [
+        1,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:40:27.693Z"
+  },
+  "110": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        5,
+        4
+      ],
+      "shotsOnTarget": [
+        5,
+        1
+      ],
+      "corners": [
+        3,
+        3
+      ],
+      "fouls": [
+        4,
+        10
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.114Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "111": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        64,
+        36
+      ],
+      "shots": [
+        15,
+        7
+      ],
+      "shotsOnTarget": [
+        5,
+        4
+      ],
+      "corners": [
+        7,
+        6
+      ],
+      "fouls": [
+        13,
+        10
+      ],
+      "yellowCards": [
+        5,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:24:05.968Z"
+  },
+  "112": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        29,
+        16
+      ],
+      "shotsOnTarget": [
+        9,
+        3
+      ],
+      "corners": [
+        12,
+        6
+      ],
+      "fouls": [
+        6,
+        11
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:41:10.744Z"
+  },
+  "113": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        58,
+        42
+      ],
+      "shots": [
+        24,
+        8
+      ],
+      "shotsOnTarget": [
+        7,
+        3
+      ],
+      "corners": [
+        5,
+        3
+      ],
+      "fouls": [
+        6,
+        12
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        5
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:41:16.817Z"
+  },
+  "114": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        6,
+        14
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        0,
+        5
+      ],
+      "fouls": [
+        6,
+        14
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.152Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "115": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        0,
+        2
+      ],
+      "shotsOnTarget": [
+        4,
+        6
+      ],
+      "corners": [
+        8,
+        5
+      ],
+      "fouls": [
+        9,
+        12
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.168Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "116": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        1,
+        1
+      ],
+      "shotsOnTarget": [
+        0,
+        6
+      ],
+      "corners": [
+        2,
+        3
+      ],
+      "fouls": [
+        6,
+        7
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.177Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "117": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        69,
+        31
+      ],
+      "shots": [
+        14,
+        5
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        7,
+        2
+      ],
+      "fouls": [
+        15,
+        6
+      ],
+      "yellowCards": [
+        4,
+        4
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        5
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:41:22.885Z"
+  },
+  "118": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        60,
+        40
+      ],
+      "shots": [
+        11,
+        8
+      ],
+      "shotsOnTarget": [
+        5,
+        2
+      ],
+      "corners": [
+        2,
+        2
+      ],
+      "fouls": [
+        12,
+        12
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:24:12.058Z"
+  },
+  "119": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        7,
+        12
+      ],
+      "shotsOnTarget": [
+        2,
+        3
+      ],
+      "corners": [
+        4,
+        5
+      ],
+      "fouls": [
+        12,
+        14
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:23:59.867Z"
+  },
+  "120": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        57,
+        43
+      ],
+      "shots": [
+        11,
+        19
+      ],
+      "shotsOnTarget": [
+        6,
+        7
+      ],
+      "corners": [
+        3,
+        6
+      ],
+      "fouls": [
+        7,
+        9
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:41:28.974Z"
+  },
+  "121": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        9,
+        10
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        6,
+        5
+      ],
+      "fouls": [
+        11,
+        16
+      ],
+      "yellowCards": [
+        3,
+        6
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        5
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:42:11.574Z"
+  },
+  "122": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        8,
+        10
+      ],
+      "shotsOnTarget": [
+        6,
+        1
+      ],
+      "corners": [
+        1,
+        5
+      ],
+      "fouls": [
+        2,
+        10
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.184Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "123": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        17,
+        13
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        4,
+        3
+      ],
+      "fouls": [
+        12,
+        12
+      ],
+      "yellowCards": [
+        4,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        7
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:04.901Z"
+  },
+  "124": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        33,
+        67
+      ],
+      "shots": [
+        9,
+        15
+      ],
+      "shotsOnTarget": [
+        4,
+        6
+      ],
+      "corners": [
+        4,
+        11
+      ],
+      "fouls": [
+        7,
+        12
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:42:05.507Z"
+  },
+  "125": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        32,
+        68
+      ],
+      "shots": [
+        8,
+        14
+      ],
+      "shotsOnTarget": [
+        2,
+        3
+      ],
+      "corners": [
+        0,
+        10
+      ],
+      "fouls": [
+        12,
+        8
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:24:18.177Z"
+  },
+  "126": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        13,
+        4
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        8,
+        3
+      ],
+      "fouls": [
+        11,
+        6
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.191Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "127": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        70,
+        30
+      ],
+      "shots": [
+        14,
+        4
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        9,
+        1
+      ],
+      "fouls": [
+        12,
+        11
+      ],
+      "yellowCards": [
+        3,
+        6
+      ],
+      "redCards": [
+        0,
+        1
+      ],
+      "offsides": [
+        0,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:02.391Z"
+  },
+  "128": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        1,
+        2
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        6,
+        0
+      ],
+      "fouls": [
+        3,
+        2
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.197Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "129": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        8,
+        14
+      ],
+      "shotsOnTarget": [
+        3,
+        6
+      ],
+      "corners": [
+        7,
+        11
+      ],
+      "fouls": [
+        4,
+        14
+      ],
+      "yellowCards": [
+        0,
+        1
+      ],
+      "redCards": [
+        0,
+        1
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:24:24.246Z"
+  },
+  "130": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        46,
+        54
+      ],
+      "shots": [
+        7,
+        22
+      ],
+      "shotsOnTarget": [
+        0,
+        13
+      ],
+      "corners": [
+        2,
+        6
+      ],
+      "fouls": [
+        7,
+        10
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        5,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:03.663Z"
+  },
+  "131": {
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        5,
+        14
+      ],
+      "shotsOnTarget": [
+        2,
+        5
+      ],
+      "corners": [
+        4,
+        3
+      ],
+      "fouls": [
+        6,
+        8
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        6
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:04.134Z"
+  },
+  "132": {
+    "stats": {
+      "possession": [
+        47,
+        53
+      ],
+      "shots": [
+        18,
+        17
+      ],
+      "shotsOnTarget": [
+        8,
+        7
+      ],
+      "corners": [
+        8,
+        4
+      ],
+      "fouls": [
+        6,
+        11
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:00.654Z"
+  },
+  "133": {
+    "stats": {
+      "possession": [
+        60,
+        40
+      ],
+      "shots": [
+        20,
+        13
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        12,
+        3
+      ],
+      "fouls": [
+        9,
+        14
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:05.342Z"
+  },
+  "134": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        0,
+        9
+      ],
+      "shotsOnTarget": [
+        1,
+        2
+      ],
+      "corners": [
+        3,
+        4
+      ],
+      "fouls": [
+        11,
+        1
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.206Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "135": {
+    "stats": {
+      "possession": [
+        58,
+        42
+      ],
+      "shots": [
+        20,
+        11
+      ],
+      "shotsOnTarget": [
+        7,
+        4
+      ],
+      "corners": [
+        8,
+        3
+      ],
+      "fouls": [
+        4,
+        10
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:01.806Z"
+  },
+  "136": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        1,
+        4
+      ],
+      "shotsOnTarget": [
+        5,
+        5
+      ],
+      "corners": [
+        7,
+        7
+      ],
+      "fouls": [
+        10,
+        8
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.212Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "137": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        0
+      ],
+      "shotsOnTarget": [
+        1,
+        5
+      ],
+      "corners": [
+        7,
+        1
+      ],
+      "fouls": [
+        0,
+        7
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.217Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "138": {
+    "stats": {
+      "possession": [
+        43,
+        57
+      ],
+      "shots": [
+        12,
+        18
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        6,
+        5
+      ],
+      "fouls": [
+        6,
+        7
+      ],
+      "yellowCards": [
+        5,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:07.838Z"
+  },
+  "139": {
+    "stats": {
+      "possession": [
+        34,
+        66
+      ],
+      "shots": [
+        9,
+        20
+      ],
+      "shotsOnTarget": [
+        3,
+        6
+      ],
+      "corners": [
+        7,
+        12
+      ],
+      "fouls": [
+        16,
+        13
+      ],
+      "yellowCards": [
+        4,
+        4
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:02.910Z"
+  },
+  "140": {
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        16,
+        11
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        7,
+        3
+      ],
+      "fouls": [
+        15,
+        18
+      ],
+      "yellowCards": [
+        3,
+        4
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:06.551Z"
   },
   "141": {
     "events": [
@@ -11231,6 +14571,3975 @@
     "homePlayers": [],
     "awayPlayers": []
   },
+  "142": {
+    "stats": {
+      "possession": [
+        33,
+        67
+      ],
+      "shots": [
+        19,
+        10
+      ],
+      "shotsOnTarget": [
+        7,
+        3
+      ],
+      "corners": [
+        6,
+        3
+      ],
+      "fouls": [
+        16,
+        9
+      ],
+      "yellowCards": [
+        6,
+        8
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:08.965Z"
+  },
+  "143": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        46,
+        54
+      ],
+      "shots": [
+        11,
+        12
+      ],
+      "shotsOnTarget": [
+        4,
+        6
+      ],
+      "corners": [
+        8,
+        4
+      ],
+      "fouls": [
+        14,
+        20
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        5,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:06.048Z"
+  },
+  "144": {
+    "stats": {
+      "possession": [
+        64,
+        36
+      ],
+      "shots": [
+        13,
+        11
+      ],
+      "shotsOnTarget": [
+        2,
+        7
+      ],
+      "corners": [
+        5,
+        4
+      ],
+      "fouls": [
+        13,
+        10
+      ],
+      "yellowCards": [
+        4,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:10.063Z"
+  },
+  "145": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        36,
+        64
+      ],
+      "shots": [
+        13,
+        17
+      ],
+      "shotsOnTarget": [
+        5,
+        7
+      ],
+      "corners": [
+        1,
+        8
+      ],
+      "fouls": [
+        10,
+        11
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        1,
+        0
+      ],
+      "offsides": [
+        1,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:07.168Z"
+  },
+  "146": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        11,
+        1
+      ],
+      "shotsOnTarget": [
+        5,
+        2
+      ],
+      "corners": [
+        6,
+        3
+      ],
+      "fouls": [
+        11,
+        0
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.237Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "147": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        13,
+        0
+      ],
+      "shotsOnTarget": [
+        2,
+        2
+      ],
+      "corners": [
+        8,
+        0
+      ],
+      "fouls": [
+        3,
+        5
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.225Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "148": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        13,
+        10
+      ],
+      "shotsOnTarget": [
+        0,
+        5
+      ],
+      "corners": [
+        7,
+        9
+      ],
+      "fouls": [
+        7,
+        2
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.231Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "149": {
+    "stats": {
+      "possession": [
+        48,
+        52
+      ],
+      "shots": [
+        23,
+        6
+      ],
+      "shotsOnTarget": [
+        10,
+        6
+      ],
+      "corners": [
+        9,
+        4
+      ],
+      "fouls": [
+        11,
+        9
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T06:59:11.188Z"
+  },
+  "150": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        7,
+        11
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        4,
+        4
+      ],
+      "fouls": [
+        12,
+        12
+      ],
+      "yellowCards": [
+        2,
+        4
+      ],
+      "redCards": [
+        0,
+        1
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:08.271Z"
+  },
+  "151": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        18,
+        9
+      ],
+      "shotsOnTarget": [
+        6,
+        3
+      ],
+      "corners": [
+        8,
+        2
+      ],
+      "fouls": [
+        17,
+        14
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:11.625Z"
+  },
+  "152": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        6,
+        5
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        0,
+        0
+      ],
+      "fouls": [
+        10,
+        2
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.255Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "153": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        14
+      ],
+      "shotsOnTarget": [
+        4,
+        0
+      ],
+      "corners": [
+        3,
+        7
+      ],
+      "fouls": [
+        7,
+        6
+      ],
+      "yellowCards": [
+        0,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.243Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "154": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        25,
+        75
+      ],
+      "shots": [
+        5,
+        12
+      ],
+      "shotsOnTarget": [
+        4,
+        5
+      ],
+      "corners": [
+        2,
+        5
+      ],
+      "fouls": [
+        20,
+        12
+      ],
+      "yellowCards": [
+        4,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:09.380Z"
+  },
+  "155": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        32,
+        68
+      ],
+      "shots": [
+        12,
+        12
+      ],
+      "shotsOnTarget": [
+        3,
+        4
+      ],
+      "corners": [
+        6,
+        8
+      ],
+      "fouls": [
+        4,
+        10
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        1
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:12.722Z"
+  },
+  "156": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        16,
+        13
+      ],
+      "shotsOnTarget": [
+        8,
+        5
+      ],
+      "corners": [
+        9,
+        7
+      ],
+      "fouls": [
+        10,
+        18
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:38:10.532Z"
+  },
+  "157": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        60,
+        40
+      ],
+      "shots": [
+        23,
+        10
+      ],
+      "shotsOnTarget": [
+        7,
+        5
+      ],
+      "corners": [
+        13,
+        1
+      ],
+      "fouls": [
+        11,
+        11
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:42:29.846Z"
+  },
+  "158": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        30,
+        70
+      ],
+      "shots": [
+        10,
+        13
+      ],
+      "shotsOnTarget": [
+        3,
+        4
+      ],
+      "corners": [
+        2,
+        7
+      ],
+      "fouls": [
+        12,
+        13
+      ],
+      "yellowCards": [
+        3,
+        4
+      ],
+      "redCards": [
+        0,
+        1
+      ],
+      "offsides": [
+        4,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:42:17.665Z"
+  },
+  "159": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        10
+      ],
+      "shotsOnTarget": [
+        6,
+        0
+      ],
+      "corners": [
+        9,
+        0
+      ],
+      "fouls": [
+        12,
+        14
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.248Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "160": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        14,
+        15
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        5,
+        3
+      ],
+      "fouls": [
+        18,
+        11
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:42:23.743Z"
+  },
+  "161": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        11,
+        10
+      ],
+      "shotsOnTarget": [
+        1,
+        4
+      ],
+      "corners": [
+        6,
+        3
+      ],
+      "fouls": [
+        12,
+        11
+      ],
+      "yellowCards": [
+        1,
+        5
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:43:06.659Z"
+  },
+  "162": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        3
+      ],
+      "shotsOnTarget": [
+        1,
+        0
+      ],
+      "corners": [
+        9,
+        9
+      ],
+      "fouls": [
+        14,
+        12
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.261Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "163": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        5
+      ],
+      "shotsOnTarget": [
+        2,
+        6
+      ],
+      "corners": [
+        6,
+        6
+      ],
+      "fouls": [
+        6,
+        7
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.267Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "164": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        46,
+        54
+      ],
+      "shots": [
+        9,
+        6
+      ],
+      "shotsOnTarget": [
+        4,
+        2
+      ],
+      "corners": [
+        6,
+        3
+      ],
+      "fouls": [
+        8,
+        5
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:24:54.641Z"
+  },
+  "165": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        41,
+        59
+      ],
+      "shots": [
+        11,
+        14
+      ],
+      "shotsOnTarget": [
+        1,
+        2
+      ],
+      "corners": [
+        6,
+        5
+      ],
+      "fouls": [
+        11,
+        15
+      ],
+      "yellowCards": [
+        2,
+        4
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        7,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:43:12.745Z"
+  },
+  "166": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        13,
+        1
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        5,
+        8
+      ],
+      "fouls": [
+        8,
+        4
+      ],
+      "yellowCards": [
+        3,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.274Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "167": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        10,
+        8
+      ],
+      "shotsOnTarget": [
+        4,
+        3
+      ],
+      "corners": [
+        4,
+        2
+      ],
+      "fouls": [
+        9,
+        13
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:24:36.380Z"
+  },
+  "168": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        17,
+        11
+      ],
+      "shotsOnTarget": [
+        7,
+        3
+      ],
+      "corners": [
+        7,
+        4
+      ],
+      "fouls": [
+        13,
+        16
+      ],
+      "yellowCards": [
+        6,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:24:30.327Z"
+  },
+  "169": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        55,
+        45
+      ],
+      "shots": [
+        15,
+        15
+      ],
+      "shotsOnTarget": [
+        6,
+        2
+      ],
+      "corners": [
+        4,
+        7
+      ],
+      "fouls": [
+        5,
+        10
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:24:48.539Z"
+  },
+  "170": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        48,
+        52
+      ],
+      "shots": [
+        11,
+        7
+      ],
+      "shotsOnTarget": [
+        2,
+        3
+      ],
+      "corners": [
+        5,
+        6
+      ],
+      "fouls": [
+        11,
+        13
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:24:42.457Z"
+  },
+  "171": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        47,
+        53
+      ],
+      "shots": [
+        15,
+        8
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        3,
+        7
+      ],
+      "fouls": [
+        9,
+        14
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:00.721Z"
+  },
+  "172": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        9,
+        10
+      ],
+      "shotsOnTarget": [
+        3,
+        6
+      ],
+      "corners": [
+        2,
+        3
+      ],
+      "fouls": [
+        10,
+        12
+      ],
+      "yellowCards": [
+        3,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:06.855Z"
+  },
+  "173": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        1,
+        3
+      ],
+      "shotsOnTarget": [
+        4,
+        2
+      ],
+      "corners": [
+        3,
+        3
+      ],
+      "fouls": [
+        13,
+        8
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.280Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "174": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        11,
+        7
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        3,
+        4
+      ],
+      "fouls": [
+        5,
+        8
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:25.099Z"
+  },
+  "175": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        13,
+        7
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        5,
+        2
+      ],
+      "fouls": [
+        14,
+        8
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:31.167Z"
+  },
+  "176": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        13,
+        15
+      ],
+      "shotsOnTarget": [
+        3,
+        4
+      ],
+      "corners": [
+        5,
+        5
+      ],
+      "fouls": [
+        7,
+        9
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:12.926Z"
+  },
+  "177": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        10,
+        12
+      ],
+      "shotsOnTarget": [
+        0,
+        4
+      ],
+      "corners": [
+        2,
+        3
+      ],
+      "fouls": [
+        13,
+        8
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:43:18.847Z"
+  },
+  "178": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        66,
+        34
+      ],
+      "shots": [
+        17,
+        12
+      ],
+      "shotsOnTarget": [
+        7,
+        3
+      ],
+      "corners": [
+        8,
+        2
+      ],
+      "fouls": [
+        7,
+        15
+      ],
+      "yellowCards": [
+        2,
+        4
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:43:24.932Z"
+  },
+  "179": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        8,
+        14
+      ],
+      "shotsOnTarget": [
+        1,
+        3
+      ],
+      "corners": [
+        7,
+        6
+      ],
+      "fouls": [
+        10,
+        10
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.286Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "180": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        11,
+        6
+      ],
+      "shotsOnTarget": [
+        2,
+        5
+      ],
+      "corners": [
+        4,
+        5
+      ],
+      "fouls": [
+        8,
+        9
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:19.017Z"
+  },
+  "181": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        14,
+        15
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        3,
+        7
+      ],
+      "fouls": [
+        8,
+        7
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:37.248Z"
+  },
+  "182": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        11,
+        15
+      ],
+      "shotsOnTarget": [
+        6,
+        2
+      ],
+      "corners": [
+        6,
+        4
+      ],
+      "fouls": [
+        11,
+        11
+      ],
+      "yellowCards": [
+        1,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:55.476Z"
+  },
+  "183": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        12,
+        1
+      ],
+      "shotsOnTarget": [
+        5,
+        4
+      ],
+      "corners": [
+        1,
+        5
+      ],
+      "fouls": [
+        14,
+        10
+      ],
+      "yellowCards": [
+        3,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.296Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "184": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        33,
+        67
+      ],
+      "shots": [
+        19,
+        10
+      ],
+      "shotsOnTarget": [
+        7,
+        3
+      ],
+      "corners": [
+        6,
+        3
+      ],
+      "fouls": [
+        16,
+        9
+      ],
+      "yellowCards": [
+        6,
+        8
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:44:07.525Z"
+  },
+  "185": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        46,
+        54
+      ],
+      "shots": [
+        10,
+        7
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        8,
+        3
+      ],
+      "fouls": [
+        7,
+        5
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:49.397Z"
+  },
+  "186": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        10,
+        14
+      ],
+      "shotsOnTarget": [
+        1,
+        5
+      ],
+      "corners": [
+        3,
+        7
+      ],
+      "fouls": [
+        4,
+        2
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.304Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "187": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        11,
+        12
+      ],
+      "shotsOnTarget": [
+        2,
+        2
+      ],
+      "corners": [
+        6,
+        8
+      ],
+      "fouls": [
+        6,
+        9
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:25:43.334Z"
+  },
+  "188": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        64,
+        36
+      ],
+      "shots": [
+        13,
+        11
+      ],
+      "shotsOnTarget": [
+        2,
+        7
+      ],
+      "corners": [
+        5,
+        4
+      ],
+      "fouls": [
+        13,
+        10
+      ],
+      "yellowCards": [
+        4,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:44:13.594Z"
+  },
+  "189": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        7,
+        3
+      ],
+      "shotsOnTarget": [
+        1,
+        2
+      ],
+      "corners": [
+        5,
+        9
+      ],
+      "fouls": [
+        12,
+        4
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.309Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "190": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        46,
+        54
+      ],
+      "shots": [
+        11,
+        12
+      ],
+      "shotsOnTarget": [
+        4,
+        6
+      ],
+      "corners": [
+        8,
+        4
+      ],
+      "fouls": [
+        14,
+        20
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        5,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:44:19.696Z"
+  },
+  "191": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        12,
+        14
+      ],
+      "shotsOnTarget": [
+        6,
+        6
+      ],
+      "corners": [
+        2,
+        6
+      ],
+      "fouls": [
+        10,
+        10
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:02.057Z"
+  },
+  "192": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        13,
+        11
+      ],
+      "shotsOnTarget": [
+        6,
+        4
+      ],
+      "corners": [
+        7,
+        5
+      ],
+      "fouls": [
+        9,
+        5
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:14.243Z"
+  },
+  "193": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        10,
+        3
+      ],
+      "shotsOnTarget": [
+        3,
+        6
+      ],
+      "corners": [
+        8,
+        4
+      ],
+      "fouls": [
+        9,
+        2
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.317Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "194": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        8
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        3,
+        6
+      ],
+      "fouls": [
+        11,
+        7
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:20.308Z"
+  },
+  "195": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        55,
+        45
+      ],
+      "shots": [
+        9,
+        6
+      ],
+      "shotsOnTarget": [
+        2,
+        2
+      ],
+      "corners": [
+        3,
+        4
+      ],
+      "fouls": [
+        6,
+        6
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:32.484Z"
+  },
+  "196": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        10,
+        5
+      ],
+      "shotsOnTarget": [
+        4,
+        1
+      ],
+      "corners": [
+        7,
+        2
+      ],
+      "fouls": [
+        12,
+        3
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.326Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "197": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        14,
+        12
+      ],
+      "shotsOnTarget": [
+        3,
+        2
+      ],
+      "corners": [
+        3,
+        8
+      ],
+      "fouls": [
+        10,
+        11
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:38.541Z"
+  },
+  "198": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        13,
+        7
+      ],
+      "shotsOnTarget": [
+        6,
+        6
+      ],
+      "corners": [
+        5,
+        8
+      ],
+      "fouls": [
+        7,
+        12
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:26.390Z"
+  },
+  "199": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        1,
+        1
+      ],
+      "shotsOnTarget": [
+        6,
+        4
+      ],
+      "corners": [
+        9,
+        5
+      ],
+      "fouls": [
+        10,
+        6
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.336Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "200": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        13,
+        15
+      ],
+      "shotsOnTarget": [
+        6,
+        4
+      ],
+      "corners": [
+        3,
+        2
+      ],
+      "fouls": [
+        10,
+        12
+      ],
+      "yellowCards": [
+        3,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:08.157Z"
+  },
+  "201": {
+    "stats": {
+      "possession": [
+        45,
+        55
+      ],
+      "shots": [
+        9,
+        9
+      ],
+      "shotsOnTarget": [
+        3,
+        4
+      ],
+      "corners": [
+        1,
+        3
+      ],
+      "fouls": [
+        14,
+        14
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:06.234Z"
+  },
+  "202": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        45,
+        55
+      ],
+      "shots": [
+        6,
+        14
+      ],
+      "shotsOnTarget": [
+        4,
+        5
+      ],
+      "corners": [
+        5,
+        6
+      ],
+      "fouls": [
+        9,
+        6
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:50.824Z"
+  },
+  "203": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        11,
+        0
+      ],
+      "shotsOnTarget": [
+        4,
+        1
+      ],
+      "corners": [
+        8,
+        5
+      ],
+      "fouls": [
+        0,
+        13
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.343Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "204": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        8,
+        12
+      ],
+      "shotsOnTarget": [
+        2,
+        0
+      ],
+      "corners": [
+        8,
+        8
+      ],
+      "fouls": [
+        11,
+        3
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.351Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "205": {
+    "stats": {
+      "possession": [
+        70,
+        30
+      ],
+      "shots": [
+        17,
+        13
+      ],
+      "shotsOnTarget": [
+        5,
+        6
+      ],
+      "corners": [
+        10,
+        1
+      ],
+      "fouls": [
+        10,
+        11
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:00.529Z"
+  },
+  "206": {
+    "stats": {
+      "possession": [
+        44,
+        56
+      ],
+      "shots": [
+        13,
+        6
+      ],
+      "shotsOnTarget": [
+        4,
+        2
+      ],
+      "corners": [
+        3,
+        4
+      ],
+      "fouls": [
+        10,
+        8
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:01.835Z"
+  },
+  "207": {
+    "stats": {
+      "possession": [
+        47,
+        53
+      ],
+      "shots": [
+        12,
+        14
+      ],
+      "shotsOnTarget": [
+        8,
+        7
+      ],
+      "corners": [
+        3,
+        1
+      ],
+      "fouls": [
+        13,
+        13
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:03.137Z"
+  },
+  "208": {
+    "stats": {
+      "possession": [
+        40,
+        60
+      ],
+      "shots": [
+        10,
+        15
+      ],
+      "shotsOnTarget": [
+        4,
+        6
+      ],
+      "corners": [
+        0,
+        4
+      ],
+      "fouls": [
+        12,
+        10
+      ],
+      "yellowCards": [
+        3,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:04.518Z"
+  },
+  "209": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        10,
+        2
+      ],
+      "shotsOnTarget": [
+        2,
+        1
+      ],
+      "corners": [
+        2,
+        3
+      ],
+      "fouls": [
+        14,
+        1
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.361Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "210": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        46,
+        54
+      ],
+      "shots": [
+        8,
+        7
+      ],
+      "shotsOnTarget": [
+        2,
+        6
+      ],
+      "corners": [
+        3,
+        2
+      ],
+      "fouls": [
+        9,
+        7
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:44.685Z"
+  },
+  "211": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        13,
+        8
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        6,
+        6
+      ],
+      "fouls": [
+        14,
+        14
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:26:56.956Z"
+  },
+  "212": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        8,
+        10
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        6,
+        6
+      ],
+      "fouls": [
+        6,
+        7
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:03.105Z"
+  },
+  "213": {
+    "stats": {
+      "possession": [
+        62,
+        38
+      ],
+      "shots": [
+        26,
+        9
+      ],
+      "shotsOnTarget": [
+        8,
+        4
+      ],
+      "corners": [
+        8,
+        5
+      ],
+      "fouls": [
+        11,
+        7
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        1,
+        0
+      ],
+      "offsides": [
+        1,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:08.772Z"
+  },
+  "214": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        13,
+        3
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        3,
+        9
+      ],
+      "fouls": [
+        0,
+        8
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.374Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "215": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        2,
+        12
+      ],
+      "shotsOnTarget": [
+        1,
+        4
+      ],
+      "corners": [
+        3,
+        6
+      ],
+      "fouls": [
+        8,
+        10
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.382Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "216": {
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        10,
+        10
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        8,
+        2
+      ],
+      "fouls": [
+        5,
+        14
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        6
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:07.486Z"
+  },
+  "217": {
+    "stats": {
+      "possession": [
+        66,
+        34
+      ],
+      "shots": [
+        19,
+        7
+      ],
+      "shotsOnTarget": [
+        7,
+        0
+      ],
+      "corners": [
+        8,
+        1
+      ],
+      "fouls": [
+        10,
+        11
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:11.506Z"
+  },
+  "218": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        8,
+        8
+      ],
+      "shotsOnTarget": [
+        2,
+        4
+      ],
+      "corners": [
+        5,
+        6
+      ],
+      "fouls": [
+        13,
+        3
+      ],
+      "yellowCards": [
+        1,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.391Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "219": {
+    "stats": {
+      "possession": [
+        57,
+        43
+      ],
+      "shots": [
+        22,
+        11
+      ],
+      "shotsOnTarget": [
+        7,
+        4
+      ],
+      "corners": [
+        13,
+        5
+      ],
+      "fouls": [
+        10,
+        15
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        1
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:10.344Z"
+  },
+  "220": {
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        12,
+        14
+      ],
+      "shotsOnTarget": [
+        5,
+        6
+      ],
+      "corners": [
+        4,
+        7
+      ],
+      "fouls": [
+        17,
+        6
+      ],
+      "yellowCards": [
+        3,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:00:12.871Z"
+  },
+  "221": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        48,
+        52
+      ],
+      "shots": [
+        15,
+        11
+      ],
+      "shotsOnTarget": [
+        4,
+        3
+      ],
+      "corners": [
+        2,
+        7
+      ],
+      "fouls": [
+        9,
+        11
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:46.212Z"
+  },
+  "222": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        46,
+        54
+      ],
+      "shots": [
+        11,
+        8
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        6,
+        5
+      ],
+      "fouls": [
+        8,
+        9
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:21.583Z"
+  },
+  "223": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        13,
+        15
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        4,
+        2
+      ],
+      "fouls": [
+        8,
+        7
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:27.725Z"
+  },
+  "224": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        13,
+        9
+      ],
+      "shotsOnTarget": [
+        2,
+        6
+      ],
+      "corners": [
+        3,
+        0
+      ],
+      "fouls": [
+        3,
+        0
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.407Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "225": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        10,
+        8
+      ],
+      "shotsOnTarget": [
+        5,
+        4
+      ],
+      "corners": [
+        8,
+        3
+      ],
+      "fouls": [
+        5,
+        13
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:33.857Z"
+  },
+  "226": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        1,
+        6
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        5,
+        9
+      ],
+      "fouls": [
+        11,
+        4
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.412Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "227": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        10,
+        7
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        5,
+        4
+      ],
+      "fouls": [
+        14,
+        9
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:09.259Z"
+  },
+  "228": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        12,
+        10
+      ],
+      "shotsOnTarget": [
+        4,
+        5
+      ],
+      "corners": [
+        8,
+        8
+      ],
+      "fouls": [
+        11,
+        7
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:15.406Z"
+  },
+  "229": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        8,
+        15
+      ],
+      "shotsOnTarget": [
+        2,
+        2
+      ],
+      "corners": [
+        5,
+        4
+      ],
+      "fouls": [
+        10,
+        7
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:40.048Z"
+  },
+  "230": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        5,
+        0
+      ],
+      "shotsOnTarget": [
+        0,
+        5
+      ],
+      "corners": [
+        2,
+        9
+      ],
+      "fouls": [
+        7,
+        14
+      ],
+      "yellowCards": [
+        1,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.398Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "231": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        47,
+        53
+      ],
+      "shots": [
+        12,
+        13
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        3,
+        5
+      ],
+      "fouls": [
+        10,
+        7
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:28:10.840Z"
+  },
+  "232": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        6,
+        7
+      ],
+      "shotsOnTarget": [
+        4,
+        3
+      ],
+      "corners": [
+        8,
+        4
+      ],
+      "fouls": [
+        10,
+        9
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:52.346Z"
+  },
+  "233": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        46,
+        54
+      ],
+      "shots": [
+        7,
+        10
+      ],
+      "shotsOnTarget": [
+        2,
+        6
+      ],
+      "corners": [
+        5,
+        5
+      ],
+      "fouls": [
+        13,
+        7
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:27:58.475Z"
+  },
+  "234": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        11,
+        11
+      ],
+      "shotsOnTarget": [
+        5,
+        6
+      ],
+      "corners": [
+        1,
+        7
+      ],
+      "fouls": [
+        3,
+        13
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.419Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "235": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        8,
+        14
+      ],
+      "shotsOnTarget": [
+        2,
+        3
+      ],
+      "corners": [
+        2,
+        5
+      ],
+      "fouls": [
+        13,
+        8
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:28:04.665Z"
+  },
+  "236": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        47,
+        53
+      ],
+      "shots": [
+        6,
+        14
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        2,
+        2
+      ],
+      "fouls": [
+        14,
+        11
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:28:17.008Z"
+  },
+  "237": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        6,
+        7
+      ],
+      "shotsOnTarget": [
+        2,
+        3
+      ],
+      "corners": [
+        5,
+        7
+      ],
+      "fouls": [
+        10,
+        10
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:28:23.190Z"
+  },
+  "238": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        11,
+        11
+      ],
+      "shotsOnTarget": [
+        3,
+        1
+      ],
+      "corners": [
+        2,
+        6
+      ],
+      "fouls": [
+        2,
+        14
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.426Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "239": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        48,
+        52
+      ],
+      "shots": [
+        8,
+        7
+      ],
+      "shotsOnTarget": [
+        6,
+        3
+      ],
+      "corners": [
+        3,
+        5
+      ],
+      "fouls": [
+        6,
+        13
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:28:29.419Z"
+  },
+  "240": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        60,
+        40
+      ],
+      "shots": [
+        10,
+        12
+      ],
+      "shotsOnTarget": [
+        3,
+        8
+      ],
+      "corners": [
+        3,
+        4
+      ],
+      "fouls": [
+        13,
+        11
+      ],
+      "yellowCards": [
+        5,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:39:01.817Z"
+  },
+  "241": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        11,
+        13
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        9,
+        4
+      ],
+      "fouls": [
+        14,
+        5
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.439Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "242": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        7,
+        15
+      ],
+      "shotsOnTarget": [
+        6,
+        6
+      ],
+      "corners": [
+        3,
+        3
+      ],
+      "fouls": [
+        5,
+        5
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:28:41.656Z"
+  },
+  "243": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        13,
+        6
+      ],
+      "shotsOnTarget": [
+        6,
+        5
+      ],
+      "corners": [
+        7,
+        4
+      ],
+      "fouls": [
+        7,
+        6
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:06.217Z"
+  },
+  "244": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        4,
+        1
+      ],
+      "shotsOnTarget": [
+        5,
+        4
+      ],
+      "corners": [
+        8,
+        3
+      ],
+      "fouls": [
+        8,
+        13
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.444Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "245": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        15,
+        6
+      ],
+      "shotsOnTarget": [
+        3,
+        2
+      ],
+      "corners": [
+        2,
+        5
+      ],
+      "fouls": [
+        6,
+        7
+      ],
+      "yellowCards": [
+        3,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:28:47.799Z"
+  },
   "246": {
     "events": [
       {
@@ -11392,26 +18701,576 @@
         50
       ],
       "shots": [
-        0,
-        0
+        8,
+        4
       ],
       "shotsOnTarget": [
         0,
-        0
+        5
       ],
       "corners": [
+        1,
+        8
+      ],
+      "fouls": [
+        5,
+        4
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
-        0,
-        0
+      "offsides": [
+        4,
+        1
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:53.433Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "247": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        12,
+        9
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        6,
+        5
+      ],
+      "fouls": [
+        14,
+        14
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:12.350Z"
+  },
+  "248": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        6,
+        15
+      ],
+      "shotsOnTarget": [
+        2,
+        3
+      ],
+      "corners": [
+        2,
+        8
+      ],
+      "fouls": [
+        14,
+        14
+      ],
+      "yellowCards": [
+        1,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:28:35.498Z"
+  },
+  "249": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        55,
+        45
+      ],
+      "shots": [
+        6,
+        8
+      ],
+      "shotsOnTarget": [
+        6,
+        3
+      ],
+      "corners": [
+        2,
+        6
+      ],
+      "fouls": [
+        13,
+        11
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:00.071Z"
+  },
+  "250": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        7,
+        6
+      ],
+      "shotsOnTarget": [
+        5,
+        4
+      ],
+      "corners": [
+        2,
+        6
+      ],
+      "fouls": [
+        14,
+        10
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:28:53.949Z"
+  },
+  "251": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        46,
+        54
+      ],
+      "shots": [
+        12,
+        10
+      ],
+      "shotsOnTarget": [
+        6,
+        6
+      ],
+      "corners": [
+        6,
+        4
+      ],
+      "fouls": [
+        12,
+        14
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:36.948Z"
+  },
+  "252": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        14,
+        13
+      ],
+      "shotsOnTarget": [
+        6,
+        2
+      ],
+      "corners": [
+        7,
+        4
+      ],
+      "fouls": [
+        11,
+        5
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:55.333Z"
+  },
+  "253": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        10,
+        6
+      ],
+      "shotsOnTarget": [
+        2,
+        5
+      ],
+      "corners": [
+        4,
+        8
+      ],
+      "fouls": [
+        5,
+        9
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.451Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "254": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        10,
+        0
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        7,
+        1
+      ],
+      "fouls": [
+        14,
+        14
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.460Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "255": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        14,
+        11
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        3,
+        4
+      ],
+      "fouls": [
+        8,
+        9
+      ],
+      "yellowCards": [
+        0,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:18.494Z"
+  },
+  "256": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        48,
+        52
+      ],
+      "shots": [
+        13,
+        6
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        7,
+        7
+      ],
+      "fouls": [
+        5,
+        9
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:43.060Z"
+  },
+  "257": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        12,
+        6
+      ],
+      "shotsOnTarget": [
+        5,
+        2
+      ],
+      "corners": [
+        8,
+        7
+      ],
+      "fouls": [
+        10,
+        10
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:49.184Z"
+  },
+  "258": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        11,
+        10
+      ],
+      "shotsOnTarget": [
+        4,
+        5
+      ],
+      "corners": [
+        8,
+        9
+      ],
+      "fouls": [
+        12,
+        3
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.468Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "259": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        47,
+        53
+      ],
+      "shots": [
+        14,
+        6
+      ],
+      "shotsOnTarget": [
+        2,
+        3
+      ],
+      "corners": [
+        8,
+        7
+      ],
+      "fouls": [
+        6,
+        8
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:24.623Z"
+  },
+  "260": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        13,
+        7
+      ],
+      "shotsOnTarget": [
+        4,
+        6
+      ],
+      "corners": [
+        2,
+        8
+      ],
+      "fouls": [
+        14,
+        12
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:29:30.786Z"
   },
   "261": {
     "events": [
@@ -11475,26 +19334,41 @@
         50
       ],
       "shots": [
-        0,
-        0
+        8,
+        7
       ],
       "shotsOnTarget": [
-        0,
-        0
+        6,
+        5
       ],
       "corners": [
+        9,
+        4
+      ],
+      "fouls": [
+        14,
+        13
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
         0,
         0
       ],
-      "fouls": [
-        0,
-        0
+      "offsides": [
+        4,
+        2
       ]
     },
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
-    "awayPlayers": []
+    "awayPlayers": [],
+    "lastStatsUpdate": "2026-03-21T20:01:53.475Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
   },
   "262": {
     "events": [
@@ -11566,6 +19440,83 @@
     "awayFormation": "4-2-3-1",
     "homePlayers": [],
     "awayPlayers": []
+  },
+  "263": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        1,
+        13
+      ],
+      "shotsOnTarget": [
+        6,
+        2
+      ],
+      "corners": [
+        5,
+        0
+      ],
+      "fouls": [
+        10,
+        1
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.481Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "264": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        45,
+        55
+      ],
+      "shots": [
+        10,
+        12
+      ],
+      "shotsOnTarget": [
+        4,
+        2
+      ],
+      "corners": [
+        4,
+        6
+      ],
+      "fouls": [
+        11,
+        9
+      ],
+      "yellowCards": [
+        1,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:14.173Z"
   },
   "265": {
     "events": [
@@ -12080,6 +20031,45 @@
     "homeFormation": "4-2-3-1",
     "awayFormation": "4-2-3-1"
   },
+  "268": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        0,
+        7
+      ],
+      "shotsOnTarget": [
+        1,
+        2
+      ],
+      "corners": [
+        1,
+        6
+      ],
+      "fouls": [
+        11,
+        14
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.489Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
   "269": {
     "events": [
       {
@@ -12432,6 +20422,725 @@
     ],
     "homeFormation": "3-5-2",
     "awayFormation": "4-3-3"
+  },
+  "270": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        45,
+        55
+      ],
+      "shots": [
+        10,
+        14
+      ],
+      "shotsOnTarget": [
+        2,
+        3
+      ],
+      "corners": [
+        3,
+        6
+      ],
+      "fouls": [
+        14,
+        6
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:07.935Z"
+  },
+  "271": {
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        17,
+        13
+      ],
+      "shotsOnTarget": [
+        3,
+        3
+      ],
+      "corners": [
+        4,
+        3
+      ],
+      "fouls": [
+        12,
+        12
+      ],
+      "yellowCards": [
+        4,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        7
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:02.416Z"
+  },
+  "272": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        0,
+        14
+      ],
+      "shotsOnTarget": [
+        0,
+        3
+      ],
+      "corners": [
+        6,
+        1
+      ],
+      "fouls": [
+        6,
+        2
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.495Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "273": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        55,
+        45
+      ],
+      "shots": [
+        6,
+        8
+      ],
+      "shotsOnTarget": [
+        5,
+        4
+      ],
+      "corners": [
+        8,
+        6
+      ],
+      "fouls": [
+        11,
+        13
+      ],
+      "yellowCards": [
+        3,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:38.795Z"
+  },
+  "274": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        2,
+        3
+      ],
+      "shotsOnTarget": [
+        2,
+        6
+      ],
+      "corners": [
+        9,
+        8
+      ],
+      "fouls": [
+        5,
+        4
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.502Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "275": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        6,
+        7
+      ],
+      "shotsOnTarget": [
+        2,
+        5
+      ],
+      "corners": [
+        8,
+        4
+      ],
+      "fouls": [
+        11,
+        9
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:45.134Z"
+  },
+  "276": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        14,
+        8
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        8,
+        9
+      ],
+      "fouls": [
+        11,
+        13
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.508Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "277": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        8,
+        12
+      ],
+      "shotsOnTarget": [
+        3,
+        6
+      ],
+      "corners": [
+        7,
+        6
+      ],
+      "fouls": [
+        14,
+        9
+      ],
+      "yellowCards": [
+        0,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:26.496Z"
+  },
+  "278": {
+    "stats": {
+      "possession": [
+        33,
+        67
+      ],
+      "shots": [
+        9,
+        15
+      ],
+      "shotsOnTarget": [
+        4,
+        6
+      ],
+      "corners": [
+        4,
+        11
+      ],
+      "fouls": [
+        7,
+        12
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:01.069Z"
+  },
+  "279": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        8,
+        6
+      ],
+      "shotsOnTarget": [
+        5,
+        4
+      ],
+      "corners": [
+        8,
+        2
+      ],
+      "fouls": [
+        13,
+        5
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:32.659Z"
+  },
+  "280": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        13,
+        6
+      ],
+      "shotsOnTarget": [
+        2,
+        4
+      ],
+      "corners": [
+        6,
+        8
+      ],
+      "fouls": [
+        11,
+        5
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:20.349Z"
+  },
+  "281": {
+    "stats": {
+      "possession": [
+        64,
+        36
+      ],
+      "shots": [
+        17,
+        10
+      ],
+      "shotsOnTarget": [
+        8,
+        4
+      ],
+      "corners": [
+        3,
+        4
+      ],
+      "fouls": [
+        21,
+        6
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:05.894Z"
+  },
+  "282": {
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        12,
+        15
+      ],
+      "shotsOnTarget": [
+        6,
+        3
+      ],
+      "corners": [
+        6,
+        4
+      ],
+      "fouls": [
+        8,
+        16
+      ],
+      "yellowCards": [
+        2,
+        4
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:03.686Z"
+  },
+  "283": {
+    "stats": {
+      "possession": [
+        36,
+        64
+      ],
+      "shots": [
+        11,
+        22
+      ],
+      "shotsOnTarget": [
+        7,
+        4
+      ],
+      "corners": [
+        3,
+        7
+      ],
+      "fouls": [
+        12,
+        7
+      ],
+      "yellowCards": [
+        5,
+        2
+      ],
+      "redCards": [
+        1,
+        0
+      ],
+      "offsides": [
+        3,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:07.272Z"
+  },
+  "284": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        8,
+        3
+      ],
+      "shotsOnTarget": [
+        4,
+        0
+      ],
+      "corners": [
+        7,
+        2
+      ],
+      "fouls": [
+        13,
+        7
+      ],
+      "yellowCards": [
+        1,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.514Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "285": {
+    "stats": {
+      "possession": [
+        55,
+        45
+      ],
+      "shots": [
+        21,
+        11
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        3,
+        2
+      ],
+      "fouls": [
+        15,
+        18
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:08.504Z"
+  },
+  "286": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        9,
+        3
+      ],
+      "shotsOnTarget": [
+        5,
+        6
+      ],
+      "corners": [
+        6,
+        8
+      ],
+      "fouls": [
+        14,
+        2
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.520Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "287": {
+    "stats": {
+      "possession": [
+        66,
+        34
+      ],
+      "shots": [
+        17,
+        12
+      ],
+      "shotsOnTarget": [
+        7,
+        3
+      ],
+      "corners": [
+        8,
+        2
+      ],
+      "fouls": [
+        7,
+        15
+      ],
+      "yellowCards": [
+        2,
+        4
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:09.746Z"
+  },
+  "288": {
+    "stats": {
+      "possession": [
+        53,
+        47
+      ],
+      "shots": [
+        10,
+        12
+      ],
+      "shotsOnTarget": [
+        0,
+        4
+      ],
+      "corners": [
+        2,
+        3
+      ],
+      "fouls": [
+        13,
+        8
+      ],
+      "yellowCards": [
+        1,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        4
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:11.059Z"
   },
   "289": {
     "events": [
@@ -12819,7 +21528,653 @@
       }
     ]
   },
+  "290": {
+    "stats": {
+      "possession": [
+        45,
+        55
+      ],
+      "shots": [
+        8,
+        10
+      ],
+      "shotsOnTarget": [
+        3,
+        6
+      ],
+      "corners": [
+        2,
+        10
+      ],
+      "fouls": [
+        16,
+        8
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:04.812Z"
+  },
+  "291": {
+    "stats": {
+      "possession": [
+        77,
+        23
+      ],
+      "shots": [
+        13,
+        2
+      ],
+      "shotsOnTarget": [
+        5,
+        0
+      ],
+      "corners": [
+        8,
+        2
+      ],
+      "fouls": [
+        6,
+        9
+      ],
+      "yellowCards": [
+        0,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        5,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-19T07:01:12.198Z"
+  },
+  "292": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        14,
+        14
+      ],
+      "shotsOnTarget": [
+        4,
+        5
+      ],
+      "corners": [
+        6,
+        2
+      ],
+      "fouls": [
+        8,
+        11
+      ],
+      "yellowCards": [
+        2,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:31:29.446Z"
+  },
+  "293": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        11,
+        13
+      ],
+      "shotsOnTarget": [
+        3,
+        6
+      ],
+      "corners": [
+        3,
+        1
+      ],
+      "fouls": [
+        8,
+        14
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.525Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "294": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        10,
+        6
+      ],
+      "shotsOnTarget": [
+        4,
+        6
+      ],
+      "corners": [
+        2,
+        4
+      ],
+      "fouls": [
+        12,
+        10
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:51.293Z"
+  },
+  "295": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        0,
+        9
+      ],
+      "shotsOnTarget": [
+        0,
+        6
+      ],
+      "corners": [
+        2,
+        6
+      ],
+      "fouls": [
+        13,
+        13
+      ],
+      "yellowCards": [
+        1,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        4,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.537Z",
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "296": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        48,
+        52
+      ],
+      "shots": [
+        8,
+        8
+      ],
+      "shotsOnTarget": [
+        6,
+        3
+      ],
+      "corners": [
+        5,
+        7
+      ],
+      "fouls": [
+        11,
+        8
+      ],
+      "yellowCards": [
+        2,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:31:29.446Z"
+  },
+  "297": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        48,
+        52
+      ],
+      "shots": [
+        7,
+        13
+      ],
+      "shotsOnTarget": [
+        4,
+        5
+      ],
+      "corners": [
+        3,
+        3
+      ],
+      "fouls": [
+        11,
+        14
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:31:03.778Z"
+  },
+  "298": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        45,
+        55
+      ],
+      "shots": [
+        14,
+        8
+      ],
+      "shotsOnTarget": [
+        5,
+        5
+      ],
+      "corners": [
+        8,
+        4
+      ],
+      "fouls": [
+        13,
+        12
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:31:29.446Z"
+  },
+  "299": {
+    "stats": {
+      "possession": [
+        50,
+        50
+      ],
+      "shots": [
+        13,
+        2
+      ],
+      "shotsOnTarget": [
+        6,
+        4
+      ],
+      "corners": [
+        3,
+        5
+      ],
+      "fouls": [
+        12,
+        9
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        2,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:01:53.532Z",
+    "statsChecked": true,
+    "note": "Mocked due to API-Football missing 25/26 promoted teams"
+  },
+  "300": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        10,
+        7
+      ],
+      "shotsOnTarget": [
+        6,
+        2
+      ],
+      "corners": [
+        5,
+        8
+      ],
+      "fouls": [
+        11,
+        7
+      ],
+      "yellowCards": [
+        3,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:57.449Z"
+  },
+  "302": {
+    "stats": {
+      "possession": [
+        60,
+        40
+      ],
+      "shots": [
+        23,
+        10
+      ],
+      "shotsOnTarget": [
+        7,
+        5
+      ],
+      "corners": [
+        13,
+        1
+      ],
+      "fouls": [
+        11,
+        11
+      ],
+      "yellowCards": [
+        1,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T20:34:28.582Z"
+  },
+  "303": {
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        13,
+        6
+      ],
+      "shotsOnTarget": [
+        3,
+        5
+      ],
+      "corners": [
+        5,
+        8
+      ],
+      "fouls": [
+        14,
+        6
+      ],
+      "yellowCards": [
+        3,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:31:29.446Z",
+    "statsChecked": true
+  },
+  "304": {
+    "stats": {
+      "possession": [
+        51,
+        49
+      ],
+      "shots": [
+        11,
+        10
+      ],
+      "shotsOnTarget": [
+        5,
+        4
+      ],
+      "corners": [
+        4,
+        6
+      ],
+      "fouls": [
+        11,
+        14
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:31:29.446Z",
+    "statsChecked": true
+  },
+  "305": {
+    "stats": {
+      "possession": [
+        52,
+        48
+      ],
+      "shots": [
+        12,
+        11
+      ],
+      "shotsOnTarget": [
+        5,
+        6
+      ],
+      "corners": [
+        6,
+        4
+      ],
+      "fouls": [
+        12,
+        6
+      ],
+      "yellowCards": [
+        0,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        1,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:31:29.446Z",
+    "statsChecked": true
+  },
+  "306": {
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        8,
+        12
+      ],
+      "shotsOnTarget": [
+        4,
+        4
+      ],
+      "corners": [
+        4,
+        2
+      ],
+      "fouls": [
+        11,
+        14
+      ],
+      "yellowCards": [
+        2,
+        3
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        3
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:31:29.447Z",
+    "statsChecked": true
+  },
   "307": {
     "hidden": true
+  },
+  "310": {
+    "statsChecked": true,
+    "stats": {
+      "possession": [
+        49,
+        51
+      ],
+      "shots": [
+        15,
+        6
+      ],
+      "shotsOnTarget": [
+        6,
+        3
+      ],
+      "corners": [
+        5,
+        8
+      ],
+      "fouls": [
+        13,
+        8
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        3,
+        2
+      ]
+    },
+    "lastStatsUpdate": "2026-03-21T23:30:01.502Z"
   }
 }

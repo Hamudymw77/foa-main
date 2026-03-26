@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { Match } from "@/types"
 import { User, X } from "lucide-react"
+import { Match } from "@/types"
+import { PlayerAvatar } from "./PlayerAvatar"
 
 interface FormationViewProps {
   selectedMatch: Match
@@ -76,15 +77,13 @@ export function FormationView({ selectedMatch }: FormationViewProps) {
                                           `}
                                       >
                                           {player.photo ? (
-                                              <img 
-                                                  src={player.photo} 
-                                                  alt={player.name}
-                                                  className="w-full h-full object-cover object-top rounded-full" 
-                                                  onError={(e) => {
-                                                      const target = e.currentTarget;
-                                                      target.src = 'https://fantasy.premierleague.com/dist/img/shirts/standard/shirt_0-66.png';
-                                                  }}
-                                              />
+                                              <div className="w-full h-full rounded-full overflow-hidden">
+                                                  <PlayerAvatar 
+                                                      name={player.name}
+                                                      photoUrl={player.photo}
+                                                      className="w-full h-full scale-110 translate-y-1"
+                                                  />
+                                              </div>
                                           ) : (
                                               <span className="text-xs font-bold text-white">{player.number || '?'}</span>
                                           )}
@@ -123,7 +122,14 @@ export function FormationView({ selectedMatch }: FormationViewProps) {
                   
                   <div className="w-40 h-40 rounded-full bg-gradient-to-br from-slate-800 to-black border-4 border-accent shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-hidden relative">
                       {previewPlayer.photo ? (
-                          <img src={previewPlayer.photo} className="w-full h-full object-cover object-top scale-110" />
+                          <img 
+                              src={previewPlayer.photo} 
+                              className="w-full h-full object-cover object-top scale-110 bg-slate-800"
+                              onError={(e) => {
+                                  e.currentTarget.onerror = null;
+                                  e.currentTarget.src = 'https://resources.premierleague.com/premierleague/photos/players/110x140/Photo-Missing.png';
+                              }}
+                          />
                       ) : (
                           <User className="w-20 h-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/20" />
                       )}

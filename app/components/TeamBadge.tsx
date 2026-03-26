@@ -1,6 +1,37 @@
 import { Shield } from "lucide-react";
 import { TEAM_LOGOS } from "../lib/constants";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+const foreignLogos: Record<string, string> = {
+  "Real Madrid": "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
+  "Barcelona": "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg",
+  "Bayern Munich": "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg",
+  "Bayern": "https://upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg",
+  "PSG": "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg",
+  "Paris Saint-Germain": "https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg",
+  "Juventus": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Juventus_FC_2017_icon_%28black%29.svg",
+  "AC Milan": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg",
+  "Milan": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg",
+  "Inter": "https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg",
+  "Atletico Madrid": "https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg",
+  "Atlético Madrid": "https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg",
+  "Napoli": "https://upload.wikimedia.org/wikipedia/commons/2/2d/SSC_Napoli_2023.svg",
+  "Dortmund": "https://upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg"
+};
+
+const brokenTeams = [
+  "Coventry City", "Hamburg", "LASK", "Cruzeiro", "Wigan", "Port Vale", "Accrington", "St. Pauli",
+  "Cremonese", "Crewe", "Shrewsbury", "Brest", "Man United", "Kasimpasa", "Flamengo", "Ipswich Town",
+  "Olympiacos", "Crvena zvezda", "Malmö", "Preston", "Stockport", "Bolton", "Birmingham",
+  "Rennes", "Huddersfield", "Union SG", "Daejeon Hana Citizen", "Hellas Verona", "Independiente",
+  "PSV Eindhoven", "Reading", "LA Galaxy", "Coventry", "Augsburg", "Swansea", "Fiorentina",
+  "Millwall", "Dundee", "Doncaster", "Antwerp", "Toulouse", "Le Havre", "Palmeiras", "Shakhtar Donetsk",
+  "Exeter", "St Mirren", "Auxerre", "Blackpool", "Montpellier", "Portsmouth", "Udinese", "Hoffenheim",
+  "Al Hilal", "Leyton Orient", "Oxford United", "Chesterfield", "Colchester", "Wolfsburg", "Parma",
+  "Suwon Bluewings", "Cerro Porteño", "Rosenborg", "Northampton", "Notts County", "West Brom",
+  "Strasbourg", "Westerlo", "Ipswich", "Norwich", "lens", "Kawasaki", "Fluminense", "Nice",
+  "Leipzig", "Southampton", "Leicester", "Slavia Praha", "Celta Vigo", "Botafogo", "Karlsruher"
+];
 
 interface TeamBadgeProps {
   name: string;
@@ -11,12 +42,30 @@ interface TeamBadgeProps {
 export function TeamBadge({ name, className = "w-10 h-10", showName = false }: TeamBadgeProps) {
   const [error, setError] = useState(false);
 
-  // Normalize name lookup
+  // 1. Check Foreign Logos
+  if (foreignLogos[name]) {
+    return (
+      <img 
+        src={foreignLogos[name]} 
+        alt={name} 
+        className={`${className} object-contain drop-shadow-md`}
+        title={name}
+      />
+    );
+  }
+
+  // 2. Check Broken Teams or Empty Name
+  if (!name || brokenTeams.includes(name)) {
+    return (
+      <div className={`flex items-center justify-center bg-white/10 rounded-full ${className}`} title={name}>
+        <Shield className="w-1/2 h-1/2 text-white/40" />
+      </div>
+    );
+  }
+
+  // 3. Standard FPL URL
   const logoUrl = TEAM_LOGOS[name] || TEAM_LOGOS[Object.keys(TEAM_LOGOS).find(k => k.toLowerCase() === name?.toLowerCase()) || ''];
   
-  // Extract code from existing SVG URL to construct the requested PNG URL
-  // format in constants: .../badges/t3.svg
-  // requested format: .../badges/t3.png
   let pngUrl = logoUrl;
   if (logoUrl) {
     const match = logoUrl.match(/t(\d+)\.svg/);
@@ -37,57 +86,10 @@ export function TeamBadge({ name, className = "w-10 h-10", showName = false }: T
     );
   }
 
-  // Fallback for non-PL teams using the Foreign Logo Proxy
-  return <ForeignTeamBadge name={name} className={className} />;
-}
-
-function ForeignTeamBadge({ name, className }: { name: string, className: string }) {
-    const [src, setSrc] = useState<string | null>(null);
-    const [error, setError] = useState(false);
-
-    useEffect(() => {
-        let mounted = true;
-        const fetchLogo = async () => {
-            try {
-                // Use the proxy endpoint we created earlier
-                const res = await fetch(`/api/foreign-logo?team=${encodeURIComponent(name)}`);
-                if (res.ok) {
-                    const data = await res.json();
-                    if (mounted && data.logo) setSrc(data.logo);
-                    else if (mounted) setError(true);
-                } else {
-                    if (mounted) setError(true);
-                }
-            } catch {
-                if (mounted) setError(true);
-            }
-        };
-        
-        // Only fetch if we have a name
-        if (name) {
-            fetchLogo();
-        } else {
-            setError(true);
-        }
-        
-        return () => { mounted = false; };
-    }, [name]);
-
-    if (src && !error) {
-        return (
-            <img 
-                src={src} 
-                alt={name} 
-                className={`${className} object-contain drop-shadow-md`}
-                title={name}
-                onError={() => setError(true)}
-            />
-        );
-    }
-
-    return (
-        <div className={`flex items-center justify-center bg-white/10 rounded-full ${className}`} title={name}>
-            <Shield className="w-1/2 h-1/2 text-white/40" />
-        </div>
-    );
+  // Fallback if FPL URL fails
+  return (
+    <div className={`flex items-center justify-center bg-white/10 rounded-full ${className}`} title={name}>
+      <Shield className="w-1/2 h-1/2 text-white/40" />
+    </div>
+  );
 }

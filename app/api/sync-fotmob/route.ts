@@ -1,13 +1,19 @@
 import { NextResponse } from 'next/server';
+import { normalizeTeamName } from '../../lib/api-mapper';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { homeTeam, awayTeam, date } = body;
+    let { homeTeam, awayTeam, date } = body;
 
     if (!homeTeam || !awayTeam || !date) {
         return NextResponse.json({ error: 'Chybí parametry (homeTeam, awayTeam, date)' }, { status: 400 });
     }
+
+    // Normalize FPL names to standard/ESPN-friendly names
+    homeTeam = normalizeTeamName(homeTeam);
+    awayTeam = normalizeTeamName(awayTeam);
+
 
     // 1. Získání data ve formátu YYYYMMDD pro ESPN
     let dateStr = '';

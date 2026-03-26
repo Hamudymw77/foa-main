@@ -153,7 +153,7 @@ export default function TransfersPage() {
             setData(json)
         }
       } catch (e) {
-        console.error(e)
+        console.warn("Failed to fetch transfers (might be network/server restart):", e)
       } finally {
         setIsLoading(false)
       }

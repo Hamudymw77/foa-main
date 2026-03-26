@@ -43,7 +43,7 @@ export function useStatisticsData() {
         }
 
       } catch (e) {
-        console.error(e);
+        console.warn("Failed to load statistics (might be network/server restart):", e);
       } finally {
         setIsLoading(false);
       }

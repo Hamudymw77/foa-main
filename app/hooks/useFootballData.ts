@@ -36,7 +36,7 @@ export function useFootballData() {
             }
         }
       } catch (error) {
-        console.error("Failed to fetch data", error);
+        console.warn("Failed to fetch data (might be network/server restart):", error);
         setError(error as Error);
       } finally {
         setIsLoading(false);
