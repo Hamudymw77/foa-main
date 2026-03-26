@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 
 function normalizeTeamForMatch(name: string) { 
   if (!name) return ""; 
@@ -32,6 +34,36 @@ function normalizeTeamForMatch(name: string) {
 // Global cache for fixture lists to avoid hammering the API
 let fixturesCache: { [key: string]: { data: any[], timestamp: number } } = {};
 const CACHE_DURATION = 3600 * 1000; // 1 hour
+const OVERRIDES_FILE = path.join(process.cwd(), 'app', 'admin_overrides.json');
+
+function getOverrides() {
+  try {
+    if (!fs.existsSync(OVERRIDES_FILE)) return {};
+    return JSON.parse(fs.readFileSync(OVERRIDES_FILE, 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
+function mapOverrideStatsToUi(overrideStats: any) {
+  const possession = Array.isArray(overrideStats?.possession) ? overrideStats.possession : [0, 0];
+  const shots = Array.isArray(overrideStats?.shots) ? overrideStats.shots : [0, 0];
+  const shotsOnTarget = Array.isArray(overrideStats?.shotsOnTarget) ? overrideStats.shotsOnTarget : [0, 0];
+  const corners = Array.isArray(overrideStats?.corners) ? overrideStats.corners : [0, 0];
+  const fouls = Array.isArray(overrideStats?.fouls) ? overrideStats.fouls : [0, 0];
+  const yellowCards = Array.isArray(overrideStats?.yellowCards) ? overrideStats.yellowCards : [0, 0];
+
+  const shotsOffTarget = [Math.max(0, shots[0] - shotsOnTarget[0]), Math.max(0, shots[1] - shotsOnTarget[1])];
+
+  return {
+    possession: { home: Number(possession[0]) || 0, away: Number(possession[1]) || 0 },
+    shotsOnTarget: { home: Number(shotsOnTarget[0]) || 0, away: Number(shotsOnTarget[1]) || 0 },
+    shotsOffTarget: { home: Number(shotsOffTarget[0]) || 0, away: Number(shotsOffTarget[1]) || 0 },
+    corners: { home: Number(corners[0]) || 0, away: Number(corners[1]) || 0 },
+    fouls: { home: Number(fouls[0]) || 0, away: Number(fouls[1]) || 0 },
+    yellowCards: { home: Number(yellowCards[0]) || 0, away: Number(yellowCards[1]) || 0 }
+  };
+}
 
 function seededRandom(seed: number) {
   let t = seed >>> 0;
@@ -97,6 +129,15 @@ export async function GET(request: Request) {
   const API_URL = 'https://v3.football.api-sports.io';
 
   try {
+    const overrides = getOverrides();
+    const o = overrides[fplMatchId];
+    if (o?.stats) {
+      const possession = Array.isArray(o.stats.possession) ? o.stats.possession : [0, 0];
+      if ((Number(possession[0]) || 0) + (Number(possession[1]) || 0) > 0) {
+        return NextResponse.json(mapOverrideStatsToUi(o.stats));
+      }
+    }
+
     // 2. Determine Season Year (Force 2025 for 25/26 Season)
     let seasonYear = '2025'; 
     // Logic removed to enforce 2025/2026 season focus
@@ -147,11 +188,7 @@ export async function GET(request: Request) {
         console.warn(`[Match Stats] Match NOT found in API-Football list. Season: ${seasonYear}, Teams: ${homeTeam} vs ${awayTeam}`);
         const normalizedHome = normalizeTeamForMatch(homeTeam || '');
         const normalizedAway = normalizeTeamForMatch(awayTeam || '');
-        const isPromoted = ['burnley', 'leeds', 'sunderland'].includes(normalizedHome) || ['burnley', 'leeds', 'sunderland'].includes(normalizedAway);
-        if (isPromoted) {
-          return NextResponse.json(getMockStats(`${fplMatchId}:${normalizedHome}:${normalizedAway}`));
-        }
-        return NextResponse.json(getEmptyStats());
+        return NextResponse.json(getMockStats(`${fplMatchId}:${normalizedHome}:${normalizedAway}`));
     }
 
     const realFixtureId = matchingFixture.fixture.id;

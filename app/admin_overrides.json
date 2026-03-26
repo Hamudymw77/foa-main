@@ -21947,6 +21947,44 @@
     },
     "lastStatsUpdate": "2026-03-21T23:30:57.449Z"
   },
+  "301": {
+    "stats": {
+      "possession": [
+        48,
+        52
+      ],
+      "shots": [
+        10,
+        12
+      ],
+      "shotsOnTarget": [
+        3,
+        6
+      ],
+      "corners": [
+        8,
+        2
+      ],
+      "fouls": [
+        5,
+        14
+      ],
+      "yellowCards": [
+        0,
+        1
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-26T17:40:21.006Z",
+    "statsChecked": true
+  },
   "302": {
     "stats": {
       "possession": [
@@ -22138,6 +22176,82 @@
   },
   "307": {
     "hidden": true
+  },
+  "308": {
+    "stats": {
+      "possession": [
+        47,
+        53
+      ],
+      "shots": [
+        10,
+        7
+      ],
+      "shotsOnTarget": [
+        5,
+        3
+      ],
+      "corners": [
+        5,
+        2
+      ],
+      "fouls": [
+        6,
+        11
+      ],
+      "yellowCards": [
+        2,
+        0
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        1
+      ]
+    },
+    "lastStatsUpdate": "2026-03-26T17:40:21.006Z",
+    "statsChecked": true
+  },
+  "309": {
+    "stats": {
+      "possession": [
+        54,
+        46
+      ],
+      "shots": [
+        8,
+        10
+      ],
+      "shotsOnTarget": [
+        2,
+        2
+      ],
+      "corners": [
+        3,
+        3
+      ],
+      "fouls": [
+        12,
+        8
+      ],
+      "yellowCards": [
+        0,
+        2
+      ],
+      "redCards": [
+        0,
+        0
+      ],
+      "offsides": [
+        0,
+        0
+      ]
+    },
+    "lastStatsUpdate": "2026-03-26T17:40:21.006Z",
+    "statsChecked": true
   },
   "310": {
     "statsChecked": true,
