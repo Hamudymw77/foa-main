@@ -1,9 +1,5 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-// Cesta k overrides souboru
-const OVERRIDES_FILE = path.join(process.cwd(), 'app', 'admin_overrides.json');
+import { getOverrides } from '../../lib/overridesStorage';
 
 const stadiums: Record<string, string> = { 
   "Arsenal": "Emirates Stadium, London", 
@@ -38,19 +34,6 @@ const stadiums: Record<string, string> = {
   "Wolves": "Molineux Stadium, Wolverhampton", 
   "Wolverhampton Wanderers": "Molineux Stadium, Wolverhampton" 
 };
-
-// Pomocná funkce pro čtení overrides (zde pouze pro čtení, zápis dělá admin API)
-function getOverrides() {
-  try {
-    if (fs.existsSync(OVERRIDES_FILE)) {
-      const data = fs.readFileSync(OVERRIDES_FILE, 'utf8');
-      return JSON.parse(data);
-    }
-  } catch (error) {
-    console.error("Chyba při čtení overrides:", error);
-  }
-  return {};
-}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);

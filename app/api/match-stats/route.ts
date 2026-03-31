@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { getOverrides } from '../../lib/overridesStorage';
 
 function normalizeTeamForMatch(name: string) { 
   if (!name) return ""; 
@@ -34,16 +33,6 @@ function normalizeTeamForMatch(name: string) {
 // Global cache for fixture lists to avoid hammering the API
 let fixturesCache: { [key: string]: { data: any[], timestamp: number } } = {};
 const CACHE_DURATION = 3600 * 1000; // 1 hour
-const OVERRIDES_FILE = path.join(process.cwd(), 'app', 'admin_overrides.json');
-
-function getOverrides() {
-  try {
-    if (!fs.existsSync(OVERRIDES_FILE)) return {};
-    return JSON.parse(fs.readFileSync(OVERRIDES_FILE, 'utf8'));
-  } catch {
-    return {};
-  }
-}
 
 function mapOverrideStatsToUi(overrideStats: any) {
   const possession = Array.isArray(overrideStats?.possession) ? overrideStats.possession : [0, 0];
@@ -117,7 +106,6 @@ function getMockStats(seedKey: string) {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const fplMatchId = searchParams.get('matchId');
-  const dateParam = searchParams.get('date');
   const homeTeam = searchParams.get('homeTeam');
   const awayTeam = searchParams.get('awayTeam');
 

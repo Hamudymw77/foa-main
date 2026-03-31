@@ -1,11 +1,9 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { getOverrides, saveOverrides } from '../../../lib/overridesStorage';
 
 // --- CONFIGURATION ---
 const API_KEY = process.env.API_FOOTBALL_KEY || '';
 const API_URL = 'https://v3.football.api-sports.io';
-const OVERRIDES_FILE = path.join(process.cwd(), 'app', 'admin_overrides.json');
 
 function normalizeTeamForMatch(name: string) { 
   if (!name) return ""; 
@@ -89,26 +87,9 @@ function getMockOverrideStats(seedKey: string) {
   };
 }
 
-function getOverrides() {
-  try {
-    if (fs.existsSync(OVERRIDES_FILE)) {
-      const data = fs.readFileSync(OVERRIDES_FILE, 'utf8');
-      return JSON.parse(data);
-    }
-  } catch (error) {
-    console.error("Error reading overrides:", error);
-  }
-  return {};
-}
-
-function saveOverrides(data: any) {
-  try {
-    fs.writeFileSync(OVERRIDES_FILE, JSON.stringify(data, null, 2), 'utf8');
-    return true;
-  } catch (error) {
-    console.error("Error writing overrides:", error);
-    return false;
-  }
+function saveOverridesOrThrow(data: any) {
+  const result = saveOverrides(data);
+  if (!result.ok) throw new Error(result.error || 'Failed to save overrides');
 }
 
 // Fetch all fixtures for a season (cached in memory for the request duration)
@@ -146,7 +127,7 @@ async function fetchFixtureStats(fixtureId: number) {
     }
 }
 
-export async function POST(request: Request) {
+export async function POST(_request: Request) {
   try {
     // 1. Load existing data
     let overrides = getOverrides();
@@ -200,7 +181,6 @@ export async function POST(request: Request) {
 
         const fplHome = normalizeTeamForMatch(homeTeamName);
         const fplAway = normalizeTeamForMatch(awayTeamName);
-        const isPromoted = ['burnley', 'leeds', 'sunderland'].includes(fplHome) || ['burnley', 'leeds', 'sunderland'].includes(fplAway);
 
         // Check if stats are already populated
         const hasStats = currentOverride.stats && 
@@ -276,7 +256,7 @@ export async function POST(request: Request) {
 
                 // Save every 5 updates to be safe
                 if (updatedCount % 5 === 0) {
-                    saveOverrides(overrides);
+                    saveOverridesOrThrow(overrides);
                 }
 
                 console.log(`Updated stats for match ${matchId} (${homeTeamName} vs ${awayTeamName})`);
@@ -292,9 +272,7 @@ export async function POST(request: Request) {
                 };
                 updatedCount++;
                 processedMatches.push(matchId);
-                if (updatedCount % 5 === 0) {
-                    saveOverrides(overrides);
-                }
+                if (updatedCount % 5 === 0) saveOverridesOrThrow(overrides);
             }
         } else {
             console.warn(`Match not found in API-Football: ${homeTeamName} vs ${awayTeamName}`);
@@ -307,15 +285,13 @@ export async function POST(request: Request) {
             };
             updatedCount++;
             processedMatches.push(matchId);
-            if (updatedCount % 5 === 0) {
-                saveOverrides(overrides);
-            }
+            if (updatedCount % 5 === 0) saveOverridesOrThrow(overrides);
             console.log(`Updated mock stats for match ${matchId} (${homeTeamName} vs ${awayTeamName})`);
         }
     }
 
     // Final save
-    saveOverrides(overrides);
+    saveOverridesOrThrow(overrides);
 
     return NextResponse.json({
         success: true,

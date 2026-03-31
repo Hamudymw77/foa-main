@@ -1,32 +1,5 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-const OVERRIDES_FILE = path.join(process.cwd(), 'app', 'admin_overrides.json');
-
-// Pomocná funkce pro čtení overridů
-function getOverrides() {
-  try {
-    if (fs.existsSync(OVERRIDES_FILE)) {
-      const data = fs.readFileSync(OVERRIDES_FILE, 'utf8');
-      return JSON.parse(data);
-    }
-  } catch (error) {
-    console.error("Chyba při čtení overrides:", error);
-  }
-  return {};
-}
-
-// Pomocná funkce pro zápis overridů
-function saveOverrides(data: any) {
-  try {
-    fs.writeFileSync(OVERRIDES_FILE, JSON.stringify(data, null, 2), 'utf8');
-    return true;
-  } catch (error) {
-    console.error("Chyba při zápisu overrides:", error);
-    return false;
-  }
-}
+import { getOverrides, saveOverrides } from '../../lib/overridesStorage';
 
 export async function POST(request: Request) {
   try {
@@ -95,12 +68,11 @@ export async function POST(request: Request) {
     if (homePlayers) matchOverrides.homePlayers = homePlayers;
     if (awayPlayers) matchOverrides.awayPlayers = awayPlayers;
 
-
     // 4. Uložení
-    const success = saveOverrides(overrides);
+    const saveResult = saveOverrides(overrides);
 
-    if (!success) {
-      return NextResponse.json({ error: 'Chyba při ukládání souboru' }, { status: 500 });
+    if (!saveResult.ok) {
+      return NextResponse.json({ error: 'Chyba při ukládání souboru', details: saveResult.error }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, message: 'Data uložena', overrides: matchOverrides });
