@@ -38,15 +38,12 @@ export async function POST(request: Request) {
     // 2. Načtení hesla z prostředí (ENV)
     const envPassword = process.env.ADMIN_PASSWORD?.trim() || '';
 
-    // 3. Logování pro odhalení problému (vypíše se v terminálu)
-    console.log('--- ADMIN AUTH DEBUG ---');
-    console.log('Zadáno z frontendu:', providedPassword);
-    console.log('Heslo v .env.local:', envPassword ? '********' : '(nenastaveno)'); // Pro bezpečnost nevypisujeme do logu celé heslo z env
-    console.log('Shodují se?:', providedPassword === envPassword);
-
     // 4. Samotná kontrola
     if (!envPassword) {
-      return NextResponse.json({ error: 'Na serveru není nastaveno ADMIN_PASSWORD v .env.local' }, { status: 500 });
+      return NextResponse.json(
+        { error: 'Na serveru není nastaveno ADMIN_PASSWORD. Nastavte ho v prostředí (Environment Variables).' },
+        { status: 500 }
+      );
     }
 
     if (providedPassword !== envPassword) {
