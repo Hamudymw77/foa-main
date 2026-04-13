@@ -24,16 +24,18 @@ export function getSupabaseAdmin() {
   return supabaseAdminClient;
 }
 
-export async function dbGetAllMatchOverrides() {
+function matchOverridesTable() {
   const supabase = getSupabaseAdmin();
+  return supabase.from('match_overrides') as any;
+}
 
+export async function dbGetAllMatchOverrides() {
   const result: Record<string, any> = {};
   const pageSize = 1000;
   let from = 0;
 
   while (true) {
-    const { data, error } = await supabase
-      .from('match_overrides')
+    const { data, error } = await matchOverridesTable()
       .select('match_id,data')
       .order('match_id', { ascending: true })
       .range(from, from + pageSize - 1);
@@ -54,22 +56,19 @@ export async function dbGetAllMatchOverrides() {
 }
 
 export async function dbGetMatchOverride(matchId: string) {
-  const supabase = getSupabaseAdmin();
-  const { data, error } = await supabase.from('match_overrides').select('match_id,data').eq('match_id', matchId).maybeSingle();
+  const { data, error } = await matchOverridesTable().select('match_id,data').eq('match_id', matchId).maybeSingle();
   if (error) throw new Error(error.message);
   return (data as any)?.data ?? null;
 }
 
 export async function dbUpsertMatchOverride(matchId: string, overrideData: any) {
-  const supabase = getSupabaseAdmin();
-  const { error } = await supabase.from('match_overrides').upsert({ match_id: matchId, data: overrideData }, { onConflict: 'match_id' });
+  const { error } = await matchOverridesTable().upsert({ match_id: matchId, data: overrideData }, { onConflict: 'match_id' });
   if (error) throw new Error(error.message);
 }
 
 export async function dbUpsertManyMatchOverrides(items: Array<{ matchId: string; data: any }>) {
   if (items.length === 0) return;
-  const supabase = getSupabaseAdmin();
   const payload = items.map((i) => ({ match_id: i.matchId, data: i.data }));
-  const { error } = await supabase.from('match_overrides').upsert(payload, { onConflict: 'match_id' });
+  const { error } = await matchOverridesTable().upsert(payload, { onConflict: 'match_id' });
   if (error) throw new Error(error.message);
 }
