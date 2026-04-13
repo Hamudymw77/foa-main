@@ -41,7 +41,7 @@ export async function GET(request: Request) {
 
   try {
     // 0. Načtení overrides
-    const overrides = getOverrides();
+    const overrides = await getOverrides();
 
     // 1. Stáhnutí základních dat (týmy, hráči)
     const bootstrapRes = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/', { 

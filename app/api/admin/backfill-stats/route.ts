@@ -87,9 +87,9 @@ function getMockOverrideStats(seedKey: string) {
   };
 }
 
-function saveOverridesOrThrow(data: any) {
-  const result = saveOverrides(data);
-  if (!result.ok) throw new Error(result.error || 'Failed to save overrides');
+async function saveOverridesOrThrow(data: any) {
+  const result = await saveOverrides(data);
+  if (!result.ok) throw new Error((result as any).error || 'Failed to save overrides');
 }
 
 // Fetch all fixtures for a season (cached in memory for the request duration)
@@ -130,7 +130,7 @@ async function fetchFixtureStats(fixtureId: number) {
 export async function POST(_request: Request) {
   try {
     // 1. Load existing data
-    let overrides = getOverrides();
+    let overrides = await getOverrides();
     let updatedCount = 0;
     let failedCount = 0;
     let skippedCount = 0;
@@ -256,7 +256,7 @@ export async function POST(_request: Request) {
 
                 // Save every 5 updates to be safe
                 if (updatedCount % 5 === 0) {
-                    saveOverridesOrThrow(overrides);
+                    await saveOverridesOrThrow(overrides);
                 }
 
                 console.log(`Updated stats for match ${matchId} (${homeTeamName} vs ${awayTeamName})`);
@@ -272,7 +272,7 @@ export async function POST(_request: Request) {
                 };
                 updatedCount++;
                 processedMatches.push(matchId);
-                if (updatedCount % 5 === 0) saveOverridesOrThrow(overrides);
+                if (updatedCount % 5 === 0) await saveOverridesOrThrow(overrides);
             }
         } else {
             console.warn(`Match not found in API-Football: ${homeTeamName} vs ${awayTeamName}`);
@@ -285,13 +285,13 @@ export async function POST(_request: Request) {
             };
             updatedCount++;
             processedMatches.push(matchId);
-            if (updatedCount % 5 === 0) saveOverridesOrThrow(overrides);
+            if (updatedCount % 5 === 0) await saveOverridesOrThrow(overrides);
             console.log(`Updated mock stats for match ${matchId} (${homeTeamName} vs ${awayTeamName})`);
         }
     }
 
     // Final save
-    saveOverridesOrThrow(overrides);
+    await saveOverridesOrThrow(overrides);
 
     return NextResponse.json({
         success: true,

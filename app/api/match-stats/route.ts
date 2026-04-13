@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getOverrides } from '../../lib/overridesStorage';
+import { getOverride } from '../../lib/overridesStorage';
 
 function normalizeTeamForMatch(name: string) { 
   if (!name) return ""; 
@@ -117,8 +117,7 @@ export async function GET(request: Request) {
   const API_URL = 'https://v3.football.api-sports.io';
 
   try {
-    const overrides = getOverrides();
-    const o = overrides[fplMatchId];
+    const o = await getOverride(fplMatchId);
     if (o?.stats) {
       const possession = Array.isArray(o.stats.possession) ? o.stats.possession : [0, 0];
       if ((Number(possession[0]) || 0) + (Number(possession[1]) || 0) > 0) {

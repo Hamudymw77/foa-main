@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getOverrides, saveOverrides } from '../../lib/overridesStorage';
+import { getOverride, saveOverride } from '../../lib/overridesStorage';
 
 export async function POST(request: Request) {
   try {
@@ -27,14 +27,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Chybí ID zápasu' }, { status: 400 });
     }
 
-    // 2. Načtení stávajících overridů
-    const overrides = getOverrides();
-    
-    if (!overrides[matchId]) {
-      overrides[matchId] = {};
-    }
-
-    const matchOverrides = overrides[matchId];
+    const existing = (await getOverride(matchId)) || {};
+    const matchOverrides = existing;
 
     // 3. Aktualizace dat
     
@@ -68,11 +62,10 @@ export async function POST(request: Request) {
     if (homePlayers) matchOverrides.homePlayers = homePlayers;
     if (awayPlayers) matchOverrides.awayPlayers = awayPlayers;
 
-    // 4. Uložení
-    const saveResult = saveOverrides(overrides);
+    const saveResult = await saveOverride(matchId, matchOverrides);
 
     if (!saveResult.ok) {
-      return NextResponse.json({ error: 'Chyba při ukládání souboru', details: saveResult.error }, { status: 500 });
+      return NextResponse.json({ error: 'Chyba při ukládání dat', details: (saveResult as any).error }, { status: 500 });
     }
 
     return NextResponse.json({ success: true, message: 'Data uložena', overrides: matchOverrides });
