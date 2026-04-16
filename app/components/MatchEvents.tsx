@@ -66,20 +66,11 @@ export function MatchEvents({ selectedMatch }: MatchEventsProps) {
                     {event.type === "goal" && <span className="text-xl">⚽</span>}
                     {event.type === "yellow" && <span className="text-xl">🟨</span>}
                     {event.type === "red" && <span className="text-xl">🟥</span>}
-                    {event.type === "substitution" && <span className="text-xl">🔄</span>}
                     
                     <span className="font-extrabold text-white text-lg tracking-tight">
                       {event.type === "substitution" ? (
-                        <span className="flex items-center gap-2">
-                          <span className="text-green-500 font-semibold drop-shadow-[0_0_8px_rgba(74,222,128,0.3)]">
-                            <span className="mr-1">⬆️</span>{event.playerIn}
-                          </span>
-                          <span className="text-secondary/60 text-[10px] font-bold uppercase tracking-widest">IN</span>
-                          <span className="text-secondary/40">/</span>
-                          <span className="text-red-500 font-semibold drop-shadow-[0_0_8px_rgba(248,113,113,0.3)]">
-                            <span className="mr-1">⬇️</span>{event.playerOut}
-                          </span>
-                          <span className="text-secondary/60 text-[10px] font-bold uppercase tracking-widest">OUT</span>
+                        <span>
+                          {event.playerIn} (IN) / {event.playerOut} (OUT)
                         </span>
                       ) : (
                         <span className={`${
