@@ -593,14 +593,18 @@ export default function AdminPage() {
           return;
       }
 
+      const currentPassword = password || sessionStorage.getItem('adminPassword') || '';
+
       toast.promise(
           fetch('/api/sync-fotmob', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ 
+                  matchId: match.id,
                   homeTeam: match.homeTeam, 
                   awayTeam: match.awayTeam, 
-                  date: rawDate 
+                  date: rawDate,
+                  password: currentPassword
               })
           }).then(async (res) => {
               const data = await res.json();
@@ -612,8 +616,35 @@ export default function AdminPage() {
                   throw new Error(errorMsg);
               }
 
+              const mergeUniqueEvents = (existing: any[], incoming: any[]) => {
+                  const out: any[] = [];
+                  const seen = new Set<string>();
+                  const add = (ev: any) => {
+                      const key = `${ev.type || ''}-${ev.minute || ''}-${ev.displayMinute || ''}-${ev.team || ''}-${ev.player || ''}-${ev.playerIn || ''}-${ev.playerOut || ''}`;
+                      if (seen.has(key)) return;
+                      seen.add(key);
+                      out.push(ev);
+                  };
+                  (existing || []).forEach(add);
+                  (incoming || []).forEach(add);
+                  return out;
+              };
+
               if (data.events && data.events.length > 0) {
-                  setCurrentEvents(prev => [...prev, ...data.events]);
+                  setCurrentEvents(prev => mergeUniqueEvents(prev, data.events));
+              }
+
+              if (data.stats) {
+                  setCurrentStats((prev: any) => ({ ...(prev || {}), ...data.stats }));
+              }
+
+              const refreshRes = await fetch('/api/football?type=matches')
+              if (refreshRes.ok) {
+                  const newData = await refreshRes.json()
+                  setMatches(newData)
+              }
+
+              if (data.events && data.events.length > 0) {
                   return 'Události úspěšně staženy!';
               } else {
                   throw new Error('Žádné události nenalezeny');

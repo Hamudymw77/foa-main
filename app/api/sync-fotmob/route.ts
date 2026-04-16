@@ -1,10 +1,125 @@
 import { NextResponse } from 'next/server';
 import { normalizeTeamName } from '../../lib/api-mapper';
+import { getOverride, saveOverride } from '../../lib/overridesStorage';
+
+function normalizeTeamForMatch(name: string) {
+  if (!name) return '';
+  const lower = name.toLowerCase().trim();
+  if (lower.includes('manchester united') || lower.includes('man utd')) return 'manutd';
+  if (lower.includes('manchester city') || lower.includes('man city')) return 'mancity';
+  if (lower.includes('tottenham') || lower.includes('spurs')) return 'tottenham';
+  if (lower.includes('nott') && lower.includes('forest')) return 'nottingham';
+  if (lower.includes('newcastle')) return 'newcastle';
+  if (lower.includes('wolv') || lower.includes('wolves')) return 'wolves';
+  if (lower.includes('bournemouth')) return 'bournemouth';
+  if (lower.includes('brighton')) return 'brighton';
+  if (lower.includes('west ham')) return 'westham';
+  if (lower.includes('leeds')) return 'leeds';
+  if (lower.includes('sunderland')) return 'sunderland';
+  if (lower.includes('burnley')) return 'burnley';
+  if (lower.includes('aston villa') || lower.includes('villa')) return 'villa';
+  if (lower.includes('crystal palace') || lower.includes('palace')) return 'palace';
+  if (lower.includes('arsenal')) return 'arsenal';
+  if (lower.includes('brentford')) return 'brentford';
+  if (lower.includes('chelsea')) return 'chelsea';
+  if (lower.includes('everton')) return 'everton';
+  if (lower.includes('fulham')) return 'fulham';
+  if (lower.includes('liverpool')) return 'liverpool';
+  if (lower.includes('ipswich')) return 'ipswich';
+  if (lower.includes('leicester')) return 'leicester';
+  if (lower.includes('southampton')) return 'southampton';
+  return lower.replace(/[^a-z0-9]/g, '');
+}
+
+function mergeUniqueEvents(existing: any[], incoming: any[]) {
+  const out: any[] = [];
+  const seen = new Set<string>();
+  const add = (ev: any) => {
+    const key = `${ev.type || ''}-${ev.minute || ''}-${ev.displayMinute || ''}-${ev.team || ''}-${ev.player || ''}-${ev.playerIn || ''}-${ev.playerOut || ''}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push(ev);
+  };
+  (existing || []).forEach(add);
+  (incoming || []).forEach(add);
+  return out;
+}
+
+async function fetchApiFootballStats(homeTeam: string, awayTeam: string, isoDate: string) {
+  const API_KEY = process.env.API_FOOTBALL_KEY || '';
+  if (!API_KEY) return null;
+
+  const API_URL = 'https://v3.football.api-sports.io';
+
+  const fetchFixtures = async (season: string) => {
+    const res = await fetch(`${API_URL}/fixtures?league=39&season=${season}&date=${isoDate}`, {
+      headers: { 'x-apisports-key': API_KEY }
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.response || [];
+  };
+
+  const [fixtures2025, fixtures2024] = await Promise.all([fetchFixtures('2025'), fetchFixtures('2024')]);
+  const allFixtures = [...fixtures2025, ...fixtures2024];
+
+  const fplHome = normalizeTeamForMatch(homeTeam);
+  const fplAway = normalizeTeamForMatch(awayTeam);
+
+  const direct = allFixtures.find((m: any) => {
+    const apiHome = normalizeTeamForMatch(m.teams?.home?.name || '');
+    const apiAway = normalizeTeamForMatch(m.teams?.away?.name || '');
+    return apiHome === fplHome && apiAway === fplAway;
+  });
+  const reverse = allFixtures.find((m: any) => {
+    const apiHome = normalizeTeamForMatch(m.teams?.home?.name || '');
+    const apiAway = normalizeTeamForMatch(m.teams?.away?.name || '');
+    return apiHome === fplAway && apiAway === fplHome;
+  });
+
+  const fixture = direct || reverse;
+  if (!fixture?.fixture?.id) return null;
+
+  const statsRes = await fetch(`${API_URL}/fixtures/statistics?fixture=${fixture.fixture.id}`, {
+    headers: { 'x-apisports-key': API_KEY }
+  });
+  if (!statsRes.ok) return null;
+  const statsData = await statsRes.json();
+  const statsResponse = statsData.response;
+  if (!statsResponse || statsResponse.length !== 2) return null;
+
+  const homeStats = statsResponse[0].statistics;
+  const awayStats = statsResponse[1].statistics;
+
+  const getValue = (arr: any[], type: string) => {
+    const item = arr.find((s) => s.type === type);
+    if (!item) return 0;
+    let val = item.value;
+    if (val === null) return 0;
+    if (typeof val === 'string' && val.includes('%')) val = parseInt(val.replace('%', ''));
+    return typeof val === 'number' ? val : 0;
+  };
+
+  const newStats = {
+    possession: [getValue(homeStats, 'Ball Possession'), getValue(awayStats, 'Ball Possession')],
+    shots: [getValue(homeStats, 'Total Shots'), getValue(awayStats, 'Total Shots')],
+    shotsOnTarget: [getValue(homeStats, 'Shots on Goal'), getValue(awayStats, 'Shots on Goal')],
+    corners: [getValue(homeStats, 'Corner Kicks'), getValue(awayStats, 'Corner Kicks')],
+    fouls: [getValue(homeStats, 'Fouls'), getValue(awayStats, 'Fouls')],
+    yellowCards: [getValue(homeStats, 'Yellow Cards'), getValue(awayStats, 'Yellow Cards')],
+    redCards: [getValue(homeStats, 'Red Cards'), getValue(awayStats, 'Red Cards')],
+    offsides: [getValue(homeStats, 'Offsides'), getValue(awayStats, 'Offsides')]
+  };
+
+  const poss = newStats.possession;
+  if (!Array.isArray(poss) || poss.length !== 2 || poss[0] + poss[1] <= 0) return null;
+  return newStats;
+}
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    let { homeTeam, awayTeam, date } = body;
+    let { homeTeam, awayTeam, date, matchId, password } = body;
 
     if (!homeTeam || !awayTeam || !date) {
         return NextResponse.json({ error: 'Chybí parametry (homeTeam, awayTeam, date)' }, { status: 400 });
@@ -41,6 +156,8 @@ export async function POST(request: Request) {
     if (!dateStr || dateStr.length !== 8) {
          return NextResponse.json({ error: 'Neplatné datum. ESPN vyžaduje YYYYMMDD.' }, { status: 400 });
     }
+
+    const isoDate = `${dateStr.substring(0, 4)}-${dateStr.substring(4, 6)}-${dateStr.substring(6, 8)}`;
 
     // 2. Najít zápas v ESPN Scoreboard
     const scoreboardUrl = `http://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${dateStr}`;
@@ -327,7 +444,42 @@ export async function POST(request: Request) {
          }, { status: 404 });
     }
 
-    return NextResponse.json({ success: true, events: finalEvents });
+    const apiFootballStats = await fetchApiFootballStats(homeTeam, awayTeam, isoDate);
+
+    if (matchId) {
+      const envPassword = process.env.ADMIN_PASSWORD?.trim() || '';
+      const providedPassword = String(password || '').trim();
+      if (!envPassword) {
+        return NextResponse.json(
+          { error: 'Na serveru není nastaveno ADMIN_PASSWORD. Nastavte ho v prostředí (Environment Variables).' },
+          { status: 500 }
+        );
+      }
+      if (providedPassword !== envPassword) {
+        return NextResponse.json({ error: 'Unauthorized: Nesprávné heslo' }, { status: 401 });
+      }
+
+      const existing = (await getOverride(String(matchId))) || {};
+      const mergedEvents = mergeUniqueEvents(existing.events || [], finalEvents);
+
+      const nextOverride: any = {
+        ...existing,
+        events: mergedEvents,
+        lastSync: new Date().toISOString()
+      };
+
+      if (apiFootballStats) {
+        nextOverride.stats = {
+          ...(existing.stats || {}),
+          ...apiFootballStats
+        };
+        nextOverride.lastStatsUpdate = new Date().toISOString();
+      }
+
+      await saveOverride(String(matchId), nextOverride);
+    }
+
+    return NextResponse.json({ success: true, events: finalEvents, stats: apiFootballStats });
 
   } catch (error: any) {
     console.error('ESPN Sync Error:', error);
