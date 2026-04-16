@@ -69,8 +69,14 @@ export function MatchEvents({ selectedMatch }: MatchEventsProps) {
                     
                     <span className="font-extrabold text-white text-lg tracking-tight">
                       {event.type === "substitution" ? (
-                        <span>
-                          {event.playerIn} (IN) / {event.playerOut} (OUT)
+                        <span className="flex items-center gap-2">
+                          <span className="text-green-500">
+                            {event.playerIn} (IN)
+                          </span>
+                          <span className="text-secondary/40">/</span>
+                          <span className="text-red-500">
+                            {event.playerOut} (OUT)
+                          </span>
                         </span>
                       ) : (
                         <span className={`${

@@ -119,7 +119,7 @@ async function fetchApiFootballStats(homeTeam: string, awayTeam: string, isoDate
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    let { homeTeam, awayTeam, date, matchId, password } = body;
+    let { homeTeam, awayTeam, date, matchId: fplMatchId, password } = body;
 
     if (!homeTeam || !awayTeam || !date) {
         return NextResponse.json({ error: 'Chybí parametry (homeTeam, awayTeam, date)' }, { status: 400 });
@@ -446,7 +446,7 @@ export async function POST(request: Request) {
 
     const apiFootballStats = await fetchApiFootballStats(homeTeam, awayTeam, isoDate);
 
-    if (matchId) {
+    if (fplMatchId) {
       const envPassword = process.env.ADMIN_PASSWORD?.trim() || '';
       const providedPassword = String(password || '').trim();
       if (!envPassword) {
@@ -459,7 +459,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Unauthorized: Nesprávné heslo' }, { status: 401 });
       }
 
-      const existing = (await getOverride(String(matchId))) || {};
+      const existing = (await getOverride(String(fplMatchId))) || {};
       const mergedEvents = mergeUniqueEvents(existing.events || [], finalEvents);
 
       const nextOverride: any = {
@@ -476,7 +476,7 @@ export async function POST(request: Request) {
         nextOverride.lastStatsUpdate = new Date().toISOString();
       }
 
-      await saveOverride(String(matchId), nextOverride);
+      await saveOverride(String(fplMatchId), nextOverride);
     }
 
     return NextResponse.json({ success: true, events: finalEvents, stats: apiFootballStats });
