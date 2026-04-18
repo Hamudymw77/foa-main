@@ -1,6 +1,7 @@
 import { Shield } from "lucide-react";
 import { TEAM_LOGOS } from "../lib/constants";
 import { useState } from "react";
+import { proxifyImageUrl } from "../lib/imageProxy";
 
 const foreignLogos: Record<string, string> = {
   "Real Madrid": "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
@@ -46,7 +47,7 @@ export function TeamBadge({ name, logoUrl, className = "w-10 h-10", showName = f
   if (logoUrl && !error) {
     return (
       <img
-        src={logoUrl}
+        src={proxifyImageUrl(logoUrl)}
         alt={name}
         className={`${className} object-contain drop-shadow-md`}
         title={name}
@@ -59,7 +60,7 @@ export function TeamBadge({ name, logoUrl, className = "w-10 h-10", showName = f
   if (foreignLogos[name]) {
     return (
       <img 
-        src={foreignLogos[name]} 
+        src={proxifyImageUrl(foreignLogos[name])} 
         alt={name} 
         className={`${className} object-contain drop-shadow-md`}
         title={name}
@@ -90,7 +91,7 @@ export function TeamBadge({ name, logoUrl, className = "w-10 h-10", showName = f
   if (pngUrl && !error) {
     return (
       <img 
-        src={pngUrl} 
+        src={proxifyImageUrl(pngUrl)} 
         alt={name} 
         className={`${className} object-contain drop-shadow-md`}
         title={name}

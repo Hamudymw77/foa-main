@@ -1,5 +1,6 @@
 import { User } from "lucide-react";
 import { useEffect, useState } from "react";
+import { proxifyImageUrl } from "../lib/imageProxy";
 
 interface PlayerAvatarProps {
   name: string;
@@ -33,7 +34,7 @@ export function PlayerAvatar({ name, photoUrl, code, className = "w-full h-full"
     return (
       <div className={`bg-slate-800 flex items-center justify-center ${className}`}>
         <img 
-            src={fallbackUrl}
+            src={proxifyImageUrl(fallbackUrl)}
             alt={name}
             className="w-full h-full object-cover object-top opacity-50"
             onError={(e) => {
@@ -47,7 +48,7 @@ export function PlayerAvatar({ name, photoUrl, code, className = "w-full h-full"
 
   return (
     <img 
-      src={finalUrl} 
+      src={proxifyImageUrl(finalUrl)} 
       alt={name} 
       className={`${className} object-cover object-top`}
       onError={() => setError(true)}

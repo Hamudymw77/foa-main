@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Shield } from "lucide-react";
+import { proxifyImageUrl } from "../lib/imageProxy";
 
 interface TeamLogoProps {
   teamName: string;
@@ -62,7 +63,7 @@ export function TeamLogo({ teamName, url, className = "" }: TeamLogoProps) {
 
   return (
     <img
-      src={currentUrl}
+      src={proxifyImageUrl(currentUrl)}
       alt={`${teamName} logo`}
       className={`${className} object-contain`}
       onError={() => setError(true)}

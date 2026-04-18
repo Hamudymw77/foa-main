@@ -10,6 +10,7 @@ import { MatchSummaryCard } from "../components/MatchSummaryCard"
 import html2canvas from "html2canvas"
 import { toast, Toaster } from "sonner"
 import { compressImageFile } from "../lib/imageCompression"
+import { proxifyImageUrl } from "../lib/imageProxy"
 import { 
   Trophy, 
   RefreshCw, 
@@ -1270,7 +1271,7 @@ export default function AdminPage() {
                                                             {player ? (
                                                                 <>
                                                                     {player.photo ? (
-                                                                        <img src={player.photo} className="w-full h-full object-cover object-top rounded-full" />
+                                                                        <img src={proxifyImageUrl(player.photo)} className="w-full h-full object-cover object-top rounded-full" />
                                                                     ) : (
                                                                         <span className="text-xs font-bold">{player.number || '?'}</span>
                                                                     )}
@@ -1344,7 +1345,7 @@ export default function AdminPage() {
                                                             {player ? (
                                                                 <>
                                                                     {player.photo ? (
-                                                                        <img src={player.photo} className="w-full h-full object-cover object-top rounded-full" />
+                                                                        <img src={proxifyImageUrl(player.photo)} className="w-full h-full object-cover object-top rounded-full" />
                                                                     ) : (
                                                                         <span className="text-xs font-bold">{player.number || '?'}</span>
                                                                     )}

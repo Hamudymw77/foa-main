@@ -27,6 +27,32 @@ function mapDbRowToFrontend(row: any) {
   return out;
 }
 
+function inferWindowFromRow(t: any): 'summer_25' | 'winter_26' {
+  const window = String(t?.window || '').trim();
+  if (window === 'summer_25' || window === 'winter_26') return window;
+
+  const rawDate = String(t?.date || '').trim();
+  if (rawDate) {
+    const parsed = new Date(rawDate);
+    if (!Number.isNaN(parsed.getTime())) {
+      const year = parsed.getUTCFullYear();
+      const month = parsed.getUTCMonth() + 1;
+      if (year === 2026 && month <= 2) return 'winter_26';
+      return 'summer_25';
+    }
+
+    const m = rawDate.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (m) {
+      const year = parseInt(m[1], 10);
+      const month = parseInt(m[2], 10);
+      if (year === 2026 && month <= 2) return 'winter_26';
+      return 'summer_25';
+    }
+  }
+
+  return 'summer_25';
+}
+
 function normalizeTransferPayload(transfer: any) {
   const row: Record<string, any> = {
     player: transfer?.player ?? transfer?.name ?? null,
@@ -72,10 +98,16 @@ export async function GET(request: Request) {
     const transfers = (Array.isArray(data) ? data : []).map(mapDbRowToFrontend);
     const visibleTransfers = includeDeleted ? transfers : transfers.filter((t: any) => !t.deleted);
 
-    // Sort logic handled in frontend or pre-sorted?
-    // Let's split into summer and winter for the frontend
-    const summer = visibleTransfers.filter((t: any) => t.window === 'summer_25');
-    const winter = visibleTransfers.filter((t: any) => t.window === 'winter_26');
+    const withWindow = visibleTransfers.map((t: any) => ({ ...t, window: inferWindowFromRow(t) }));
+    const summer = withWindow.filter((t: any) => t.window === 'summer_25');
+    const winter = withWindow.filter((t: any) => t.window === 'winter_26');
+
+    console.log('Transfers GET debug:', {
+      total: transfers.length,
+      visible: visibleTransfers.length,
+      summer: summer.length,
+      winter: winter.length
+    });
 
     // If fetching deleted specifically (e.g. for trash view), we might want a flat list or separated
     // For now, returning standard structure but filtered is consistent.
@@ -84,7 +116,7 @@ export async function GET(request: Request) {
     return NextResponse.json({
         summer,
         winter,
-        all: visibleTransfers // Returning flat list too might be helpful for admin
+        all: withWindow // Returning flat list too might be helpful for admin
     });
 
   } catch (error) {
