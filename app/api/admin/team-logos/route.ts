@@ -123,8 +123,8 @@ export async function POST(request: Request) {
 
     if (isSupabaseConfigured()) {
       const supabase = getSupabaseAdmin();
-      const { error } = await supabase
-        .from('team_logos')
+      const { error } = await (supabase
+        .from('team_logos') as any)
         .upsert({ team_name: teamName, url, updated_at: new Date().toISOString() }, { onConflict: 'team_name' });
       if (error) {
         if (shouldFallbackToLocal(error.message)) {
