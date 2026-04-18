@@ -120,7 +120,10 @@ export const DataService = {
       }
 
       const res = await fetch('/api/football?type=stats');
-      if (!res.ok) throw new Error('Failed to fetch stats');
+      if (!res.ok) {
+        console.warn('Stats endpoint returned non-OK:', res.status, res.statusText);
+        return [];
+      }
       const data = await res.json();
       
       await db.put('scorers', { data, timestamp: Date.now() }, 'allPlayers');

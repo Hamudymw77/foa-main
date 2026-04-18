@@ -90,7 +90,7 @@ export async function POST(request: Request) {
 
     const supabase = getSupabaseAdmin();
     const { error } = await (supabase.from('team_logos') as any).upsert(
-      { team_name: teamName, url, updated_at: new Date().toISOString() },
+      { team_name: teamName, url },
       { onConflict: 'team_name' }
     );
     if (error) {

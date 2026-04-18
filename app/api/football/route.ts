@@ -40,8 +40,17 @@ export async function GET(request: Request) {
   const type = searchParams.get('type') || 'matches';
 
   try {
-    // 0. Načtení overrides
-    const overrides = await getOverrides();
+    // 0. Načtení overrides jen tam, kde jsou potřeba
+    let overrides: Record<string, any> = {};
+    if (type === 'matches') {
+      try {
+        overrides = await getOverrides();
+      } catch (e) {
+        // Stats/standings endpointy nesmí spadnout jen kvůli override úložišti.
+        console.warn('Overrides load failed, continuing with empty overrides:', e);
+        overrides = {};
+      }
+    }
 
     // 1. Stáhnutí základních dat (týmy, hráči)
     const bootstrapRes = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/', { 
@@ -56,16 +65,22 @@ export async function GET(request: Request) {
     const teamsMap = new Map(bootstrapData.teams.map((t: any) => [t.id, { name: t.name, code: t.code }]));
     const playersMap = new Map(bootstrapData.elements.map((p: any) => [p.id, `${p.first_name} ${p.second_name}`]));
 
-    // 2. Stáhnutí zápasů
-    const fixturesRes = await fetch('https://fantasy.premierleague.com/api/fixtures/', { 
+    // Fixtures načítáme až když je skutečně potřebujeme (matches/standings),
+    // aby endpoint type=stats nespadl na chybě fixtures.
+    let fixturesData: any[] | undefined;
+    const getFixturesData = async (): Promise<any[]> => {
+      if (fixturesData) return fixturesData;
+      const fixturesRes = await fetch('https://fantasy.premierleague.com/api/fixtures/', {
         next: { revalidate: 60 },
         headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         },
         cache: 'no-store'
-    });
-    if (!fixturesRes.ok) throw new Error('FPL Fixtures selhalo');
-    const fixturesData = await fixturesRes.json();
+      });
+      if (!fixturesRes.ok) throw new Error('FPL Fixtures selhalo');
+      fixturesData = (await fixturesRes.json()) as any[];
+      return fixturesData;
+    };
 
     // --- ZPRACOVÁNÍ HRÁČŮ ---
     if (type === 'players') {
@@ -93,6 +108,7 @@ export async function GET(request: Request) {
 
     // --- ZPRACOVÁNÍ ZÁPASŮ ---
     if (type === 'matches') {
+      const fixturesData = await getFixturesData();
       const matches = fixturesData.map((f: any) => {
         const homeTeamData = teamsMap.get(f.team_h) || { name: 'Neznámý', code: 0 };
         const awayTeamData = teamsMap.get(f.team_a) || { name: 'Neznámý', code: 0 };
@@ -244,6 +260,7 @@ export async function GET(request: Request) {
 
     // --- ZPRACOVÁNÍ TABULKY (počítá se dynamicky ze zápasů) ---
     if (type === 'standings') {
+       const fixturesData = await getFixturesData();
        const table = new Map();
        
        bootstrapData.teams.forEach((t: any) => {

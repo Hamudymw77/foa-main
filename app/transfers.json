@@ -2999,7 +2999,7 @@
     "type": "loan",
     "club": "Wolves",
     "photo": "https://resources.premierleague.com/premierleague25/photos/players/110x140/641221.png",
-    "fromLogo": null,
+    "fromLogo": "https://mtppqyotfcnbouuqdrqz.supabase.co/storage/v1/object/public/kickgoal-assets/clubs/porto.webp",
     "toLogo": null
   }
 ]
