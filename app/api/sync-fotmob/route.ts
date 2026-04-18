@@ -185,7 +185,7 @@ function parseEspnLineups(
 
   const collectPlayers = (roster: any, teamName: string) => {
     const rosterList = Array.isArray(roster?.roster) ? roster.roster : [];
-    const out: Array<{ id: string; name: string; number?: number; position?: string; teamName: string; starter: boolean; formationPlace?: number }> = [];
+    const out: Array<{ id: string; name: string; number?: number; position?: string; teamName: string; starter: boolean; formationPlace?: number; photo?: string | null }> = [];
     const seen = new Set<string>();
 
     for (const item of rosterList) {
@@ -210,7 +210,7 @@ function parseEspnLineups(
         teamName,
         starter: item?.starter === true,
         formationPlace: Number.isFinite(formationPlace as any) ? (formationPlace as number) : undefined,
-        photo
+        photo: photo || null
       });
     }
 
