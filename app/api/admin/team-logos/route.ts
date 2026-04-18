@@ -1,34 +1,5 @@
 import { NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
 import { getSupabaseAdmin, isSupabaseConfigured } from '../../../lib/db';
-
-const DB_PATH = path.join(process.cwd(), 'app', 'team_logos.json');
-
-function shouldFallbackToLocal(errorMessage: string) {
-  const msg = (errorMessage || '').toLowerCase();
-  return (
-    msg.includes('team_logos') &&
-    (msg.includes('does not exist') ||
-      msg.includes('could not find') ||
-      msg.includes('relation') ||
-      msg.includes('schema cache'))
-  );
-}
-
-async function readLocal() {
-  try {
-    const raw = await fs.readFile(DB_PATH, 'utf8');
-    const data = JSON.parse(raw);
-    return Array.isArray(data) ? data : [];
-  } catch {
-    return [];
-  }
-}
-
-async function writeLocal(rows: any[]) {
-  await fs.writeFile(DB_PATH, JSON.stringify(rows, null, 2));
-}
 
 function getPasswordFromRequest(request: Request) {
   const headerPw = request.headers.get('x-admin-password') || '';
@@ -55,30 +26,26 @@ export async function GET(request: Request) {
   if (!auth.ok) return auth.res;
 
   try {
-    if (isSupabaseConfigured()) {
-      const supabase = getSupabaseAdmin();
-      const { data, error } = await supabase
-        .from('team_logos')
-        .select('team_name,url,updated_at')
-        .order('team_name', { ascending: true });
-      if (error) {
-        if (shouldFallbackToLocal(error.message)) {
-          console.log('team_logos: Supabase table missing, falling back to local JSON');
-        } else {
-          return NextResponse.json({ error: error.message }, { status: 500 });
-        }
-      } else {
-        const rows = (data || []).map((r: any) => ({
-          teamName: r.team_name,
-          url: r.url,
-          updatedAt: r.updated_at || null
-        }));
-        return NextResponse.json({ ok: true, logos: rows });
-      }
+    if (!isSupabaseConfigured()) {
+      console.error('team_logos: Supabase není nakonfigurovaný (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY).');
+      return NextResponse.json({ error: 'Supabase není nakonfigurovaný.' }, { status: 500 });
     }
 
-    const rows = await readLocal();
-    rows.sort((a: any, b: any) => String(a.teamName || '').localeCompare(String(b.teamName || ''), 'cs'));
+    const supabase = getSupabaseAdmin();
+    const { data, error } = await supabase
+      .from('team_logos')
+      .select('team_name,url,updated_at')
+      .order('team_name', { ascending: true });
+    if (error) {
+      console.error('team_logos: DB select error', error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    const rows = (data || []).map((r: any) => ({
+      teamName: r.team_name,
+      url: r.url,
+      updatedAt: r.updated_at || null
+    }));
     return NextResponse.json({ ok: true, logos: rows });
   } catch (e) {
     return NextResponse.json({ error: e instanceof Error ? e.message : String(e) }, { status: 500 });
@@ -99,50 +66,38 @@ export async function POST(request: Request) {
     if (!teamName) return NextResponse.json({ error: 'Chybí teamName' }, { status: 400 });
 
     if (action === 'delete') {
-      if (isSupabaseConfigured()) {
-        const supabase = getSupabaseAdmin();
-        const { error } = await supabase.from('team_logos').delete().eq('team_name', teamName);
-        if (error) {
-          if (shouldFallbackToLocal(error.message)) {
-            console.log('team_logos: Supabase table missing on delete, falling back to local JSON');
-          } else {
-            return NextResponse.json({ error: error.message }, { status: 500 });
-          }
-        } else {
-          return NextResponse.json({ ok: true });
-        }
+      if (!isSupabaseConfigured()) {
+        console.error('team_logos: Supabase není nakonfigurovaný (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY).');
+        return NextResponse.json({ error: 'Supabase není nakonfigurovaný.' }, { status: 500 });
       }
 
-      const rows = await readLocal();
-      const next = rows.filter((r: any) => String(r.teamName || '') !== teamName);
-      await writeLocal(next);
+      const supabase = getSupabaseAdmin();
+      const { error } = await supabase.from('team_logos').delete().eq('team_name', teamName);
+      if (error) {
+        console.error('team_logos: DB delete error', error.message);
+        return NextResponse.json({ error: error.message }, { status: 500 });
+      }
+
       return NextResponse.json({ ok: true });
     }
 
     if (!url) return NextResponse.json({ error: 'Chybí url' }, { status: 400 });
 
-    if (isSupabaseConfigured()) {
-      const supabase = getSupabaseAdmin();
-      const { error } = await (supabase
-        .from('team_logos') as any)
-        .upsert({ team_name: teamName, url, updated_at: new Date().toISOString() }, { onConflict: 'team_name' });
-      if (error) {
-        if (shouldFallbackToLocal(error.message)) {
-          console.log('team_logos: Supabase table missing on upsert, falling back to local JSON');
-        } else {
-          return NextResponse.json({ error: error.message }, { status: 500 });
-        }
-      } else {
-        return NextResponse.json({ ok: true });
-      }
+    if (!isSupabaseConfigured()) {
+      console.error('team_logos: Supabase není nakonfigurovaný (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY).');
+      return NextResponse.json({ error: 'Supabase není nakonfigurovaný.' }, { status: 500 });
     }
 
-    const rows = await readLocal();
-    const existingIdx = rows.findIndex((r: any) => String(r.teamName || '') === teamName);
-    const row = { teamName, url, updatedAt: new Date().toISOString() };
-    if (existingIdx >= 0) rows[existingIdx] = row;
-    else rows.unshift(row);
-    await writeLocal(rows);
+    const supabase = getSupabaseAdmin();
+    const { error } = await (supabase.from('team_logos') as any).upsert(
+      { team_name: teamName, url, updated_at: new Date().toISOString() },
+      { onConflict: 'team_name' }
+    );
+    if (error) {
+      console.error('team_logos: DB upsert error', error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
     return NextResponse.json({ ok: true });
   } catch (e) {
     return NextResponse.json({ error: e instanceof Error ? e.message : String(e) }, { status: 500 });

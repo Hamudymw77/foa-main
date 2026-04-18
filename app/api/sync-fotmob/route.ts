@@ -71,10 +71,15 @@ async function findApiFootballFixture(homeTeam: string, awayTeam: string, isoDat
   }
 
   const fetchFixtures = async (season: string, dateToUse: string) => {
-    const res = await fetch(`${API_URL}/fixtures?league=39&season=${season}&date=${dateToUse}`, {
+    const url = `${API_URL}/fixtures?league=39&season=${season}&date=${dateToUse}`;
+    console.log('API-Football: GET', url);
+    const res = await fetch(url, {
       headers: { 'x-apisports-key': API_KEY }
     });
-    if (!res.ok) return [];
+    if (!res.ok) {
+      console.log('API-Football: fixtures endpoint failed', { url, status: res.status, statusText: res.statusText });
+      return [];
+    }
     const data = await res.json();
     return data.response || [];
   };
@@ -82,21 +87,29 @@ async function findApiFootballFixture(homeTeam: string, awayTeam: string, isoDat
   let allFixtures: any[] = [];
   const perDateSamples: Array<{ date: string; count: number; sample: Array<{ id: any; home: any; away: any; date: any }> }> = [];
   for (const d of datesToTry) {
-    const [fixtures2025, fixtures2024] = await Promise.all([fetchFixtures('2025', d), fetchFixtures('2024', d)]);
-    allFixtures = [...fixtures2025, ...fixtures2024];
+    const fixtures2025 = await fetchFixtures('2025', d);
+    allFixtures = [...allFixtures, ...fixtures2025];
     perDateSamples.push({
       date: d,
-      count: allFixtures.length,
-      sample: allFixtures.slice(0, 5).map((m: any) => ({
+      count: fixtures2025.length,
+      sample: fixtures2025.slice(0, 5).map((m: any) => ({
         id: m.fixture?.id,
         home: m.teams?.home?.name,
         away: m.teams?.away?.name,
         date: m.fixture?.date
       }))
     });
-    if (allFixtures.length > 0) break;
   }
-  console.log('API-Football: fixtures lookup', { homeTeam, awayTeam, isoDate, datesTried: datesToTry, fixturesCount: allFixtures.length });
+  console.log('API-Football: fixtures lookup', {
+    league: 39,
+    season: 2025,
+    homeTeam,
+    awayTeam,
+    isoDate,
+    datesTried: datesToTry,
+    fixturesCount: allFixtures.length,
+    sampleByDate: perDateSamples
+  });
 
   const fplHome = normalizeTeamForMatch(homeTeam);
   const fplAway = normalizeTeamForMatch(awayTeam);
