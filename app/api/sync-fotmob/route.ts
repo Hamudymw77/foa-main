@@ -2,35 +2,6 @@ import { NextResponse } from 'next/server';
 import { normalizeTeamName } from '../../lib/api-mapper';
 import { getOverride, saveOverride } from '../../lib/overridesStorage';
 
-function normalizeTeamForMatch(name: string) {
-  if (!name) return '';
-  const lower = name.toLowerCase().trim();
-  if (lower.includes('manchester united') || lower.includes('man utd')) return 'manutd';
-  if (lower.includes('manchester city') || lower.includes('man city')) return 'mancity';
-  if (lower.includes('tottenham') || lower.includes('spurs')) return 'tottenham';
-  if (lower.includes('nott') && lower.includes('forest')) return 'nottingham';
-  if (lower.includes('newcastle')) return 'newcastle';
-  if (lower.includes('wolv') || lower.includes('wolves')) return 'wolves';
-  if (lower.includes('bournemouth')) return 'bournemouth';
-  if (lower.includes('brighton')) return 'brighton';
-  if (lower.includes('west ham')) return 'westham';
-  if (lower.includes('leeds')) return 'leeds';
-  if (lower.includes('sunderland')) return 'sunderland';
-  if (lower.includes('burnley')) return 'burnley';
-  if (lower.includes('aston villa') || lower.includes('villa')) return 'villa';
-  if (lower.includes('crystal palace') || lower.includes('palace')) return 'palace';
-  if (lower.includes('arsenal')) return 'arsenal';
-  if (lower.includes('brentford')) return 'brentford';
-  if (lower.includes('chelsea')) return 'chelsea';
-  if (lower.includes('everton')) return 'everton';
-  if (lower.includes('fulham')) return 'fulham';
-  if (lower.includes('liverpool')) return 'liverpool';
-  if (lower.includes('ipswich')) return 'ipswich';
-  if (lower.includes('leicester')) return 'leicester';
-  if (lower.includes('southampton')) return 'southampton';
-  return lower.replace(/[^a-z0-9]/g, '');
-}
-
 function mergeUniqueEvents(existing: any[], incoming: any[]) {
   const out: any[] = [];
   const seen = new Set<string>();
@@ -45,327 +16,259 @@ function mergeUniqueEvents(existing: any[], incoming: any[]) {
   return out;
 }
 
-async function findApiFootballFixture(homeTeam: string, awayTeam: string, isoDate: string) {
-  const API_KEY = process.env.API_FOOTBALL_KEY || '';
-  if (!API_KEY) {
-    console.log('API-Football: chybí API_FOOTBALL_KEY');
-    return null;
-  }
-
-  const API_URL = 'https://v3.football.api-sports.io';
-
-  const shiftIsoDate = (baseIso: string, days: number) => {
-    const d = new Date(`${baseIso}T00:00:00.000Z`);
-    d.setUTCDate(d.getUTCDate() + days);
-    return d.toISOString().slice(0, 10);
-  };
-
-  const datesToTry: string[] = [];
-  for (let delta = 0; delta <= 3; delta++) {
-    if (delta === 0) {
-      datesToTry.push(isoDate);
-      continue;
-    }
-    datesToTry.push(shiftIsoDate(isoDate, -delta));
-    datesToTry.push(shiftIsoDate(isoDate, delta));
-  }
-
-  const fetchFixtures = async (season: string, dateToUse: string) => {
-    const url = `${API_URL}/fixtures?league=39&season=${season}&date=${dateToUse}`;
-    console.log('API-Football: GET', url);
-    const res = await fetch(url, {
-      headers: { 'x-apisports-key': API_KEY }
-    });
-    if (!res.ok) {
-      console.log('API-Football: fixtures endpoint failed', { url, status: res.status, statusText: res.statusText });
-      return [];
-    }
-    const data = await res.json();
-    return data.response || [];
-  };
-
-  let allFixtures: any[] = [];
-  const perDateSamples: Array<{ date: string; count: number; sample: Array<{ id: any; home: any; away: any; date: any }> }> = [];
-  for (const d of datesToTry) {
-    const fixtures2025 = await fetchFixtures('2025', d);
-    allFixtures = [...allFixtures, ...fixtures2025];
-    perDateSamples.push({
-      date: d,
-      count: fixtures2025.length,
-      sample: fixtures2025.slice(0, 5).map((m: any) => ({
-        id: m.fixture?.id,
-        home: m.teams?.home?.name,
-        away: m.teams?.away?.name,
-        date: m.fixture?.date
-      }))
-    });
-  }
-  console.log('API-Football: fixtures lookup', {
-    league: 39,
-    season: 2025,
-    homeTeam,
-    awayTeam,
-    isoDate,
-    datesTried: datesToTry,
-    fixturesCount: allFixtures.length,
-    sampleByDate: perDateSamples
-  });
-
-  const fplHome = normalizeTeamForMatch(homeTeam);
-  const fplAway = normalizeTeamForMatch(awayTeam);
-
-  const normalizeLoose = (name: string) => String(name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-  const fplHomeLoose = normalizeLoose(homeTeam);
-  const fplAwayLoose = normalizeLoose(awayTeam);
-
-  const fplHomeShortLoose = normalizeLoose(homeTeam.split(/\s+/).slice(0, 2).join(' '));
-  const fplAwayShortLoose = normalizeLoose(awayTeam.split(/\s+/).slice(0, 2).join(' '));
-
-  const isTeamMatch = (apiName: string, targetNorm: string, targetLoose: string, targetShortLoose: string) => {
-    const apiNorm = normalizeTeamForMatch(apiName);
-    if (apiNorm === targetNorm) return true;
-
-    const apiLoose = normalizeLoose(apiName);
-    if (apiLoose && targetLoose && (apiLoose.includes(targetLoose) || targetLoose.includes(apiLoose))) return true;
-    if (apiLoose && targetShortLoose && (apiLoose.includes(targetShortLoose) || targetShortLoose.includes(apiLoose))) return true;
-
-    if (apiNorm && targetNorm && (apiNorm.includes(targetNorm) || targetNorm.includes(apiNorm))) return true;
-    return false;
-  };
-
-  const direct = allFixtures.find((m: any) => {
-    const apiHomeName = m.teams?.home?.name || '';
-    const apiAwayName = m.teams?.away?.name || '';
-    return (
-      isTeamMatch(apiHomeName, fplHome, fplHomeLoose, fplHomeShortLoose) &&
-      isTeamMatch(apiAwayName, fplAway, fplAwayLoose, fplAwayShortLoose)
-    );
-  });
-
-  const reverse = allFixtures.find((m: any) => {
-    const apiHomeName = m.teams?.home?.name || '';
-    const apiAwayName = m.teams?.away?.name || '';
-    return (
-      isTeamMatch(apiHomeName, fplAway, fplAwayLoose, fplAwayShortLoose) &&
-      isTeamMatch(apiAwayName, fplHome, fplHomeLoose, fplHomeShortLoose)
-    );
-  });
-
-  const fixture = direct || reverse;
-  if (!fixture?.fixture?.id) {
-    console.log('API-Football: fixture nenalezen', {
-      homeTeam,
-      awayTeam,
-      isoDate,
-      sampleByDate: perDateSamples
-    });
-    return null;
-  }
-  console.log('API-Football: fixture matched', {
-    fixtureId: fixture.fixture.id,
-    home: fixture.teams?.home?.name,
-    away: fixture.teams?.away?.name,
-    date: fixture.fixture?.date
-  });
-  return { fixtureId: fixture.fixture.id as number, fixture };
+function normalizeLooseKey(input: string) {
+  return String(input || '')
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
 }
 
-async function fetchApiFootballStats(homeTeam: string, awayTeam: string, isoDate: string) {
-  const API_KEY = process.env.API_FOOTBALL_KEY || '';
-  if (!API_KEY) {
-    console.log('API-Football: stats přeskočeny (chybí API_FOOTBALL_KEY)');
-    return null;
-  }
-
-  const API_URL = 'https://v3.football.api-sports.io';
-
-  const found = await findApiFootballFixture(homeTeam, awayTeam, isoDate);
-  if (!found) {
-    console.log('API-Football: stats - fixture nenalezen');
-    return null;
-  }
-  const { fixtureId, fixture } = found;
-  const statsRes = await fetch(`${API_URL}/fixtures/statistics?fixture=${fixtureId}`, {
-    headers: { 'x-apisports-key': API_KEY }
-  });
-  if (!statsRes.ok) {
-    console.log('API-Football: stats endpoint failed', { fixtureId, status: statsRes.status, statusText: statsRes.statusText });
-    return null;
-  }
-  const statsData = await statsRes.json();
-  const statsResponse = statsData.response;
-  console.log('API-Football: stats response preview', {
-    fixtureId,
-    teams: Array.isArray(statsResponse)
-      ? statsResponse.map((t: any) => ({
-          team: t.team?.name,
-          sample: Array.isArray(t.statistics) ? t.statistics.slice(0, 6) : []
-        }))
-      : null
-  });
-  if (!statsResponse || statsResponse.length !== 2) return null;
-
-  const fixtureHome = normalizeTeamForMatch(fixture.teams?.home?.name || '');
-  const fixtureAway = normalizeTeamForMatch(fixture.teams?.away?.name || '');
-
-  const homeEntry =
-    statsResponse.find((s: any) => normalizeTeamForMatch(s.team?.name || '') === fixtureHome) || statsResponse[0];
-  const awayEntry =
-    statsResponse.find((s: any) => normalizeTeamForMatch(s.team?.name || '') === fixtureAway) || statsResponse[1];
-
-  const homeStats = homeEntry.statistics;
-  const awayStats = awayEntry.statistics;
-
-  const getValue = (arr: any[], type: string) => {
-    const item = arr.find((s) => s.type === type);
-    if (!item) return 0;
-    let val = item.value;
-    if (val === null) return 0;
-    if (typeof val === 'string') {
-      const parsed = parseInt(val.replace('%', '').trim(), 10);
-      return Number.isFinite(parsed) ? parsed : 0;
-    }
-    return typeof val === 'number' ? val : 0;
-  };
-
-  const getAnyValue = (arr: any[], types: string[]) => {
-    for (const t of types) {
-      const v = getValue(arr, t);
-      if (v > 0) return v;
-    }
-    return getValue(arr, types[0] || '');
-  };
-
-  const newStats = {
-    possession: [
-      getAnyValue(homeStats, ['Ball Possession']),
-      getAnyValue(awayStats, ['Ball Possession'])
-    ],
-    shots: [
-      getAnyValue(homeStats, ['Total Shots']),
-      getAnyValue(awayStats, ['Total Shots'])
-    ],
-    shotsOnTarget: [
-      getAnyValue(homeStats, ['Shots on Goal', 'Shots on Target']),
-      getAnyValue(awayStats, ['Shots on Goal', 'Shots on Target'])
-    ],
-    corners: [
-      getAnyValue(homeStats, ['Corner Kicks']),
-      getAnyValue(awayStats, ['Corner Kicks'])
-    ],
-    fouls: [
-      getAnyValue(homeStats, ['Fouls']),
-      getAnyValue(awayStats, ['Fouls'])
-    ],
-    yellowCards: [
-      getAnyValue(homeStats, ['Yellow Cards']),
-      getAnyValue(awayStats, ['Yellow Cards'])
-    ],
-    redCards: [
-      getAnyValue(homeStats, ['Red Cards']),
-      getAnyValue(awayStats, ['Red Cards'])
-    ],
-    offsides: [
-      getAnyValue(homeStats, ['Offsides']),
-      getAnyValue(awayStats, ['Offsides'])
-    ]
-  };
-
-  const poss = newStats.possession;
-  if (!Array.isArray(poss) || poss.length !== 2 || poss[0] + poss[1] <= 0) return null;
-  return newStats;
+function normalizeTeamKey(input: string) {
+  const n = normalizeLooseKey(input);
+  if (n.includes('wolverhampton') || n.includes('wolves')) return 'wolves';
+  if (n.includes('westham')) return 'westham';
+  if (n.includes('manchestercity') || n === 'mancity') return 'mancity';
+  if (n.includes('manchesterunited') || n === 'manutd') return 'manutd';
+  if (n.includes('tottenham') || n.includes('spurs')) return 'tottenham';
+  if (n.includes('nottingham') && n.includes('forest')) return 'nottinghamforest';
+  return n;
 }
 
-async function fetchApiFootballLineups(homeTeam: string, awayTeam: string, isoDate: string) {
-  const API_KEY = process.env.API_FOOTBALL_KEY || '';
-  if (!API_KEY) {
-    console.log('API-Football: lineups přeskočeny (chybí API_FOOTBALL_KEY)');
-    return null;
+let cachedFplPhotoLookup: { getPhoto: (teamName: string, nameCandidates: string[]) => string | null } | null = null;
+let cachedFplPhotoLookupAt = 0;
+
+async function buildFplPhotoLookup() {
+  if (cachedFplPhotoLookup && Date.now() - cachedFplPhotoLookupAt < 10 * 60 * 1000) {
+    return cachedFplPhotoLookup;
   }
-
-  const API_URL = 'https://v3.football.api-sports.io';
-
-  const found = await findApiFootballFixture(homeTeam, awayTeam, isoDate);
-  if (!found) {
-    console.log('API-Football: lineups - fixture nenalezen');
-    return null;
-  }
-  const { fixtureId, fixture } = found;
-
-  const lineupsRes = await fetch(`${API_URL}/fixtures/lineups?fixture=${fixtureId}`, {
-    headers: { 'x-apisports-key': API_KEY }
+  const bootstrapRes = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/', {
+    cache: 'no-store',
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    }
   });
-  if (!lineupsRes.ok) {
-    console.log('API-Football: lineups endpoint failed', { fixtureId, status: lineupsRes.status, statusText: lineupsRes.statusText });
-    return null;
+  if (!bootstrapRes.ok) throw new Error('FPL Bootstrap selhal');
+  const bootstrapData = await bootstrapRes.json();
+
+  const teamIdToKeys = new Map<number, string[]>();
+  for (const t of bootstrapData.teams || []) {
+    const keys = new Set<string>();
+    keys.add(normalizeTeamKey(t.name));
+    keys.add(normalizeTeamKey(t.short_name || ''));
+    keys.add(normalizeTeamKey(t.name?.replace(' United', '') || ''));
+    teamIdToKeys.set(t.id, Array.from(keys).filter(Boolean));
   }
-  const lineupsData = await lineupsRes.json();
-  const lineups = lineupsData.response;
-  console.log('API-Football: lineups response preview', {
-    fixtureId,
-    teams: Array.isArray(lineups)
-      ? lineups.map((l: any) => ({
-          team: l.team?.name,
-          formation: l.formation,
-          startXI: Array.isArray(l.startXI) ? l.startXI.length : 0,
-          substitutes: Array.isArray(l.substitutes) ? l.substitutes.length : 0
-        }))
-      : null
-  });
-  if (!Array.isArray(lineups) || lineups.length < 2) return null;
 
-  const fixtureHome = normalizeTeamForMatch(fixture.teams?.home?.name || '');
-  const fixtureAway = normalizeTeamForMatch(fixture.teams?.away?.name || '');
+  const byTeam = new Map<string, Map<string, string>>();
+  const global = new Map<string, { url: string; count: number }>();
 
-  const homeEntry = lineups.find((l: any) => normalizeTeamForMatch(l.team?.name || '') === fixtureHome) || lineups[0];
-  const awayEntry = lineups.find((l: any) => normalizeTeamForMatch(l.team?.name || '') === fixtureAway) || lineups[1];
+  for (const p of bootstrapData.elements || []) {
+    const code = p.code;
+    if (!code) continue;
+    const photoUrl = `https://resources.premierleague.com/premierleague25/photos/players/110x140/${code}.png`;
 
-  const mapPlayer = (p: any, teamName: string) => {
-    const player = p?.player || {};
-    return {
-      id: player.id ?? `${teamName}-${player.name ?? 'player'}`,
-      name: player.name ?? 'Player',
-      number: player.number ?? undefined,
-      position: player.pos ?? undefined,
-      teamName,
-      grid: player.grid ?? undefined
-    };
+    const fullNameKey = normalizeLooseKey(`${p.first_name || ''} ${p.second_name || ''}`);
+    const webNameKey = normalizeLooseKey(p.web_name || '');
+    const lastNameKey = normalizeLooseKey(p.second_name || '');
+
+    const keys = Array.from(new Set([fullNameKey, webNameKey, lastNameKey].filter(Boolean)));
+    const teamKeys = teamIdToKeys.get(p.team) || [];
+
+    for (const tk of teamKeys) {
+      if (!byTeam.has(tk)) byTeam.set(tk, new Map());
+      const m = byTeam.get(tk)!;
+      for (const k of keys) {
+        if (!m.has(k)) m.set(k, photoUrl);
+      }
+    }
+
+    for (const k of keys) {
+      const prev = global.get(k);
+      if (!prev) global.set(k, { url: photoUrl, count: 1 });
+      else global.set(k, { url: prev.url, count: prev.count + 1 });
+    }
+  }
+
+  const getPhoto = (teamName: string, nameCandidates: string[]) => {
+    const teamKey = normalizeTeamKey(teamName);
+    const teamMap = byTeam.get(teamKey);
+    const keys = nameCandidates.map(normalizeLooseKey).filter(Boolean);
+    if (teamMap) {
+      for (const k of keys) {
+        const u = teamMap.get(k);
+        if (u) return u;
+      }
+    }
+    for (const k of keys) {
+      const g = global.get(k);
+      if (g && g.count === 1) return g.url;
+    }
+    return null;
   };
 
-  const mapLineup = (entry: any) => {
-    const teamName = entry?.team?.name || '';
-    const parseGrid = (grid: any) => {
-      const str = String(grid || '');
-      const m = str.match(/^(\d+):(\d+)$/);
-      if (!m) return null;
-      return { r: parseInt(m[1], 10), c: parseInt(m[2], 10) };
-    };
+  cachedFplPhotoLookup = { getPhoto };
+  cachedFplPhotoLookupAt = Date.now();
+  return cachedFplPhotoLookup;
+}
 
-    const startingUnsorted = Array.isArray(entry?.startXI) ? entry.startXI.map((x: any) => mapPlayer(x, teamName)) : [];
-    const starting = startingUnsorted.slice().sort((a: any, b: any) => {
-      const ga = parseGrid(a.grid);
-      const gb = parseGrid(b.grid);
-      if (!ga && !gb) return 0;
-      if (!ga) return 1;
-      if (!gb) return -1;
-      return ga.r - gb.r || ga.c - gb.c;
-    });
-    const subs = Array.isArray(entry?.substitutes) ? entry.substitutes.map((x: any) => mapPlayer(x, teamName)) : [];
-    const formation = entry?.formation || undefined;
-    return { teamName, formation, starting, substitutes: subs };
+function parseEspnStats(sumData: any, espnHomeId: string | null, espnAwayId: string | null) {
+  const boxTeams = Array.isArray(sumData?.boxscore?.teams) ? sumData.boxscore.teams : [];
+  if (!boxTeams.length) return null;
+
+  const byId = (teamId: string | null) =>
+    boxTeams.find((t: any) => String(t?.team?.id || t?.team?.uid || '') === String(teamId || ''));
+
+  const homeEntry = byId(espnHomeId) || boxTeams[0];
+  const awayEntry = byId(espnAwayId) || boxTeams[1];
+  if (!homeEntry || !awayEntry) return null;
+
+  const normalizeKey = (s: string) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const toNumber = (value: any) => {
+    if (value == null) return 0;
+    if (typeof value === 'number') return Number.isFinite(value) ? value : 0;
+    const parsed = parseInt(String(value).replace('%', '').trim(), 10);
+    return Number.isFinite(parsed) ? parsed : 0;
   };
 
-  const home = mapLineup(homeEntry);
-  const away = mapLineup(awayEntry);
+  const statMap = (entry: any) => {
+    const map = new Map<string, number>();
+    const stats = Array.isArray(entry?.statistics) ? entry.statistics : [];
+    for (const st of stats) {
+      const key = normalizeKey(st?.name || st?.displayName || st?.label || st?.abbreviation || '');
+      if (!key) continue;
+      map.set(key, toNumber(st?.value ?? st?.displayValue ?? st?.stat));
+    }
+    return map;
+  };
 
-  if (!home.starting.length || !away.starting.length) return null;
+  const h = statMap(homeEntry);
+  const a = statMap(awayEntry);
+
+  const pick = (m: Map<string, number>, keys: string[]) => {
+    for (const k of keys) {
+      if (m.has(k)) return m.get(k) || 0;
+    }
+    return 0;
+  };
+
+  const stats = {
+    possession: [pick(h, ['possession', 'ballpossession']), pick(a, ['possession', 'ballpossession'])],
+    shots: [pick(h, ['shotstotal', 'totalshots', 'shots']), pick(a, ['shotstotal', 'totalshots', 'shots'])],
+    shotsOnTarget: [pick(h, ['shotsongoal', 'shotsontarget', 'ontarget']), pick(a, ['shotsongoal', 'shotsontarget', 'ontarget'])],
+    corners: [pick(h, ['cornerkicks', 'corners']), pick(a, ['cornerkicks', 'corners'])],
+    fouls: [pick(h, ['foulscommitted', 'fouls']), pick(a, ['foulscommitted', 'fouls'])],
+    yellowCards: [pick(h, ['yellowcards']), pick(a, ['yellowcards'])],
+    redCards: [pick(h, ['redcards']), pick(a, ['redcards'])],
+    offsides: [pick(h, ['offsides']), pick(a, ['offsides'])]
+  };
+
+  if (stats.possession[0] + stats.possession[1] <= 0 && stats.shots[0] + stats.shots[1] <= 0) return null;
+  return stats;
+}
+
+function parseEspnLineups(
+  sumData: any,
+  espnHomeId: string | null,
+  espnAwayId: string | null,
+  getPhoto: ((teamName: string, nameCandidates: string[]) => string | null) | null
+) {
+  const rosters = Array.isArray(sumData?.rosters) ? sumData.rosters : [];
+  if (!rosters.length) return null;
+
+  const byId = (teamId: string | null) =>
+    rosters.find((r: any) => String(r?.team?.id || r?.team?.uid || '') === String(teamId || ''));
+
+  const homeRoster = byId(espnHomeId) || rosters[0];
+  const awayRoster = byId(espnAwayId) || rosters[1];
+  if (!homeRoster || !awayRoster) return null;
+
+  const collectPlayers = (roster: any, teamName: string) => {
+    const rosterList = Array.isArray(roster?.roster) ? roster.roster : [];
+    const out: Array<{ id: string; name: string; number?: number; position?: string; teamName: string; starter: boolean; formationPlace?: number }> = [];
+    const seen = new Set<string>();
+
+    for (const item of rosterList) {
+      const athlete = item?.athlete;
+      const name = athlete?.displayName || athlete?.shortName || athlete?.fullName || athlete?.name;
+      const id = String(athlete?.id || athlete?.uid || '');
+      if (!id || !name) continue;
+      if (seen.has(id)) continue;
+      seen.add(id);
+
+      const lastToken = String(name).trim().split(/\s+/).slice(-1)[0] || '';
+      const photo = getPhoto ? getPhoto(teamName, [String(name), String(athlete?.shortName || ''), lastToken]) : null;
+
+      const formationPlaceRaw = item?.formationPlace;
+      const formationPlace = formationPlaceRaw != null ? parseInt(String(formationPlaceRaw), 10) : undefined;
+
+      out.push({
+        id,
+        name: String(name),
+        number: item?.jersey ? Number(item.jersey) : undefined,
+        position: item?.position?.abbreviation || item?.position?.name || athlete?.position?.abbreviation || athlete?.position?.name || undefined,
+        teamName,
+        starter: item?.starter === true,
+        formationPlace: Number.isFinite(formationPlace as any) ? (formationPlace as number) : undefined,
+        photo
+      });
+    }
+
+    const starterOrder = (p: any) => {
+      if (typeof p.formationPlace === 'number') return p.formationPlace;
+      const pos = String(p.position || '').toLowerCase();
+      if (pos.includes('gk') || pos.includes('goal')) return 1;
+      if (pos.includes('def') || pos === 'd') return 2;
+      if (pos.includes('mid') || pos === 'm') return 3;
+      if (pos.includes('for') || pos.includes('fwd') || pos === 'f') return 4;
+      return 9;
+    };
+
+    const startingRaw = out.filter((p) => p.starter);
+    const substitutesRaw = out.filter((p) => !p.starter);
+
+    const starting =
+      startingRaw.length > 0
+        ? startingRaw.slice().sort((a, b) => starterOrder(a) - starterOrder(b))
+        : out.slice().sort((a, b) => starterOrder(a) - starterOrder(b)).slice(0, 11);
+
+    const subs = substitutesRaw.slice().sort((a, b) => starterOrder(a) - starterOrder(b));
+
+    return { starting, substitutes: subs, all: out };
+  };
+
+  const homeTeamName = homeRoster?.team?.displayName || homeRoster?.team?.name || 'Home';
+  const awayTeamName = awayRoster?.team?.displayName || awayRoster?.team?.name || 'Away';
+
+  const home = collectPlayers(homeRoster, homeTeamName);
+  const away = collectPlayers(awayRoster, awayTeamName);
+  if (!home.all.length || !away.all.length) return null;
+
+  const competitors = sumData?.header?.competitions?.[0]?.competitors || [];
+  const homeComp = competitors.find((c: any) => c?.homeAway === 'home');
+  const awayComp = competitors.find((c: any) => c?.homeAway === 'away');
+
+  const homeFormation = homeRoster?.formation || homeComp?.formation || homeComp?.lineup || undefined;
+  const awayFormation = awayRoster?.formation || awayComp?.formation || awayComp?.lineup || undefined;
+
+  const mapOut = (p: any) => ({
+    id: p.id,
+    name: p.name,
+    number: p.number,
+    position: p.position,
+    teamName: p.teamName,
+    photo: p.photo || null
+  });
 
   return {
-    homeFormation: home.formation,
-    awayFormation: away.formation,
-    homePlayers: [...home.starting, ...home.substitutes],
-    awayPlayers: [...away.starting, ...away.substitutes],
-    lineups: { home, away }
+    homeFormation,
+    awayFormation,
+    homePlayers: home.starting.map(mapOut),
+    awayPlayers: away.starting.map(mapOut),
+    lineups: {
+      home: { teamName: homeTeamName, formation: homeFormation, starting: home.starting.map(mapOut), substitutes: home.substitutes.map(mapOut) },
+      away: { teamName: awayTeamName, formation: awayFormation, starting: away.starting.map(mapOut), substitutes: away.substitutes.map(mapOut) }
+    }
   };
 }
 
@@ -409,8 +312,6 @@ export async function POST(request: Request) {
     if (!dateStr || dateStr.length !== 8) {
          return NextResponse.json({ error: 'Neplatné datum. ESPN vyžaduje YYYYMMDD.' }, { status: 400 });
     }
-
-    const isoDate = `${dateStr.substring(0, 4)}-${dateStr.substring(4, 6)}-${dateStr.substring(6, 8)}`;
 
     // 2. Najít zápas v ESPN Scoreboard
     const scoreboardUrl = `http://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/scoreboard?dates=${dateStr}`;
@@ -495,54 +396,6 @@ export async function POST(request: Request) {
                  const a = competitors.find((c: any) => c.homeAway === 'away').team.displayName;
                  console.log(`- ${h} vs ${a}`);
              });
-         }
-
-         const [apiFootballStats, apiFootballLineups] = await Promise.all([
-            fetchApiFootballStats(homeTeam, awayTeam, isoDate),
-            fetchApiFootballLineups(homeTeam, awayTeam, isoDate)
-         ]);
-
-         if (fplMatchId) {
-            const envPassword = process.env.ADMIN_PASSWORD?.trim() || '';
-            const providedPassword = String(password || '').trim();
-            if (!envPassword) {
-                return NextResponse.json(
-                    { error: 'Na serveru není nastaveno ADMIN_PASSWORD. Nastavte ho v prostředí (Environment Variables).' },
-                    { status: 500 }
-                );
-            }
-            if (providedPassword !== envPassword) {
-                return NextResponse.json({ error: 'Unauthorized: Nesprávné heslo' }, { status: 401 });
-            }
-
-            const existing = (await getOverride(String(fplMatchId))) || {};
-            const nextOverride: any = {
-                ...existing,
-                lastSync: new Date().toISOString()
-            };
-
-            if (apiFootballStats) {
-                nextOverride.stats = {
-                    ...(existing.stats || {}),
-                    ...apiFootballStats
-                };
-                nextOverride.lastStatsUpdate = new Date().toISOString();
-            }
-
-            if (apiFootballLineups) {
-                if (apiFootballLineups.homeFormation) nextOverride.homeFormation = apiFootballLineups.homeFormation;
-                if (apiFootballLineups.awayFormation) nextOverride.awayFormation = apiFootballLineups.awayFormation;
-                if (apiFootballLineups.homePlayers) nextOverride.homePlayers = apiFootballLineups.homePlayers;
-                if (apiFootballLineups.awayPlayers) nextOverride.awayPlayers = apiFootballLineups.awayPlayers;
-                nextOverride.lineups = apiFootballLineups.lineups;
-                nextOverride.lastLineupsUpdate = new Date().toISOString();
-            }
-
-            await saveOverride(String(fplMatchId), nextOverride);
-         }
-
-         if (apiFootballStats || apiFootballLineups) {
-            return NextResponse.json({ success: true, events: [], stats: apiFootballStats, lineups: apiFootballLineups });
          }
 
          return NextResponse.json({ 
@@ -738,12 +591,24 @@ export async function POST(request: Request) {
         // Seřadí od 1. do 120. minuty
         .sort((a, b) => a.sortMin - b.sortMin);
 
-    const [apiFootballStats, apiFootballLineups] = await Promise.all([
-      fetchApiFootballStats(homeTeam, awayTeam, isoDate),
-      fetchApiFootballLineups(homeTeam, awayTeam, isoDate)
-    ]);
+    let photoLookup: { getPhoto: (teamName: string, nameCandidates: string[]) => string | null } | null = null;
+    try {
+      photoLookup = await buildFplPhotoLookup();
+    } catch (e) {
+      console.error('FPL photo lookup failed:', e);
+    }
 
-    if (finalEvents.length === 0 && !apiFootballStats && !apiFootballLineups) {
+    const espnStats = parseEspnStats(sumData, espnHomeId, espnAwayId);
+    const espnLineups = parseEspnLineups(sumData, espnHomeId, espnAwayId, photoLookup?.getPhoto || null);
+    console.log('ESPN parsed payload:', {
+      hasStats: Boolean(espnStats),
+      hasLineups: Boolean(espnLineups),
+      statsKeys: espnStats ? Object.keys(espnStats) : [],
+      homePlayers: espnLineups?.homePlayers?.length || 0,
+      awayPlayers: espnLineups?.awayPlayers?.length || 0
+    });
+
+    if (finalEvents.length === 0 && !espnStats && !espnLineups) {
       return NextResponse.json(
         { error: 'Synchronizace nenašla žádná data (události, statistiky ani sestavy).', debugData: { keys: Object.keys(sumData) } },
         { status: 404 }
@@ -772,27 +637,27 @@ export async function POST(request: Request) {
         lastSync: new Date().toISOString()
       };
 
-      if (apiFootballStats) {
+      if (espnStats) {
         nextOverride.stats = {
           ...(existing.stats || {}),
-          ...apiFootballStats
+          ...espnStats
         };
         nextOverride.lastStatsUpdate = new Date().toISOString();
       }
 
-      if (apiFootballLineups) {
-        if (apiFootballLineups.homeFormation) nextOverride.homeFormation = apiFootballLineups.homeFormation;
-        if (apiFootballLineups.awayFormation) nextOverride.awayFormation = apiFootballLineups.awayFormation;
-        if (apiFootballLineups.homePlayers) nextOverride.homePlayers = apiFootballLineups.homePlayers;
-        if (apiFootballLineups.awayPlayers) nextOverride.awayPlayers = apiFootballLineups.awayPlayers;
-        nextOverride.lineups = apiFootballLineups.lineups;
+      if (espnLineups) {
+        if (espnLineups.homeFormation) nextOverride.homeFormation = espnLineups.homeFormation;
+        if (espnLineups.awayFormation) nextOverride.awayFormation = espnLineups.awayFormation;
+        if (espnLineups.homePlayers) nextOverride.homePlayers = espnLineups.homePlayers;
+        if (espnLineups.awayPlayers) nextOverride.awayPlayers = espnLineups.awayPlayers;
+        nextOverride.lineups = espnLineups.lineups;
         nextOverride.lastLineupsUpdate = new Date().toISOString();
       }
 
       await saveOverride(String(fplMatchId), nextOverride);
     }
 
-    return NextResponse.json({ success: true, events: finalEvents, stats: apiFootballStats, lineups: apiFootballLineups });
+    return NextResponse.json({ success: true, events: finalEvents, stats: espnStats, lineups: espnLineups });
 
   } catch (error: any) {
     console.error('ESPN Sync Error:', error);
