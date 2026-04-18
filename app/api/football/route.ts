@@ -249,7 +249,7 @@ export async function GET(request: Request) {
        bootstrapData.teams.forEach((t: any) => {
          table.set(t.id, {
            id: t.id, pos: 0, team: t.name, logo: `https://resources.premierleague.com/premierleague/badges/100/t${t.code}.png`,
-           played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0, form: []
+           played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, gd: 0, points: 0, form: [], formDetails: []
          });
        });
 
@@ -261,16 +261,34 @@ export async function GET(request: Request) {
               home.played++; away.played++;
               home.gf += f.team_h_score; home.ga += f.team_a_score;
               away.gf += f.team_a_score; away.ga += f.team_h_score;
+
+              const matchDate = f.kickoff_time
+                ? new Date(f.kickoff_time).toLocaleDateString('cs-CZ', { day: '2-digit', month: '2-digit', year: 'numeric' })
+                : '';
+              const sharedMatchDetail = {
+                matchId: String(f.id),
+                homeTeam: home.team,
+                awayTeam: away.team,
+                homeScore: f.team_h_score ?? 0,
+                awayScore: f.team_a_score ?? 0,
+                date: matchDate
+              };
               
               if (f.team_h_score > f.team_a_score) {
                  home.won++; home.points += 3; home.form.push('W');
                  away.lost++; away.form.push('L');
+                 home.formDetails.push({ ...sharedMatchDetail, result: 'W' });
+                 away.formDetails.push({ ...sharedMatchDetail, result: 'L' });
               } else if (f.team_h_score < f.team_a_score) {
                  away.won++; away.points += 3; away.form.push('W');
                  home.lost++; home.form.push('L');
+                 away.formDetails.push({ ...sharedMatchDetail, result: 'W' });
+                 home.formDetails.push({ ...sharedMatchDetail, result: 'L' });
               } else {
                  home.drawn++; home.points += 1; home.form.push('D');
                  away.drawn++; away.points += 1; away.form.push('D');
+                 home.formDetails.push({ ...sharedMatchDetail, result: 'D' });
+                 away.formDetails.push({ ...sharedMatchDetail, result: 'D' });
               }
           }
        });
@@ -278,6 +296,7 @@ export async function GET(request: Request) {
        const standingsList = Array.from(table.values()).map(t => {
          t.gd = t.gf - t.ga;
          t.form = t.form.slice(-5).reverse(); // Posledních 5 zápasů
+         t.formDetails = (t.formDetails || []).slice(-5).reverse();
          return t;
        });
 

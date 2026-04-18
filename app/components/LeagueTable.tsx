@@ -1,6 +1,7 @@
 "use client"
 import { TeamStanding, FormResult } from "@/types"
 import { TeamLogo } from "./TeamLogo"
+import Link from "next/link"
 
 interface LeagueTableProps {
   standings: TeamStanding[]
@@ -15,8 +16,8 @@ export function LeagueTable({ standings, lastUpdated }: LeagueTableProps) {
   }
 
   const getRowColor = (pos: number) => {
-    if (pos <= 4) return "bg-green-500/10"
-    if (pos === 5) return "bg-primary/10"
+    if (pos <= 5) return "bg-green-500/10"
+    if (pos === 6) return "bg-orange-500/10"
     if (pos >= 18) return "bg-red-500/10"
     return ""
   }
@@ -68,12 +69,27 @@ export function LeagueTable({ standings, lastUpdated }: LeagueTableProps) {
               <td className="p-3">
                 <div className="flex gap-1">
                   {team.form.map((result, i) => (
-                    <span
-                      key={i}
-                      className={`w-6 h-6 rounded flex items-center justify-center text-xs font-bold ${getFormColor(result)}`}
-                    >
-                      {result}
-                    </span>
+                    <div key={i} className="relative group/form">
+                      {team.formDetails?.[i]?.matchId ? (
+                        <Link
+                          href={`/match/${team.formDetails[i].matchId}`}
+                          className={`w-6 h-6 rounded flex items-center justify-center text-xs font-bold ${getFormColor(result)}`}
+                          aria-label={`Open match ${team.formDetails[i].homeTeam} vs ${team.formDetails[i].awayTeam}`}
+                        >
+                          {result}
+                        </Link>
+                      ) : (
+                        <span className={`w-6 h-6 rounded flex items-center justify-center text-xs font-bold ${getFormColor(result)}`}>
+                          {result}
+                        </span>
+                      )}
+
+                      {team.formDetails?.[i] && (
+                        <div className="pointer-events-none absolute left-1/2 top-0 z-30 hidden -translate-x-1/2 -translate-y-full whitespace-nowrap rounded-md border border-white/15 bg-slate-900 px-2 py-1 text-[11px] text-white shadow-xl group-hover/form:block">
+                          {team.formDetails[i].homeScore}:{team.formDetails[i].awayScore} ({team.formDetails[i].homeTeam} - {team.formDetails[i].awayTeam}) {team.formDetails[i].date}
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </td>

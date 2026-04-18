@@ -1,5 +1,5 @@
 import { User } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PlayerAvatarProps {
   name: string;
@@ -10,6 +10,10 @@ interface PlayerAvatarProps {
 
 export function PlayerAvatar({ name, photoUrl, code, className = "w-full h-full" }: PlayerAvatarProps) {
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setError(false);
+  }, [photoUrl, code]);
 
   // Reverted logic: Use photoUrl directly if available, otherwise construct from code (no 'p' prefix forced unless in photoUrl)
   let finalUrl = photoUrl;

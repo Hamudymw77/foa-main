@@ -78,6 +78,16 @@ export interface Match {
 
 export type FormResult = 'W' | 'V' | 'D' | 'R' | 'L' | 'P';
 
+export interface FormMatchDetail {
+  matchId: string;
+  homeTeam: string;
+  awayTeam: string;
+  homeScore: number;
+  awayScore: number;
+  date: string;
+  result: FormResult;
+}
+
 export interface TeamStanding {
   pos: number;
   team: string;
@@ -90,6 +100,7 @@ export interface TeamStanding {
   gd: number;
   points: number;
   form: FormResult[];
+  formDetails?: FormMatchDetail[];
   logo: string;
 }
 

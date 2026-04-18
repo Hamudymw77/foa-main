@@ -9,6 +9,7 @@ import { SkeletonLoader } from "../components/SkeletonLoader"
 import { MatchSummaryCard } from "../components/MatchSummaryCard"
 import html2canvas from "html2canvas"
 import { toast, Toaster } from "sonner"
+import { compressImageFile } from "../lib/imageCompression"
 import { 
   Trophy, 
   RefreshCw, 
@@ -30,10 +31,11 @@ import {
 } from "lucide-react"
 
 import { TransfersAdmin } from "./components/TransfersAdmin"
+import { TeamLogosAdmin } from "./components/TeamLogosAdmin"
 
 export default function AdminPage() {
   const [matches, setMatches] = useState<Match[]>([])
-  const [activeTab, setActiveTab] = useState<'matches' | 'transfers'>('matches')
+  const [activeTab, setActiveTab] = useState<'matches' | 'transfers' | 'logos'>('matches')
   const [isLoading, setIsLoading] = useState(true)
   const [editingMatchId, setEditingMatchId] = useState<string | null>(null)
   
@@ -201,7 +203,14 @@ export default function AdminPage() {
     } else {
         setEditingMatchId(match.id)
         setCurrentEvents(match.events ? [...match.events] : [])
-        setCurrentStats(match.stats ? { ...match.stats } : null)
+        const baseStats = match.stats ? { ...match.stats } : null
+        const statsForEdit = baseStats ? { ...baseStats } : { possession: [50, 50], shots: [0, 0], shotsOnTarget: [0, 0], corners: [0, 0], fouls: [0, 0] }
+        if (!Array.isArray((statsForEdit as any).shotsOffTarget) && Array.isArray((statsForEdit as any).shots) && Array.isArray((statsForEdit as any).shotsOnTarget)) {
+          const s = (statsForEdit as any).shots
+          const on = (statsForEdit as any).shotsOnTarget
+          ;(statsForEdit as any).shotsOffTarget = [Math.max(0, (Number(s[0]) || 0) - (Number(on[0]) || 0)), Math.max(0, (Number(s[1]) || 0) - (Number(on[1]) || 0))]
+        }
+        setCurrentStats(statsForEdit)
         // Resetujeme search při otevření nového zápasu
         setPlayerSearch('')
         
@@ -333,6 +342,40 @@ export default function AdminPage() {
 
   // Preview Modal
   const [previewPlayer, setPreviewPlayer] = useState<any>(null)
+
+  const uploadPreviewPlayerPhoto = async (file: File) => {
+      if (!previewPlayer) return
+      const currentPassword = password || sessionStorage.getItem('adminPassword') || ''
+      if (!currentPassword) {
+          toast.error('Chybí admin heslo')
+          return
+      }
+
+      toast.promise(
+          (async () => {
+              const compressed = await compressImageFile(file, { maxSizePx: 300, targetBytes: 50 * 1024, mimeType: 'image/webp' })
+              const form = new FormData()
+              form.append('file', compressed)
+              form.append('kind', 'player_photo')
+              form.append('entityId', String(previewPlayer.id || previewPlayer.name || 'player'))
+              form.append('password', currentPassword)
+
+              const res = await fetch('/api/admin/upload-asset', { method: 'POST', body: form })
+              const data = await res.json()
+              if (!res.ok) throw new Error(data?.error || 'Upload failed')
+
+              const url = data.url as string
+              setPreviewPlayer((prev: any) => ({ ...(prev || {}), photo: url, customPhoto: true }))
+              setHomeFormationPlayers((prev: any[]) => prev.map((p: any) => (p?.id === previewPlayer.id ? { ...p, photo: url, customPhoto: true } : p)))
+              setAwayFormationPlayers((prev: any[]) => prev.map((p: any) => (p?.id === previewPlayer.id ? { ...p, photo: url, customPhoto: true } : p)))
+          })(),
+          {
+              loading: 'Nahrávám fotku hráče...',
+              success: 'Uloženo',
+              error: (err) => `Chyba: ${err.message}`
+          }
+      )
+  }
   
   const handleShowPreview = (e: React.MouseEvent, player: any) => {
       e.stopPropagation()
@@ -411,15 +454,26 @@ export default function AdminPage() {
       if (!editingMatchId) return
 
       // Formátování statistik na čísla
-      const formattedStats = currentStats ? {
-        possession: currentStats.possession.map(Number),
-        shots: currentStats.shots.map(Number),
-        shotsOnTarget: currentStats.shotsOnTarget.map(Number),
-        corners: currentStats.corners.map(Number),
-        fouls: currentStats.fouls.map(Number),
-        // Zachování ostatních
-        ...currentStats
-      } : null;
+      const formattedStats = currentStats ? (() => {
+        const possession = Array.isArray(currentStats.possession) ? currentStats.possession.map(Number) : [50, 50]
+        const shotsOnTarget = Array.isArray(currentStats.shotsOnTarget) ? currentStats.shotsOnTarget.map(Number) : [0, 0]
+        const shotsOffTarget = Array.isArray((currentStats as any).shotsOffTarget) ? (currentStats as any).shotsOffTarget.map(Number) : [0, 0]
+        const corners = Array.isArray(currentStats.corners) ? currentStats.corners.map(Number) : [0, 0]
+        const fouls = Array.isArray(currentStats.fouls) ? currentStats.fouls.map(Number) : [0, 0]
+        const shots = [
+          (Number(shotsOnTarget[0]) || 0) + (Number(shotsOffTarget[0]) || 0),
+          (Number(shotsOnTarget[1]) || 0) + (Number(shotsOffTarget[1]) || 0)
+        ]
+        return {
+          ...currentStats,
+          possession,
+          shotsOnTarget,
+          shotsOffTarget,
+          shots,
+          corners,
+          fouls
+        }
+      })() : null;
 
       try {
         // 2. Spolehlivé odeslání hesla (Frontend -> Backend)
@@ -594,6 +648,10 @@ export default function AdminPage() {
       }
 
       const currentPassword = password || sessionStorage.getItem('adminPassword') || '';
+      if (!currentPassword) {
+          toast.error('Chybí admin heslo')
+          return
+      }
 
       toast.promise(
           fetch('/api/sync-fotmob', {
@@ -608,6 +666,8 @@ export default function AdminPage() {
               })
           }).then(async (res) => {
               const data = await res.json();
+              console.log('AUTO-SYNC RESPONSE:', data)
+              alert('Stats: ' + (data.stats ? 'DORAZILY' : 'CHYBÍ') + ' | Lineups: ' + (data.lineups ? 'DORAZILY' : 'CHYBÍ'))
               
               if (!res.ok) {
                   const errorMsg = data.error || 'Neznámá chyba serveru';
@@ -635,7 +695,25 @@ export default function AdminPage() {
               }
 
               if (data.stats) {
-                  setCurrentStats((prev: any) => ({ ...(prev || {}), ...data.stats }));
+                  const nextStats = { ...data.stats } as any
+                  if (!Array.isArray(nextStats.shotsOffTarget) && Array.isArray(nextStats.shots) && Array.isArray(nextStats.shotsOnTarget)) {
+                      nextStats.shotsOffTarget = [
+                          Math.max(0, (Number(nextStats.shots?.[0]) || 0) - (Number(nextStats.shotsOnTarget?.[0]) || 0)),
+                          Math.max(0, (Number(nextStats.shots?.[1]) || 0) - (Number(nextStats.shotsOnTarget?.[1]) || 0))
+                      ]
+                  }
+                  setCurrentStats(nextStats)
+              } else {
+                  console.log('Statistiky zatím nejsou k dispozici')
+              }
+
+              if (data.lineups) {
+                  if (data.lineups.homeFormation) setHomeFormation(data.lineups.homeFormation);
+                  if (data.lineups.awayFormation) setAwayFormation(data.lineups.awayFormation);
+                  if (data.lineups.homePlayers && Array.isArray(data.lineups.homePlayers)) setHomeFormationPlayers(data.lineups.homePlayers);
+                  if (data.lineups.awayPlayers && Array.isArray(data.lineups.awayPlayers)) setAwayFormationPlayers(data.lineups.awayPlayers);
+              } else {
+                  console.log('Sestavy zatím nejsou k dispozici')
               }
 
               const refreshRes = await fetch('/api/football?type=matches')
@@ -644,11 +722,17 @@ export default function AdminPage() {
                   setMatches(newData)
               }
 
-              if (data.events && data.events.length > 0) {
-                  return 'Události úspěšně staženy!';
-              } else {
-                  throw new Error('Žádné události nenalezeny');
+              if ((data.events && data.events.length > 0) || data.stats || data.lineups) {
+                  if (data.events && data.events.length > 0) return 'Události úspěšně staženy!';
+                  if (data.lineups && data.stats) return 'Sestavy a statistiky úspěšně staženy!';
+                  if (data.lineups) return 'Sestavy úspěšně staženy!';
+                  return 'Statistiky úspěšně staženy!';
               }
+
+              throw new Error('Synchronizace nenašla žádná data');
+          }).catch((error) => {
+              alert('Chyba Auto-Syncu: ' + (error?.message || String(error)))
+              throw error
           }),
           {
               loading: 'Stahuji data z FotMob...',
@@ -701,6 +785,12 @@ export default function AdminPage() {
                             className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${activeTab === 'transfers' ? 'bg-accent text-slate-900' : 'text-secondary hover:text-white'}`}
                         >
                             Přestupy
+                        </button>
+                        <button 
+                            onClick={() => setActiveTab('logos')}
+                            className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${activeTab === 'logos' ? 'bg-accent text-slate-900' : 'text-secondary hover:text-white'}`}
+                        >
+                            Knihovna log
                         </button>
                     </div>
 
@@ -1010,6 +1100,131 @@ export default function AdminPage() {
                             </div>
                         </div>
                         
+                        <div className="mt-8 border-t border-white/10 pt-8">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-sm font-bold text-secondary uppercase tracking-widest">STATISTIKY (RUČNĚ)</h3>
+                                <button
+                                    type="button"
+                                    onClick={() =>
+                                        setCurrentStats((prev: any) => ({
+                                            possession: Array.isArray(prev?.possession) ? prev.possession : [50, 50],
+                                            shotsOnTarget: Array.isArray(prev?.shotsOnTarget) ? prev.shotsOnTarget : [0, 0],
+                                            shotsOffTarget: Array.isArray(prev?.shotsOffTarget) ? prev.shotsOffTarget : [0, 0],
+                                            corners: Array.isArray(prev?.corners) ? prev.corners : [0, 0],
+                                            fouls: Array.isArray(prev?.fouls) ? prev.fouls : [0, 0]
+                                        }))
+                                    }
+                                    className="text-[10px] bg-white/5 hover:bg-white/10 text-secondary px-2 py-1 rounded border border-white/10 transition-colors font-bold uppercase tracking-wider"
+                                >
+                                    Inicializovat
+                                </button>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="bg-slate-900/50 p-4 rounded-xl border border-white/5">
+                                    <div className="text-xs font-black text-accent uppercase tracking-widest mb-4">DOMÁCÍ</div>
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Držení (%)</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            max={100}
+                                            value={currentStats?.possession?.[0] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), possession: [Number(e.target.value), Number(prev?.possession?.[1] ?? 0)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Střely na bránu</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            value={currentStats?.shotsOnTarget?.[0] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), shotsOnTarget: [Number(e.target.value), Number(prev?.shotsOnTarget?.[1] ?? 0)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Střely mimo</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            value={currentStats?.shotsOffTarget?.[0] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), shotsOffTarget: [Number(e.target.value), Number(prev?.shotsOffTarget?.[1] ?? 0)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Rohy</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            value={currentStats?.corners?.[0] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), corners: [Number(e.target.value), Number(prev?.corners?.[1] ?? 0)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Fauly</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            value={currentStats?.fouls?.[0] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), fouls: [Number(e.target.value), Number(prev?.fouls?.[1] ?? 0)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="bg-slate-900/50 p-4 rounded-xl border border-white/5">
+                                    <div className="text-xs font-black text-blue-400 uppercase tracking-widest mb-4">HOSTÉ</div>
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Držení (%)</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            max={100}
+                                            value={currentStats?.possession?.[1] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), possession: [Number(prev?.possession?.[0] ?? 0), Number(e.target.value)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Střely na bránu</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            value={currentStats?.shotsOnTarget?.[1] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), shotsOnTarget: [Number(prev?.shotsOnTarget?.[0] ?? 0), Number(e.target.value)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Střely mimo</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            value={currentStats?.shotsOffTarget?.[1] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), shotsOffTarget: [Number(prev?.shotsOffTarget?.[0] ?? 0), Number(e.target.value)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Rohy</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            value={currentStats?.corners?.[1] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), corners: [Number(prev?.corners?.[0] ?? 0), Number(e.target.value)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+
+                                        <label className="text-[10px] uppercase font-bold text-secondary">Fauly</label>
+                                        <input
+                                            type="number"
+                                            min={0}
+                                            value={currentStats?.fouls?.[1] ?? 0}
+                                            onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), fouls: [Number(prev?.fouls?.[0] ?? 0), Number(e.target.value)] }))}
+                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Formace - Visual Editor */}
                         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 pt-8">
                             {/* DOMÁCÍ */}
@@ -1220,6 +1435,20 @@ export default function AdminPage() {
                                             <User className="w-20 h-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/20" />
                                         )}
                                     </div>
+
+                                    <div className="w-full">
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={(e) => {
+                                                const f = e.target.files?.[0]
+                                                if (!f) return
+                                                void uploadPreviewPlayerPhoto(f)
+                                                e.target.value = ''
+                                            }}
+                                            className="w-full text-xs text-secondary file:bg-white/10 file:text-white file:border-0 file:px-4 file:py-2 file:rounded-lg file:font-bold file:uppercase file:tracking-wider file:text-[10px] file:hover:bg-white/20 file:cursor-pointer"
+                                        />
+                                    </div>
                                     
                                     <div className="text-center">
                                         <h2 className="text-3xl font-black text-white mb-2 tracking-tight">{previewPlayer.name}</h2>
@@ -1254,7 +1483,8 @@ export default function AdminPage() {
             </>
         )}
 
-        {activeTab === 'transfers' && isAuthenticated && <TransfersAdmin />}
+        {activeTab === 'transfers' && isAuthenticated && <TransfersAdmin password={password || sessionStorage.getItem('adminPassword') || ''} />}
+        {activeTab === 'logos' && isAuthenticated && <TeamLogosAdmin password={password || sessionStorage.getItem('adminPassword') || ''} />}
 
         {/* Modal for Image Generation */}
         {showSummaryModal && summaryMatch && (

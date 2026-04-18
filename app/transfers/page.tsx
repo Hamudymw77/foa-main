@@ -57,7 +57,7 @@ const TransferCard = ({ t }: { t: any }) => {
                 <div className="flex items-center justify-between relative z-10 bg-black/20 rounded-xl p-3 border border-white/5 mb-4">
                     <div className="flex flex-col items-center gap-2 w-[35%]">
                         <div className="w-10 h-10 flex items-center justify-center">
-                            <TeamBadge name={t.from} className="w-full h-full" />
+                            <TeamBadge name={t.from} logoUrl={t.fromLogo} className="w-full h-full" />
                         </div>
                         <span className="text-[9px] font-bold text-white/50 truncate w-full text-center leading-tight">{t.from}</span>
                     </div>
@@ -69,7 +69,7 @@ const TransferCard = ({ t }: { t: any }) => {
 
                     <div className="flex flex-col items-center gap-2 w-[35%]">
                         <div className="w-12 h-12 flex items-center justify-center">
-                            <TeamBadge name={t.to} className="w-full h-full scale-110" />
+                            <TeamBadge name={t.to} logoUrl={t.toLogo} className="w-full h-full scale-110" />
                         </div>
                         <span className="text-[9px] font-bold text-white truncate w-full text-center leading-tight">{t.to}</span>
                     </div>

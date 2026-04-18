@@ -45,14 +45,33 @@ function mergeUniqueEvents(existing: any[], incoming: any[]) {
   return out;
 }
 
-async function fetchApiFootballStats(homeTeam: string, awayTeam: string, isoDate: string) {
+async function findApiFootballFixture(homeTeam: string, awayTeam: string, isoDate: string) {
   const API_KEY = process.env.API_FOOTBALL_KEY || '';
-  if (!API_KEY) return null;
+  if (!API_KEY) {
+    console.log('API-Football: chybí API_FOOTBALL_KEY');
+    return null;
+  }
 
   const API_URL = 'https://v3.football.api-sports.io';
 
-  const fetchFixtures = async (season: string) => {
-    const res = await fetch(`${API_URL}/fixtures?league=39&season=${season}&date=${isoDate}`, {
+  const shiftIsoDate = (baseIso: string, days: number) => {
+    const d = new Date(`${baseIso}T00:00:00.000Z`);
+    d.setUTCDate(d.getUTCDate() + days);
+    return d.toISOString().slice(0, 10);
+  };
+
+  const datesToTry: string[] = [];
+  for (let delta = 0; delta <= 3; delta++) {
+    if (delta === 0) {
+      datesToTry.push(isoDate);
+      continue;
+    }
+    datesToTry.push(shiftIsoDate(isoDate, -delta));
+    datesToTry.push(shiftIsoDate(isoDate, delta));
+  }
+
+  const fetchFixtures = async (season: string, dateToUse: string) => {
+    const res = await fetch(`${API_URL}/fixtures?league=39&season=${season}&date=${dateToUse}`, {
       headers: { 'x-apisports-key': API_KEY }
     });
     if (!res.ok) return [];
@@ -60,60 +79,281 @@ async function fetchApiFootballStats(homeTeam: string, awayTeam: string, isoDate
     return data.response || [];
   };
 
-  const [fixtures2025, fixtures2024] = await Promise.all([fetchFixtures('2025'), fetchFixtures('2024')]);
-  const allFixtures = [...fixtures2025, ...fixtures2024];
+  let allFixtures: any[] = [];
+  const perDateSamples: Array<{ date: string; count: number; sample: Array<{ id: any; home: any; away: any; date: any }> }> = [];
+  for (const d of datesToTry) {
+    const [fixtures2025, fixtures2024] = await Promise.all([fetchFixtures('2025', d), fetchFixtures('2024', d)]);
+    allFixtures = [...fixtures2025, ...fixtures2024];
+    perDateSamples.push({
+      date: d,
+      count: allFixtures.length,
+      sample: allFixtures.slice(0, 5).map((m: any) => ({
+        id: m.fixture?.id,
+        home: m.teams?.home?.name,
+        away: m.teams?.away?.name,
+        date: m.fixture?.date
+      }))
+    });
+    if (allFixtures.length > 0) break;
+  }
+  console.log('API-Football: fixtures lookup', { homeTeam, awayTeam, isoDate, datesTried: datesToTry, fixturesCount: allFixtures.length });
 
   const fplHome = normalizeTeamForMatch(homeTeam);
   const fplAway = normalizeTeamForMatch(awayTeam);
 
+  const normalizeLoose = (name: string) => String(name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const fplHomeLoose = normalizeLoose(homeTeam);
+  const fplAwayLoose = normalizeLoose(awayTeam);
+
+  const fplHomeShortLoose = normalizeLoose(homeTeam.split(/\s+/).slice(0, 2).join(' '));
+  const fplAwayShortLoose = normalizeLoose(awayTeam.split(/\s+/).slice(0, 2).join(' '));
+
+  const isTeamMatch = (apiName: string, targetNorm: string, targetLoose: string, targetShortLoose: string) => {
+    const apiNorm = normalizeTeamForMatch(apiName);
+    if (apiNorm === targetNorm) return true;
+
+    const apiLoose = normalizeLoose(apiName);
+    if (apiLoose && targetLoose && (apiLoose.includes(targetLoose) || targetLoose.includes(apiLoose))) return true;
+    if (apiLoose && targetShortLoose && (apiLoose.includes(targetShortLoose) || targetShortLoose.includes(apiLoose))) return true;
+
+    if (apiNorm && targetNorm && (apiNorm.includes(targetNorm) || targetNorm.includes(apiNorm))) return true;
+    return false;
+  };
+
   const direct = allFixtures.find((m: any) => {
-    const apiHome = normalizeTeamForMatch(m.teams?.home?.name || '');
-    const apiAway = normalizeTeamForMatch(m.teams?.away?.name || '');
-    return apiHome === fplHome && apiAway === fplAway;
+    const apiHomeName = m.teams?.home?.name || '';
+    const apiAwayName = m.teams?.away?.name || '';
+    return (
+      isTeamMatch(apiHomeName, fplHome, fplHomeLoose, fplHomeShortLoose) &&
+      isTeamMatch(apiAwayName, fplAway, fplAwayLoose, fplAwayShortLoose)
+    );
   });
+
   const reverse = allFixtures.find((m: any) => {
-    const apiHome = normalizeTeamForMatch(m.teams?.home?.name || '');
-    const apiAway = normalizeTeamForMatch(m.teams?.away?.name || '');
-    return apiHome === fplAway && apiAway === fplHome;
+    const apiHomeName = m.teams?.home?.name || '';
+    const apiAwayName = m.teams?.away?.name || '';
+    return (
+      isTeamMatch(apiHomeName, fplAway, fplAwayLoose, fplAwayShortLoose) &&
+      isTeamMatch(apiAwayName, fplHome, fplHomeLoose, fplHomeShortLoose)
+    );
   });
 
   const fixture = direct || reverse;
-  if (!fixture?.fixture?.id) return null;
+  if (!fixture?.fixture?.id) {
+    console.log('API-Football: fixture nenalezen', {
+      homeTeam,
+      awayTeam,
+      isoDate,
+      sampleByDate: perDateSamples
+    });
+    return null;
+  }
+  console.log('API-Football: fixture matched', {
+    fixtureId: fixture.fixture.id,
+    home: fixture.teams?.home?.name,
+    away: fixture.teams?.away?.name,
+    date: fixture.fixture?.date
+  });
+  return { fixtureId: fixture.fixture.id as number, fixture };
+}
 
-  const statsRes = await fetch(`${API_URL}/fixtures/statistics?fixture=${fixture.fixture.id}`, {
+async function fetchApiFootballStats(homeTeam: string, awayTeam: string, isoDate: string) {
+  const API_KEY = process.env.API_FOOTBALL_KEY || '';
+  if (!API_KEY) {
+    console.log('API-Football: stats přeskočeny (chybí API_FOOTBALL_KEY)');
+    return null;
+  }
+
+  const API_URL = 'https://v3.football.api-sports.io';
+
+  const found = await findApiFootballFixture(homeTeam, awayTeam, isoDate);
+  if (!found) {
+    console.log('API-Football: stats - fixture nenalezen');
+    return null;
+  }
+  const { fixtureId, fixture } = found;
+  const statsRes = await fetch(`${API_URL}/fixtures/statistics?fixture=${fixtureId}`, {
     headers: { 'x-apisports-key': API_KEY }
   });
-  if (!statsRes.ok) return null;
+  if (!statsRes.ok) {
+    console.log('API-Football: stats endpoint failed', { fixtureId, status: statsRes.status, statusText: statsRes.statusText });
+    return null;
+  }
   const statsData = await statsRes.json();
   const statsResponse = statsData.response;
+  console.log('API-Football: stats response preview', {
+    fixtureId,
+    teams: Array.isArray(statsResponse)
+      ? statsResponse.map((t: any) => ({
+          team: t.team?.name,
+          sample: Array.isArray(t.statistics) ? t.statistics.slice(0, 6) : []
+        }))
+      : null
+  });
   if (!statsResponse || statsResponse.length !== 2) return null;
 
-  const homeStats = statsResponse[0].statistics;
-  const awayStats = statsResponse[1].statistics;
+  const fixtureHome = normalizeTeamForMatch(fixture.teams?.home?.name || '');
+  const fixtureAway = normalizeTeamForMatch(fixture.teams?.away?.name || '');
+
+  const homeEntry =
+    statsResponse.find((s: any) => normalizeTeamForMatch(s.team?.name || '') === fixtureHome) || statsResponse[0];
+  const awayEntry =
+    statsResponse.find((s: any) => normalizeTeamForMatch(s.team?.name || '') === fixtureAway) || statsResponse[1];
+
+  const homeStats = homeEntry.statistics;
+  const awayStats = awayEntry.statistics;
 
   const getValue = (arr: any[], type: string) => {
     const item = arr.find((s) => s.type === type);
     if (!item) return 0;
     let val = item.value;
     if (val === null) return 0;
-    if (typeof val === 'string' && val.includes('%')) val = parseInt(val.replace('%', ''));
+    if (typeof val === 'string') {
+      const parsed = parseInt(val.replace('%', '').trim(), 10);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
     return typeof val === 'number' ? val : 0;
   };
 
+  const getAnyValue = (arr: any[], types: string[]) => {
+    for (const t of types) {
+      const v = getValue(arr, t);
+      if (v > 0) return v;
+    }
+    return getValue(arr, types[0] || '');
+  };
+
   const newStats = {
-    possession: [getValue(homeStats, 'Ball Possession'), getValue(awayStats, 'Ball Possession')],
-    shots: [getValue(homeStats, 'Total Shots'), getValue(awayStats, 'Total Shots')],
-    shotsOnTarget: [getValue(homeStats, 'Shots on Goal'), getValue(awayStats, 'Shots on Goal')],
-    corners: [getValue(homeStats, 'Corner Kicks'), getValue(awayStats, 'Corner Kicks')],
-    fouls: [getValue(homeStats, 'Fouls'), getValue(awayStats, 'Fouls')],
-    yellowCards: [getValue(homeStats, 'Yellow Cards'), getValue(awayStats, 'Yellow Cards')],
-    redCards: [getValue(homeStats, 'Red Cards'), getValue(awayStats, 'Red Cards')],
-    offsides: [getValue(homeStats, 'Offsides'), getValue(awayStats, 'Offsides')]
+    possession: [
+      getAnyValue(homeStats, ['Ball Possession']),
+      getAnyValue(awayStats, ['Ball Possession'])
+    ],
+    shots: [
+      getAnyValue(homeStats, ['Total Shots']),
+      getAnyValue(awayStats, ['Total Shots'])
+    ],
+    shotsOnTarget: [
+      getAnyValue(homeStats, ['Shots on Goal', 'Shots on Target']),
+      getAnyValue(awayStats, ['Shots on Goal', 'Shots on Target'])
+    ],
+    corners: [
+      getAnyValue(homeStats, ['Corner Kicks']),
+      getAnyValue(awayStats, ['Corner Kicks'])
+    ],
+    fouls: [
+      getAnyValue(homeStats, ['Fouls']),
+      getAnyValue(awayStats, ['Fouls'])
+    ],
+    yellowCards: [
+      getAnyValue(homeStats, ['Yellow Cards']),
+      getAnyValue(awayStats, ['Yellow Cards'])
+    ],
+    redCards: [
+      getAnyValue(homeStats, ['Red Cards']),
+      getAnyValue(awayStats, ['Red Cards'])
+    ],
+    offsides: [
+      getAnyValue(homeStats, ['Offsides']),
+      getAnyValue(awayStats, ['Offsides'])
+    ]
   };
 
   const poss = newStats.possession;
   if (!Array.isArray(poss) || poss.length !== 2 || poss[0] + poss[1] <= 0) return null;
   return newStats;
+}
+
+async function fetchApiFootballLineups(homeTeam: string, awayTeam: string, isoDate: string) {
+  const API_KEY = process.env.API_FOOTBALL_KEY || '';
+  if (!API_KEY) {
+    console.log('API-Football: lineups přeskočeny (chybí API_FOOTBALL_KEY)');
+    return null;
+  }
+
+  const API_URL = 'https://v3.football.api-sports.io';
+
+  const found = await findApiFootballFixture(homeTeam, awayTeam, isoDate);
+  if (!found) {
+    console.log('API-Football: lineups - fixture nenalezen');
+    return null;
+  }
+  const { fixtureId, fixture } = found;
+
+  const lineupsRes = await fetch(`${API_URL}/fixtures/lineups?fixture=${fixtureId}`, {
+    headers: { 'x-apisports-key': API_KEY }
+  });
+  if (!lineupsRes.ok) {
+    console.log('API-Football: lineups endpoint failed', { fixtureId, status: lineupsRes.status, statusText: lineupsRes.statusText });
+    return null;
+  }
+  const lineupsData = await lineupsRes.json();
+  const lineups = lineupsData.response;
+  console.log('API-Football: lineups response preview', {
+    fixtureId,
+    teams: Array.isArray(lineups)
+      ? lineups.map((l: any) => ({
+          team: l.team?.name,
+          formation: l.formation,
+          startXI: Array.isArray(l.startXI) ? l.startXI.length : 0,
+          substitutes: Array.isArray(l.substitutes) ? l.substitutes.length : 0
+        }))
+      : null
+  });
+  if (!Array.isArray(lineups) || lineups.length < 2) return null;
+
+  const fixtureHome = normalizeTeamForMatch(fixture.teams?.home?.name || '');
+  const fixtureAway = normalizeTeamForMatch(fixture.teams?.away?.name || '');
+
+  const homeEntry = lineups.find((l: any) => normalizeTeamForMatch(l.team?.name || '') === fixtureHome) || lineups[0];
+  const awayEntry = lineups.find((l: any) => normalizeTeamForMatch(l.team?.name || '') === fixtureAway) || lineups[1];
+
+  const mapPlayer = (p: any, teamName: string) => {
+    const player = p?.player || {};
+    return {
+      id: player.id ?? `${teamName}-${player.name ?? 'player'}`,
+      name: player.name ?? 'Player',
+      number: player.number ?? undefined,
+      position: player.pos ?? undefined,
+      teamName,
+      grid: player.grid ?? undefined
+    };
+  };
+
+  const mapLineup = (entry: any) => {
+    const teamName = entry?.team?.name || '';
+    const parseGrid = (grid: any) => {
+      const str = String(grid || '');
+      const m = str.match(/^(\d+):(\d+)$/);
+      if (!m) return null;
+      return { r: parseInt(m[1], 10), c: parseInt(m[2], 10) };
+    };
+
+    const startingUnsorted = Array.isArray(entry?.startXI) ? entry.startXI.map((x: any) => mapPlayer(x, teamName)) : [];
+    const starting = startingUnsorted.slice().sort((a: any, b: any) => {
+      const ga = parseGrid(a.grid);
+      const gb = parseGrid(b.grid);
+      if (!ga && !gb) return 0;
+      if (!ga) return 1;
+      if (!gb) return -1;
+      return ga.r - gb.r || ga.c - gb.c;
+    });
+    const subs = Array.isArray(entry?.substitutes) ? entry.substitutes.map((x: any) => mapPlayer(x, teamName)) : [];
+    const formation = entry?.formation || undefined;
+    return { teamName, formation, starting, substitutes: subs };
+  };
+
+  const home = mapLineup(homeEntry);
+  const away = mapLineup(awayEntry);
+
+  if (!home.starting.length || !away.starting.length) return null;
+
+  return {
+    homeFormation: home.formation,
+    awayFormation: away.formation,
+    homePlayers: [...home.starting, ...home.substitutes],
+    awayPlayers: [...away.starting, ...away.substitutes],
+    lineups: { home, away }
+  };
 }
 
 export async function POST(request: Request) {
@@ -243,10 +483,58 @@ export async function POST(request: Request) {
                  console.log(`- ${h} vs ${a}`);
              });
          }
-         
+
+         const [apiFootballStats, apiFootballLineups] = await Promise.all([
+            fetchApiFootballStats(homeTeam, awayTeam, isoDate),
+            fetchApiFootballLineups(homeTeam, awayTeam, isoDate)
+         ]);
+
+         if (fplMatchId) {
+            const envPassword = process.env.ADMIN_PASSWORD?.trim() || '';
+            const providedPassword = String(password || '').trim();
+            if (!envPassword) {
+                return NextResponse.json(
+                    { error: 'Na serveru není nastaveno ADMIN_PASSWORD. Nastavte ho v prostředí (Environment Variables).' },
+                    { status: 500 }
+                );
+            }
+            if (providedPassword !== envPassword) {
+                return NextResponse.json({ error: 'Unauthorized: Nesprávné heslo' }, { status: 401 });
+            }
+
+            const existing = (await getOverride(String(fplMatchId))) || {};
+            const nextOverride: any = {
+                ...existing,
+                lastSync: new Date().toISOString()
+            };
+
+            if (apiFootballStats) {
+                nextOverride.stats = {
+                    ...(existing.stats || {}),
+                    ...apiFootballStats
+                };
+                nextOverride.lastStatsUpdate = new Date().toISOString();
+            }
+
+            if (apiFootballLineups) {
+                if (apiFootballLineups.homeFormation) nextOverride.homeFormation = apiFootballLineups.homeFormation;
+                if (apiFootballLineups.awayFormation) nextOverride.awayFormation = apiFootballLineups.awayFormation;
+                if (apiFootballLineups.homePlayers) nextOverride.homePlayers = apiFootballLineups.homePlayers;
+                if (apiFootballLineups.awayPlayers) nextOverride.awayPlayers = apiFootballLineups.awayPlayers;
+                nextOverride.lineups = apiFootballLineups.lineups;
+                nextOverride.lastLineupsUpdate = new Date().toISOString();
+            }
+
+            await saveOverride(String(fplMatchId), nextOverride);
+         }
+
+         if (apiFootballStats || apiFootballLineups) {
+            return NextResponse.json({ success: true, events: [], stats: apiFootballStats, lineups: apiFootballLineups });
+         }
+
          return NextResponse.json({ 
             error: `Zápas '${homeTeam} vs ${awayTeam}' nenalezen na ESPN (datum: ${dateStr}).` 
-        }, { status: 404 });
+         }, { status: 404 });
     }
 
     // 3. Získat detaily zápasu (Game Summary)
@@ -437,14 +725,17 @@ export async function POST(request: Request) {
         // Seřadí od 1. do 120. minuty
         .sort((a, b) => a.sortMin - b.sortMin);
 
-    if (finalEvents.length === 0) {
-         return NextResponse.json({ 
-             error: 'Ani hloubkový sken nenašel žádné události. Zkus jiný zápas, tento pravděpodobně nemá na ESPN data.',
-             debugData: { keys: Object.keys(sumData) }
-         }, { status: 404 });
-    }
+    const [apiFootballStats, apiFootballLineups] = await Promise.all([
+      fetchApiFootballStats(homeTeam, awayTeam, isoDate),
+      fetchApiFootballLineups(homeTeam, awayTeam, isoDate)
+    ]);
 
-    const apiFootballStats = await fetchApiFootballStats(homeTeam, awayTeam, isoDate);
+    if (finalEvents.length === 0 && !apiFootballStats && !apiFootballLineups) {
+      return NextResponse.json(
+        { error: 'Synchronizace nenašla žádná data (události, statistiky ani sestavy).', debugData: { keys: Object.keys(sumData) } },
+        { status: 404 }
+      );
+    }
 
     if (fplMatchId) {
       const envPassword = process.env.ADMIN_PASSWORD?.trim() || '';
@@ -476,10 +767,19 @@ export async function POST(request: Request) {
         nextOverride.lastStatsUpdate = new Date().toISOString();
       }
 
+      if (apiFootballLineups) {
+        if (apiFootballLineups.homeFormation) nextOverride.homeFormation = apiFootballLineups.homeFormation;
+        if (apiFootballLineups.awayFormation) nextOverride.awayFormation = apiFootballLineups.awayFormation;
+        if (apiFootballLineups.homePlayers) nextOverride.homePlayers = apiFootballLineups.homePlayers;
+        if (apiFootballLineups.awayPlayers) nextOverride.awayPlayers = apiFootballLineups.awayPlayers;
+        nextOverride.lineups = apiFootballLineups.lineups;
+        nextOverride.lastLineupsUpdate = new Date().toISOString();
+      }
+
       await saveOverride(String(fplMatchId), nextOverride);
     }
 
-    return NextResponse.json({ success: true, events: finalEvents, stats: apiFootballStats });
+    return NextResponse.json({ success: true, events: finalEvents, stats: apiFootballStats, lineups: apiFootballLineups });
 
   } catch (error: any) {
     console.error('ESPN Sync Error:', error);

@@ -112,7 +112,7 @@
     "window": "summer_25",
     "type": "permanent",
     "club": "Arsenal",
-    "photo": null,
+    "photo": "https://mtppqyotfcnbouuqdrqz.supabase.co/storage/v1/object/public/kickgoal-assets/transfers/summer-25-marquinhos-player.webp",
     "fromLogo": null,
     "toLogo": null
   },
@@ -619,7 +619,7 @@
     "window": "summer_25",
     "type": "permanent",
     "club": "Brentford",
-    "photo": null,
+    "photo": "https://mtppqyotfcnbouuqdrqz.supabase.co/storage/v1/object/public/kickgoal-assets/transfers/summer-25-mark-flekken-player.webp",
     "fromLogo": null,
     "toLogo": null
   },

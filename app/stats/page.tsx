@@ -72,7 +72,7 @@ export default function StatsPage() {
                         onClick={() => setActiveTab(tab.id as any)}
                         className={`px-4 py-2 rounded-lg text-sm font-bold transition-all whitespace-nowrap ${
                             activeTab === tab.id 
-                                ? 'bg-accent text-slate-900 shadow-lg' 
+                                ? 'bg-white text-slate-900 shadow-lg' 
                                 : 'text-secondary hover:text-white hover:bg-white/5'
                         }`}
                     >
@@ -88,9 +88,9 @@ export default function StatsPage() {
                 <div className="h-96 bg-white/5 rounded-2xl"></div>
             </div>
         ) : (
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="space-y-8">
                 {/* Main Leaderboard */}
-                <div className="lg:col-span-2 space-y-6">
+                <div className="space-y-6">
                     <div className="glass-card rounded-2xl overflow-hidden border border-white/10">
                         <div className="p-6 border-b border-white/10 bg-white/5 backdrop-blur flex items-center justify-between">
                             <div className="flex items-center gap-3">
@@ -152,9 +152,6 @@ export default function StatsPage() {
                                             <td className="px-3 py-3 md:px-6 md:py-4 text-center">
                                                 <div className="flex flex-col items-center gap-1">
                                                     <TeamLogo teamName={player.team} url={player.team_logo} className="w-6 h-6 md:w-8 md:h-8" />
-                                                    <span className="text-[9px] md:text-[10px] font-bold text-secondary uppercase tracking-wider hidden md:block">
-                                                        {player.team_code}
-                                                    </span>
                                                 </div>
                                             </td>
                                             <td className="px-3 py-3 md:px-6 md:py-4 text-center">
@@ -170,58 +167,26 @@ export default function StatsPage() {
                     </div>
                 </div>
 
-                {/* Sidebar Stats */}
-                <div className="space-y-6">
-                    {/* Team Defense Card */}
-                    <div className="glass-card rounded-2xl overflow-hidden border border-white/10 p-6">
-                        <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                            <Shield className="w-5 h-5 text-blue-400" />
-                            Best Defenses
-                        </h3>
-                        <div className="space-y-4">
-                            {bestDefense.slice(0, 5).map((team, idx) => (
-                                <div key={team.team} className="flex items-center justify-between p-3 bg-white/5 rounded-xl">
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-secondary font-mono text-sm">#{idx + 1}</span>
-                                        <TeamLogo teamName={team.team} url={team.logo} className="w-8 h-8" />
-                                        <span className="font-bold text-white text-sm">{team.team}</span>
-                                    </div>
-                                    <div className="flex flex-col items-end">
-                                        <span className="text-lg font-black text-blue-400">{team.cleanSheets}</span>
-                                        <span className="text-[10px] text-secondary uppercase">Clean Sheets</span>
-                                    </div>
+                <div className="glass-card rounded-2xl overflow-hidden border border-white/10 p-6">
+                    <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <Shield className="w-5 h-5 text-blue-400" />
+                        Best Defenses
+                    </h3>
+                    <div className="space-y-4">
+                        {bestDefense.slice(0, 5).map((team, idx) => (
+                            <div key={team.team} className="flex items-center justify-between p-3 bg-white/5 rounded-xl">
+                                <div className="flex items-center gap-3">
+                                    <span className="text-secondary font-mono text-sm">#{idx + 1}</span>
+                                    <TeamLogo teamName={team.team} url={team.logo} className="w-8 h-8" />
+                                    <span className="font-bold text-white text-sm">{team.team}</span>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Spotlight Card (Top Performer) */}
-                    {activeData.data.length > 0 && (
-                        <div className="glass-card rounded-2xl overflow-hidden border border-white/10 relative group">
-                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-10"></div>
-                            <img 
-                                src={activeData.data[0].photo.replace('110x140', '250x250')} 
-                                className="w-full h-80 object-cover object-top opacity-60 group-hover:opacity-80 transition-opacity duration-500"
-                                alt="Spotlight"
-                            />
-                            <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                                <div className="text-accent text-sm font-bold uppercase tracking-wider mb-1">
-                                    Current Leader
-                                </div>
-                                <h3 className="text-3xl font-black text-white mb-2 leading-none">
-                                    {activeData.data[0].web_name}
-                                </h3>
-                                <div className="flex items-center gap-4 text-white/80 text-sm">
-                                    <span className="flex items-center gap-1">
-                                        <TeamLogo teamName={activeData.data[0].team} url={activeData.data[0].team_logo} className="w-5 h-5" />
-                                        {activeData.data[0].team}
-                                    </span>
-                                    <span>•</span>
-                                    <span>{activeData.data[0].total_points} Total Points</span>
+                                <div className="flex flex-col items-end">
+                                    <span className="text-lg font-black text-blue-400">{team.cleanSheets}</span>
+                                    <span className="text-[10px] text-secondary uppercase">Clean Sheets</span>
                                 </div>
                             </div>
-                        </div>
-                    )}
+                        ))}
+                    </div>
                 </div>
             </div>
         )}

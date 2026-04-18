@@ -3,8 +3,19 @@
 import { useState, useEffect } from "react"
 import { ArrowRightLeft, Trash2, Plus, Save, RefreshCw, Archive, Undo2, X } from "lucide-react"
 import { toast } from "sonner"
+import { compressImageFile } from "../../lib/imageCompression"
 
-export function TransfersAdmin() {
+type TeamLogoRow = {
+    teamName: string
+    url: string
+    updatedAt?: string | null
+}
+
+interface TransfersAdminProps {
+    password: string
+}
+
+export function TransfersAdmin({ password }: TransfersAdminProps) {
     const [name, setName] = useState('')
     const [from, setFrom] = useState('')
     const [to, setTo] = useState('')
@@ -17,6 +28,10 @@ export function TransfersAdmin() {
     const [filteredPlayers, setFilteredPlayers] = useState<any[]>([])
     const [showSuggestions, setShowSuggestions] = useState(false)
     const [selectedPhoto, setSelectedPhoto] = useState('')
+    const [fromLogo, setFromLogo] = useState<string | null>(null)
+    const [toLogo, setToLogo] = useState<string | null>(null)
+    const [isUploading, setIsUploading] = useState(false)
+    const [teamLogos, setTeamLogos] = useState<TeamLogoRow[]>([])
 
     // List state
     const [transfers, setTransfers] = useState<{summer: any[], winter: any[], all?: any[]}>({ summer: [], winter: [] })
@@ -63,9 +78,23 @@ export function TransfersAdmin() {
         }
     }
 
+    const fetchTeamLogos = async () => {
+        if (!password) return
+        try {
+            const res = await fetch('/api/admin/team-logos', { headers: { 'x-admin-password': password } })
+            const data = await res.json()
+            if (res.ok && Array.isArray(data.logos)) {
+                setTeamLogos(data.logos)
+            }
+        } catch (error) {
+            console.warn(error)
+        }
+    }
+
     useEffect(() => {
         fetchTransfers()
         fetchPlayers()
+        fetchTeamLogos()
     }, [])
 
     const handleNameChange = (val: string) => {
@@ -91,6 +120,99 @@ export function TransfersAdmin() {
         // But for now just Name + Photo is huge help
     }
 
+    const uploadAsset = async (kind: string, entityId: string, file: File) => {
+        if (!password) throw new Error('Chybí admin heslo')
+        setIsUploading(true)
+        try {
+            const compressed = await compressImageFile(file, { maxSizePx: 300, targetBytes: 50 * 1024, mimeType: 'image/webp' })
+            const form = new FormData()
+            form.append('file', compressed)
+            form.append('kind', kind)
+            form.append('entityId', entityId)
+            form.append('password', password)
+
+            const res = await fetch('/api/admin/upload-asset', { method: 'POST', body: form })
+            const data = await res.json()
+            if (!res.ok) throw new Error(data?.error || 'Upload failed')
+            return data.url as string
+        } finally {
+            setIsUploading(false)
+        }
+    }
+
+    const upsertTeamLogoRecord = async (teamName: string, url: string) => {
+        const res = await fetch('/api/admin/team-logos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password, teamName, url })
+        })
+        const data = await res.json()
+        if (!res.ok) throw new Error(data?.error || 'Nepodařilo se uložit logo do DB')
+    }
+
+    const uploadAndRegisterTeamLogo = async (teamName: string, file: File) => {
+        const url = await uploadAsset('team_logo', teamName, file)
+        await upsertTeamLogoRecord(teamName, url)
+        await fetchTeamLogos()
+        return url
+    }
+
+    const handleUploadForNew = async (kind: string, entityId: string, file: File, setUrl: (u: string) => void) => {
+        toast.promise(
+            uploadAsset(kind, entityId, file).then((url) => {
+                setUrl(url)
+                return 'Nahráno'
+            }),
+            {
+                loading: 'Nahrávám obrázek...',
+                success: (msg) => `${msg}`,
+                error: (err) => `Chyba: ${err.message}`
+            }
+        )
+    }
+
+    const updateTransferAssets = async (transferId: string, payload: { photo?: string | null; fromLogo?: string | null; toLogo?: string | null }) => {
+        const res = await fetch('/api/transfers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'update', transfer: { id: transferId, ...payload } })
+        })
+        if (!res.ok) {
+            const data = await res.json().catch(() => ({}))
+            throw new Error(data?.error || 'Nepodařilo se uložit URL')
+        }
+    }
+
+    const handleUploadForExisting = async (t: any, kind: string, entityId: string, file: File, field: 'photo' | 'fromLogo' | 'toLogo') => {
+        toast.promise(
+            uploadAsset(kind, entityId, file)
+                .then(async (url) => {
+                    await updateTransferAssets(t.id, { [field]: url } as any)
+                    await fetchTransfers()
+                    return 'Uloženo'
+                }),
+            {
+                loading: 'Nahrávám a ukládám...',
+                success: (msg) => `${msg}`,
+                error: (err) => `Chyba: ${err.message}`
+            }
+        )
+    }
+
+    const handleSelectLogoForExisting = async (t: any, field: 'fromLogo' | 'toLogo', url: string | null) => {
+        toast.promise(
+            updateTransferAssets(t.id, { [field]: url } as any).then(async () => {
+                await fetchTransfers()
+                return 'Uloženo'
+            }),
+            {
+                loading: 'Ukládám...',
+                success: (msg) => `${msg}`,
+                error: (err) => `Chyba: ${err.message}`
+            }
+        )
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         
@@ -101,13 +223,15 @@ export function TransfersAdmin() {
                 body: JSON.stringify({
                     action: 'add',
                     transfer: { 
-                        name, 
+                        player: name,
                         from, 
                         to, 
                         fee, 
                         window, 
                         type,
-                        photo: selectedPhoto // Include photo if selected
+                        photo: selectedPhoto || null,
+                        fromLogo,
+                        toLogo
                     }
                 })
             })
@@ -119,6 +243,8 @@ export function TransfersAdmin() {
                 setTo('')
                 setFee('')
                 setSelectedPhoto('')
+                setFromLogo(null)
+                setToLogo(null)
                 fetchTransfers() // Refresh list
             } else {
                 toast.error('Chyba při ukládání')
@@ -286,6 +412,124 @@ export function TransfersAdmin() {
                             <Plus className="w-4 h-4" /> Přidat Přestup
                         </button>
                     </div>
+
+                    <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="bg-black/30 border border-white/10 rounded-xl p-4">
+                            <div className="text-xs font-bold text-secondary uppercase mb-2">Fotka hráče</div>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                disabled={isUploading}
+                                onChange={(e) => {
+                                    const f = e.target.files?.[0]
+                                    if (!f) return
+                                    void handleUploadForNew('transfer_photo', `${window}-${name || 'player'}`, f, setSelectedPhoto)
+                                    e.target.value = ''
+                                }}
+                                className="w-full text-xs text-secondary file:bg-white/10 file:text-white file:border-0 file:px-3 file:py-2 file:rounded-lg file:font-bold file:uppercase file:tracking-wider file:text-[10px] file:hover:bg-white/20 file:cursor-pointer"
+                            />
+                            {selectedPhoto && (
+                                <div className="mt-3 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-black overflow-hidden border border-white/10">
+                                        <img src={selectedPhoto} className="w-full h-full object-cover object-top" />
+                                    </div>
+                                    <div className="text-[10px] text-white/60 break-all">{selectedPhoto}</div>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="bg-black/30 border border-white/10 rounded-xl p-4">
+                            <div className="text-xs font-bold text-secondary uppercase mb-2">Logo From</div>
+                            <select
+                                value={fromLogo || ''}
+                                onChange={(e) => setFromLogo(e.target.value ? e.target.value : null)}
+                                className="w-full bg-black/50 border border-white/10 rounded-lg p-2 text-sm font-bold text-white focus:border-accent outline-none"
+                            >
+                                <option value="">(Vyber z knihovny)</option>
+                                {teamLogos.map((l) => (
+                                    <option key={l.teamName} value={l.url}>{l.teamName}</option>
+                                ))}
+                            </select>
+                            <div className="mt-2">
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    disabled={isUploading}
+                                    onChange={(e) => {
+                                        const f = e.target.files?.[0]
+                                        if (!f) return
+                                        toast.promise(
+                                            uploadAndRegisterTeamLogo(from || 'from', f).then((url) => {
+                                                setFromLogo(url)
+                                                return 'Logo uloženo'
+                                            }),
+                                            {
+                                                loading: 'Nahrávám logo...',
+                                                success: (msg) => `${msg}`,
+                                                error: (err) => `Chyba: ${err.message}`
+                                            }
+                                        )
+                                        e.target.value = ''
+                                    }}
+                                    className="w-full text-xs text-secondary file:bg-white/10 file:text-white file:border-0 file:px-3 file:py-2 file:rounded-lg file:font-bold file:uppercase file:tracking-wider file:text-[10px] file:hover:bg-white/20 file:cursor-pointer"
+                                />
+                            </div>
+                            {fromLogo && (
+                                <div className="mt-3 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-black overflow-hidden border border-white/10">
+                                        <img src={fromLogo} className="w-full h-full object-cover object-contain p-1" />
+                                    </div>
+                                    <div className="text-[10px] text-white/60 break-all">{fromLogo}</div>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="bg-black/30 border border-white/10 rounded-xl p-4">
+                            <div className="text-xs font-bold text-secondary uppercase mb-2">Logo To</div>
+                            <select
+                                value={toLogo || ''}
+                                onChange={(e) => setToLogo(e.target.value ? e.target.value : null)}
+                                className="w-full bg-black/50 border border-white/10 rounded-lg p-2 text-sm font-bold text-white focus:border-accent outline-none"
+                            >
+                                <option value="">(Vyber z knihovny)</option>
+                                {teamLogos.map((l) => (
+                                    <option key={l.teamName} value={l.url}>{l.teamName}</option>
+                                ))}
+                            </select>
+                            <div className="mt-2">
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    disabled={isUploading}
+                                    onChange={(e) => {
+                                        const f = e.target.files?.[0]
+                                        if (!f) return
+                                        toast.promise(
+                                            uploadAndRegisterTeamLogo(to || 'to', f).then((url) => {
+                                                setToLogo(url)
+                                                return 'Logo uloženo'
+                                            }),
+                                            {
+                                                loading: 'Nahrávám logo...',
+                                                success: (msg) => `${msg}`,
+                                                error: (err) => `Chyba: ${err.message}`
+                                            }
+                                        )
+                                        e.target.value = ''
+                                    }}
+                                    className="w-full text-xs text-secondary file:bg-white/10 file:text-white file:border-0 file:px-3 file:py-2 file:rounded-lg file:font-bold file:uppercase file:tracking-wider file:text-[10px] file:hover:bg-white/20 file:cursor-pointer"
+                                />
+                            </div>
+                            {toLogo && (
+                                <div className="mt-3 flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-black overflow-hidden border border-white/10">
+                                        <img src={toLogo} className="w-full h-full object-cover object-contain p-1" />
+                                    </div>
+                                    <div className="text-[10px] text-white/60 break-all">{toLogo}</div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </form>
             </div>
 
@@ -324,6 +568,86 @@ export function TransfersAdmin() {
                                             <div>
                                                 <div className="text-sm font-bold text-white">{t.player}</div>
                                                 <div className="text-xs text-white/50">{t.from} → {t.to} ({t.fee})</div>
+                                                <div className="mt-2 flex flex-wrap gap-2">
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        disabled={isUploading}
+                                                        onChange={(e) => {
+                                                            const f = e.target.files?.[0]
+                                                            if (!f) return
+                                                            void handleUploadForExisting(t, 'transfer_photo', t.id, f, 'photo')
+                                                            e.target.value = ''
+                                                        }}
+                                                        className="text-[10px] text-secondary file:bg-white/10 file:text-white file:border-0 file:px-2 file:py-1 file:rounded file:font-bold file:uppercase file:tracking-wider file:hover:bg-white/20 file:cursor-pointer"
+                                                    />
+                                                    <select
+                                                        value={t.fromLogo || ''}
+                                                        onChange={(e) => void handleSelectLogoForExisting(t, 'fromLogo', e.target.value ? e.target.value : null)}
+                                                        className="bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] font-bold text-white"
+                                                    >
+                                                        <option value="">From logo</option>
+                                                        {teamLogos.map((l) => (
+                                                            <option key={l.teamName} value={l.url}>{l.teamName}</option>
+                                                        ))}
+                                                    </select>
+                                                    <select
+                                                        value={t.toLogo || ''}
+                                                        onChange={(e) => void handleSelectLogoForExisting(t, 'toLogo', e.target.value ? e.target.value : null)}
+                                                        className="bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] font-bold text-white"
+                                                    >
+                                                        <option value="">To logo</option>
+                                                        {teamLogos.map((l) => (
+                                                            <option key={l.teamName} value={l.url}>{l.teamName}</option>
+                                                        ))}
+                                                    </select>
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        disabled={isUploading}
+                                                        onChange={(e) => {
+                                                            const f = e.target.files?.[0]
+                                                            if (!f) return
+                                                            toast.promise(
+                                                                uploadAndRegisterTeamLogo(t.from || t.id, f).then(async (url) => {
+                                                                    await updateTransferAssets(t.id, { fromLogo: url })
+                                                                    await fetchTransfers()
+                                                                    return 'Logo uloženo'
+                                                                }),
+                                                                {
+                                                                    loading: 'Nahrávám logo...',
+                                                                    success: (msg) => `${msg}`,
+                                                                    error: (err) => `Chyba: ${err.message}`
+                                                                }
+                                                            )
+                                                            e.target.value = ''
+                                                        }}
+                                                        className="text-[10px] text-secondary file:bg-white/10 file:text-white file:border-0 file:px-2 file:py-1 file:rounded file:font-bold file:uppercase file:tracking-wider file:hover:bg-white/20 file:cursor-pointer"
+                                                    />
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        disabled={isUploading}
+                                                        onChange={(e) => {
+                                                            const f = e.target.files?.[0]
+                                                            if (!f) return
+                                                            toast.promise(
+                                                                uploadAndRegisterTeamLogo(t.to || t.id, f).then(async (url) => {
+                                                                    await updateTransferAssets(t.id, { toLogo: url })
+                                                                    await fetchTransfers()
+                                                                    return 'Logo uloženo'
+                                                                }),
+                                                                {
+                                                                    loading: 'Nahrávám logo...',
+                                                                    success: (msg) => `${msg}`,
+                                                                    error: (err) => `Chyba: ${err.message}`
+                                                                }
+                                                            )
+                                                            e.target.value = ''
+                                                        }}
+                                                        className="text-[10px] text-secondary file:bg-white/10 file:text-white file:border-0 file:px-2 file:py-1 file:rounded file:font-bold file:uppercase file:tracking-wider file:hover:bg-white/20 file:cursor-pointer"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                         <button 
@@ -351,6 +675,86 @@ export function TransfersAdmin() {
                                             <div>
                                                 <div className="text-sm font-bold text-white">{t.player}</div>
                                                 <div className="text-xs text-white/50">{t.from} → {t.to} ({t.fee})</div>
+                                                <div className="mt-2 flex flex-wrap gap-2">
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        disabled={isUploading}
+                                                        onChange={(e) => {
+                                                            const f = e.target.files?.[0]
+                                                            if (!f) return
+                                                            void handleUploadForExisting(t, 'transfer_photo', t.id, f, 'photo')
+                                                            e.target.value = ''
+                                                        }}
+                                                        className="text-[10px] text-secondary file:bg-white/10 file:text-white file:border-0 file:px-2 file:py-1 file:rounded file:font-bold file:uppercase file:tracking-wider file:hover:bg-white/20 file:cursor-pointer"
+                                                    />
+                                                    <select
+                                                        value={t.fromLogo || ''}
+                                                        onChange={(e) => void handleSelectLogoForExisting(t, 'fromLogo', e.target.value ? e.target.value : null)}
+                                                        className="bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] font-bold text-white"
+                                                    >
+                                                        <option value="">From logo</option>
+                                                        {teamLogos.map((l) => (
+                                                            <option key={l.teamName} value={l.url}>{l.teamName}</option>
+                                                        ))}
+                                                    </select>
+                                                    <select
+                                                        value={t.toLogo || ''}
+                                                        onChange={(e) => void handleSelectLogoForExisting(t, 'toLogo', e.target.value ? e.target.value : null)}
+                                                        className="bg-black/40 border border-white/10 rounded px-2 py-1 text-[10px] font-bold text-white"
+                                                    >
+                                                        <option value="">To logo</option>
+                                                        {teamLogos.map((l) => (
+                                                            <option key={l.teamName} value={l.url}>{l.teamName}</option>
+                                                        ))}
+                                                    </select>
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        disabled={isUploading}
+                                                        onChange={(e) => {
+                                                            const f = e.target.files?.[0]
+                                                            if (!f) return
+                                                            toast.promise(
+                                                                uploadAndRegisterTeamLogo(t.from || t.id, f).then(async (url) => {
+                                                                    await updateTransferAssets(t.id, { fromLogo: url })
+                                                                    await fetchTransfers()
+                                                                    return 'Logo uloženo'
+                                                                }),
+                                                                {
+                                                                    loading: 'Nahrávám logo...',
+                                                                    success: (msg) => `${msg}`,
+                                                                    error: (err) => `Chyba: ${err.message}`
+                                                                }
+                                                            )
+                                                            e.target.value = ''
+                                                        }}
+                                                        className="text-[10px] text-secondary file:bg-white/10 file:text-white file:border-0 file:px-2 file:py-1 file:rounded file:font-bold file:uppercase file:tracking-wider file:hover:bg-white/20 file:cursor-pointer"
+                                                    />
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        disabled={isUploading}
+                                                        onChange={(e) => {
+                                                            const f = e.target.files?.[0]
+                                                            if (!f) return
+                                                            toast.promise(
+                                                                uploadAndRegisterTeamLogo(t.to || t.id, f).then(async (url) => {
+                                                                    await updateTransferAssets(t.id, { toLogo: url })
+                                                                    await fetchTransfers()
+                                                                    return 'Logo uloženo'
+                                                                }),
+                                                                {
+                                                                    loading: 'Nahrávám logo...',
+                                                                    success: (msg) => `${msg}`,
+                                                                    error: (err) => `Chyba: ${err.message}`
+                                                                }
+                                                            )
+                                                            e.target.value = ''
+                                                        }}
+                                                        className="text-[10px] text-secondary file:bg-white/10 file:text-white file:border-0 file:px-2 file:py-1 file:rounded file:font-bold file:uppercase file:tracking-wider file:hover:bg-white/20 file:cursor-pointer"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                         <button 

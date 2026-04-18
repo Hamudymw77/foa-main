@@ -99,6 +99,20 @@ export async function POST(req: Request) {
             return NextResponse.json({ success: true });
         }
 
+        if (action === 'update') {
+            customTransfers = customTransfers.map((t: any) => {
+                if (t.id !== transfer.id) return t;
+                return {
+                    ...t,
+                    photo: transfer.photo ?? t.photo ?? null,
+                    fromLogo: transfer.fromLogo ?? t.fromLogo ?? null,
+                    toLogo: transfer.toLogo ?? t.toLogo ?? null
+                };
+            });
+            await saveCustomTransfers(customTransfers);
+            return NextResponse.json({ success: true });
+        }
+
         return NextResponse.json({ error: 'Invalid action' }, { status: 400 });
 
     } catch (error) {

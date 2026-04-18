@@ -35,12 +35,25 @@ const brokenTeams = [
 
 interface TeamBadgeProps {
   name: string;
+  logoUrl?: string | null;
   className?: string;
   showName?: boolean;
 }
 
-export function TeamBadge({ name, className = "w-10 h-10", showName = false }: TeamBadgeProps) {
+export function TeamBadge({ name, logoUrl, className = "w-10 h-10", showName = false }: TeamBadgeProps) {
   const [error, setError] = useState(false);
+
+  if (logoUrl && !error) {
+    return (
+      <img
+        src={logoUrl}
+        alt={name}
+        className={`${className} object-contain drop-shadow-md`}
+        title={name}
+        onError={() => setError(true)}
+      />
+    );
+  }
 
   // 1. Check Foreign Logos
   if (foreignLogos[name]) {
@@ -64,11 +77,11 @@ export function TeamBadge({ name, className = "w-10 h-10", showName = false }: T
   }
 
   // 3. Standard FPL URL
-  const logoUrl = TEAM_LOGOS[name] || TEAM_LOGOS[Object.keys(TEAM_LOGOS).find(k => k.toLowerCase() === name?.toLowerCase()) || ''];
+  const fplLogoUrl = TEAM_LOGOS[name] || TEAM_LOGOS[Object.keys(TEAM_LOGOS).find(k => k.toLowerCase() === name?.toLowerCase()) || ''];
   
-  let pngUrl = logoUrl;
-  if (logoUrl) {
-    const match = logoUrl.match(/t(\d+)\.svg/);
+  let pngUrl = fplLogoUrl;
+  if (fplLogoUrl) {
+    const match = fplLogoUrl.match(/t(\d+)\.svg/);
     if (match) {
         pngUrl = `https://resources.premierleague.com/premierleague/badges/t${match[1]}.png`;
     }
