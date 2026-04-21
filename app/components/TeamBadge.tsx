@@ -41,13 +41,44 @@ interface TeamBadgeProps {
   showName?: boolean;
 }
 
+function normalizeTeamKey(name: string) {
+  return String(name || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function getCanonicalLogo(teamName: string) {
+  if (!teamName) return undefined;
+  if (TEAM_LOGOS[teamName]) return TEAM_LOGOS[teamName];
+  const normalized = normalizeTeamKey(teamName);
+  const matched = Object.keys(TEAM_LOGOS).find((k) => normalizeTeamKey(k) === normalized);
+  return matched ? TEAM_LOGOS[matched] : undefined;
+}
+
+function extractBadgeId(url: string | undefined) {
+  const v = String(url || "");
+  const m = v.match(/\/t(\d+)\.(svg|png)/i);
+  return m ? m[1] : null;
+}
+
 export function TeamBadge({ name, logoUrl, className = "w-10 h-10", showName = false }: TeamBadgeProps) {
   const [error, setError] = useState(false);
+  const canonical = getCanonicalLogo(name);
+  const resolvedLogoUrl = (() => {
+    if (!logoUrl) return canonical || logoUrl;
+    if (!canonical) return logoUrl;
+    const expected = extractBadgeId(canonical);
+    const actual = extractBadgeId(logoUrl);
+    if (expected && actual && expected !== actual) return canonical;
+    return logoUrl;
+  })();
 
-  if (logoUrl && !error) {
+  if (resolvedLogoUrl && !error) {
     return (
       <img
-        src={proxifyImageUrl(logoUrl)}
+        src={proxifyImageUrl(resolvedLogoUrl)}
         alt={name}
         className={`${className} object-contain drop-shadow-md`}
         title={name}
@@ -78,7 +109,7 @@ export function TeamBadge({ name, logoUrl, className = "w-10 h-10", showName = f
   }
 
   // 3. Standard FPL URL
-  const fplLogoUrl = TEAM_LOGOS[name] || TEAM_LOGOS[Object.keys(TEAM_LOGOS).find(k => k.toLowerCase() === name?.toLowerCase()) || ''];
+  const fplLogoUrl = canonical || TEAM_LOGOS[Object.keys(TEAM_LOGOS).find(k => k.toLowerCase() === name?.toLowerCase()) || ''];
   
   let pngUrl = fplLogoUrl;
   if (fplLogoUrl) {

@@ -79,11 +79,11 @@ export function StatisticsPanel({ topScorers, bestDefense, isLoading = false }: 
             <table className="w-full border-collapse text-left">
               <thead>
                 <tr className="border-b border-white/10 text-xs font-bold text-secondary uppercase tracking-wider">
-                  <th className="px-3 py-3 text-center w-12">#</th>
-                  <th className="px-3 py-3">Player</th>
-                  <th className="px-3 py-3 text-center">Goals</th>
-                  <th className="px-3 py-3 text-center">Assists</th>
-                  <th className="px-3 py-3 text-center">Played</th>
+                  <th className="px-3 py-3 text-center w-12 min-w-[48px]">#</th>
+                  <th className="px-3 py-3 min-w-[160px]">Player</th>
+                  <th className="px-3 py-3 text-center min-w-[70px]">Goals</th>
+                  <th className="px-3 py-3 text-center min-w-[70px]">Assists</th>
+                  <th className="px-3 py-3 text-center min-w-[70px]">Played</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
@@ -109,7 +109,7 @@ export function StatisticsPanel({ topScorers, bestDefense, isLoading = false }: 
                               <span 
                                 className="text-lg leading-none shrink-0" 
                                 title={`Nationality: ${scorer.countryCode.toUpperCase()}`}
-                                aria-label={`Flag of ${scorer.countryCode}`}
+                                aria-label={`Flag of ${scorer.name}'s country`}
                               >
                                 {getFlagEmoji(scorer.countryCode)}
                               </span>

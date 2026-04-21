@@ -2,6 +2,7 @@ import { useState } from "react"
 import { User, X } from "lucide-react"
 import { Match } from "@/types"
 import { PlayerAvatar } from "./PlayerAvatar"
+import { proxifyImageUrl } from "../lib/imageProxy"
 
 interface FormationViewProps {
   selectedMatch: Match
@@ -56,7 +57,7 @@ export function FormationView({ selectedMatch }: FormationViewProps) {
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-white/20 rounded-full pointer-events-none"></div>
 
                   {/* Players Grid */}
-                  <div className="absolute inset-0 flex flex-col justify-between py-8 px-4">
+                  <div className="absolute inset-0 flex flex-col justify-between py-6 px-3 sm:py-7 sm:px-4 md:py-8 md:px-4">
                       {rows.map((count, rowIdx) => (
                           <div key={rowIdx} className="flex justify-around items-center h-full">
                               {Array.from({ length: count }).map((_, colIdx) => {
@@ -64,14 +65,14 @@ export function FormationView({ selectedMatch }: FormationViewProps) {
                                   const globalIndex = prevCount + colIdx
                                   const player = players[globalIndex]
                                   
-                                  if (!player) return <div key={globalIndex} className="w-12 h-12" />; // Empty slot placeholder
+                                  if (!player) return <div key={globalIndex} className="w-10 h-10 sm:w-11 sm:h-11 md:w-14 md:h-14" />; // Empty slot placeholder
 
                                   return (
                                       <div 
                                           key={globalIndex}
                                           onClick={() => setPreviewPlayer(player)}
                                           className={`
-                                              relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center 
+                                              relative w-10 h-10 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full flex items-center justify-center 
                                               cursor-pointer transition-all duration-300 group z-10
                                               bg-slate-900 border-2 ${playerBorder} shadow-lg hover:scale-110
                                           `}
@@ -89,8 +90,8 @@ export function FormationView({ selectedMatch }: FormationViewProps) {
                                           )}
                                           
                                           <div className={`
-                                              absolute -bottom-6 left-1/2 -translate-x-1/2 
-                                              bg-black/80 backdrop-blur text-white text-[10px] font-bold 
+                                              absolute -bottom-5 sm:-bottom-6 left-1/2 -translate-x-1/2 
+                                              bg-black/80 backdrop-blur text-white text-[9px] sm:text-[10px] font-bold 
                                               px-2 py-0.5 rounded-full whitespace-nowrap shadow-md z-20 
                                               ${hoverColor} hover:text-black transition-colors
                                           `}>
@@ -123,7 +124,7 @@ export function FormationView({ selectedMatch }: FormationViewProps) {
                   <div className="w-40 h-40 rounded-full bg-gradient-to-br from-slate-800 to-black border-4 border-accent shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-hidden relative">
                       {previewPlayer.photo ? (
                           <img 
-                              src={previewPlayer.photo} 
+                              src={proxifyImageUrl(previewPlayer.photo)} 
                               className="w-full h-full object-cover object-top scale-110 bg-slate-800"
                               onError={(e) => {
                                   e.currentTarget.onerror = null;

@@ -17,9 +17,9 @@ export function Header({
 
   return (
     <header className="sticky top-0 z-50 w-full glass mb-8 border-b-0 shadow-lg">
-      <div className="container mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
+      <div className="container mx-auto px-2 md:px-8 h-16 md:h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 cursor-pointer group">
+        <Link href="/" className="flex items-center gap-3 cursor-pointer group min-h-[48px] active:scale-95 transition-transform duration-150">
           <div className="relative">
             <div className="absolute inset-0 bg-blue-500 blur-lg opacity-40 rounded-full group-hover:opacity-60 transition-opacity duration-500"></div>
             <div className="relative bg-gradient-to-br from-blue-500 to-indigo-600 p-2 md:p-2.5 rounded-xl shadow-lg transform group-hover:scale-105 transition-transform duration-300">
@@ -39,21 +39,21 @@ export function Header({
         <nav className="hidden md:flex items-center gap-1 bg-white/5 p-1.5 rounded-full border border-white/5 backdrop-blur-sm" aria-label="Primary">
           <Link 
             href="/"
-            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2"
+            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[48px] min-w-[48px] flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150"
           >
             <Home className="w-4 h-4" />
             Home
           </Link>
           <Link 
             href="/stats"
-            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2"
+            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[48px] min-w-[48px] flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150"
           >
             <BarChart2 className="w-4 h-4" />
             Stats
           </Link>
           <Link 
             href="/transfers"
-            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[44px] min-w-[44px] flex items-center justify-center gap-2"
+            className="px-6 py-2 rounded-full text-sm font-bold text-secondary hover:text-foreground hover:bg-white/10 transition-all duration-300 min-h-[48px] min-w-[48px] flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150"
           >
             <ArrowRightLeft className="w-4 h-4" />
             Transfers
@@ -62,7 +62,7 @@ export function Header({
 
         {/* Mobile Menu Toggle */}
         <button 
-          className="md:hidden p-2 rounded-md text-secondary hover:text-foreground transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+          className="md:hidden p-2 rounded-md text-secondary hover:text-foreground transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center active:scale-95 transition-transform duration-150"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
           aria-expanded={isMenuOpen}
@@ -73,12 +73,12 @@ export function Header({
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-xl border-b border-white/10 shadow-2xl animate-fade-in">
+        <div className="flex md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-xl border-b border-white/10 shadow-2xl animate-fade-in">
           <div className="flex flex-col p-4 gap-2">
             <Link 
               href="/"
               onClick={() => setIsMenuOpen(false)}
-              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all flex items-center gap-3"
+              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all flex items-center gap-3 min-h-[48px] active:scale-95 transition-transform duration-150"
             >
               <Home className="w-5 h-5" />
               Home
@@ -86,7 +86,7 @@ export function Header({
             <Link 
               href="/stats"
               onClick={() => setIsMenuOpen(false)}
-              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all flex items-center gap-3"
+              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all flex items-center gap-3 min-h-[48px] active:scale-95 transition-transform duration-150"
             >
               <BarChart2 className="w-5 h-5" />
               Stats
@@ -94,7 +94,7 @@ export function Header({
             <Link 
               href="/transfers"
               onClick={() => setIsMenuOpen(false)}
-              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all flex items-center gap-3"
+              className="text-left text-lg font-bold text-secondary hover:text-primary hover:bg-white/5 p-3 rounded-lg transition-all flex items-center gap-3 min-h-[48px] active:scale-95 transition-transform duration-150"
             >
               <ArrowRightLeft className="w-5 h-5" />
               Transfers

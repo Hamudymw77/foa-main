@@ -36,7 +36,7 @@ describe('MatchDetail', () => {
     render(
       <MatchDetail 
         selectedMatch={mockMatch} 
-        activeTab="overview" 
+        activeTab="formation" 
         setActiveTab={() => {}} 
       />
     );
@@ -46,17 +46,16 @@ describe('MatchDetail', () => {
     expect(screen.getAllByText('2 - 1').length).toBeGreaterThan(0);
   });
 
-  it('renders overview tab content', () => {
+  it('renders statistics tab content', () => {
     render(
       <MatchDetail 
         selectedMatch={mockMatch} 
-        activeTab="overview" 
+        activeTab="statistics" 
         setActiveTab={() => {}} 
       />
     );
 
-    expect(screen.getByText('Goals')).toBeDefined();
-    expect(screen.getByText('Player 1')).toBeDefined();
+    expect(screen.getByTestId('match-statistics')).toBeDefined();
   });
 
   it('calls setActiveTab when clicking a tab', () => {
@@ -64,7 +63,7 @@ describe('MatchDetail', () => {
     render(
       <MatchDetail 
         selectedMatch={mockMatch} 
-        activeTab="overview" 
+        activeTab="formation" 
         setActiveTab={setActiveTab} 
       />
     );

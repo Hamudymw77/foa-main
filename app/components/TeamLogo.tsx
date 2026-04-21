@@ -3,11 +3,34 @@
 import { useState, useEffect } from "react";
 import { Shield } from "lucide-react";
 import { proxifyImageUrl } from "../lib/imageProxy";
+import { TEAM_LOGOS } from "../lib/constants";
 
 interface TeamLogoProps {
   teamName: string;
   url?: string;
   className?: string;
+}
+
+function normalizeTeamKey(name: string) {
+  return String(name || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function getCanonicalLogo(teamName: string) {
+  if (!teamName) return undefined;
+  if (TEAM_LOGOS[teamName]) return TEAM_LOGOS[teamName];
+  const normalized = normalizeTeamKey(teamName);
+  const matched = Object.keys(TEAM_LOGOS).find((k) => normalizeTeamKey(k) === normalized);
+  return matched ? TEAM_LOGOS[matched] : undefined;
+}
+
+function extractBadgeId(url: string | undefined) {
+  const v = String(url || "");
+  const m = v.match(/\/t(\d+)\.(svg|png)/i);
+  return m ? m[1] : null;
 }
 
 export function TeamLogo({ teamName, url, className = "" }: TeamLogoProps) {
@@ -20,8 +43,16 @@ export function TeamLogo({ teamName, url, className = "" }: TeamLogoProps) {
     setCurrentUrl(url);
   }, [url]);
 
+  const canonical = getCanonicalLogo(teamName);
+  const canonicalBadge = extractBadgeId(canonical);
+  const currentBadge = extractBadgeId(currentUrl);
+  const resolvedUrl =
+    canonical && canonicalBadge && currentBadge && canonicalBadge !== currentBadge
+      ? canonical
+      : currentUrl || canonical;
+
   // Fallback if URL is missing or error occurred
-  if (!currentUrl || error) {
+  if (!resolvedUrl || error) {
     // Extract initials (up to 2 chars)
     const initials = teamName
       .split(" ")
@@ -63,7 +94,7 @@ export function TeamLogo({ teamName, url, className = "" }: TeamLogoProps) {
 
   return (
     <img
-      src={proxifyImageUrl(currentUrl)}
+      src={proxifyImageUrl(resolvedUrl)}
       alt={`${teamName} logo`}
       className={`${className} object-contain`}
       onError={() => setError(true)}

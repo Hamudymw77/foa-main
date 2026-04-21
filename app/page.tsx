@@ -37,7 +37,7 @@ export default function PremierLeagueDashboard() {
         showStatistics={showStatistics}
         setShowStatistics={setShowStatistics}
       />
-        <div className="p-4 md:p-8 flex-1">
+        <div className="p-2 md:p-8 flex-1">
           <SkeletonLoader />
         </div>
       </div>
@@ -61,11 +61,11 @@ export default function PremierLeagueDashboard() {
         setShowStatistics={setShowStatistics}
       />
       
-      <main id="main" className="container mx-auto max-w-7xl px-4 md:px-8 flex-1">
+      <main id="main" className="container mx-auto max-w-7xl px-2 md:px-8 py-4 md:py-8 flex-1">
         <div className="lg:grid lg:grid-cols-4 lg:gap-8">
           <div className="lg:col-span-4">
             {/* Premier League Table */}
-            <div id="standings" className="glass rounded-xl shadow-lg mb-8 p-6 scroll-mt-24">
+            <div id="standings" className="glass rounded-xl shadow-lg mb-8 p-4 md:p-6 scroll-mt-24">
               <div className="flex justify-between items-center mb-4 pb-2 border-b border-white/10">
                 <h2 className="font-bold text-accent text-[clamp(1.5rem,3vw,2rem)]">
                   {showStatistics ? 'Season Statistics' : 'Premier League Table'}

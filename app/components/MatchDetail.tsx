@@ -60,7 +60,7 @@ export function MatchDetail({
           <>
             <button
               onClick={() => setActiveTab("statistics")}
-              className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap ${
+              className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap min-h-[48px] active:scale-95 transition-transform duration-150 ${
                 activeTab === "statistics"
                   ? "text-accent border-b-2 border-accent"
                   : "text-secondary hover:text-foreground hover:bg-white/5 rounded-t-lg"
@@ -72,7 +72,7 @@ export function MatchDetail({
         )}
         <button
           onClick={() => setActiveTab("formation")}
-          className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap ${
+          className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap min-h-[48px] active:scale-95 transition-transform duration-150 ${
             activeTab === "formation"
               ? "text-accent border-b-2 border-accent"
               : "text-secondary hover:text-foreground hover:bg-white/5 rounded-t-lg"
@@ -83,7 +83,7 @@ export function MatchDetail({
         {selectedMatch.status !== 'upcoming' && (
           <button
             onClick={() => setActiveTab("events")}
-            className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap ${
+            className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap min-h-[48px] active:scale-95 transition-transform duration-150 ${
               activeTab === "events"
                 ? "text-accent border-b-2 border-accent"
                 : "text-secondary hover:text-foreground hover:bg-white/5 rounded-t-lg"

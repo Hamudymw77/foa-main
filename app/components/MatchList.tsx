@@ -43,7 +43,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
   }
 
   return (
-    <div className="glass rounded-xl shadow-lg mb-8 p-6">
+    <div className="glass rounded-xl shadow-lg mb-8 p-4 md:p-6">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4 border-b border-white/10 pb-4">
         <h2 className="font-bold text-foreground tracking-tight flex items-center gap-2 text-[clamp(1.4rem,3vw,1.9rem)]">
             Zápasy
@@ -55,7 +55,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
             <div className="flex items-center gap-3">
                 {/* Team Filter - Admin Style */}
-                <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10 hover:border-white/20 transition-colors">
+                <div className="flex items-center gap-2 bg-white/5 px-3 py-3 min-h-[48px] rounded-lg border border-white/10 hover:border-white/20 transition-colors">
                     <Filter className="w-4 h-4 text-secondary" />
                     <select
                         value={filterTeam}
@@ -71,7 +71,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
                 </div>
 
                 {/* Round Filter - Admin Style */}
-                <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10 hover:border-white/20 transition-colors">
+                <div className="flex items-center gap-2 bg-white/5 px-3 py-3 min-h-[48px] rounded-lg border border-white/10 hover:border-white/20 transition-colors">
                     <Calendar className="w-4 h-4 text-secondary" />
                     <select
                         value={filterRound ?? ''}
@@ -90,7 +90,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
           <div className="relative">
             <button
               onClick={() => setMatchesMenuOpen(!matchesMenuOpen)}
-              className="bg-slate-800 border border-white/10 hover:bg-slate-700 text-white font-bold py-2.5 px-6 rounded-lg transition-all shadow-lg shadow-black/10 flex items-center gap-2 text-sm min-h-[44px] min-w-[44px]"
+              className="bg-slate-800 border border-white/10 hover:bg-slate-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg shadow-black/10 flex items-center gap-2 text-sm min-h-[48px] min-w-[48px] active:scale-95 transition-transform duration-150"
             >
               {centerListType === 'played' ? 'Odehrané' : 'Nadcházející'}
               <ChevronDown className={`w-4 h-4 transition-transform ${matchesMenuOpen ? 'rotate-180' : ''}`} />
@@ -102,7 +102,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
                     setCenterListType('played')
                     setMatchesMenuOpen(false)
                   }}
-                  className={`w-full text-left px-4 py-3 text-sm transition-colors ${centerListType === 'played' ? 'bg-accent/10 text-accent font-medium' : 'text-slate-300 hover:bg-white/5'}`}
+                  className={`w-full text-left px-4 py-3 text-sm transition-colors min-h-[48px] active:scale-95 transition-transform duration-150 ${centerListType === 'played' ? 'bg-accent/10 text-accent font-medium' : 'text-slate-300 hover:bg-white/5'}`}
                 >
                   Odehrané zápasy
                 </button>
@@ -111,7 +111,7 @@ export function MatchList({ matches, upcomingMatches, selectedMatchId, onSelectM
                     setCenterListType('upcoming')
                     setMatchesMenuOpen(false)
                   }}
-                  className={`w-full text-left px-4 py-3 text-sm transition-colors ${centerListType === 'upcoming' ? 'bg-accent/10 text-accent font-medium' : 'text-slate-300 hover:bg-white/5'}`}
+                  className={`w-full text-left px-4 py-3 text-sm transition-colors min-h-[48px] active:scale-95 transition-transform duration-150 ${centerListType === 'upcoming' ? 'bg-accent/10 text-accent font-medium' : 'text-slate-300 hover:bg-white/5'}`}
                 >
                   Nadcházející zápasy
                 </button>

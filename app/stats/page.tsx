@@ -7,6 +7,7 @@ import { BackToTop } from "../components/BackToTop"
 import { useStatisticsData } from "../hooks/useStatisticsData"
 import { Trophy, Shield, Activity, Target, TrendingUp, Users } from "lucide-react"
 import { TeamLogo } from "../components/TeamLogo"
+import { proxifyImageUrl } from "../lib/imageProxy"
 
 export default function StatsPage() {
   const { playerStats, bestDefense, isLoading } = useStatisticsData()
@@ -53,7 +54,7 @@ export default function StatsPage() {
     <div className="flex flex-col min-h-screen bg-slate-950">
       <Header />
       
-      <main className="container mx-auto max-w-7xl px-4 md:px-8 py-8 flex-1 space-y-8">
+      <main className="container mx-auto max-w-7xl px-2 md:px-8 py-4 md:py-8 flex-1 space-y-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
                 <h1 className="text-4xl font-black text-white mb-2">Season Stats</h1>
@@ -70,7 +71,7 @@ export default function StatsPage() {
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id as any)}
-                        className={`px-4 py-2 rounded-lg text-sm font-bold transition-all whitespace-nowrap ${
+                        className={`px-4 py-3 rounded-lg text-sm font-bold transition-all whitespace-nowrap min-h-[48px] min-w-[48px] active:scale-95 transition-transform duration-150 ${
                             activeTab === tab.id 
                                 ? 'bg-white text-slate-900 shadow-lg' 
                                 : 'text-secondary hover:text-white hover:bg-white/5'
@@ -128,12 +129,12 @@ export default function StatsPage() {
                                                 <div className="flex items-center gap-2 md:gap-4">
                                                     <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/10 overflow-hidden border border-white/10 relative shrink-0">
                                                         <img 
-                                                            src={player.photo} 
+                                                            src={proxifyImageUrl(player.photo)} 
                                                             alt={player.web_name}
                                                             className="w-full h-full object-cover object-top scale-110 translate-y-1"
                                                             loading="lazy"
                                                             onError={(e) => {
-                                                                (e.target as HTMLImageElement).src = 'https://resources.premierleague.com/premierleague/photos/players/110x140/p0.png'
+                                                                (e.target as HTMLImageElement).src = proxifyImageUrl('https://resources.premierleague.com/premierleague/photos/players/110x140/p0.png') || ''
                                                             }}
                                                         />
                                                     </div>

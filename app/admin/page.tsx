@@ -752,7 +752,7 @@ export default function AdminPage() {
     return (
       <div className="flex flex-col min-h-screen">
         <Header />
-        <div className="p-8 flex-1 container mx-auto"><SkeletonLoader /></div>
+        <div className="p-2 md:p-8 flex-1 container mx-auto"><SkeletonLoader /></div>
         <Footer />
       </div>
     )
@@ -763,7 +763,7 @@ export default function AdminPage() {
       <Header />
       <Toaster position="top-right" richColors />
       
-      <main className="container mx-auto max-w-7xl px-4 md:px-8 py-8 flex-1">
+      <main className="container mx-auto max-w-7xl px-2 md:px-8 py-4 md:py-8 flex-1">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
           <div>
             <h1 className="text-4xl font-black text-accent uppercase tracking-tighter italic">PL Admin Panel</h1>
@@ -771,36 +771,36 @@ export default function AdminPage() {
           </div>
           
           {/* Login & Filter */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 w-full md:w-auto">
              {isAuthenticated && (
                  <>
                     <div className="flex bg-white/5 rounded-lg p-1 border border-white/10">
                         <button 
                             onClick={() => setActiveTab('matches')}
-                            className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${activeTab === 'matches' ? 'bg-accent text-slate-900' : 'text-secondary hover:text-white'}`}
+                            className={`px-4 py-3 min-h-[48px] min-w-[48px] rounded-md text-xs font-bold transition-all active:scale-95 transition-transform duration-150 ${activeTab === 'matches' ? 'bg-accent text-slate-900' : 'text-secondary hover:text-white'}`}
                         >
                             Zápasy
                         </button>
                         <button 
                             onClick={() => setActiveTab('transfers')}
-                            className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${activeTab === 'transfers' ? 'bg-accent text-slate-900' : 'text-secondary hover:text-white'}`}
+                            className={`px-4 py-3 min-h-[48px] min-w-[48px] rounded-md text-xs font-bold transition-all active:scale-95 transition-transform duration-150 ${activeTab === 'transfers' ? 'bg-accent text-slate-900' : 'text-secondary hover:text-white'}`}
                         >
                             Přestupy
                         </button>
                         <button 
                             onClick={() => setActiveTab('logos')}
-                            className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${activeTab === 'logos' ? 'bg-accent text-slate-900' : 'text-secondary hover:text-white'}`}
+                            className={`px-4 py-3 min-h-[48px] min-w-[48px] rounded-md text-xs font-bold transition-all active:scale-95 transition-transform duration-150 ${activeTab === 'logos' ? 'bg-accent text-slate-900' : 'text-secondary hover:text-white'}`}
                         >
                             Knihovna log
                         </button>
                     </div>
 
-                 <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                 <div className="flex items-center gap-2 bg-white/5 px-3 py-3 rounded-lg border border-white/10 min-h-[48px] w-full md:w-auto">
                     <Filter className="w-4 h-4 text-secondary" />
                     <select 
                         value={selectedGameweek} 
                         onChange={(e) => handleGameweekChange(e.target.value === 'all' ? 'all' : parseInt(e.target.value))}
-                        className="bg-transparent text-sm outline-none font-bold cursor-pointer"
+                        className="bg-transparent text-sm outline-none font-bold cursor-pointer w-full md:w-auto py-1"
                     >
                         <option value="all" className="bg-slate-900">Všechna kola</option>
                         {availableGameweeks.map(gw => (
@@ -812,22 +812,22 @@ export default function AdminPage() {
              )}
 
              {!isAuthenticated ? (
-                 <form onSubmit={handleLogin} className="flex gap-2">
+                 <form onSubmit={handleLogin} className="flex gap-2 w-full md:w-auto">
                      <input 
                         type="password" 
                         placeholder="Admin heslo" 
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-accent w-32 md:w-48"
+                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 min-h-[48px] text-sm outline-none focus:border-accent w-full md:w-48"
                      />
-                     <button type="submit" className="bg-white/10 hover:bg-white/20 p-2 rounded-lg transition-colors">
+                     <button type="submit" className="bg-white/10 hover:bg-white/20 px-4 py-3 min-h-[48px] min-w-[48px] rounded-lg transition-colors active:scale-95 transition-transform duration-150">
                         <Lock className="w-4 h-4" />
                      </button>
                  </form>
              ) : (
-                 <div className="flex items-center gap-2 bg-green-500/10 px-3 py-1.5 rounded-lg border border-green-500/20">
+                 <div className="flex items-center gap-2 bg-green-500/10 px-3 py-3 rounded-lg border border-green-500/20 min-h-[48px] w-full md:w-auto">
                      <Unlock className="w-4 h-4 text-green-500" />
-                     <button onClick={handleLogout} className="text-xs font-bold text-green-400 hover:text-white transition-colors">Odhlásit</button>
+                     <button onClick={handleLogout} className="text-xs font-bold text-green-400 hover:text-white transition-colors min-h-[48px] px-2 active:scale-95 transition-transform duration-150">Odhlásit</button>
                  </div>
              )}
           </div>
@@ -999,7 +999,7 @@ export default function AdminPage() {
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="text-[10px] uppercase font-bold text-secondary mb-1 block">Typ</label>
-                                            <select value={eventType} onChange={e => setEventType(e.target.value as any)} className="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none">
+                                            <select value={eventType} onChange={e => setEventType(e.target.value as any)} className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none">
                                                 <option value="goal">⚽ Gól</option>
                                                 <option value="substitution">🔄 Střídání</option>
                                                 <option value="yellow">🟨 Žlutá karta</option>
@@ -1008,7 +1008,7 @@ export default function AdminPage() {
                                         </div>
                                         <div>
                                             <label className="text-[10px] uppercase font-bold text-secondary mb-1 block">Tým</label>
-                                            <select value={team} onChange={e => setTeam(e.target.value as any)} className="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none">
+                                            <select value={team} onChange={e => setTeam(e.target.value as any)} className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none">
                                                 <option value="home">{matches.find(m => m.id === editingMatchId)?.homeTeam}</option>
                                                 <option value="away">{matches.find(m => m.id === editingMatchId)?.awayTeam}</option>
                                             </select>
@@ -1022,7 +1022,7 @@ export default function AdminPage() {
                                                 type="text" 
                                                 value={minute} 
                                                 onChange={e => setMinute(e.target.value)} 
-                                                className="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none focus:border-accent font-mono" 
+                                                className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none focus:border-accent font-mono" 
                                                 placeholder="90+2" 
                                                 required 
                                             />
@@ -1030,7 +1030,7 @@ export default function AdminPage() {
                                         {eventType === 'goal' && (
                                             <div>
                                                 <label className="text-[10px] uppercase font-bold text-secondary mb-1 block">Skóre</label>
-                                                <input type="text" value={score} onChange={e => setScore(e.target.value)} className="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none" placeholder="1-0" />
+                                                <input type="text" value={score} onChange={e => setScore(e.target.value)} className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none" placeholder="1-0" />
                                             </div>
                                         )}
                                     </div>
@@ -1041,7 +1041,7 @@ export default function AdminPage() {
                                             <select 
                                                 value={player} 
                                                 onChange={e => setPlayer(e.target.value)} 
-                                                className="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none"
+                                                className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none"
                                             >
                                                 <option value="">Vyber hráče</option>
                                                 {(team === 'home' ? availableHomePlayers : availableAwayPlayers).map((p: any) => (
@@ -1051,7 +1051,7 @@ export default function AdminPage() {
                                             </select>
                                             {/* Fallback input if needed */}
                                             {!availableHomePlayers.length && !availableAwayPlayers.length && (
-                                                <input type="text" value={player} onChange={e => setPlayer(e.target.value)} className="w-full mt-2 bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none" placeholder="Nebo napiš jméno" />
+                                                <input type="text" value={player} onChange={e => setPlayer(e.target.value)} className="w-full mt-2 bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none" placeholder="Nebo napiš jméno" />
                                             )}
                                         </div>
                                     ) : (
@@ -1061,7 +1061,7 @@ export default function AdminPage() {
                                                 <select 
                                                     value={playerOut} 
                                                     onChange={e => setPlayerOut(e.target.value)} 
-                                                    className="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none"
+                                                    className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none"
                                                 >
                                                     <option value="">Vyber hráče</option>
                                                     {(team === 'home' ? availableHomePlayers : availableAwayPlayers).map((p: any) => (
@@ -1074,7 +1074,7 @@ export default function AdminPage() {
                                                 <select 
                                                     value={playerIn} 
                                                     onChange={e => setPlayerIn(e.target.value)} 
-                                                    className="w-full bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none"
+                                                    className="w-full bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none"
                                                 >
                                                     <option value="">Vyber hráče</option>
                                                     {(team === 'home' ? availableHomePlayers : availableAwayPlayers).map((p: any) => (
@@ -1085,14 +1085,14 @@ export default function AdminPage() {
                                         </div>
                                     )}
 
-                                    <button type="submit" className="w-full bg-white/10 hover:bg-white/20 text-white font-bold py-2 rounded-lg transition-colors text-sm">
+                                    <button type="submit" className="w-full bg-white/10 hover:bg-white/20 text-white font-bold px-4 py-3 min-h-[44px] rounded-lg transition-colors text-sm">
                                         {editingEventId ? '💾 Uložit změny' : '+ Přidat do seznamu'}
                                     </button>
                                     {editingEventId && (
                                         <button 
                                             type="button" 
                                             onClick={() => { setEditingEventId(null); resetForm(); }}
-                                            className="w-full text-secondary hover:text-white text-xs py-1"
+                                            className="w-full text-secondary hover:text-white text-xs py-3 min-h-[44px]"
                                         >
                                             Zrušit úpravy
                                         </button>
@@ -1132,7 +1132,7 @@ export default function AdminPage() {
                                             max={100}
                                             value={currentStats?.possession?.[0] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), possession: [Number(e.target.value), Number(prev?.possession?.[1] ?? 0)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
 
                                         <label className="text-[10px] uppercase font-bold text-secondary">Střely na bránu</label>
@@ -1141,7 +1141,7 @@ export default function AdminPage() {
                                             min={0}
                                             value={currentStats?.shotsOnTarget?.[0] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), shotsOnTarget: [Number(e.target.value), Number(prev?.shotsOnTarget?.[1] ?? 0)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
 
                                         <label className="text-[10px] uppercase font-bold text-secondary">Střely mimo</label>
@@ -1150,7 +1150,7 @@ export default function AdminPage() {
                                             min={0}
                                             value={currentStats?.shotsOffTarget?.[0] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), shotsOffTarget: [Number(e.target.value), Number(prev?.shotsOffTarget?.[1] ?? 0)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
 
                                         <label className="text-[10px] uppercase font-bold text-secondary">Rohy</label>
@@ -1159,7 +1159,7 @@ export default function AdminPage() {
                                             min={0}
                                             value={currentStats?.corners?.[0] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), corners: [Number(e.target.value), Number(prev?.corners?.[1] ?? 0)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
 
                                         <label className="text-[10px] uppercase font-bold text-secondary">Fauly</label>
@@ -1168,7 +1168,7 @@ export default function AdminPage() {
                                             min={0}
                                             value={currentStats?.fouls?.[0] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), fouls: [Number(e.target.value), Number(prev?.fouls?.[1] ?? 0)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
                                     </div>
                                 </div>
@@ -1183,7 +1183,7 @@ export default function AdminPage() {
                                             max={100}
                                             value={currentStats?.possession?.[1] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), possession: [Number(prev?.possession?.[0] ?? 0), Number(e.target.value)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
 
                                         <label className="text-[10px] uppercase font-bold text-secondary">Střely na bránu</label>
@@ -1192,7 +1192,7 @@ export default function AdminPage() {
                                             min={0}
                                             value={currentStats?.shotsOnTarget?.[1] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), shotsOnTarget: [Number(prev?.shotsOnTarget?.[0] ?? 0), Number(e.target.value)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
 
                                         <label className="text-[10px] uppercase font-bold text-secondary">Střely mimo</label>
@@ -1201,7 +1201,7 @@ export default function AdminPage() {
                                             min={0}
                                             value={currentStats?.shotsOffTarget?.[1] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), shotsOffTarget: [Number(prev?.shotsOffTarget?.[0] ?? 0), Number(e.target.value)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
 
                                         <label className="text-[10px] uppercase font-bold text-secondary">Rohy</label>
@@ -1210,7 +1210,7 @@ export default function AdminPage() {
                                             min={0}
                                             value={currentStats?.corners?.[1] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), corners: [Number(prev?.corners?.[0] ?? 0), Number(e.target.value)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
 
                                         <label className="text-[10px] uppercase font-bold text-secondary">Fauly</label>
@@ -1219,7 +1219,7 @@ export default function AdminPage() {
                                             min={0}
                                             value={currentStats?.fouls?.[1] ?? 0}
                                             onChange={(e) => setCurrentStats((prev: any) => ({ ...(prev || {}), fouls: [Number(prev?.fouls?.[0] ?? 0), Number(e.target.value)] }))}
-                                            className="bg-slate-950 border border-white/10 rounded-lg p-2 text-sm outline-none font-bold"
+                                            className="bg-slate-950 border border-white/10 rounded-lg px-4 py-3 min-h-[44px] text-sm outline-none font-bold"
                                         />
                                     </div>
                                 </div>
@@ -1263,7 +1263,7 @@ export default function AdminPage() {
                                                             key={globalIndex}
                                                             onClick={() => handleSlotClick('home', globalIndex)}
                                                             className={`
-                                                                relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center 
+                                                                relative w-10 h-10 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full flex items-center justify-center 
                                                                 cursor-pointer transition-all duration-300 group z-10
                                                                 ${player ? 'bg-slate-900 border-2 border-accent shadow-lg scale-105' : 'bg-white/10 border-2 border-white/20 hover:bg-white/20 hover:scale-110'}
                                                             `}
@@ -1277,7 +1277,7 @@ export default function AdminPage() {
                                                                     )}
                                                                     
                                                                     <div 
-                                                                        className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md z-20 hover:bg-accent hover:text-black transition-colors"
+                                                                        className="absolute -bottom-5 sm:-bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md z-20 hover:bg-accent hover:text-black transition-colors"
                                                                         onClick={(e) => handleShowPreview(e, player)}
                                                                     >
                                                                         {player.name.split(' ').pop()}
@@ -1337,7 +1337,7 @@ export default function AdminPage() {
                                                             key={globalIndex}
                                                             onClick={() => handleSlotClick('away', globalIndex)}
                                                             className={`
-                                                                relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center 
+                                                                relative w-10 h-10 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full flex items-center justify-center 
                                                                 cursor-pointer transition-all duration-300 group z-10
                                                                 ${player ? 'bg-slate-900 border-2 border-blue-500 shadow-lg scale-105' : 'bg-white/10 border-2 border-white/20 hover:bg-white/20 hover:scale-110'}
                                                             `}
@@ -1351,7 +1351,7 @@ export default function AdminPage() {
                                                                     )}
                                                                     
                                                                     <div 
-                                                                        className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md z-20 hover:bg-blue-500 hover:text-white transition-colors"
+                                                                        className="absolute -bottom-5 sm:-bottom-6 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md z-20 hover:bg-blue-500 hover:text-white transition-colors"
                                                                         onClick={(e) => handleShowPreview(e, player)}
                                                                     >
                                                                         {player.name.split(' ').pop()}

@@ -62,7 +62,7 @@ describe('LeagueTable', () => {
     render(<LeagueTable standings={mockStandings} />);
     
     const teamARow = screen.getByText('Team A').closest('tr');
-    expect(teamARow?.className).toContain('bg-green-500/10');
+    expect(teamARow?.className).toContain('bg-blue-500/10');
   });
 
   it('applies correct styling for relegation teams', () => {

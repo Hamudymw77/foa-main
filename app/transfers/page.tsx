@@ -29,13 +29,13 @@ const TransferCard = ({ t }: { t: any }) => {
     return (
         <div className="group relative bg-white/5 hover:bg-white/10 border border-white/5 hover:border-accent/50 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-accent/10">
             {/* Header / Main Info */}
-            <div className="p-6 pb-4">
+            <div className="p-4 md:p-6 pb-4">
                 {/* Background Effect */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-accent/10 transition-colors" />
 
                 {/* Player Photo */}
                 <div className="relative flex justify-center mb-6 mt-2">
-                    <div className="w-28 h-28 rounded-full bg-slate-900 border-4 border-white/10 group-hover:border-accent transition-colors overflow-hidden shadow-2xl relative z-10 flex items-center justify-center">
+                    <div className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-slate-900 border-4 border-white/10 group-hover:border-accent transition-colors overflow-hidden shadow-2xl relative z-10 flex items-center justify-center">
                         <PlayerAvatar 
                             name={t.player} 
                             photoUrl={t.photo} 
@@ -49,7 +49,7 @@ const TransferCard = ({ t }: { t: any }) => {
 
                 {/* Player Name */}
                 <div className="text-center mb-6 relative z-10">
-                    <h3 className="text-xl font-black text-white group-hover:text-accent transition-colors truncate px-2">{t.player}</h3>
+                    <h3 className="text-lg md:text-xl font-black text-white group-hover:text-accent transition-colors truncate px-2">{t.player}</h3>
                     <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest mt-1">Confirmed Deal</p>
                 </div>
 
@@ -68,7 +68,7 @@ const TransferCard = ({ t }: { t: any }) => {
                     </div>
 
                     <div className="flex flex-col items-center gap-2 w-[35%]">
-                        <div className="w-12 h-12 flex items-center justify-center">
+                        <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
                             <TeamBadge name={t.to} logoUrl={t.toLogo} className="w-full h-full scale-110" />
                         </div>
                         <span className="text-[9px] font-bold text-white truncate w-full text-center leading-tight">{t.to}</span>
@@ -81,7 +81,7 @@ const TransferCard = ({ t }: { t: any }) => {
                 <>
                     <button 
                         onClick={() => setShowStats(!showStats)}
-                        className="w-full py-2 bg-white/5 hover:bg-white/10 border-t border-white/5 text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-white transition-colors flex items-center justify-center gap-2"
+                        className="w-full py-3 min-h-[48px] bg-white/5 hover:bg-white/10 border-t border-white/5 text-[10px] font-bold uppercase tracking-widest text-secondary hover:text-white transition-colors flex items-center justify-center gap-2 active:scale-95 transition-transform duration-150"
                     >
                         {showStats ? 'Hide Stats' : 'View Season Stats'}
                         {showStats ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -115,7 +115,7 @@ const LatestTransferItem = ({ t }: { t: any }) => {
     if (!t) return null;
 
     return (
-        <div className="bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 p-3 rounded-xl flex items-center gap-3 transition-all cursor-default">
+        <div className="bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/20 p-2.5 md:p-3 rounded-xl flex items-center gap-3 transition-all cursor-default">
             <div className="w-8 h-8 rounded-full bg-slate-800 overflow-hidden shrink-0 border border-white/10 flex items-center justify-center">
                 <PlayerAvatar 
                     name={t.player} 
@@ -186,7 +186,7 @@ export default function TransfersPage() {
     <div className="flex flex-col min-h-screen bg-slate-950">
       <Header />
       
-      <main className="container mx-auto max-w-7xl px-4 md:px-8 py-8 flex-1">
+      <main className="container mx-auto max-w-7xl px-2 md:px-8 py-4 md:py-8 flex-1">
         
         {/* Header Section */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8">
@@ -203,16 +203,16 @@ export default function TransfersPage() {
             </div>
 
             {/* Tab Switcher */}
-            <div className="flex flex-col sm:flex-row bg-slate-900/50 p-1 rounded-xl border border-white/10 backdrop-blur-md w-full md:w-auto">
+            <div className="grid grid-cols-2 bg-slate-900/50 p-1 rounded-xl border border-white/10 backdrop-blur-md w-full md:w-auto">
                 <button 
                     onClick={() => { setActiveTab('summer'); setSelectedTeam(null); }}
-                    className={`px-4 md:px-8 py-3 rounded-lg text-xs md:text-sm font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'summer' ? 'bg-accent text-slate-900 shadow-[0_0_20px_rgba(251,191,36,0.3)] scale-105' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
+                    className={`px-4 md:px-8 py-3 min-h-[48px] min-w-[48px] rounded-lg text-xs md:text-sm font-black uppercase tracking-wider transition-all duration-300 active:scale-95 transition-transform duration-150 ${activeTab === 'summer' ? 'bg-accent text-slate-900 shadow-[0_0_20px_rgba(251,191,36,0.3)]' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
                 >
                     Summer 2025
                 </button>
                 <button 
                     onClick={() => { setActiveTab('winter'); setSelectedTeam(null); }}
-                    className={`px-4 md:px-8 py-3 rounded-lg text-xs md:text-sm font-black uppercase tracking-wider transition-all duration-300 ${activeTab === 'winter' ? 'bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)] scale-105' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
+                    className={`px-4 md:px-8 py-3 min-h-[48px] min-w-[48px] rounded-lg text-xs md:text-sm font-black uppercase tracking-wider transition-all duration-300 active:scale-95 transition-transform duration-150 ${activeTab === 'winter' ? 'bg-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.3)]' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
                 >
                     January 2026
                 </button>
@@ -224,7 +224,7 @@ export default function TransfersPage() {
             <div className="flex items-center gap-2 min-w-max">
                 <button
                     onClick={() => setSelectedTeam(null)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-wider transition-all ${!selectedTeam ? 'bg-white text-slate-900 border-white' : 'bg-white/5 text-white/50 border-white/5 hover:bg-white/10 hover:text-white'}`}
+                    className={`flex items-center gap-2 px-4 py-3 min-h-[48px] rounded-full border text-xs font-bold uppercase tracking-wider transition-all active:scale-95 transition-transform duration-150 ${!selectedTeam ? 'bg-white text-slate-900 border-white' : 'bg-white/5 text-white/50 border-white/5 hover:bg-white/10 hover:text-white'}`}
                 >
                     <Filter className="w-3 h-3" /> All Clubs
                 </button>
@@ -233,7 +233,7 @@ export default function TransfersPage() {
                     <button
                         key={team}
                         onClick={() => setSelectedTeam(team === selectedTeam ? null : team)}
-                        className={`px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${selectedTeam === team ? 'bg-accent text-slate-900 border-accent' : 'bg-white/5 text-white/50 border-white/5 hover:bg-white/10 hover:text-white'}`}
+                        className={`px-4 py-3 min-h-[48px] rounded-full border text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap active:scale-95 transition-transform duration-150 ${selectedTeam === team ? 'bg-accent text-slate-900 border-accent' : 'bg-white/5 text-white/50 border-white/5 hover:bg-white/10 hover:text-white'}`}
                     >
                         {team}
                     </button>
@@ -265,7 +265,7 @@ export default function TransfersPage() {
         ) : (
             <div className="min-h-[500px]">
                 {/* Section Header */}
-                <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
+                <div className="flex flex-col items-start gap-2 md:flex-row md:items-end md:justify-between md:gap-4 mb-8 border-b border-white/10 pb-4">
                     <h2 className="text-3xl font-black text-white flex items-center gap-3">
                         <span className="text-white">
                             {activeTab === 'summer' ? 'Summer' : 'Winter'}
@@ -290,7 +290,7 @@ export default function TransfersPage() {
                         <p className="text-secondary">Try selecting a different team or window.</p>
                         <button 
                             onClick={() => setSelectedTeam(null)}
-                            className="mt-6 text-accent text-sm font-bold uppercase tracking-wider hover:underline"
+                            className="mt-6 text-accent text-sm font-bold uppercase tracking-wider hover:underline min-h-[48px] px-4 active:scale-95 transition-transform duration-150"
                         >
                             Clear Filters
                         </button>

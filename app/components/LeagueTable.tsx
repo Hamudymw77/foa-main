@@ -16,33 +16,41 @@ export function LeagueTable({ standings, lastUpdated }: LeagueTableProps) {
   }
 
   const getRowColor = (pos: number) => {
-    if (pos <= 5) return "bg-green-500/10"
-    if (pos === 6) return "bg-orange-500/10"
+    if (pos <= 4) return "bg-blue-500/10"
+    if (pos === 5) return "bg-orange-500/10"
     if (pos >= 18) return "bg-red-500/10"
     return ""
   }
 
+  const getPosBadgeStyle = (pos: number) => {
+    if (pos <= 4) return "text-blue-300 bg-blue-500/10 border-blue-400/30"
+    if (pos === 5) return "text-orange-300 bg-orange-500/10 border-orange-400/30"
+    if (pos >= 18) return "text-red-300 bg-red-500/10 border-red-400/30"
+    return "text-secondary bg-white/5 border-white/10"
+  }
+
   return (
-    <div className="overflow-x-auto rounded-lg relative">
+    <div className="overflow-x-auto md:overflow-x-visible rounded-lg relative">
       {lastUpdated && (
         <div className="text-xs text-secondary mb-2 text-right">
-          Last updated: {lastUpdated.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' })}
+          Last updated: {lastUpdated.toLocaleTimeString("cs-CZ", { hour: "2-digit", minute: "2-digit" })}
         </div>
       )}
-      <table className="w-full text-sm border-collapse">
+      <table className="w-full text-sm border-collapse table-auto md:table-fixed">
         <thead className="bg-white/5 text-secondary font-bold uppercase tracking-wider">
           <tr>
-            <th className="p-3 text-left sticky left-0 z-20 bg-background w-12 border-b border-white/10">Pos</th>
-            <th className="p-3 text-left sticky left-12 z-20 bg-background shadow-[4px_0_8px_-2px_rgba(0,0,0,0.5)] border-r border-b border-white/10">Team</th>
-            <th className="p-3 text-center min-w-[40px] border-b border-white/10">P</th>
-            <th className="p-3 text-center min-w-[40px] border-b border-white/10">W</th>
-            <th className="p-3 text-center min-w-[40px] border-b border-white/10">D</th>
-            <th className="p-3 text-center min-w-[40px] border-b border-white/10">L</th>
-            <th className="p-3 text-center min-w-[40px] border-b border-white/10">GF</th>
-            <th className="p-3 text-center min-w-[40px] border-b border-white/10">GA</th>
-            <th className="p-3 text-center min-w-[40px] border-b border-white/10">GD</th>
-            <th className="p-3 text-center min-w-[40px] border-b border-white/10">Pts</th>
-            <th className="p-3 text-left min-w-[120px] border-b border-white/10">Form</th>
+            <th className="py-3 px-1.5 md:p-3 text-left w-12 border-b border-white/10">Pos</th>
+            <th className="py-3 px-2 md:p-3 text-left min-w-[160px] border-b border-white/10">Team</th>
+            <th className="py-3 px-1.5 md:p-3 text-center w-12 border-b border-white/10">P</th>
+            <th className="hidden md:table-cell p-3 text-center w-12 border-b border-white/10">W</th>
+            <th className="hidden md:table-cell p-3 text-center w-12 border-b border-white/10">D</th>
+            <th className="hidden md:table-cell p-3 text-center w-12 border-b border-white/10">L</th>
+            <th className="md:hidden py-3 px-1.5 md:p-3 text-center w-16 border-b border-white/10">G</th>
+            <th className="hidden md:table-cell p-3 text-center w-12 border-b border-white/10">GF</th>
+            <th className="hidden md:table-cell p-3 text-center w-12 border-b border-white/10">GA</th>
+            <th className="hidden md:table-cell p-3 text-center w-12 border-b border-white/10">GD</th>
+            <th className="py-3 px-1.5 md:p-3 text-center w-14 border-b border-white/10">Pts</th>
+            <th className="hidden md:table-cell p-3 text-left w-[180px] border-b border-white/10">Form</th>
           </tr>
         </thead>
         <tbody>
@@ -51,22 +59,29 @@ export function LeagueTable({ standings, lastUpdated }: LeagueTableProps) {
               key={team.pos}
               className={`border-b border-white/10 hover:bg-white/5 transition-colors group ${getRowColor(team.pos)}`}
             >
-              <td className={`p-3 font-bold sticky left-0 z-10 w-12 border-b border-white/10 ${getRowColor(team.pos) || 'bg-background'} group-hover:bg-white/10 transition-colors`}>{team.pos}</td>
-              <td className={`p-3 sticky left-12 z-10 shadow-[4px_0_8px_-2px_rgba(0,0,0,0.5)] border-r border-b border-white/10 ${getRowColor(team.pos) || 'bg-background'} group-hover:bg-white/10 transition-colors`}>
-                <div className="flex items-center gap-2 w-max">
-                  <TeamLogo teamName={team.team} url={team.logo} className="w-6 h-6" />
-                  <span className="font-medium whitespace-nowrap text-foreground">{team.team}</span>
+              <td className="py-3 px-1.5 md:p-3 w-12">
+                <div
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-black border ${getPosBadgeStyle(team.pos)}`}
+                >
+                  {team.pos}
                 </div>
               </td>
-              <td className="p-3 text-center">{team.played}</td>
-              <td className="p-3 text-center">{team.won}</td>
-              <td className="p-3 text-center">{team.drawn}</td>
-              <td className="p-3 text-center">{team.lost}</td>
-              <td className="p-3 text-center">{team.gf}</td>
-              <td className="p-3 text-center">{team.ga}</td>
-              <td className="p-3 text-center font-bold">{team.gd > 0 ? `+${team.gd}` : team.gd}</td>
-              <td className="p-3 text-center font-bold text-accent">{team.points}</td>
-              <td className="p-3">
+              <td className="py-3 px-2 md:p-3 min-w-[160px]">
+                <div className="flex items-center gap-2">
+                  <TeamLogo teamName={team.team} url={team.logo} className="w-5 h-5 shrink-0" />
+                  <span className="font-medium text-foreground text-xs md:text-sm whitespace-nowrap">{team.team}</span>
+                </div>
+              </td>
+              <td className="py-3 px-1.5 md:p-3 text-center tabular-nums">{team.played}</td>
+              <td className="hidden md:table-cell p-3 text-center tabular-nums">{team.won}</td>
+              <td className="hidden md:table-cell p-3 text-center tabular-nums">{team.drawn}</td>
+              <td className="hidden md:table-cell p-3 text-center tabular-nums">{team.lost}</td>
+              <td className="md:hidden py-3 px-1.5 md:p-3 text-center tabular-nums font-semibold">{team.gf}:{team.ga}</td>
+              <td className="hidden md:table-cell p-3 text-center tabular-nums">{team.gf}</td>
+              <td className="hidden md:table-cell p-3 text-center tabular-nums">{team.ga}</td>
+              <td className="hidden md:table-cell p-3 text-center tabular-nums font-bold">{team.gd > 0 ? `+${team.gd}` : team.gd}</td>
+              <td className="py-3 px-1.5 md:p-3 text-center font-black text-accent tabular-nums">{team.points}</td>
+              <td className="hidden md:table-cell p-3">
                 <div className="flex gap-1">
                   {team.form.map((result, i) => (
                     <div key={i} className="relative group/form">

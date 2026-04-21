@@ -32,7 +32,7 @@ export function MatchCard({ match, selectedMatchId, homeForm = [], awayForm = []
   return (
     <Link
       href={`/match/${m.id}`}
-      className={`glass-card rounded-xl p-5 transition-all duration-300 text-left border block hover:scale-[1.02] ${
+      className={`glass-card rounded-xl p-4 md:p-5 transition-all duration-300 text-left border block hover:scale-[1.02] ${
         selectedMatchId === m.id ? 'border-accent ring-1 ring-accent/50' : 'border-white/5 hover:border-white/10'
       }`}
     >
@@ -48,23 +48,23 @@ export function MatchCard({ match, selectedMatchId, homeForm = [], awayForm = []
           <TeamLogo 
             teamName={m.homeTeam} 
             url={m.homeLogo} 
-            className="w-12 h-12 drop-shadow-md" 
+            className="w-10 h-10 md:w-12 md:h-12 drop-shadow-md" 
           />
           <div className="text-center w-full">
-            <span className="block text-sm font-bold text-slate-200 leading-tight mb-1 break-words">{m.homeTeam}</span>
+            <span className="block text-xs md:text-sm font-bold text-slate-200 leading-tight mb-1 truncate">{m.homeTeam}</span>
             <div className="flex justify-center">{renderFormDots(homeForm)}</div>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center min-w-[80px] bg-slate-900/50 rounded-lg py-2 px-1">
-          <div className={`text-3xl font-black tracking-tighter ${m.status === 'upcoming' ? 'text-slate-600' : 'text-white'}`}>
+        <div className="flex flex-col items-center justify-center min-w-[72px] md:min-w-[80px] bg-slate-900/50 rounded-lg py-2 px-1">
+          <div className={`text-2xl md:text-3xl font-black tracking-tighter ${m.status === 'upcoming' ? 'text-slate-600' : 'text-white'}`}>
             {m.status === 'upcoming' ? (
-                <span className="text-2xl text-slate-500 font-bold">VS</span>
+                <span className="text-xl md:text-2xl text-slate-500 font-bold">VS</span>
             ) : (
                 <div className="flex items-center justify-center gap-1">
-                    <span className="text-4xl">{m.homeScore}</span>
-                    <span className="text-secondary text-2xl mx-0.5">:</span>
-                    <span className="text-4xl">{m.awayScore}</span>
+                    <span className="text-3xl md:text-4xl">{m.homeScore}</span>
+                    <span className="text-secondary text-xl md:text-2xl mx-0.5">:</span>
+                    <span className="text-3xl md:text-4xl">{m.awayScore}</span>
                 </div>
             )}
           </div>
@@ -77,10 +77,10 @@ export function MatchCard({ match, selectedMatchId, homeForm = [], awayForm = []
           <TeamLogo 
             teamName={m.awayTeam} 
             url={m.awayLogo} 
-            className="w-12 h-12 drop-shadow-md" 
+            className="w-10 h-10 md:w-12 md:h-12 drop-shadow-md" 
           />
           <div className="text-center w-full">
-            <span className="block text-sm font-bold text-slate-200 leading-tight mb-1 break-words">{m.awayTeam}</span>
+            <span className="block text-xs md:text-sm font-bold text-slate-200 leading-tight mb-1 truncate">{m.awayTeam}</span>
             <div className="flex justify-center">{renderFormDots(awayForm)}</div>
           </div>
         </div>

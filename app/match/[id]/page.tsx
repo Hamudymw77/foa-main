@@ -26,7 +26,7 @@ export default function MatchPage({ params }: MatchPageProps) {
     return (
       <div className="flex flex-col min-h-screen">
         <Header />
-        <div className="container mx-auto max-w-7xl px-4 md:px-8 py-8 flex-1">
+        <div className="container mx-auto max-w-7xl px-2 md:px-8 py-4 md:py-8 flex-1">
           <SkeletonLoader />
         </div>
         <Footer />
@@ -40,12 +40,12 @@ export default function MatchPage({ params }: MatchPageProps) {
     return (
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="container mx-auto max-w-7xl px-4 md:px-8 py-20 flex-1 text-center">
+        <main className="container mx-auto max-w-7xl px-2 md:px-8 py-20 flex-1 text-center">
           <h1 className="text-4xl font-bold text-accent mb-4">Match Not Found</h1>
           <p className="text-secondary mb-8">The match you are looking for does not exist or has been removed.</p>
           <Link 
             href="/" 
-            className="bg-accent hover:bg-accent/90 text-white font-bold py-3 px-8 rounded-lg transition-colors inline-block"
+            className="bg-accent hover:bg-accent/90 text-white font-bold py-3 px-8 rounded-lg transition-colors inline-block min-h-[48px] active:scale-95 transition-transform duration-150"
           >
             Back to Dashboard
           </Link>
@@ -59,11 +59,11 @@ export default function MatchPage({ params }: MatchPageProps) {
     <div className="flex flex-col min-h-screen">
       <Header />
       
-      <main className="container mx-auto max-w-7xl px-4 md:px-8 py-8 flex-1">
+      <main className="container mx-auto max-w-7xl px-2 md:px-8 py-4 md:py-8 flex-1">
         <div className="mb-6">
           <Link 
             href="/" 
-            className="text-secondary hover:text-accent transition-colors flex items-center gap-2 group"
+            className="text-secondary hover:text-accent transition-colors flex items-center gap-2 group min-h-[48px] active:scale-95 transition-transform duration-150"
           >
             <span className="group-hover:-translate-x-1 transition-transform">←</span>
             Back to Dashboard

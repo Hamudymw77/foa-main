@@ -9,6 +9,14 @@ interface PlayerAvatarProps {
   className?: string;
 }
 
+function isLikelyTeamLogoUrl(url: string) {
+  const v = String(url || '').toLowerCase();
+  if (!v) return false;
+  if (v.includes('/premierleague/badges/t')) return true;
+  if (v.includes('upload.wikimedia.org') && (v.includes('logo') || v.includes('crest') || v.includes('icon'))) return true;
+  return false;
+}
+
 export function PlayerAvatar({ name, photoUrl, code, className = "w-full h-full" }: PlayerAvatarProps) {
   const [error, setError] = useState(false);
 
@@ -17,7 +25,7 @@ export function PlayerAvatar({ name, photoUrl, code, className = "w-full h-full"
   }, [photoUrl, code]);
 
   // Reverted logic: Use photoUrl directly if available, otherwise construct from code (no 'p' prefix forced unless in photoUrl)
-  let finalUrl = photoUrl;
+  let finalUrl = photoUrl && !isLikelyTeamLogoUrl(photoUrl) ? photoUrl : undefined;
   
   if (!finalUrl && code) {
       finalUrl = `https://resources.premierleague.com/premierleague/photos/players/110x140/${code}.png`;

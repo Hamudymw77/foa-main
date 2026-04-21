@@ -106,7 +106,7 @@ export default function MatchesPage() {
     <div className="flex flex-col min-h-screen bg-slate-950">
       <Header />
       
-      <main className="container mx-auto max-w-7xl px-4 md:px-8 py-8 flex-1 space-y-8">
+      <main className="container mx-auto max-w-7xl px-2 md:px-8 py-4 md:py-8 flex-1 space-y-8">
         <section>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
             <h1 className="text-4xl font-black text-white">Premier League</h1>
@@ -117,7 +117,7 @@ export default function MatchesPage() {
                 <button 
                   onClick={handlePrevGw}
                   disabled={selectedGameweek === gameweeks[0]}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-white"
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-white min-w-[48px] min-h-[48px] active:scale-95 transition-transform duration-150"
                   aria-label="Previous Gameweek"
                 >
                   <ChevronLeft className="w-6 h-6" />
@@ -131,7 +131,7 @@ export default function MatchesPage() {
                 <button 
                   onClick={handleNextGw}
                   disabled={selectedGameweek === gameweeks[gameweeks.length - 1]}
-                  className="p-2 hover:bg-white/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-white"
+                  className="p-2 hover:bg-white/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-white min-w-[48px] min-h-[48px] active:scale-95 transition-transform duration-150"
                   aria-label="Next Gameweek"
                 >
                   <ChevronRight className="w-6 h-6" />
@@ -144,7 +144,7 @@ export default function MatchesPage() {
           <div className="flex gap-2 mb-8 border-b border-white/10 overflow-x-auto pb-2 md:pb-0 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
             <button
               onClick={() => setActiveTab("overview")}
-              className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap ${
+              className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap min-h-[48px] active:scale-95 transition-transform duration-150 ${
                 activeTab === "overview"
                   ? "text-accent border-b-2 border-accent"
                   : "text-secondary hover:text-foreground hover:bg-white/5 rounded-t-lg"
@@ -154,7 +154,7 @@ export default function MatchesPage() {
             </button>
             <button
               onClick={() => setActiveTab("fixtures")}
-              className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap ${
+              className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap min-h-[48px] active:scale-95 transition-transform duration-150 ${
                 activeTab === "fixtures"
                   ? "text-accent border-b-2 border-accent"
                   : "text-secondary hover:text-foreground hover:bg-white/5 rounded-t-lg"
@@ -164,7 +164,7 @@ export default function MatchesPage() {
             </button>
             <button
               onClick={() => setActiveTab("table")}
-              className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap ${
+              className={`px-3 py-2 md:px-6 md:py-3 text-sm md:text-base font-semibold transition-all whitespace-nowrap min-h-[48px] active:scale-95 transition-transform duration-150 ${
                 activeTab === "table"
                   ? "text-accent border-b-2 border-accent"
                   : "text-secondary hover:text-foreground hover:bg-white/5 rounded-t-lg"

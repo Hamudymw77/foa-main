@@ -6,11 +6,12 @@ import { describe, it, expect, vi } from 'vitest';
 vi.mock('../../services/dataService', () => ({
   DataService: {
     getTopScorers: vi.fn().mockResolvedValue([
-      { id: '1', name: 'Haaland E.', goals: 10, assists: 2, countryCode: 'no' }
+      { id: '1', name: 'Haaland E.', team: 'Man City', goals: 10, assists: 2, countryCode: 'no', matchesPlayed: 10, minutesPlayed: 900, goalsPerMatch: 1 }
     ]),
     getBestDefense: vi.fn().mockResolvedValue([
-      { team: 'Arsenal', goalsAgainst: 5, cleanSheets: 10 }
-    ])
+      { team: 'Arsenal', logo: '/arsenal.svg', goalsAgainst: 5, cleanSheets: 10 }
+    ]),
+    getPlayersStats: vi.fn().mockResolvedValue([])
   }
 }));
 

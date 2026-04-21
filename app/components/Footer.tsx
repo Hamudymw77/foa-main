@@ -5,7 +5,7 @@ import { Github, Twitter, Facebook, Instagram, Mail } from "lucide-react";
 export function Footer() {
   return (
     <footer className="glass-card border-t border-white/10 mt-12 pt-12 pb-8">
-      <div className="container mx-auto px-4 md:px-8">
+      <div className="container mx-auto px-2 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
@@ -17,16 +17,16 @@ export function Footer() {
               The ultimate destination for Premier League statistics, live scores, and detailed match analysis. Built for fans, by fans.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-secondary hover:text-foreground transition-colors" aria-label="Twitter">
+              <a href="#" className="text-secondary hover:text-foreground transition-colors min-w-[48px] min-h-[48px] inline-flex items-center justify-center active:scale-95 transition-transform duration-150" aria-label="Twitter">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-secondary hover:text-foreground transition-colors" aria-label="Facebook">
+              <a href="#" className="text-secondary hover:text-foreground transition-colors min-w-[48px] min-h-[48px] inline-flex items-center justify-center active:scale-95 transition-transform duration-150" aria-label="Facebook">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-secondary hover:text-foreground transition-colors" aria-label="Instagram">
+              <a href="#" className="text-secondary hover:text-foreground transition-colors min-w-[48px] min-h-[48px] inline-flex items-center justify-center active:scale-95 transition-transform duration-150" aria-label="Instagram">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-secondary hover:text-foreground transition-colors" aria-label="GitHub">
+              <a href="#" className="text-secondary hover:text-foreground transition-colors min-w-[48px] min-h-[48px] inline-flex items-center justify-center active:scale-95 transition-transform duration-150" aria-label="GitHub">
                 <Github className="w-5 h-5" />
               </a>
             </div>
@@ -36,11 +36,11 @@ export function Footer() {
           <div className="col-span-1">
             <h4 className="text-foreground font-bold mb-4 uppercase text-sm tracking-wider">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors">Home</a></li>
-              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors">Live Scores</a></li>
-              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors">League Table</a></li>
-              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors">Top Scorers</a></li>
-              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors">News</a></li>
+              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors min-h-[48px] md:min-h-0 flex items-center py-2 md:py-0 active:scale-95 transition-transform duration-150">Home</a></li>
+              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors min-h-[48px] md:min-h-0 flex items-center py-2 md:py-0 active:scale-95 transition-transform duration-150">Live Scores</a></li>
+              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors min-h-[48px] md:min-h-0 flex items-center py-2 md:py-0 active:scale-95 transition-transform duration-150">League Table</a></li>
+              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors min-h-[48px] md:min-h-0 flex items-center py-2 md:py-0 active:scale-95 transition-transform duration-150">Top Scorers</a></li>
+              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors min-h-[48px] md:min-h-0 flex items-center py-2 md:py-0 active:scale-95 transition-transform duration-150">News</a></li>
             </ul>
           </div>
 
@@ -48,10 +48,10 @@ export function Footer() {
           <div className="col-span-1">
             <h4 className="text-foreground font-bold mb-4 uppercase text-sm tracking-wider">Legal</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors">Cookie Policy</a></li>
-              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors">Contact Us</a></li>
+              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors min-h-[48px] md:min-h-0 flex items-center py-2 md:py-0 active:scale-95 transition-transform duration-150">Privacy Policy</a></li>
+              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors min-h-[48px] md:min-h-0 flex items-center py-2 md:py-0 active:scale-95 transition-transform duration-150">Terms of Service</a></li>
+              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors min-h-[48px] md:min-h-0 flex items-center py-2 md:py-0 active:scale-95 transition-transform duration-150">Cookie Policy</a></li>
+              <li><a href="#" className="text-secondary hover:text-accent text-sm transition-colors min-h-[48px] md:min-h-0 flex items-center py-2 md:py-0 active:scale-95 transition-transform duration-150">Contact Us</a></li>
             </ul>
           </div>
 
@@ -63,9 +63,9 @@ export function Footer() {
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="bg-white/5 border border-white/10 text-foreground text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent placeholder:text-secondary"
+                className="bg-white/5 border border-white/10 text-foreground text-sm rounded-lg px-4 py-3 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent placeholder:text-secondary"
               />
-              <button className="bg-accent hover:bg-accent/80 text-white font-bold py-2.5 px-4 rounded-lg transition-colors text-sm">
+              <button className="bg-accent hover:bg-accent/80 text-white font-bold py-3 px-4 rounded-lg transition-colors text-sm min-h-[48px] active:scale-95 transition-transform duration-150">
                 Subscribe
               </button>
             </form>

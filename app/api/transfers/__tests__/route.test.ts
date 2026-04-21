@@ -1,35 +1,39 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { GET, POST } from '../route';
 
-// Mock fs
 const mockTransfers = [
-    { id: '1', player: 'Active Player', from: 'A', to: 'B', window: 'summer_25', deleted: false },
-    { id: '2', player: 'Deleted Player', from: 'C', to: 'D', window: 'summer_25', deleted: true },
+  { id: '1', player: 'Active Player', from_team: 'A', to_team: 'B', window: 'summer_25', deleted: false },
+  { id: '2', player: 'Deleted Player', from_team: 'C', to_team: 'D', window: 'summer_25', deleted: true }
 ];
 
 let currentTransfers = [...mockTransfers];
 
-vi.mock('fs', () => {
-    return {
-        promises: {
-            readFile: vi.fn().mockImplementation(async () => JSON.stringify(currentTransfers)),
-            writeFile: vi.fn().mockImplementation(async (path, data) => {
-                currentTransfers = JSON.parse(data as string);
-            }),
-        },
-        default: {
-             promises: {
-                readFile: vi.fn().mockImplementation(async () => JSON.stringify(currentTransfers)),
-                writeFile: vi.fn().mockImplementation(async (path, data) => {
-                    currentTransfers = JSON.parse(data as string);
-                }),
-            }
-        }
-    };
+vi.mock('../../../lib/db', () => {
+  return {
+    isSupabaseConfigured: () => true,
+    getSupabaseAdmin: () => ({
+      from: () => ({
+        select: vi.fn().mockImplementation(async () => ({ data: currentTransfers, error: null })),
+        insert: vi.fn().mockImplementation(async (row: any) => {
+          currentTransfers = [...currentTransfers, row];
+          return { error: null };
+        }),
+        update: vi.fn().mockImplementation((patch: any) => ({
+          eq: vi.fn().mockImplementation(async (field: string, value: any) => {
+            currentTransfers = currentTransfers.map((t: any) => (t?.[field] === value ? { ...t, ...patch } : t));
+            return { error: null };
+          })
+        })),
+        delete: vi.fn().mockImplementation(() => ({
+          eq: vi.fn().mockImplementation(async (field: string, value: any) => {
+            currentTransfers = currentTransfers.filter((t: any) => t?.[field] !== value);
+            return { error: null };
+          })
+        }))
+      })
+    })
+  };
 });
-
-// Mock process.cwd
-vi.spyOn(process, 'cwd').mockReturnValue('/tmp');
 
 describe('Transfers API', () => {
     beforeEach(() => {
