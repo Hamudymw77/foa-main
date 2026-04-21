@@ -6,13 +6,15 @@ import { resolveTeamLogoUrl } from "../lib/constants";
 
 interface TeamLogoProps {
   teamName: string;
+  url?: string | null;
   className?: string;
 }
 
-export function TeamLogo({ teamName, className = "" }: TeamLogoProps) {
+export function TeamLogo({ teamName, url, className = "" }: TeamLogoProps) {
   const [error, setError] = useState(false);
   const [referrerAttempt, setReferrerAttempt] = useState<0 | 1>(0);
-  const resolvedUrl = resolveTeamLogoUrl(teamName, undefined);
+  const resolvedUrl =
+    url && String(url).trim() ? String(url).trim() : resolveTeamLogoUrl(teamName, undefined);
 
   useEffect(() => {
     setError(false);
