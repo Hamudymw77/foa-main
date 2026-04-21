@@ -1,7 +1,6 @@
 import { Shield } from "lucide-react";
 import { resolveTeamLogoUrl } from "../lib/constants";
-import { useState } from "react";
-import { proxifyImageUrl } from "../lib/imageProxy";
+import { useEffect, useState } from "react";
 
 const foreignLogos: Record<string, string> = {
   "Real Madrid": "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
@@ -36,23 +35,35 @@ const brokenTeams = [
 
 interface TeamBadgeProps {
   name: string;
-  logoUrl?: string | null;
   className?: string;
   showName?: boolean;
 }
 
-export function TeamBadge({ name, logoUrl, className = "w-10 h-10", showName = false }: TeamBadgeProps) {
+export function TeamBadge({ name, className = "w-10 h-10", showName = false }: TeamBadgeProps) {
   const [error, setError] = useState(false);
-  const resolvedLogoUrl = resolveTeamLogoUrl(name, logoUrl ?? undefined);
+  const [referrerAttempt, setReferrerAttempt] = useState<0 | 1>(0);
+  const resolvedLogoUrl = resolveTeamLogoUrl(name, undefined);
+
+  useEffect(() => {
+    setError(false);
+    setReferrerAttempt(0);
+  }, [name, resolvedLogoUrl]);
 
   if (resolvedLogoUrl && !error) {
     return (
       <img
-        src={proxifyImageUrl(resolvedLogoUrl)}
+        src={resolvedLogoUrl}
         alt={name}
         className={`${className} object-contain drop-shadow-md`}
         title={name}
-        onError={() => setError(true)}
+        referrerPolicy={referrerAttempt === 0 ? "no-referrer" : "origin"}
+        onError={() => {
+          if (referrerAttempt === 0) {
+            setReferrerAttempt(1);
+            return;
+          }
+          setError(true);
+        }}
       />
     );
   }
@@ -61,10 +72,18 @@ export function TeamBadge({ name, logoUrl, className = "w-10 h-10", showName = f
   if (foreignLogos[name]) {
     return (
       <img 
-        src={proxifyImageUrl(foreignLogos[name])} 
+        src={foreignLogos[name]} 
         alt={name} 
         className={`${className} object-contain drop-shadow-md`}
         title={name}
+        referrerPolicy={referrerAttempt === 0 ? "no-referrer" : "origin"}
+        onError={() => {
+          if (referrerAttempt === 0) {
+            setReferrerAttempt(1);
+            return;
+          }
+          setError(true);
+        }}
       />
     );
   }

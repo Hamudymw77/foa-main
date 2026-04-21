@@ -9,6 +9,18 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'images.fotmob.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'a.espncdn.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+      },
+      {
+        protocol: 'https',
         hostname: '*.football-data.org',
       },
     ],

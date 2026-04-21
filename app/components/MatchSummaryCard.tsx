@@ -63,7 +63,7 @@ export const MatchSummaryCard = forwardRef<HTMLDivElement, MatchSummaryCardProps
         
         {/* Home Team */}
         <div className="flex flex-col items-center w-full md:w-1/3 text-center order-1 md:order-1">
-            <TeamLogo teamName={match.homeTeam} url={match.homeLogo} className="w-32 h-32 mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" />
+            <TeamLogo teamName={match.homeTeam} className="w-32 h-32 mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" />
             <h2 className="text-2xl font-black uppercase tracking-tight leading-none mb-4">{match.homeTeam}</h2>
             
             {/* Home Scorers */}
@@ -89,7 +89,7 @@ export const MatchSummaryCard = forwardRef<HTMLDivElement, MatchSummaryCardProps
 
         {/* Away Team */}
         <div className="flex flex-col items-center w-full md:w-1/3 text-center order-3 md:order-3">
-            <TeamLogo teamName={match.awayTeam} url={match.awayLogo} className="w-32 h-32 mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" />
+            <TeamLogo teamName={match.awayTeam} className="w-32 h-32 mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" />
             <h2 className="text-2xl font-black uppercase tracking-tight leading-none mb-4">{match.awayTeam}</h2>
 
             {/* Away Scorers */}

@@ -7,7 +7,6 @@ import { BackToTop } from "../components/BackToTop"
 import { useStatisticsData } from "../hooks/useStatisticsData"
 import { Trophy, Shield, Activity, Target, TrendingUp, Users } from "lucide-react"
 import { TeamLogo } from "../components/TeamLogo"
-import { proxifyImageUrl } from "../lib/imageProxy"
 
 export default function StatsPage() {
   const { playerStats, bestDefense, isLoading } = useStatisticsData()
@@ -129,12 +128,13 @@ export default function StatsPage() {
                                                 <div className="flex items-center gap-2 md:gap-4">
                                                     <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/10 overflow-hidden border border-white/10 relative shrink-0">
                                                         <img 
-                                                            src={proxifyImageUrl(player.photo)} 
+                                                            src={player.photo} 
                                                             alt={player.web_name}
                                                             className="w-full h-full object-cover object-top scale-110 translate-y-1"
                                                             loading="lazy"
+                                                            referrerPolicy="no-referrer"
                                                             onError={(e) => {
-                                                                (e.target as HTMLImageElement).src = proxifyImageUrl('https://resources.premierleague.com/premierleague/photos/players/110x140/p0.png') || ''
+                                                                (e.target as HTMLImageElement).src = 'https://resources.premierleague.com/premierleague/photos/players/110x140/p0.png'
                                                             }}
                                                         />
                                                     </div>
@@ -152,7 +152,7 @@ export default function StatsPage() {
                                             </td>
                                             <td className="px-3 py-3 md:px-6 md:py-4 text-center">
                                                 <div className="flex flex-col items-center gap-1">
-                                                    <TeamLogo teamName={player.team} url={player.team_logo} className="w-6 h-6 md:w-8 md:h-8" />
+                                                    <TeamLogo teamName={player.team} className="w-6 h-6 md:w-8 md:h-8" />
                                                 </div>
                                             </td>
                                             <td className="px-3 py-3 md:px-6 md:py-4 text-center">
@@ -178,7 +178,7 @@ export default function StatsPage() {
                             <div key={team.team} className="flex items-center justify-between p-3 bg-white/5 rounded-xl">
                                 <div className="flex items-center gap-3">
                                     <span className="text-secondary font-mono text-sm">#{idx + 1}</span>
-                                    <TeamLogo teamName={team.team} url={team.logo} className="w-8 h-8" />
+                                    <TeamLogo teamName={team.team} className="w-8 h-8" />
                                     <span className="font-bold text-white text-sm">{team.team}</span>
                                 </div>
                                 <div className="flex flex-col items-end">

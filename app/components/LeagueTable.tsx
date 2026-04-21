@@ -16,15 +16,15 @@ export function LeagueTable({ standings, lastUpdated }: LeagueTableProps) {
   }
 
   const getRowColor = (pos: number) => {
-    if (pos <= 4) return "bg-blue-500/10"
-    if (pos === 5) return "bg-orange-500/10"
+    if (pos <= 5) return "bg-blue-500/10"
+    if (pos === 6) return "bg-orange-500/10"
     if (pos >= 18) return "bg-red-500/10"
     return ""
   }
 
   const getPosBadgeStyle = (pos: number) => {
-    if (pos <= 4) return "text-blue-300 bg-blue-500/10 border-blue-400/30"
-    if (pos === 5) return "text-orange-300 bg-orange-500/10 border-orange-400/30"
+    if (pos <= 5) return "text-blue-300 bg-blue-500/10 border-blue-400/30"
+    if (pos === 6) return "text-orange-300 bg-orange-500/10 border-orange-400/30"
     if (pos >= 18) return "text-red-300 bg-red-500/10 border-red-400/30"
     return "text-secondary bg-white/5 border-white/10"
   }
@@ -68,7 +68,7 @@ export function LeagueTable({ standings, lastUpdated }: LeagueTableProps) {
               </td>
               <td className="py-3 px-2 md:p-3 min-w-[160px]">
                 <div className="flex items-center gap-2">
-                  <TeamLogo teamName={team.team} url={team.logo} className="w-5 h-5 shrink-0" />
+                  <TeamLogo teamName={team.team} className="w-5 h-5 shrink-0" />
                   <span className="font-medium text-foreground text-xs md:text-sm whitespace-nowrap">{team.team}</span>
                 </div>
               </td>

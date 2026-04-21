@@ -170,7 +170,6 @@ export function StatisticsPanel({ topScorers, bestDefense, isLoading = false }: 
               <div className="flex-1 flex items-center gap-3 min-w-0">
                 <TeamLogo 
                   teamName={team.team} 
-                  url={team.logo} 
                   className="w-10 h-10 drop-shadow-md transition-transform group-hover:scale-110" 
                 />
                 <div>

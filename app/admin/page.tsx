@@ -10,7 +10,6 @@ import { MatchSummaryCard } from "../components/MatchSummaryCard"
 import html2canvas from "html2canvas"
 import { toast, Toaster } from "sonner"
 import { compressImageFile } from "../lib/imageCompression"
-import { proxifyImageUrl } from "../lib/imageProxy"
 import { 
   Trophy, 
   RefreshCw, 
@@ -854,7 +853,7 @@ export default function AdminPage() {
                     {/* Týmy a Skóre */}
                     <div className="flex items-center justify-center gap-6 flex-1">
                         <div className="text-center w-24">
-                        <TeamLogo teamName={m.homeTeam} url={m.homeLogo} className="w-16 h-16 mb-2 mx-auto drop-shadow-2xl" />
+                        <TeamLogo teamName={m.homeTeam} className="w-16 h-16 mb-2 mx-auto drop-shadow-2xl" />
                         <span className="text-xs font-black uppercase truncate block">{m.homeTeam}</span>
                         </div>
                         
@@ -872,7 +871,7 @@ export default function AdminPage() {
                         </div>
 
                         <div className="text-center w-24">
-                        <TeamLogo teamName={m.awayTeam} url={m.awayLogo} className="w-16 h-16 mb-2 mx-auto drop-shadow-2xl" />
+                        <TeamLogo teamName={m.awayTeam} className="w-16 h-16 mb-2 mx-auto drop-shadow-2xl" />
                         <span className="text-xs font-black uppercase truncate block">{m.awayTeam}</span>
                         </div>
                     </div>
@@ -1271,7 +1270,7 @@ export default function AdminPage() {
                                                             {player ? (
                                                                 <>
                                                                     {player.photo ? (
-                                                                        <img src={proxifyImageUrl(player.photo)} className="w-full h-full object-cover object-top rounded-full" />
+                                                                        <img src={player.photo} className="w-full h-full object-cover object-top rounded-full" referrerPolicy="no-referrer" />
                                                                     ) : (
                                                                         <span className="text-xs font-bold">{player.number || '?'}</span>
                                                                     )}
@@ -1345,7 +1344,7 @@ export default function AdminPage() {
                                                             {player ? (
                                                                 <>
                                                                     {player.photo ? (
-                                                                        <img src={proxifyImageUrl(player.photo)} className="w-full h-full object-cover object-top rounded-full" />
+                                                                        <img src={player.photo} className="w-full h-full object-cover object-top rounded-full" referrerPolicy="no-referrer" />
                                                                     ) : (
                                                                         <span className="text-xs font-bold">{player.number || '?'}</span>
                                                                     )}
@@ -1406,7 +1405,7 @@ export default function AdminPage() {
                                                     className="flex items-center gap-3 p-3 hover:bg-white/10 cursor-pointer border-b border-white/5 last:border-0 group transition-colors"
                                                 >
                                                     <div className="w-10 h-10 rounded-full bg-slate-800 overflow-hidden border border-white/10 group-hover:border-accent/50 transition-colors">
-                                                        {p.photo ? <img src={p.photo} className="w-full h-full object-cover object-top" /> : <User className="w-5 h-5 m-2.5 text-white/50" />}
+                                                        {p.photo ? <img src={p.photo} className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" /> : <User className="w-5 h-5 m-2.5 text-white/50" />}
                                                     </div>
                                                     <div>
                                                         <div className="font-bold text-sm text-white group-hover:text-accent transition-colors">{p.name}</div>
@@ -1431,7 +1430,7 @@ export default function AdminPage() {
                                     
                                     <div className="w-40 h-40 rounded-full bg-gradient-to-br from-slate-800 to-black border-4 border-accent shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-hidden relative">
                                         {previewPlayer.photo ? (
-                                            <img src={previewPlayer.photo} className="w-full h-full object-cover object-top scale-110" />
+                                            <img src={previewPlayer.photo} className="w-full h-full object-cover object-top scale-110" referrerPolicy="no-referrer" />
                                         ) : (
                                             <User className="w-20 h-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/20" />
                                         )}

@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { getSupabaseAdmin, isSupabaseConfigured } from '../../lib/db';
 import { resolveTeamLogoUrl } from '../../lib/constants';
 
+export const dynamic = 'force-dynamic';
+
 function transfersTable() {
   const supabase = getSupabaseAdmin();
   return supabase.from('transfers') as any;

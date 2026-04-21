@@ -1,27 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Shield } from "lucide-react";
-import { proxifyImageUrl } from "../lib/imageProxy";
 import { resolveTeamLogoUrl } from "../lib/constants";
 
 interface TeamLogoProps {
   teamName: string;
-  url?: string;
   className?: string;
 }
 
-export function TeamLogo({ teamName, url, className = "" }: TeamLogoProps) {
+export function TeamLogo({ teamName, className = "" }: TeamLogoProps) {
   const [error, setError] = useState(false);
-  const [currentUrl, setCurrentUrl] = useState(url);
+  const [referrerAttempt, setReferrerAttempt] = useState<0 | 1>(0);
+  const resolvedUrl = resolveTeamLogoUrl(teamName, undefined);
 
-  // Reset error state when url changes
   useEffect(() => {
     setError(false);
-    setCurrentUrl(url);
-  }, [url]);
-
-  const resolvedUrl = resolveTeamLogoUrl(teamName, currentUrl);
+    setReferrerAttempt(0);
+  }, [teamName, resolvedUrl]);
 
   // Fallback if URL is missing or error occurred
   if (!resolvedUrl || error) {
@@ -66,10 +62,17 @@ export function TeamLogo({ teamName, url, className = "" }: TeamLogoProps) {
 
   return (
     <img
-      src={proxifyImageUrl(resolvedUrl)}
+      src={resolvedUrl}
       alt={`${teamName} logo`}
       className={`${className} object-contain`}
-      onError={() => setError(true)}
+      referrerPolicy={referrerAttempt === 0 ? "no-referrer" : "origin"}
+      onError={() => {
+        if (referrerAttempt === 0) {
+          setReferrerAttempt(1);
+          return;
+        }
+        setError(true);
+      }}
       loading="lazy"
     />
   );

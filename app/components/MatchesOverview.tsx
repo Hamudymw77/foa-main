@@ -127,7 +127,7 @@ export function MatchesOverview({ matches, upcomingMatches, standings }: Matches
                   }`}>
                     {team.pos}
                   </span>
-                  <TeamLogo teamName={team.team} url={team.logo} className="w-8 h-8" />
+                  <TeamLogo teamName={team.team} className="w-8 h-8" />
                   <span className="font-bold text-white">{team.team}</span>
                 </div>
                 <div className="text-right">

@@ -1,6 +1,6 @@
 import { User } from "lucide-react";
 import { useEffect, useState } from "react";
-import { proxifyImageUrl } from "../lib/imageProxy";
+import { getPlayerPhotoOverride } from "../lib/constants";
 
 interface PlayerAvatarProps {
   name: string;
@@ -17,49 +17,67 @@ function isLikelyTeamLogoUrl(url: string) {
   return false;
 }
 
+function isMissingPlayerPhotoUrl(url: string | null | undefined) {
+  const v = String(url || "").trim().toLowerCase();
+  if (!v) return true;
+  if (v.includes("photo-missing.png")) return true;
+  if (v.endsWith("/p0.png")) return true;
+  if (v.endsWith("/0.png")) return true;
+  return false;
+}
+
+function Silhouette({ name, className }: { name: string; className: string }) {
+  return (
+    <div
+      className={`bg-slate-800 flex items-center justify-center ${className}`}
+      role="img"
+      aria-label={name}
+      title={name}
+    >
+      <User className="w-1/2 h-1/2 text-white/30" />
+    </div>
+  );
+}
+
 export function PlayerAvatar({ name, photoUrl, code, className = "w-full h-full" }: PlayerAvatarProps) {
   const [error, setError] = useState(false);
+  const [referrerAttempt, setReferrerAttempt] = useState<0 | 1>(0);
 
   useEffect(() => {
     setError(false);
+    setReferrerAttempt(0);
   }, [photoUrl, code]);
 
   // Reverted logic: Use photoUrl directly if available, otherwise construct from code (no 'p' prefix forced unless in photoUrl)
-  let finalUrl = photoUrl && !isLikelyTeamLogoUrl(photoUrl) ? photoUrl : undefined;
+  const overrideUrl = getPlayerPhotoOverride(name);
+  let finalUrl = overrideUrl || (photoUrl && !isLikelyTeamLogoUrl(photoUrl) ? photoUrl : undefined);
   
   if (!finalUrl && code) {
       finalUrl = `https://resources.premierleague.com/premierleague/photos/players/110x140/${code}.png`;
   }
 
-  // If no URL determined yet (shouldn't happen if code is present), use placeholder
-  if (!finalUrl) {
-      finalUrl = "https://resources.premierleague.com/premierleague/photos/players/110x140/Photo-Missing.png";
+  if (error) {
+    return <Silhouette name={name} className={className} />;
   }
 
-  const fallbackUrl = "https://resources.premierleague.com/premierleague/photos/players/110x140/Photo-Missing.png";
-
-  if (error) {
-    return (
-      <div className={`bg-slate-800 flex items-center justify-center ${className}`}>
-        <img 
-            src={proxifyImageUrl(fallbackUrl)}
-            alt={name}
-            className="w-full h-full object-cover object-top opacity-50"
-            onError={(e) => {
-                e.currentTarget.style.display = 'none';
-            }}
-        />
-        <User className="w-1/3 h-1/3 text-white/20 absolute" />
-      </div>
-    );
+  if (!finalUrl || isMissingPlayerPhotoUrl(finalUrl)) {
+    return <Silhouette name={name} className={className} />;
   }
 
   return (
     <img 
-      src={proxifyImageUrl(finalUrl)} 
+      key={`${finalUrl}-${referrerAttempt}`}
+      src={finalUrl} 
       alt={name} 
       className={`${className} object-cover object-top`}
-      onError={() => setError(true)}
+      referrerPolicy={referrerAttempt === 0 ? "no-referrer" : "origin"}
+      onError={() => {
+        if (referrerAttempt === 0) {
+          setReferrerAttempt(1);
+          return;
+        }
+        setError(true);
+      }}
     />
   );
 }

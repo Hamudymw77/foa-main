@@ -2,7 +2,6 @@ import { useState } from "react"
 import { User, X } from "lucide-react"
 import { Match } from "@/types"
 import { PlayerAvatar } from "./PlayerAvatar"
-import { proxifyImageUrl } from "../lib/imageProxy"
 
 interface FormationViewProps {
   selectedMatch: Match
@@ -124,8 +123,9 @@ export function FormationView({ selectedMatch }: FormationViewProps) {
                   <div className="w-40 h-40 rounded-full bg-gradient-to-br from-slate-800 to-black border-4 border-accent shadow-[0_0_50px_rgba(251,191,36,0.2)] overflow-hidden relative">
                       {previewPlayer.photo ? (
                           <img 
-                              src={proxifyImageUrl(previewPlayer.photo)} 
+                              src={previewPlayer.photo} 
                               className="w-full h-full object-cover object-top scale-110 bg-slate-800"
+                              referrerPolicy="no-referrer"
                               onError={(e) => {
                                   e.currentTarget.onerror = null;
                                   e.currentTarget.src = 'https://resources.premierleague.com/premierleague/photos/players/110x140/Photo-Missing.png';

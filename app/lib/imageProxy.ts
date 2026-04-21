@@ -6,7 +6,9 @@ export function proxifyImageUrl(url: string | null | undefined): string | undefi
     const host = u.hostname.toLowerCase();
     const shouldProxy =
       host === "resources.premierleague.com" ||
-      host === "upload.wikimedia.org";
+      host === "upload.wikimedia.org" ||
+      host === "images.fotmob.com" ||
+      host === "a.espncdn.com";
     if (!shouldProxy) return url;
     return `/api/image-proxy?url=${encodeURIComponent(url)}`;
   } catch {
