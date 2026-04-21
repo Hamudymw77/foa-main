@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getSupabaseAdmin, isSupabaseConfigured } from '../../lib/db';
-import { TEAM_LOGOS } from '../../lib/constants';
+import { resolveTeamLogoUrl } from '../../lib/constants';
 
 function transfersTable() {
   const supabase = getSupabaseAdmin();
@@ -14,46 +14,9 @@ function sanitizeUrl(value: any, field: string) {
   return null;
 }
 
-function normalizeTeamKey(name: string) {
-  return String(name || '')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .replace(/[^a-z0-9]/g, '');
-}
-
-function findCanonicalTeamLogo(teamName: string): string | null {
-  if (!teamName) return null;
-  const direct = TEAM_LOGOS[teamName];
-  if (direct) return direct;
-
-  const normalized = normalizeTeamKey(teamName);
-  const key = Object.keys(TEAM_LOGOS).find((k) => normalizeTeamKey(k) === normalized);
-  return key ? TEAM_LOGOS[key] : null;
-}
-
-function extractBadgeId(url: string | null | undefined) {
-  const source = String(url || '');
-  const m = source.match(/\/t(\d+)\.(svg|png)/i);
-  return m ? m[1] : null;
-}
-
 function resolveTeamLogo(teamName: string, providedUrl: string | null | undefined) {
-  const canonical = findCanonicalTeamLogo(teamName);
   const provided = sanitizeUrl(providedUrl, 'teamLogo');
-  if (!canonical) return provided;
-  if (!provided) return canonical;
-
-  const expectedBadgeId = extractBadgeId(canonical);
-  const actualBadgeId = extractBadgeId(provided);
-
-  // If incoming logo points to another PL badge (e.g. Aston Villa for all),
-  // always prefer canonical logo derived from team name.
-  if (expectedBadgeId && actualBadgeId && expectedBadgeId !== actualBadgeId) {
-    return canonical;
-  }
-
-  return provided;
+  return resolveTeamLogoUrl(teamName, provided) ?? null;
 }
 
 function sanitizePlayerPhoto(photoUrl: string | null | undefined) {

@@ -1,5 +1,5 @@
 import { Match, TeamStanding } from '@/types';
-import { TEAM_LOGOS } from '@/lib/constants';
+import { resolveTeamLogoUrl } from '@/lib/constants';
 
 export function computeStandings(matches: Match[]): TeamStanding[] {
   const table: Record<string, TeamStanding> = {};
@@ -27,7 +27,7 @@ export function computeStandings(matches: Match[]): TeamStanding[] {
         gd: 0,
         points: 0,
         form: [],
-        logo: m.homeLogo || TEAM_LOGOS[ht] || '',
+        logo: resolveTeamLogoUrl(ht, m.homeLogo) || '',
       };
     }
 
@@ -44,13 +44,13 @@ export function computeStandings(matches: Match[]): TeamStanding[] {
         gd: 0,
         points: 0,
         form: [],
-        logo: m.awayLogo || TEAM_LOGOS[at] || '',
+        logo: resolveTeamLogoUrl(at, m.awayLogo) || '',
       };
     }
 
     // Ensure logos are set (in case they were missing in the first match encountered)
-    if (!table[ht].logo) table[ht].logo = m.homeLogo || TEAM_LOGOS[ht] || '';
-    if (!table[at].logo) table[at].logo = m.awayLogo || TEAM_LOGOS[at] || '';
+    if (!table[ht].logo) table[ht].logo = resolveTeamLogoUrl(ht, m.homeLogo) || '';
+    if (!table[at].logo) table[at].logo = resolveTeamLogoUrl(at, m.awayLogo) || '';
 
     const homeScore = m.homeScore ?? 0;
     const awayScore = m.awayScore ?? 0;
