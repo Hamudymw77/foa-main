@@ -1,4 +1,4 @@
-export const TEAM_LOGOS: Record<string, string> = {
+export const TEAM_LOGOS_REMOTE: Record<string, string> = {
   'Arsenal': 'https://resources.premierleague.com/premierleague/badges/t3.svg',
   'Aston Villa': 'https://resources.premierleague.com/premierleague/badges/t7.svg',
   'Bournemouth': 'https://resources.premierleague.com/premierleague/badges/t91.svg',
@@ -54,6 +54,7 @@ const TEAM_NAME_ALIASES: Record<string, string> = {
   spurs: "Tottenham Hotspur",
   tottenham: "Tottenham Hotspur",
   tottenhamhotspur: "Tottenham Hotspur",
+  brighton: "Brighton & Hove Albion",
   brightonandhovealbion: "Brighton & Hove Albion",
   brightonhovealbion: "Brighton & Hove Albion",
   westham: "West Ham United",
@@ -63,6 +64,7 @@ const TEAM_NAME_ALIASES: Record<string, string> = {
   nottmforest: "Nottingham Forest",
   nottinghamforest: "Nottingham Forest",
   nottsforest: "Nottingham Forest",
+  leeds: "Leeds United",
   leedsutd: "Leeds United",
   leedsunited: "Leeds United",
   wolves: "Wolverhampton Wanderers",
@@ -76,9 +78,9 @@ const TEAM_NAME_ALIASES: Record<string, string> = {
   chelseafc: "Chelsea"
 };
 
-const TEAM_LOGO_BY_NORMALIZED: Record<string, string> = Object.keys(TEAM_LOGOS).reduce(
+const TEAM_LOGO_BY_NORMALIZED: Record<string, string> = Object.keys(TEAM_LOGOS_REMOTE).reduce(
   (acc, k) => {
-    acc[normalizeTeamKey(k)] = TEAM_LOGOS[k];
+    acc[normalizeTeamKey(k)] = TEAM_LOGOS_REMOTE[k];
     return acc;
   },
   {} as Record<string, string>
@@ -98,15 +100,17 @@ export function extractPremierLeagueBadgeId(url: string | null | undefined) {
 export function getTeamLogoUrl(teamName: string | null | undefined) {
   if (!teamName) return undefined;
   const trimmed = String(teamName).trim();
-  if (TEAM_LOGOS[trimmed]) return TEAM_LOGOS[trimmed];
-
   const normalized = normalizeTeamKey(trimmed);
   if (!normalized) return undefined;
 
   const aliasedName = TEAM_NAME_ALIASES[normalized];
-  if (aliasedName && TEAM_LOGOS[aliasedName]) return TEAM_LOGOS[aliasedName];
+  const canonicalName = aliasedName || trimmed;
+  const canonicalNormalized = normalizeTeamKey(canonicalName);
+  if (canonicalNormalized) {
+    return `/logos/${canonicalNormalized}.svg`;
+  }
 
-  return TEAM_LOGO_BY_NORMALIZED[normalized];
+  return undefined;
 }
 
 export function resolveTeamLogoUrl(teamName: string | null | undefined, providedUrl?: string | null) {
@@ -114,9 +118,7 @@ export function resolveTeamLogoUrl(teamName: string | null | undefined, provided
   const provided = providedUrl ? String(providedUrl) : undefined;
 
   if (canonical) {
-    const expected = extractPremierLeagueBadgeId(canonical);
-    const actual = extractPremierLeagueBadgeId(provided);
-    if (expected && actual && expected !== actual) return canonical;
+    if (provided && isPremierLeagueBadgeUrl(provided)) return canonical;
     return provided || canonical;
   }
 
