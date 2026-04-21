@@ -78,7 +78,6 @@ export const TEAM_LOGOS: Record<string, string> = {
   'Accrington': '/api/team-logo?name=Accrington',
   'Augsburg': '/api/team-logo?name=Augsburg',
   'Dundee': '/api/team-logo?name=Dundee',
-  'Independiente del Valle': '/api/team-logo?name=Independiente%20del%20Valle',
   'Strasbourg': 'https://images.fotmob.com/image_resources/logo/teamlogo/9848.png',
   'Dortmund': 'https://media.api-sports.io/football/teams/165.png',
   'Ajax': 'https://media.api-sports.io/football/teams/194.png',
